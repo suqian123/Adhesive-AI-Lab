@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Streamlit: Adhesive AI",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "args": ["run", "${workspaceFolder}/app.py"],
+      "justMyCode": true
+    },
+    {
+      "name": "Pytest",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["${workspaceFolder}/tests"],
+      "justMyCode": true
+    },
+    {
+      "name": "Offline browser app",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/offline_app.py",
+      "justMyCode": true
+    }
+  ]
+}

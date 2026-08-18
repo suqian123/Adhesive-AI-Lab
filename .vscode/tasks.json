@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install dependencies",
+      "type": "shell",
+      "command": "python -m pip install -r requirements.txt",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Streamlit app",
+      "type": "shell",
+      "command": "streamlit run app.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run offline browser app",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File \"${workspaceFolder}/run_offline.ps1\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run tests",
+      "type": "shell",
+      "command": "pytest",
+      "problemMatcher": []
+    }
+  ]
+}
