@@ -6,11 +6,11 @@
 
 - 输入树脂、增粘剂、填料的 SMILES 和质量配比
 - 提取轻量分子结构特征
-- 训练随机森林代理模型，预测粘附功、界面结合能和密度
-- 运行可重复的粗粒化界面吸附模拟
+- 训练可版本化的回归/分类代理模型，预测宽温域黏附、自修复、抗原子氧、抗紫外和增材制造指标
+- 生成 PDA@CeO₂ 粗粒化界面拓扑，并支持外部 LAMMPS/GROMACS 任务提交和输出回读
 - 展示能量轨迹、表面覆盖率、分子特征和特征重要性
 
-当前模拟器用于配方排序和趋势判断，不替代生产级全原子 MD。后续可把 `simulation.py` 替换为 LAMMPS/GROMACS 适配器，把 `model.py` 的合成数据替换成真实实验数据。
+当前默认页面仍使用明确标记的物理启发代理结果进行前筛；只有提交并完成 VASP/QE/CP2K/LAMMPS/GROMACS 外部任务后，结果才可作为真实计算数据回写候选库。实验表单支持批次、重复记录、模型版本归档、残差校正和下一轮候选推荐。
 
 ## 启动
 
@@ -38,3 +38,15 @@ streamlit run app.py
 ```powershell
 pytest
 ```
+
+## 配置说明
+
+- 复制 `.env.example` 为 `.env`，再填写 MySQL 连接信息。
+- 默认优先使用 MySQL；未配置 MySQL 时，实验记录和模型版本自动落盘到 `work/adhesive_ai_lab.sqlite3`，可通过 `ADHESIVE_SQLITE_PATH` 修改位置。
+- 外部任务记录默认保存在 `work/jobs`，任务命令以参数列表执行，不经过 shell 拼接。
+- 项目标准启动方式仍是 `streamlit run app.py`，离线版使用 `.\run_offline.ps1`。
+
+## 候选库
+
+- 通过 `adhesive_ai.build_candidate_library()` 可生成覆盖 CE、PN、PI、硅橡胶、PU 及其共混/改性体系的候选表。
+- 表中包含树脂结构、动态修复单元、PDA@CeO₂ 填料、固化/后固化条件，以及耐高温性、低温韧性、粘附强度、自修复性能和空间环境稳定性等目标指标。

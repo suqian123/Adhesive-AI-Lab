@@ -6,6 +6,13 @@ build-backend = "setuptools.build_meta"
 name = "adhesive-ai-simulation"
 version = "0.1.0"
 requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "plotly>=5.22",
+    "streamlit>=1.37",
+    "mysql-connector-python>=9.0",
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

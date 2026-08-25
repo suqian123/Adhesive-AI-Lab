@@ -146,6 +146,13 @@ def _prediction(form: dict[str, list[str]]) -> dict:
         temperature_c=_number(form, "temperature_c", 25),
         humidity_pct=_number(form, "humidity_pct", 45),
         simulation_steps=int(_number(form, "simulation_steps", 650)),
+        facet=form.get("facet", ["(111)"])[0],
+        oxygen_vacancy_fraction=_number(form, "oxygen_vacancy_fraction", 0.08),
+        hydroxyl_fraction=_number(form, "hydroxyl_fraction", 0.35),
+        crosslink_density=_number(form, "crosslink_density", 0.65),
+        dynamic_healing=_number(form, "dynamic_healing", 0.55),
+        dynamic_mobility=_number(form, "dynamic_mobility", 0.25),
+        particle_size_nm=_number(form, "particle_size_nm", 35.0),
     )
     simulation = result["simulation"]
     return {
@@ -156,6 +163,9 @@ def _prediction(form: dict[str, list[str]]) -> dict:
         "molecule_kind_labels": MOLECULE_KIND_LABELS,
         "importance": result["importance"].to_dict("records"),
         "energy": simulation.energy[::max(1, len(simulation.energy) // 180)].tolist(),
+        "quantum": result["quantum"].__dict__,
+        "md": {"temperatures_c": result["md"].temperatures_c.tolist(), "glass_transition_c": result["md"].glass_transition_c},
+        "interface": result["interface"].__dict__,
     }
 
 
