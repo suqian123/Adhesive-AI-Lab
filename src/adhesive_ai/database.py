@@ -9,15 +9,21 @@ from pathlib import Path
 from dataclasses import asdict, is_dataclass
 from contextlib import contextmanager
 from typing import Any, Iterator
+from urllib.parse import parse_qs, unquote, urlparse
 
 import pandas as pd
 import numpy as np
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 try:
     import mysql.connector as mysql_connector
 except ModuleNotFoundError:  # pragma: no cover - optional dependency
     mysql_connector = None
 
+# Candidate-id indexes keep lookups fast without requiring the MySQL REFERENCES
+# privilege, which is commonly withheld from application service accounts.
 SCHEMA = (
     "CREATE TABLE IF NOT EXISTS candidates ("
     "candidate_id VARCHAR(32) PRIMARY KEY, resin VARCHAR(32) NOT NULL, blend_resin VARCHAR(32) NULL, blend_fraction DECIMAL(5,3) NOT NULL, "
@@ -25,10 +31,10 @@ SCHEMA = (
     "filler_pct DECIMAL(6,3) NOT NULL, crosslink_density DECIMAL(6,4) NOT NULL, properties JSON NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS simulation_results ("
-    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, model_version VARCHAR(32) NOT NULL, qchem JSON NOT NULL, md JSON NOT NULL, interface_data JSON NOT NULL, predictions JSON NOT NULL, multi_objective_score DECIMAL(8,3) NOT NULL, screening_class VARCHAR(32) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_result_candidate (candidate_id), CONSTRAINT fk_result_candidate FOREIGN KEY (candidate_id) REFERENCES candidates(candidate_id) ON DELETE CASCADE"
+    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, model_version VARCHAR(32) NOT NULL, qchem JSON NOT NULL, md JSON NOT NULL, interface_data JSON NOT NULL, predictions JSON NOT NULL, multi_objective_score DECIMAL(8,3) NOT NULL, screening_class VARCHAR(32) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_result_candidate (candidate_id)"
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS experimental_results ("
-    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, test_batch VARCHAR(64) NOT NULL, test_temperature_c DECIMAL(7,2) NULL, properties JSON NOT NULL, source VARCHAR(128) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_experiment_candidate (candidate_id), CONSTRAINT fk_experiment_candidate FOREIGN KEY (candidate_id) REFERENCES candidates(candidate_id) ON DELETE CASCADE"
+    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, test_batch VARCHAR(64) NOT NULL, test_temperature_c DECIMAL(7,2) NULL, properties JSON NOT NULL, source VARCHAR(128) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_experiment_candidate (candidate_id)"
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS model_versions ("
     "model_version VARCHAR(96) PRIMARY KEY, metadata JSON NOT NULL, artifact_path VARCHAR(512) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
@@ -78,14 +84,42 @@ def sqlite_connection() -> Iterator[sqlite3.Connection]:
 
 
 def config_from_env() -> dict[str, Any]:
-    return {
-        "host": os.getenv("MYSQL_HOST", "127.0.0.1"),
-        "port": int(os.getenv("MYSQL_PORT", "3306")),
-        "user": os.getenv("MYSQL_USER", "root"),
-        "password": os.getenv("MYSQL_PASSWORD", ""),
-        "database": os.getenv("MYSQL_DATABASE", "adhesive_ai_lab"),
+    """Build mysql-connector settings from DATABASE_URL or MYSQL_* variables."""
+    config: dict[str, Any] = {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "root",
+        "password": "",
+        "database": "adhesive_ai_lab",
         "connection_timeout": int(os.getenv("MYSQL_CONNECT_TIMEOUT", "5")),
     }
+    database_url = os.getenv("DATABASE_URL", "").strip()
+    if database_url:
+        parsed = urlparse(database_url)
+        if not parsed.scheme.startswith("mysql"):
+            raise DatabaseError("DATABASE_URL must use a MySQL scheme")
+        query = parse_qs(parsed.query)
+        config.update(
+            host=parsed.hostname or config["host"],
+            port=parsed.port or config["port"],
+            user=unquote(parsed.username or config["user"]),
+            password=unquote(parsed.password or ""),
+            database=unquote(parsed.path.lstrip("/")) or config["database"],
+        )
+        if query.get("charset"):
+            config["charset"] = query["charset"][-1]
+
+    overrides = {
+        "host": os.getenv("MYSQL_HOST"),
+        "port": os.getenv("MYSQL_PORT"),
+        "user": os.getenv("MYSQL_USER"),
+        "password": os.getenv("MYSQL_PASSWORD"),
+        "database": os.getenv("MYSQL_DATABASE"),
+    }
+    for key, value in overrides.items():
+        if value is not None:
+            config[key] = int(value) if key == "port" else value
+    return config
 
 
 def _connector() -> Any:
@@ -102,8 +136,12 @@ def connection() -> Iterator[Any]:
     except connector.Error as exc:
         raise DatabaseError(f"无法连接 MySQL: {exc}") from exc
     try:
-        yield conn
-        conn.commit()
+        try:
+            yield conn
+            conn.commit()
+        except connector.Error as exc:
+            conn.rollback()
+            raise DatabaseError(f"MySQL 操作失败: {exc}") from exc
     finally:
         conn.close()
 

@@ -12,6 +12,7 @@ dependencies = [
     "plotly>=5.22",
     "streamlit>=1.37",
     "mysql-connector-python>=9.0",
+    "python-dotenv>=1.0",
 ]
 
 [tool.pytest.ini_options]

@@ -41,7 +41,8 @@ pytest
 
 ## 配置说明
 
-- 复制 `.env.example` 为 `.env`，再填写 MySQL 连接信息。
+- 复制 `.env.example` 为 `.env`，再填写 MySQL 连接信息；也可以使用 `DATABASE_URL=mysql://用户:密码@主机:端口/数据库`。
+- 首次配置后运行 `python scripts/init_database.py`，创建数据表并验证读写权限。
 - 默认优先使用 MySQL；未配置 MySQL 时，实验记录和模型版本自动落盘到 `work/adhesive_ai_lab.sqlite3`，可通过 `ADHESIVE_SQLITE_PATH` 修改位置。
 - 外部任务记录默认保存在 `work/jobs`，任务命令以参数列表执行，不经过 shell 拼接。
 - 项目标准启动方式仍是 `streamlit run app.py`，离线版使用 `.\run_offline.ps1`。
