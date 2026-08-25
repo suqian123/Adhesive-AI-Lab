@@ -166,7 +166,12 @@ def _read_experiment_csv(uploaded_file: object) -> tuple[pd.DataFrame | None, li
             errors.append("宽温域黏附强度不能为负值。")
     return frame, errors, warnings
 
-st.set_page_config(page_title="粘附材料多尺度模拟平台", page_icon="🧪", layout="wide")
+st.set_page_config(
+    page_title="粘附材料多尺度模拟平台",
+    page_icon="🧪",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 st.html(
     """
     <script>
@@ -309,6 +314,7 @@ st.html(
         } catch (error) {
             // Parent access is unavailable in isolated deployments.
         }
+
     })();
     </script>
     """,
@@ -319,8 +325,13 @@ st.markdown(
     """
     <style>
     .stApp { background:#fbfcfd; }
-    header[data-testid="stHeader"] { display:none; }
-    [data-testid="stToolbar"], [data-testid="stDecoration"] { display:none; }
+    header[data-testid="stHeader"] { background:transparent; }
+    [data-testid="stToolbarActions"],
+    [data-testid="stToolbarActionButton"],
+    [data-testid="stAppDeployButton"],
+    [data-testid="stMainMenu"],
+    [data-testid="stMainMenuButton"] { display:none !important; }
+    [data-testid="stDecoration"] { display:none; }
     .block-container { padding-top:1.25rem; }
     [data-testid="stSidebar"] { background:#f6f3ed; }
     .hero { padding:1rem 0 .8rem; border-bottom:1px solid #d9e0e7; margin-bottom:1rem; }
