@@ -291,6 +291,23 @@ def _compose_candidate(
     row["uv_retention_pct"] = uv_retention
     row["am_feasibility"] = am_feasibility
     row["curing_agent"] = curing_agent
+    row["data_source"] = "physics-informed-proxy"
+    row["feature_provenance"] = {
+        name: "physics-informed-proxy"
+        for name in (
+            "functional_group_type", "crosslink_density", "glass_transition_c", "free_volume_fraction",
+            "chain_mobility", "cohesive_energy_density_mj_m3", "elastic_modulus_gpa", "cte_ppm_k",
+            "filler_oxygen_adsorption_ev", "filler_radical_capture_index",
+            "interface_binding_energy_mj_m2", "interface_covalent_bond_count",
+        )
+    }
+    row["target_provenance"] = {
+        name: "physics-informed-proxy"
+        for name in (
+            "wide_temp_adhesion_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct",
+            "uv_retention_pct", "am_feasibility",
+        )
+    }
     return row
 
 

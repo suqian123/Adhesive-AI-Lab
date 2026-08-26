@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+import pandas as pd
 
 import adhesive_ai.database as database
 from adhesive_ai.engines import MDObservables
@@ -46,3 +47,20 @@ def test_experiment_and_model_persistence_fall_back_to_sqlite(monkeypatch, tmp_p
     database.save_experiment("CL-00001", {"wide_temp_adhesion_mpa": 28.5}, test_batch="batch-1", temperature_c=25)
     stored = database.load_experiments(["CL-00001"])
     assert len(stored) == 1 and stored.iloc[0].wide_temp_adhesion_mpa == 28.5
+
+
+def test_batch_experiment_persistence_falls_back_to_sqlite(monkeypatch, tmp_path):
+    monkeypatch.setattr(database, "mysql_connector", None)
+    monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
+    frame = pd.DataFrame([
+        {"candidate_id": "CL-00001", "wide_temp_adhesion_mpa": 28.5, "source": "lab-a"},
+        {"candidate_id": "CL-00002", "healing_efficiency_pct": 86.0},
+    ])
+
+    saved = database.save_experiments(frame, default_source="csv-upload")
+    stored = database.load_experiments(["CL-00001", "CL-00002"])
+
+    assert saved == 2
+    assert set(stored.candidate_id) == {"CL-00001", "CL-00002"}
+    assert stored.loc[stored.candidate_id == "CL-00001", "source"].iloc[0] == "lab-a"
+    assert stored.loc[stored.candidate_id == "CL-00002", "source"].iloc[0] == "csv-upload"

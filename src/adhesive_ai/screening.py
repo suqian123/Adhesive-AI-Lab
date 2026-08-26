@@ -12,7 +12,15 @@ import numpy as np
 import pandas as pd
 
 
+FUNCTIONAL_GROUP_FEATURES = {
+    "functional_group_cyanate_phenolic": "cyanate/phenolic",
+    "functional_group_phthalonitrile": "phthalonitrile/nitrile-triazine",
+    "functional_group_imide_amine": "imide/amine",
+    "functional_group_siloxane": "siloxane",
+    "functional_group_urethane": "urethane",
+}
 FEATURE_COLUMNS = (
+    *FUNCTIONAL_GROUP_FEATURES,
     "crosslink_density", "glass_transition_c", "free_volume_fraction", "chain_mobility",
     "cohesive_energy_density_mj_m3", "elastic_modulus_gpa", "cte_ppm_k",
     "filler_oxygen_adsorption_ev", "filler_radical_capture_index",
@@ -50,6 +58,7 @@ class ScreeningModel:
     correction_bias: np.ndarray | None = None
     validation_metrics: dict[str, float] = field(default_factory=dict)
     created_at: str = ""
+    data_provenance: dict[str, int] = field(default_factory=dict)
 
 
 def save_model(model: ScreeningModel, path: str | Path) -> Path:
@@ -63,6 +72,7 @@ def save_model(model: ScreeningModel, path: str | Path) -> Path:
         classes=np.asarray(model.classes), training_rows=model.training_rows, experimental_rows=model.experimental_rows,
         version=model.version, correction_bias=np.asarray(model.correction_bias if model.correction_bias is not None else []),
         validation_metrics=json.dumps(model.validation_metrics), created_at=model.created_at,
+        data_provenance=json.dumps(model.data_provenance),
     )
     return target
 
@@ -77,11 +87,20 @@ def load_model(path: str | Path) -> ScreeningModel:
             payload["regression_weights"], payload["classifier_weights"], tuple(payload["classes"].tolist()),
             int(payload["training_rows"]), int(payload["experimental_rows"]), str(payload["version"]),
             bias if len(bias) else None, json.loads(str(payload["validation_metrics"])), str(payload["created_at"]),
+            json.loads(str(payload["data_provenance"])) if "data_provenance" in payload.files else {},
         )
 
 
 def _numeric(frame: pd.DataFrame, columns: tuple[str, ...]) -> np.ndarray:
-    values = frame.reindex(columns=columns, fill_value=0).apply(pd.to_numeric, errors="coerce")
+    functional_groups = frame.get("functional_group_type", pd.Series("", index=frame.index)).astype(str).str.strip()
+    values = pd.DataFrame(index=frame.index)
+    for name in columns:
+        if name in FUNCTIONAL_GROUP_FEATURES:
+            values[name] = functional_groups.eq(FUNCTIONAL_GROUP_FEATURES[name]).astype(float)
+        elif name in frame:
+            values[name] = pd.to_numeric(frame[name], errors="coerce")
+        else:
+            values[name] = 0.0
     values = values.replace([np.inf, -np.inf], np.nan).fillna(0.0)
     return values.to_numpy(dtype=float)
 
@@ -182,10 +201,16 @@ def train_screening_models(
         validation_metrics["classification_macro_recall"] = float(np.mean(recalls)) if recalls else 0.0
         validation_metrics["validation_rows"] = float(np.sum(validation))
     validation_metrics["mean_rmse_scaled"] = float(np.mean([value for key, value in validation_metrics.items() if key.endswith("_rmse_scaled")])) if any(key.endswith("_rmse_scaled") for key in validation_metrics) else 0.0
+    source_counts = {
+        "candidate_rows": len(frame),
+        "proxy_rows": int(len(frame) - frame.get("simulation_source", pd.Series(index=frame.index, dtype=str)).eq("external").sum()),
+        "external_rows": int(frame.get("simulation_source", pd.Series(index=frame.index, dtype=str)).eq("external").sum()),
+        "experimental_rows": experimental_rows,
+    }
     return ScreeningModel(
         FEATURE_COLUMNS, OUTPUT_COLUMNS, x_means, x_scales, y_means, y_scales,
         regression, classifier, classes, len(frame), experimental_rows, version,
-        None, validation_metrics, datetime.now(timezone.utc).isoformat(),
+        None, validation_metrics, datetime.now(timezone.utc).isoformat(), source_counts,
     )
 
 

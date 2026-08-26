@@ -46,9 +46,9 @@ def update_candidate_with_external_results(
     if len(matched) != 1:
         raise ValueError(f"Expected exactly one candidate_id match for {candidate_id}")
     row = matched[0]
-    for name in ("simulation_source", "external_dft", "external_md", "external_interface"):
+    for name in ("simulation_source", "external_dft", "external_md", "external_interface", "feature_provenance"):
         if name not in frame:
-            frame[name] = None
+            frame[name] = [None] * len(frame)
     dft_record, md_record, interface_record = _record(dft), _record(md), _record(interface)
     dft_map = {
         "adsorption_energy_ev": "filler_oxygen_adsorption_ev",
@@ -66,16 +66,22 @@ def update_candidate_with_external_results(
         "covalent_bond_count": "interface_covalent_bond_count",
         "interface_covalent_bond_count": "interface_covalent_bond_count",
     }
+    provenance = dict(frame.at[row, "feature_provenance"] or {})
     for source, target in dft_map.items():
         if dft_record.get(source) is not None:
             frame.loc[row, target] = float(dft_record[source])
+            provenance[target] = f"external:{dft_record.get('job_id', 'dft')}"
     for source, target in md_map.items():
         if md_record.get(source) is not None:
             frame.loc[row, target] = float(md_record[source])
+            provenance[target] = f"external:{md_record.get('job_id', 'md')}"
     for source, target in interface_map.items():
         if interface_record.get(source) is not None:
             frame.loc[row, target] = float(interface_record[source])
+            provenance[target] = f"external:{interface_record.get('job_id', 'interface')}"
     frame.at[row, "simulation_source"] = "external"
+    frame.at[row, "data_source"] = "hybrid-external"
+    frame.at[row, "feature_provenance"] = provenance
     frame.at[row, "external_dft"] = to_jsonable(dft_record)
     frame.at[row, "external_md"] = to_jsonable(md_record)
     frame.at[row, "external_interface"] = to_jsonable(interface_record)

@@ -7,6 +7,10 @@ from adhesive_ai.screening import OUTPUT_COLUMNS, load_model, predict_screening,
 def test_regression_classification_and_experiment_update():
     candidates = build_candidate_library(max_records=36, seed=11)
     model = train_screening_models(candidates)
+    assert len([name for name in model.feature_names if name.startswith("functional_group_")]) == 5
+    assert model.data_provenance == {
+        "candidate_rows": 36, "proxy_rows": 36, "external_rows": 0, "experimental_rows": 0,
+    }
     predictions = predict_screening(model, candidates)
     assert set(f"predicted_{name}" for name in OUTPUT_COLUMNS).issubset(predictions.columns)
     assert predictions["predicted_screening_class"].isin(["A", "B", "C", "D"]).all()
@@ -31,6 +35,7 @@ def test_experimental_feature_mapping_validation_persistence_and_recommendation(
     path = save_model(model, tmp_path / "models" / "screening.npz")
     restored = load_model(path)
     assert restored.version == model.version
+    assert restored.data_provenance == model.data_provenance
     batch = recommend_next_experiments(restored, candidates, tested_ids=[candidates.iloc[0].candidate_id], batch_size=4)
     assert len(batch) == 4
     assert candidates.iloc[0].candidate_id not in set(batch.candidate_id)

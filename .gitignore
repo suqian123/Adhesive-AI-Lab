@@ -6,4 +6,5 @@ venv/
 .env
 *.egg-info/
 .streamlit/secrets.toml
+work/multiscale_profiles.json
 outputs/

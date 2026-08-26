@@ -157,6 +157,18 @@ def initialize_schema() -> None:
 
 
 def save_candidate(row: dict[str, Any]) -> None:
+    """Upsert one candidate formulation."""
+    save_candidates([row])
+
+
+def save_candidates(rows: Any) -> int:
+    """Upsert a candidate batch in one transaction and return its row count."""
+    if isinstance(rows, pd.DataFrame):
+        records = rows.to_dict("records")
+    else:
+        records = [dict(row) for row in rows]
+    if not records:
+        return 0
     formulation_keys = (
         "candidate_id",
         "resin",
@@ -169,8 +181,10 @@ def save_candidate(row: dict[str, Any]) -> None:
         "filler_pct",
         "crosslink_density",
     )
-    properties = {key: value for key, value in row.items() if key not in formulation_keys and key not in {"resin_name", "dynamic_name", "cure_name"}}
-    params = [row.get(key) for key in formulation_keys] + [_json(properties)]
+    params = []
+    for row in records:
+        properties = {key: value for key, value in row.items() if key not in formulation_keys and key not in {"resin_name", "dynamic_name", "cure_name"}}
+        params.append(tuple([row.get(key) for key in formulation_keys] + [_json(properties)]))
     sql = (
         "INSERT INTO candidates (candidate_id,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,toughener_pct,filler_pct,crosslink_density,properties) "
         "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) "
@@ -181,9 +195,10 @@ def save_candidate(row: dict[str, Any]) -> None:
     with connection() as conn:
         cursor = conn.cursor()
         try:
-            cursor.execute(sql, params)
+            cursor.executemany(sql, params)
         finally:
             cursor.close()
+    return len(records)
 
 
 def save_simulation(
@@ -193,16 +208,21 @@ def save_simulation(
     interface: dict[str, Any],
     model_version: str = "proxy-v1",
 ) -> None:
+    """Append a cumulative simulation snapshot for one candidate."""
     prediction_keys = ("wide_temp_adhesion_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct", "uv_retention_pct", "am_feasibility")
+    predictions = {
+        key: row.get(key, row.get(f"predicted_{key}"))
+        for key in prediction_keys
+    }
     params = (
         row["candidate_id"],
         model_version,
         _json(qchem),
         _json(md),
         _json(interface),
-        _json({key: row[key] for key in prediction_keys}),
-        row["multi_objective_score"],
-        row["screening_class"],
+        _json(predictions),
+        row.get("multi_objective_score", row.get("predicted_multi_objective_score")),
+        row.get("screening_class", row.get("predicted_screening_class")),
     )
     with connection() as conn:
         cursor = conn.cursor()
@@ -214,6 +234,48 @@ def save_simulation(
             )
         finally:
             cursor.close()
+
+
+def load_latest_simulation_results(candidate_ids: list[str] | None = None) -> dict[str, dict[str, Any]]:
+    """Return the latest cumulative external-calculation snapshot per candidate."""
+    query = (
+        "SELECT s.candidate_id,s.model_version,s.qchem,s.md,s.interface_data,s.predictions,"
+        "s.multi_objective_score,s.screening_class,s.created_at "
+        "FROM simulation_results s "
+        "JOIN (SELECT candidate_id,MAX(id) AS latest_id FROM simulation_results GROUP BY candidate_id) latest "
+        "ON latest.latest_id=s.id"
+    )
+    params: tuple[Any, ...] = ()
+    if candidate_ids:
+        placeholders = ",".join(["%s"] * len(candidate_ids))
+        query += f" WHERE s.candidate_id IN ({placeholders})"
+        params = tuple(candidate_ids)
+    with connection() as conn:
+        cursor = conn.cursor(dictionary=True)
+        try:
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
+        finally:
+            cursor.close()
+
+    def decoded(value: Any) -> dict[str, Any]:
+        if isinstance(value, str):
+            return json.loads(value)
+        return dict(value or {})
+
+    return {
+        str(row["candidate_id"]): {
+            "model_version": row["model_version"],
+            "dft": decoded(row["qchem"]),
+            "md": decoded(row["md"]),
+            "interface": decoded(row["interface_data"]),
+            "predictions": decoded(row["predictions"]),
+            "multi_objective_score": float(row["multi_objective_score"]),
+            "screening_class": row["screening_class"],
+            "created_at": row["created_at"],
+        }
+        for row in rows
+    }
 
 
 def load_candidate_results(limit: int = 300) -> pd.DataFrame:
@@ -236,19 +298,48 @@ def save_experiment(
     temperature_c: float | None = None,
     source: str | None = None,
 ) -> None:
+    row = {"candidate_id": candidate_id, "test_batch": test_batch, "test_temperature_c": temperature_c, "source": source, **properties}
+    save_experiments(pd.DataFrame([row]))
+
+
+def save_experiments(frame: pd.DataFrame, *, default_source: str | None = None) -> int:
+    """Append a validated batch of experimental feedback rows."""
+    if frame is None or frame.empty:
+        return 0
+    records = frame.to_dict("records")
+    metadata_keys = {"candidate_id", "test_batch", "test_temperature_c", "source", "created_at"}
+    params = []
+    for row in records:
+        raw_candidate_id = row.get("candidate_id")
+        candidate_id = "" if raw_candidate_id is None or pd.isna(raw_candidate_id) else str(raw_candidate_id).strip()
+        if not candidate_id:
+            raise ValueError("Experimental rows require candidate_id")
+        raw_batch = row.get("test_batch")
+        test_batch = "manual" if raw_batch is None or pd.isna(raw_batch) else str(raw_batch).strip() or "manual"
+        temperature_c = row.get("test_temperature_c")
+        if temperature_c is not None and pd.isna(temperature_c):
+            temperature_c = None
+        raw_source = row.get("source")
+        source = default_source if raw_source is None or pd.isna(raw_source) else str(raw_source).strip() or default_source
+        properties = {
+            key: value for key, value in row.items()
+            if key not in metadata_keys and not (isinstance(value, float) and np.isnan(value))
+        }
+        params.append((candidate_id, test_batch, temperature_c, _json(properties), source))
     try:
         with connection() as conn:
             cursor = conn.cursor()
             try:
-                cursor.execute(
+                cursor.executemany(
                     "INSERT INTO experimental_results (candidate_id,test_batch,test_temperature_c,properties,source) VALUES (%s,%s,%s,%s,%s)",
-                    (candidate_id, test_batch, temperature_c, _json(properties), source),
+                    params,
                 )
             finally:
                 cursor.close()
     except DatabaseError:
         with sqlite_connection() as conn:
-            conn.execute("INSERT INTO experimental_results (candidate_id,test_batch,test_temperature_c,properties,source) VALUES (?,?,?,?,?)", (candidate_id, test_batch, temperature_c, _json(properties), source))
+            conn.executemany("INSERT INTO experimental_results (candidate_id,test_batch,test_temperature_c,properties,source) VALUES (?,?,?,?,?)", params)
+    return len(params)
 
 
 def load_experiments(candidate_ids: list[str] | None = None) -> pd.DataFrame:
@@ -261,7 +352,12 @@ def load_experiments(candidate_ids: list[str] | None = None) -> pd.DataFrame:
                 placeholders = ",".join(["%s"] * len(candidate_ids))
                 query += f" WHERE candidate_id IN ({placeholders})"
                 params = tuple(candidate_ids)
-            frame = pd.read_sql(query, conn, params=params)
+            cursor = conn.cursor(dictionary=True)
+            try:
+                cursor.execute(query, params)
+                frame = pd.DataFrame(cursor.fetchall())
+            finally:
+                cursor.close()
     except DatabaseError:
         with sqlite_connection() as conn:
             query = "SELECT candidate_id,test_batch,test_temperature_c,properties,source,created_at FROM experimental_results"
@@ -282,6 +378,7 @@ def save_model_version(model: Any, artifact_path: str | None = None) -> None:
         "feature_names": getattr(model, "feature_names", ()), "target_names": getattr(model, "target_names", ()),
         "training_rows": getattr(model, "training_rows", 0), "experimental_rows": getattr(model, "experimental_rows", 0),
         "validation_metrics": getattr(model, "validation_metrics", {}), "created_at": getattr(model, "created_at", ""),
+        "data_provenance": getattr(model, "data_provenance", {}),
     }
     try:
         with connection() as conn:
