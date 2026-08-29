@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import sqlite3
+from decimal import Decimal
 from pathlib import Path
 from dataclasses import asdict, is_dataclass
 from contextlib import contextmanager
@@ -54,6 +55,8 @@ def jsonable(value: Any) -> Any:
         return value.tolist()
     if isinstance(value, np.generic):
         return value.item()
+    if isinstance(value, Decimal):
+        return float(value)
     if isinstance(value, dict):
         return {str(key): jsonable(item) for key, item in value.items()}
     if isinstance(value, (list, tuple)):
@@ -183,7 +186,7 @@ def save_candidates(rows: Any) -> int:
     )
     params = []
     for row in records:
-        properties = {key: value for key, value in row.items() if key not in formulation_keys and key not in {"resin_name", "dynamic_name", "cure_name"}}
+        properties = {key: value for key, value in row.items() if key not in formulation_keys}
         params.append(tuple([row.get(key) for key in formulation_keys] + [_json(properties)]))
     sql = (
         "INSERT INTO candidates (candidate_id,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,toughener_pct,filler_pct,crosslink_density,properties) "
@@ -199,6 +202,38 @@ def save_candidates(rows: Any) -> int:
         finally:
             cursor.close()
     return len(records)
+
+
+def load_candidates(candidate_ids: list[str] | None = None) -> pd.DataFrame:
+    """Load candidate formulations with JSON properties expanded into columns."""
+    query = (
+        "SELECT candidate_id,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,"
+        "toughener_pct,filler_pct,crosslink_density,properties FROM candidates"
+    )
+    params: tuple[Any, ...] = ()
+    if candidate_ids:
+        placeholders = ",".join(["%s"] * len(candidate_ids))
+        query += f" WHERE candidate_id IN ({placeholders})"
+        params = tuple(candidate_ids)
+    query += " ORDER BY candidate_id"
+    with connection() as conn:
+        cursor = conn.cursor(dictionary=True)
+        try:
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
+        finally:
+            cursor.close()
+
+    records: list[dict[str, Any]] = []
+    for row in rows:
+        record = dict(row)
+        raw_properties = record.pop("properties", {})
+        if isinstance(raw_properties, str):
+            properties = json.loads(raw_properties)
+        else:
+            properties = dict(raw_properties or {})
+        records.append({**record, **properties})
+    return pd.DataFrame(records)
 
 
 def save_simulation(

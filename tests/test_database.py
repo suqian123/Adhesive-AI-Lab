@@ -1,6 +1,7 @@
 import pytest
 import numpy as np
 import pandas as pd
+from contextlib import contextmanager
 
 import adhesive_ai.database as database
 from adhesive_ai.engines import MDObservables
@@ -36,9 +37,16 @@ def test_config_from_database_url(monkeypatch):
 
 
 def test_database_jsonable_handles_md_dataclasses_and_numpy():
-    value = database.jsonable({"md": MDObservables(300, .1, 500, 3, 45, (0, 25), (100, 101)), "array": np.array([1, 2])})
+    from decimal import Decimal
+
+    value = database.jsonable({
+        "md": MDObservables(300, .1, 500, 3, 45, (0, 25), (100, 101)),
+        "array": np.array([1, 2]),
+        "decimal": Decimal("0.8125"),
+    })
     assert value["md"]["glass_transition_c"] == 300
     assert value["array"] == [1, 2]
+    assert value["decimal"] == 0.8125
 
 
 def test_experiment_and_model_persistence_fall_back_to_sqlite(monkeypatch, tmp_path):
@@ -64,3 +72,45 @@ def test_batch_experiment_persistence_falls_back_to_sqlite(monkeypatch, tmp_path
     assert set(stored.candidate_id) == {"CL-00001", "CL-00002"}
     assert stored.loc[stored.candidate_id == "CL-00001", "source"].iloc[0] == "lab-a"
     assert stored.loc[stored.candidate_id == "CL-00002", "source"].iloc[0] == "csv-upload"
+
+
+def test_load_candidates_expands_database_properties(monkeypatch):
+    class FakeCursor:
+        def execute(self, query, params):
+            assert "FROM candidates" in query
+            assert params == ("CL-00001",)
+
+        def fetchall(self):
+            return [{
+                "candidate_id": "CL-00001",
+                "resin": "CE",
+                "blend_resin": None,
+                "blend_fraction": 0.0,
+                "dynamic_unit": "DielsAlder",
+                "cure_system": "imidazole",
+                "catalyst": "organometallic",
+                "toughener_pct": 0.0,
+                "filler_pct": 8.0,
+                "crosslink_density": 0.83,
+                "properties": '{"curing_agent":"imidazole-activated","data_source":"physics-informed-proxy"}',
+            }]
+
+        def close(self):
+            return None
+
+    class FakeConnection:
+        def cursor(self, *, dictionary=False):
+            assert dictionary is True
+            return FakeCursor()
+
+    @contextmanager
+    def fake_connection():
+        yield FakeConnection()
+
+    monkeypatch.setattr(database, "connection", fake_connection)
+
+    frame = database.load_candidates(["CL-00001"])
+
+    assert frame.iloc[0].candidate_id == "CL-00001"
+    assert frame.iloc[0].curing_agent == "imidazole-activated"
+    assert frame.iloc[0].data_source == "physics-informed-proxy"

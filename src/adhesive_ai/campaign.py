@@ -209,15 +209,87 @@ def write_multiscale_campaign(campaign: MultiscaleCampaign, output_root: str | P
     return {"campaign": manifest_path, **{f"cg_{name}": path for name, path in cg_paths.items()}}
 
 
-def requirement_coverage() -> tuple[dict[str, str], ...]:
-    """Expose an honest implementation/readiness matrix for the UI."""
+def requirement_coverage(
+    profiles: Mapping[str, Mapping[str, Any]] | None = None,
+) -> tuple[dict[str, str], ...]:
+    """Expose software, environment, and scientific readiness separately."""
+    selected_profiles = profiles or {}
+
+    def environment_status(*categories: str) -> str:
+        if not profiles:
+            return "待检测"
+        configured = [
+            selected_profiles.get(category, {})
+            for category in categories
+            if str(selected_profiles.get(category, {}).get("command") or "").strip()
+        ]
+        if not configured:
+            return "未配置"
+        if len(configured) != len(categories):
+            return f"部分配置（{len(configured)}/{len(categories)}）"
+        engines = sorted(
+            {
+                str(profile.get("engine") or "外部求解器").strip()
+                for profile in configured
+            }
+        )
+        return f"已配置（{'/'.join(engines)}）"
+
     return (
-        {"模块": "候选配方数据库", "状态": "已实现", "说明": "组成、结构、工艺、五类性能及来源元数据可生成并持久化"},
-        {"模块": "量子化学代理预测", "状态": "已实现（代理）", "说明": "覆盖晶面、氧空位、羟基化和PDA作用趋势，不等同真实DFT"},
-        {"模块": "真实DFT计算", "状态": "部分实现", "说明": "已有任务矩阵、一键调度、输入/输出适配和回写；原子结构及DFT(+U)参数需外部验证"},
-        {"模块": "树脂MD与宽温域评价", "状态": "部分实现", "说明": "一键调度、代理温度扫描与外部日志回写已实现；交联拓扑和力场需标定"},
-        {"模块": "界面与粗粒化动力学", "状态": "部分实现", "说明": "依赖调度和CG起始模型已实现；定量使用前需由DFT、PMF和实验标定"},
-        {"模块": "多尺度任务自动编排", "状态": "已实现（需外部环境）", "说明": "支持前置检查、并行后台执行、依赖推进、实时状态、汇总回写和模型更新"},
-        {"模块": "回归/分类筛选", "状态": "已实现", "说明": "五输出、多目标排序、等级分类和不确定性推荐"},
-        {"模块": "实验闭环", "状态": "已实现", "说明": "支持历史数据加载、单条/批量反馈、重训、版本归档和再推荐"},
+        {
+            "模块": "候选配方数据库",
+            "实现状态": "已实现",
+            "运行环境": "已就绪",
+            "科学就绪": "代理数据可用",
+            "说明": "候选生成、来源追踪和持久化已实现；仍需真实实验持续扩充与校准",
+        },
+        {
+            "模块": "量子化学代理预测",
+            "实现状态": "已实现",
+            "运行环境": "已就绪",
+            "科学就绪": "趋势代理可用",
+            "说明": "覆盖晶面、氧空位、羟基化和 PDA 作用趋势，不等同真实 DFT",
+        },
+        {
+            "模块": "真实 DFT 计算",
+            "实现状态": "已实现",
+            "运行环境": environment_status("dft"),
+            "科学就绪": "待验证输入",
+            "说明": "任务调度、求解器调用、输出解析和回写已实现；生产计算仍需验证结构、赝势及 DFT(+U) 参数",
+        },
+        {
+            "模块": "树脂 MD 与宽温域评价",
+            "实现状态": "已实现",
+            "运行环境": environment_status("bulk_md"),
+            "科学就绪": "待力场标定",
+            "说明": "温度扫描、外部日志解析和回写已实现；交联拓扑、力场及时间尺度仍需标定",
+        },
+        {
+            "模块": "界面与粗粒化动力学",
+            "实现状态": "已实现",
+            "运行环境": environment_status("interface_md", "coarse_grained"),
+            "科学就绪": "待多尺度标定",
+            "说明": "依赖调度和 CG 起始模型已实现；定量使用前需由 DFT、PMF 和实验标定",
+        },
+        {
+            "模块": "多尺度任务自动编排",
+            "实现状态": "已实现",
+            "运行环境": environment_status("dft", "bulk_md", "interface_md", "coarse_grained"),
+            "科学就绪": "流程已就绪",
+            "说明": "支持前置检查、并行后台执行、依赖推进、实时状态、汇总回写和模型更新",
+        },
+        {
+            "模块": "回归/分类筛选",
+            "实现状态": "已实现",
+            "运行环境": "已就绪",
+            "科学就绪": "代理基线可用",
+            "说明": "五输出、多目标排序、等级分类和不确定性推荐已实现；需用真实计算与实验数据验证泛化能力",
+        },
+        {
+            "模块": "实验闭环",
+            "实现状态": "已实现",
+            "运行环境": "已就绪",
+            "科学就绪": "待真实数据积累",
+            "说明": "历史数据、单条/批量反馈、重训、版本归档和再推荐流程已实现",
+        },
     )

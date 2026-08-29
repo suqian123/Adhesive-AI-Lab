@@ -279,7 +279,9 @@ def update_with_experiments(
             exp[target] = exp[source]
     if "candidate_id" not in exp.columns:
         raise ValueError("实验数据必须包含 candidate_id")
+    exp = exp.drop_duplicates("candidate_id", keep="last")
     base = candidates if isinstance(candidates, pd.DataFrame) else pd.DataFrame(candidates)
+    base = base.drop_duplicates("candidate_id", keep="last")
     base = base[base["candidate_id"].isin(exp["candidate_id"])]
     if base.empty:
         return updated

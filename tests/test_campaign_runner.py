@@ -3,6 +3,7 @@ import time
 
 from adhesive_ai.campaign import CalculationTask, MultiscaleCampaign
 from adhesive_ai.campaign_runner import (
+    available_engine_profiles,
     campaign_environment_frame,
     engine_profiles_from_env,
     get_campaign_run,
@@ -125,3 +126,22 @@ def test_engine_profiles_auto_detect_installed_solver(monkeypatch):
     assert profiles["interface_md"]["command"].endswith("-in in.production")
     assert profiles["coarse_grained"]["command"].endswith("-in in.cg")
     assert profiles["dft"]["command"] == ""
+
+
+def test_available_engine_profiles_filters_missing_launchers(monkeypatch):
+    monkeypatch.setattr(
+        "adhesive_ai.campaign_runner.shutil.which",
+        lambda name: f"C:/tools/{name}.exe" if name in {"wsl.exe", "lmp"} else None,
+    )
+    profiles = {
+        "dft": {"engine": "VASP", "command": "wsl.exe -d Ubuntu -- vasp_std", "result_file": "OUTCAR"},
+        "bulk_md": {"engine": "LAMMPS", "command": "lmp -in in.production", "result_file": "log.lammps"},
+        "interface_md": {"engine": "GROMACS", "command": "gmx mdrun", "result_file": "potential.xvg"},
+        "coarse_grained": {"engine": "LAMMPS", "command": "", "result_file": "log.lammps"},
+    }
+
+    available = available_engine_profiles(profiles)
+
+    assert set(available) == {"dft", "bulk_md"}
+    assert available["dft"]["engine"] == "VASP"
+    assert available["bulk_md"]["command"] == "lmp -in in.production"

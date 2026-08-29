@@ -217,6 +217,18 @@ def campaign_environment_frame(profiles: Mapping[str, Mapping[str, Any]] | None 
     } for category, profile in selected.items()])
 
 
+def available_engine_profiles(
+    profiles: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Return configured calculation profiles whose launcher is executable."""
+    selected = dict(profiles or engine_profiles_from_env())
+    return {
+        category: dict(profile)
+        for category, profile in selected.items()
+        if _command_check(str(profile.get("command") or "")) == "已找到可执行程序"
+    }
+
+
 def _category(task: CalculationTask | Mapping[str, Any]) -> str:
     scale = task.scale if isinstance(task, CalculationTask) else str(task.get("scale"))
     kind = task.calculation_kind if isinstance(task, CalculationTask) else str(task.get("calculation_kind"))

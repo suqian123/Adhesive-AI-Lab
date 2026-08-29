@@ -12,13 +12,13 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 from adhesive_ai.candidate_library import build_candidate_library
 from adhesive_ai.campaign import build_multiscale_campaign, campaign_task_frame, requirement_coverage, validate_candidate_contract, write_multiscale_campaign
 from adhesive_ai.campaign_runner import (
-    campaign_environment_frame, campaign_run_frame, get_campaign_run,
+    available_engine_profiles, campaign_environment_frame, campaign_run_frame, get_campaign_run,
     integrate_campaign_run, list_campaign_runs, load_engine_profiles,
     save_engine_profiles, start_campaign_run,
 )
 from adhesive_ai.mechanism import fuse_candidate_mechanism, mechanism_provenance_frame
 from adhesive_ai.screening import OUTPUT_COLUMNS, recommend_next_experiments, save_model, screen_candidates
-from adhesive_ai.database import DatabaseError, load_experiments, save_candidates, save_experiment, save_experiments, save_model_version
+from adhesive_ai.database import DatabaseError, load_candidates, load_experiments, save_candidates, save_experiment, save_experiments, save_model_version
 from adhesive_ai.jobs import JobRecord, list_jobs, parse_job_result, read_job_output, split_job_command, submit_job
 from adhesive_ai.workflow import integrate_completed_job, load_connected_state
 
@@ -151,6 +151,7 @@ JOB_COMMAND_EXAMPLES = {
     "LAMMPS": "lmp -in in.production",
     "GROMACS": "gmx mdrun -deffnm production",
 }
+SINGLE_JOB_ENGINE_ORDER = ("VASP", "Quantum ESPRESSO", "CP2K", "LAMMPS", "GROMACS")
 JOB_RESULT_FILE_EXAMPLES = {
     "VASP": "OUTCAR",
     "Quantum ESPRESSO": "scf.out",
@@ -193,10 +194,28 @@ def _campaign_profile_selector(
     presets = CAMPAIGN_PROFILE_PRESETS[category]
     current_label = "使用已保存配置或 .env"
     custom_label = "自定义命令/任务包装器"
+    available_presets = {
+        label: profile
+        for label, profile in presets.items()
+        if campaign_environment_frame({category: profile}).iloc[0]["程序检查"] == "已找到可执行程序"
+    }
+    mode_key = f"campaign_profile_mode_{category}"
+    signature_key = f"campaign_loaded_profile_signature_{category}"
+    profile_signature = (
+        str(current.get("engine") or ""),
+        str(current.get("command") or ""),
+        str(current.get("result_file") or ""),
+    )
+    if st.session_state.get(signature_key) != profile_signature:
+        st.session_state[mode_key] = current_label
+        st.session_state[signature_key] = profile_signature
+    choices = [current_label, *available_presets, custom_label]
+    if st.session_state.get(mode_key) not in choices:
+        st.session_state[mode_key] = current_label
     choice = st.selectbox(
         "运行方式",
-        [current_label, *presets, custom_label],
-        key=f"campaign_profile_mode_{category}",
+        choices,
+        key=mode_key,
     )
     if choice == current_label:
         profile = dict(current)
@@ -205,8 +224,8 @@ def _campaign_profile_selector(
             f"{profile.get('command') or '尚未填写执行命令'}"
         )
         return profile
-    if choice in presets:
-        profile = {**current, **presets[choice], "category": category}
+    if choice in available_presets:
+        profile = {**current, **available_presets[choice], "category": category}
         st.code(str(profile["command"]), language=None)
         if category != "coarse_grained":
             st.caption("直接调用求解器前，任务目录必须具有经过验证的结构、拓扑、力场或 DFT 输入文件。")
@@ -246,12 +265,48 @@ def _job_duration(record: JobRecord) -> str:
     return f"{hours:d}时{minutes:02d}分{secs:02d}秒" if hours else f"{minutes:d}分{secs:02d}秒"
 
 
+def _training_error_message(
+    error: ValueError,
+    *,
+    external_rows: int,
+    experiment_rows: int,
+) -> str:
+    """Translate model-validation failures into actionable user guidance."""
+    detail = str(error).strip()
+    lowered = detail.lower()
+    if "duplicate labels" in lowered or ("duplicate" in lowered and "reindex" in lowered):
+        return (
+            "检测到同一候选存在重复训练记录，暂时无法确定应使用哪条数据。"
+            "请合并或删除重复实验记录后重试。"
+        )
+    if external_rows <= 0 and experiment_rows <= 0:
+        return (
+            "当前没有已回写的外部计算或实验数据。请先在第 2 板块启动并完成计算，"
+            "等待状态显示“已自动回写”后再运行 AI 筛选。"
+        )
+    if "不能为空" in detail or "empty" in lowered:
+        return "当前候选库为空。请先在第 1 板块生成候选数据库，再运行 AI 筛选。"
+    if "candidate_id" in detail:
+        return f"训练数据中的候选编号无法匹配当前候选库：{detail}。请检查候选编号后重试。"
+    return f"训练数据校验未通过：{detail}。请检查已回写的计算结果或实验数据后重试。"
+
+
 def _localized_campaign_run_table(record: dict[str, object]) -> pd.DataFrame:
     display = campaign_run_frame(record)
     display["计算尺度"] = display["计算尺度"].map(CAMPAIGN_VALUE_LABELS["scale"]).fillna(display["计算尺度"])
     display["计算类型"] = display["计算类型"].map(CAMPAIGN_CATEGORY_LABELS).fillna(display["计算类型"])
     display["状态"] = display["状态"].map(CAMPAIGN_TASK_STATUS_LABELS).fillna(display["状态"])
     return display
+
+
+def _style_program_check(frame: pd.DataFrame):
+    """Highlight unavailable or invalid external launchers in red."""
+    def highlight(value: object) -> str:
+        if str(value) == "已找到可执行程序":
+            return ""
+        return "background-color: #fee2e2; color: #b91c1c; font-weight: 700;"
+
+    return frame.style.map(highlight, subset=["程序检查"])
 
 
 @st.fragment(run_every=5)
@@ -280,6 +335,30 @@ def _render_campaign_run_status(run_id: str) -> None:
             st.rerun()
     elif record.get("integrated_at"):
         st.success(f"结果已回写，模型版本：{record.get('integrated_model_version', '—')}")
+
+
+@st.fragment(run_every=5)
+def _watch_standalone_external_jobs() -> None:
+    """Rerun the app when a standalone job reaches a terminal state."""
+    standalone_jobs = [
+        job for job in list_jobs()
+        if not (job.metadata or {}).get("campaign_run_id")
+    ]
+    terminal_signature = tuple(
+        sorted(
+            (job.job_id, job.status)
+            for job in standalone_jobs
+            if job.status in {"completed", "failed"}
+        )
+    )
+    state_key = "standalone_external_terminal_signature"
+    previous_signature = st.session_state.get(state_key)
+    st.session_state[state_key] = terminal_signature
+    if previous_signature is not None and previous_signature != terminal_signature:
+        st.rerun()
+    active_count = sum(job.status in {"queued", "running"} for job in standalone_jobs)
+    if active_count:
+        st.caption(f"正在自动监控 {active_count} 个单任务；每 5 秒检查状态，完成后自动回写。")
 
 EXPERIMENT_COLUMN_LABELS = {
     "candidate_id": "候选编号",
@@ -662,23 +741,39 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+saved_campaign_profiles = load_engine_profiles()
 with st.expander("需求实现与科学就绪状态", expanded=False):
-    st.dataframe(pd.DataFrame(requirement_coverage()), width="stretch", hide_index=True)
-    st.caption("“部分实现”表示任务规划、输入输出适配或代理模型已具备，但仍需要经过验证的原子结构、力场或外部计算软件。")
+    st.dataframe(
+        pd.DataFrame(requirement_coverage(saved_campaign_profiles)),
+        width="stretch",
+        hide_index=True,
+    )
+    st.caption(
+        "“已实现”只表示软件功能已经具备；“已配置”表示已保存外部求解器命令，"
+        "不代表生产输入、力场或科学结果已经验证。"
+    )
 
 st.divider()
-st.subheader("1. 候选数据库生成")
-st.caption("先生成覆盖树脂基体、动态修复单元、PDA@CeO₂ 填料、组成、结构和工艺条件的候选集合。")
-candidate_count = st.slider("候选库规模", 24, 360, 72, 24)
+st.subheader("1. 候选数据库")
+candidate_count = 360
 base_candidate_frame = build_candidate_library(max_records=candidate_count, seed=11)
 candidate_frame = base_candidate_frame
 candidate_ids = candidate_frame["candidate_id"].astype(str).tolist()
 
-candidate_signature = (candidate_count, tuple(candidate_ids))
+candidate_signature = ("candidate-db-v2", candidate_count, tuple(candidate_ids))
 try:
     if st.session_state.get("persisted_candidate_signature") != candidate_signature:
         save_candidates(base_candidate_frame)
         st.session_state["persisted_candidate_signature"] = candidate_signature
+    database_candidate_frame = load_candidates()
+    database_ids = database_candidate_frame.get("candidate_id", pd.Series(dtype=str)).astype(str).tolist()
+    if set(database_ids) == set(candidate_ids) and len(database_ids) == len(candidate_ids):
+        database_candidate_frame["candidate_id"] = database_candidate_frame["candidate_id"].astype(str)
+        database_candidate_frame = database_candidate_frame.set_index("candidate_id").reindex(candidate_ids).reset_index()
+        missing_database_columns = [column for column in base_candidate_frame.columns if column not in database_candidate_frame]
+        if not missing_database_columns:
+            base_candidate_frame = database_candidate_frame.reindex(columns=base_candidate_frame.columns)
+            candidate_frame = base_candidate_frame
     candidate_frame, experiment_history, external_payloads = load_connected_state(base_candidate_frame)
 except DatabaseError as exc:
     experiment_history = pd.DataFrame()
@@ -750,10 +845,6 @@ if feedback_notice:
     st.success(feedback_notice)
 
 external_candidate_count = len(external_payloads)
-st.caption(
-    f"已连接状态：{len(candidate_frame)} 个候选已载入 · {len(experiment_history)} 条历史实验 · "
-    f"{external_candidate_count} 个候选含外部计算结果"
-)
 contract_report = validate_candidate_contract(candidate_frame)
 if not contract_report["valid"]:
     st.warning(f"候选特征契约不完整：缺少 {contract_report['missing_columns']}，空值 {contract_report['null_counts']}")
@@ -773,237 +864,321 @@ with st.expander("候选数据库预览", expanded=True):
     ]
     composition_tab, process_tab, target_tab = st.tabs(["组成与结构", "工艺条件", "性能与来源"])
     with composition_tab:
-        st.dataframe(_localized_candidate_table(candidate_frame.head(100), composition_columns), width="stretch", hide_index=True)
+        st.dataframe(_localized_candidate_table(candidate_frame, composition_columns), width="stretch", hide_index=True)
     with process_tab:
-        st.dataframe(_localized_candidate_table(candidate_frame.head(100), process_columns), width="stretch", hide_index=True)
+        st.dataframe(_localized_candidate_table(candidate_frame, process_columns), width="stretch", hide_index=True)
     with target_tab:
-        st.dataframe(_localized_candidate_table(candidate_frame.head(100), performance_columns), width="stretch", hide_index=True)
+        st.dataframe(_localized_candidate_table(candidate_frame, performance_columns), width="stretch", hide_index=True)
 
 st.divider()
 st.subheader("2. 多尺度计算方案")
-with st.expander("查看并生成计算任务矩阵", expanded=False):
-    campaign_candidate_id = st.selectbox("方案候选编号", candidate_ids, key="campaign_candidate_id")
-    campaign_row = candidate_frame.loc[candidate_frame["candidate_id"].astype(str) == campaign_candidate_id].iloc[0]
-    campaign = build_multiscale_campaign(campaign_row)
-    campaign_frame = campaign_task_frame(campaign)
-    scale_counts = campaign_frame.groupby("scale").size().to_dict()
-    st.caption(
-        f"共 {len(campaign.tasks)} 个任务：量子化学 {scale_counts.get('quantum', 0)}、"
-        f"原子级 MD {scale_counts.get('atomistic-md', 0)}、粗粒化 {scale_counts.get('coarse-grained', 0)}。"
-    )
-    campaign_display = campaign_frame.copy()
-    for column, labels in CAMPAIGN_VALUE_LABELS.items():
-        campaign_display[column] = campaign_display[column].map(labels).fillna(campaign_display[column])
-    campaign_display["expected_outputs"] = campaign_display["expected_outputs"].apply(
-        lambda value: "、".join(CALCULATION_OUTPUT_LABELS.get(name.strip(), name.strip()) for name in str(value).split(","))
-    )
-    campaign_display = campaign_display.rename(columns=CAMPAIGN_COLUMN_LABELS)
-    st.dataframe(campaign_display, width="stretch", hide_index=True)
-    if st.button("生成多尺度计算任务包", key="write_campaign"):
-        try:
-            written_campaign = write_multiscale_campaign(campaign)
-            st.success(f"任务包已生成：{written_campaign['campaign'].parent}")
-        except Exception as exc:
-            st.error(f"任务包生成失败：{exc}")
 
-st.markdown("#### 一键启动多尺度计算")
-st.caption(f"当前计算候选：{campaign_candidate_id}")
-st.caption(
-    "一次生成全部任务并按“量子化学/体相 MD → 界面 MD → 粗粒化”依赖顺序后台执行；"
-    "完成后自动汇总、回写候选数据库并更新 AI 模型。"
-)
-saved_campaign_profiles = load_engine_profiles()
-campaign_profiles: dict[str, dict[str, object]] = {}
-with st.expander("选择计算引擎与执行方式", expanded=True):
-    dft_tab, bulk_tab, interface_tab, cg_tab = st.tabs(["量子化学 DFT", "树脂体相 MD", "界面 MD", "粗粒化"])
-    with dft_tab:
-        campaign_profiles["dft"] = _campaign_profile_selector("dft", saved_campaign_profiles["dft"])
-    with bulk_tab:
-        campaign_profiles["bulk_md"] = _campaign_profile_selector("bulk_md", saved_campaign_profiles["bulk_md"])
-    with interface_tab:
-        campaign_profiles["interface_md"] = _campaign_profile_selector(
-            "interface_md", saved_campaign_profiles["interface_md"]
-        )
-    with cg_tab:
-        campaign_profiles["coarse_grained"] = _campaign_profile_selector(
-            "coarse_grained", saved_campaign_profiles["coarse_grained"]
-        )
 
-    save_profile_col, profile_note_col = st.columns([1, 2])
-    with save_profile_col:
-        if st.button("保存为项目默认配置", key="save_campaign_profiles", width="stretch"):
+def _render_multiscale_campaign_section() -> None:
+    with st.expander("查看并生成计算任务矩阵", expanded=True):
+        campaign_candidate_id = st.selectbox(
+            "方案候选编号（必填）",
+            candidate_ids,
+            index=None,
+            placeholder="请选择方案候选编号",
+            key="campaign_candidate_id",
+        )
+        if campaign_candidate_id is None:
+            st.info("请先选择方案候选编号，选择后才会生成计算任务矩阵和启动配置。")
+            return
+        campaign_row = candidate_frame.loc[candidate_frame["candidate_id"].astype(str) == campaign_candidate_id].iloc[0]
+        campaign = build_multiscale_campaign(campaign_row)
+        campaign_frame = campaign_task_frame(campaign)
+        scale_counts = campaign_frame.groupby("scale").size().to_dict()
+        st.caption(
+            f"共 {len(campaign.tasks)} 个任务：量子化学 {scale_counts.get('quantum', 0)}、"
+            f"原子级 MD {scale_counts.get('atomistic-md', 0)}、粗粒化 {scale_counts.get('coarse-grained', 0)}。"
+        )
+        campaign_display = campaign_frame.copy()
+        for column, labels in CAMPAIGN_VALUE_LABELS.items():
+            campaign_display[column] = campaign_display[column].map(labels).fillna(campaign_display[column])
+        campaign_display["expected_outputs"] = campaign_display["expected_outputs"].apply(
+            lambda value: "、".join(CALCULATION_OUTPUT_LABELS.get(name.strip(), name.strip()) for name in str(value).split(","))
+        )
+        campaign_display = campaign_display.rename(columns=CAMPAIGN_COLUMN_LABELS)
+        st.dataframe(campaign_display, width="stretch", hide_index=True)
+        if st.button("生成多尺度计算任务包", key="write_campaign"):
             try:
-                saved_profile_path = save_engine_profiles(campaign_profiles)
-                st.success(f"配置已保存：{saved_profile_path}")
+                written_campaign = write_multiscale_campaign(campaign)
+                st.success(f"任务包已生成：{written_campaign['campaign'].parent}")
             except Exception as exc:
-                st.error(f"配置保存失败：{exc}")
-    with profile_note_col:
-        st.caption("不保存也可直接启动；保存后，下次打开页面会自动载入当前选择。")
+                st.error(f"任务包生成失败：{exc}")
 
-    st.markdown("##### 启动前检查")
-    st.dataframe(campaign_environment_frame(campaign_profiles), width="stretch", hide_index=True)
+    st.markdown("#### 一键启动多尺度计算")
+    st.caption(f"当前计算候选：{campaign_candidate_id}")
     st.caption(
-        "高级用法仍可通过 .env 配置命令。自定义命令可使用 {task_file}、{task_dir}、"
-        "{candidate_id}、{campaign_id} 占位符；包含 {task_file} 时按任务包装器执行。"
+        "一次生成全部任务并按“量子化学/体相 MD → 界面 MD → 粗粒化”依赖顺序后台执行；"
+        "完成后自动汇总、回写候选数据库并更新 AI 模型。"
     )
-
-parallel_col, launch_col = st.columns([1, 2])
-try:
-    configured_parallel = int(os.getenv("ADHESIVE_CAMPAIGN_MAX_PARALLEL", "2"))
-except ValueError:
-    configured_parallel = 2
-configured_parallel = min(16, max(1, configured_parallel))
-with parallel_col:
-    campaign_max_parallel = st.number_input(
-        "最大并行任务数", min_value=1, max_value=16, value=configured_parallel, step=1, key="campaign_max_parallel"
-    )
-with launch_col:
-    st.write("")
-    launch_campaign = st.button(
-        "一键生成并启动多尺度计算", type="primary", key="launch_multiscale_campaign", width="stretch"
-    )
-
-if launch_campaign:
-    try:
-        with st.spinner("正在生成计算包、检查前置条件并提交首批任务……"):
-            launched_run = start_campaign_run(
-                campaign,
-                profiles=campaign_profiles,
-                max_parallel=int(campaign_max_parallel),
+    campaign_profiles: dict[str, dict[str, object]] = {}
+    with st.expander("选择计算引擎与执行方式", expanded=True):
+        dft_tab, bulk_tab, interface_tab, cg_tab = st.tabs(["量子化学 DFT", "树脂体相 MD", "界面 MD", "粗粒化"])
+        with dft_tab:
+            campaign_profiles["dft"] = _campaign_profile_selector("dft", saved_campaign_profiles["dft"])
+        with bulk_tab:
+            campaign_profiles["bulk_md"] = _campaign_profile_selector("bulk_md", saved_campaign_profiles["bulk_md"])
+        with interface_tab:
+            campaign_profiles["interface_md"] = _campaign_profile_selector(
+                "interface_md", saved_campaign_profiles["interface_md"]
             )
-        st.session_state["selected_campaign_run"] = launched_run["run_id"]
-        if launched_run["status"] == "blocked":
-            st.warning("计算包已生成，但外部程序或输入条件尚未满足；请查看下方任务状态。")
-        else:
-            st.success(f"多尺度计算已在后台启动：{launched_run['run_id']}")
-    except Exception as exc:
-        st.error(f"一键启动失败：{exc}")
+        with cg_tab:
+            campaign_profiles["coarse_grained"] = _campaign_profile_selector(
+                "coarse_grained", saved_campaign_profiles["coarse_grained"]
+            )
 
-candidate_campaign_runs = list_campaign_runs(candidate_id=campaign_candidate_id)
-if candidate_campaign_runs:
-    campaign_run_ids = [str(record["run_id"]) for record in candidate_campaign_runs]
-    selected_campaign_run = st.session_state.get("selected_campaign_run")
-    if selected_campaign_run not in campaign_run_ids:
-        selected_campaign_run = campaign_run_ids[0]
-    selected_campaign_run = st.selectbox(
-        "查看自动计算记录",
-        campaign_run_ids,
-        index=campaign_run_ids.index(selected_campaign_run),
-        format_func=lambda run_id: (
-            f"{run_id} · "
-            f"{CAMPAIGN_RUN_STATUS_LABELS.get(str(get_campaign_run(run_id).get('status')), '未知状态')}"
-        ),
-        key=f"campaign_run_selector_{campaign_candidate_id}",
-    )
-    st.session_state["selected_campaign_run"] = selected_campaign_run
-    selected_run_record = get_campaign_run(selected_campaign_run)
-    st.caption(f"任务包目录：{selected_run_record.get('package_directory', '—')}")
-    _render_campaign_run_status(selected_campaign_run)
-else:
-    st.info("当前候选还没有一键自动计算记录。")
+        save_profile_col, profile_note_col = st.columns([1, 2])
+        with save_profile_col:
+            if st.button("保存为项目默认配置", key="save_campaign_profiles", width="stretch"):
+                try:
+                    saved_profile_path = save_engine_profiles(campaign_profiles)
+                    st.success(f"配置已保存：{saved_profile_path}")
+                except Exception as exc:
+                    st.error(f"配置保存失败：{exc}")
+        with profile_note_col:
+            st.caption("不保存也可直接启动；保存后，下次打开页面会自动载入当前选择。")
+
+        st.markdown("##### 启动前检查")
+        environment_frame = campaign_environment_frame(campaign_profiles)
+        st.dataframe(_style_program_check(environment_frame), width="stretch", hide_index=True)
+        st.caption(
+            "高级用法仍可通过 .env 配置命令。自定义命令可使用 {task_file}、{task_dir}、"
+            "{candidate_id}、{campaign_id} 占位符；包含 {task_file} 时按任务包装器执行。"
+        )
+
+    parallel_col, launch_col = st.columns([1, 2])
+    try:
+        configured_parallel = int(os.getenv("ADHESIVE_CAMPAIGN_MAX_PARALLEL", "2"))
+    except ValueError:
+        configured_parallel = 2
+    configured_parallel = min(16, max(1, configured_parallel))
+    with parallel_col:
+        campaign_max_parallel = st.number_input(
+            "最大并行任务数", min_value=1, max_value=16, value=configured_parallel, step=1, key="campaign_max_parallel"
+        )
+    with launch_col:
+        st.write("")
+        launch_campaign = st.button(
+            "一键生成并启动多尺度计算", type="primary", key="launch_multiscale_campaign", width="stretch"
+        )
+
+    if launch_campaign:
+        try:
+            with st.spinner("正在生成计算包、检查前置条件并提交首批任务……"):
+                launched_run = start_campaign_run(
+                    campaign,
+                    profiles=campaign_profiles,
+                    max_parallel=int(campaign_max_parallel),
+                )
+            st.session_state["selected_campaign_run"] = launched_run["run_id"]
+            if launched_run["status"] == "blocked":
+                st.warning("计算包已生成，但外部程序或输入条件尚未满足；请查看下方任务状态。")
+            else:
+                st.success(f"多尺度计算已在后台启动：{launched_run['run_id']}")
+        except Exception as exc:
+            st.error(f"一键启动失败：{exc}")
+
+    with st.expander("高级：单独提交外部计算任务", expanded=False):
+        st.caption("仅用于调试或补算单个 DFT/MD 任务；日常计算无需填写以下命令。")
+        standalone_profiles = available_engine_profiles(saved_campaign_profiles)
+        available_job_engines = [
+            engine
+            for engine in SINGLE_JOB_ENGINE_ORDER
+            if any(str(profile.get("engine")) == engine for profile in standalone_profiles.values())
+        ]
+        hidden_job_engines = [engine for engine in SINGLE_JOB_ENGINE_ORDER if engine not in available_job_engines]
+        if hidden_job_engines:
+            st.caption(f"已隐藏当前不可用的引擎：{'、'.join(hidden_job_engines)}")
+        engine_selection_enabled = bool(available_job_engines)
+        if not engine_selection_enabled:
+            st.warning("当前没有通过程序检查的外部计算引擎，请先在上方保存可用配置。")
+        job_candidate_col, job_engine_col, job_dir_col = st.columns([1, 1, 1.4])
+        with job_candidate_col:
+            job_candidate_id = st.selectbox("绑定候选", candidate_ids)
+        with job_engine_col:
+            selected_job_engine = st.selectbox(
+                "计算引擎",
+                available_job_engines or ["未检测到可用引擎"],
+                disabled=not engine_selection_enabled,
+            )
+            job_engine = selected_job_engine if engine_selection_enabled else "VASP"
+        with job_dir_col:
+            job_workdir = st.text_input("任务工作目录", value="work/external")
+        dft_engines = {"VASP", "Quantum ESPRESSO", "CP2K"}
+        if job_engine in dft_engines:
+            calculation_kind = "dft"
+            job_temperature_c = 25.0
+            st.caption("计算类型：DFT 表面/吸附计算")
+            facet_col, vacancy_col, hydroxyl_col = st.columns(3)
+            with facet_col:
+                job_facet = st.selectbox("CeO₂ 晶面", ["(111)", "(110)", "(100)"], key="job_facet")
+            with vacancy_col:
+                job_oxygen_vacancy = st.number_input("氧空位比例", min_value=0.0, max_value=0.30, value=0.08, step=0.01, key="job_vacancy")
+            with hydroxyl_col:
+                job_hydroxyl_fraction = st.number_input("羟基化比例", min_value=0.0, max_value=1.0, value=0.35, step=0.05, key="job_hydroxyl")
+            reference_col, oxygen_reference_col = st.columns(2)
+            with reference_col:
+                surface_energy_text = st.text_input("裸表面能量 (eV，可选)", placeholder="用于计算吸附能")
+            with oxygen_reference_col:
+                oxygen_energy_text = st.text_input("吸附物参考能量 (eV，可选)", placeholder="需与裸表面能量同时填写")
+            interface_area_nm2 = 100.0
+        else:
+            job_facet = None
+            job_oxygen_vacancy = None
+            job_hydroxyl_fraction = None
+            md_kind_col, md_temperature_col = st.columns(2)
+            with md_kind_col:
+                calculation_kind_label = st.selectbox("计算类型", ["体相 MD 性能", "界面 MD 结合"])
+            with md_temperature_col:
+                job_temperature_c = st.number_input("计算温度 (°C)", min_value=-180.0, max_value=1500.0, value=25.0, step=1.0)
+            calculation_kind = "bulk_md" if calculation_kind_label == "体相 MD 性能" else "interface_md"
+            surface_energy_text = oxygen_energy_text = ""
+            interface_area_nm2 = st.number_input("界面面积 (nm²)", min_value=0.001, value=100.0, step=1.0) if calculation_kind == "interface_md" else 100.0
+        selected_job_profile = dict(standalone_profiles.get(calculation_kind, {}))
+        if str(selected_job_profile.get("engine")) != job_engine:
+            selected_job_profile = next(
+                (
+                    dict(profile)
+                    for profile in standalone_profiles.values()
+                    if str(profile.get("engine")) == job_engine
+                ),
+                {},
+            )
+        saved_job_command = str(selected_job_profile.get("command") or "")
+        saved_job_result_file = str(
+            selected_job_profile.get("result_file") or JOB_RESULT_FILE_EXAMPLES[job_engine]
+        )
+        standalone_profile_signature = (
+            job_engine,
+            calculation_kind,
+            saved_job_command,
+            saved_job_result_file,
+        )
+        if st.session_state.get("standalone_loaded_profile_signature") != standalone_profile_signature:
+            st.session_state["standalone_job_command"] = saved_job_command
+            st.session_state["standalone_job_result_file"] = saved_job_result_file
+            st.session_state["standalone_loaded_profile_signature"] = standalone_profile_signature
+        if saved_job_command:
+            st.caption(f"已自动载入项目配置：{job_engine} · {calculation_kind}")
+        job_command_text = st.text_input(
+            "任务命令",
+            placeholder=JOB_COMMAND_EXAMPLES[job_engine],
+            key="standalone_job_command",
+            help="命令按参数列表直接执行，不经过 shell；请不要使用管道、重定向或 &&。带空格的路径请用双引号包裹。",
+        )
+        job_result_file = st.text_input(
+            "结果文件（相对于任务目录）",
+            key="standalone_job_result_file",
+            help="优先解析该文件；文件不存在时回退到标准输出。",
+        )
+        if st.button("提交外部计算任务", disabled=not engine_selection_enabled):
+            if not job_command_text.strip():
+                st.error("请输入任务命令。")
+            else:
+                try:
+                    if bool(surface_energy_text.strip()) != bool(oxygen_energy_text.strip()):
+                        raise ValueError("裸表面能量和吸附物参考能量必须同时填写或同时留空。")
+                    selected_candidate_row = candidate_frame.loc[candidate_frame["candidate_id"].astype(str) == job_candidate_id].iloc[0]
+                    job_metadata: dict[str, object] = {
+                        "candidate_id": job_candidate_id,
+                        "calculation_kind": calculation_kind,
+                        "area_nm2": float(interface_area_nm2),
+                        "filler_ratio": float(selected_candidate_row.get("filler_pct", 0.0)) / 100.0,
+                        "polar_fraction": float(selected_candidate_row.get("resin_polarity", 0.5)),
+                        "compatibility_index": float(selected_candidate_row.get("low_temp_toughness_index", 0.5)),
+                        "temperature_c": float(job_temperature_c),
+                        "temperature_unit": "K",
+                        "energy_unit": "kcal/mol" if job_engine == "LAMMPS" else "kJ/mol",
+                        "result_file": job_result_file.strip(),
+                    }
+                    if surface_energy_text.strip():
+                        job_metadata["surface_energy_ev"] = float(surface_energy_text)
+                        job_metadata["oxygen_energy_ev"] = float(oxygen_energy_text)
+                    if calculation_kind == "dft":
+                        job_metadata.update(
+                            facet=job_facet,
+                            oxygen_vacancy_fraction=float(job_oxygen_vacancy),
+                            hydroxyl_fraction=float(job_hydroxyl_fraction),
+                        )
+                    submitted_job = submit_job(
+                        job_engine,
+                        split_job_command(job_command_text),
+                        workdir=job_workdir,
+                        metadata=job_metadata,
+                    )
+                    st.session_state["last_job_id"] = submitted_job.job_id
+                    st.success(f"任务已提交：{submitted_job.job_id}，已绑定 {job_candidate_id}")
+                except Exception as exc:
+                    st.error(f"任务提交失败：{exc}")
+    candidate_campaign_runs = list_campaign_runs(candidate_id=campaign_candidate_id)
+    if candidate_campaign_runs:
+        campaign_run_ids = [str(record["run_id"]) for record in candidate_campaign_runs]
+        selected_campaign_run = st.session_state.get("selected_campaign_run")
+        if selected_campaign_run not in campaign_run_ids:
+            selected_campaign_run = campaign_run_ids[0]
+        selected_campaign_run = st.selectbox(
+            "查看自动计算记录",
+            campaign_run_ids,
+            index=campaign_run_ids.index(selected_campaign_run),
+            format_func=lambda run_id: (
+                f"{run_id} · "
+                f"{CAMPAIGN_RUN_STATUS_LABELS.get(str(get_campaign_run(run_id).get('status')), '未知状态')}"
+            ),
+            key=f"campaign_run_selector_{campaign_candidate_id}",
+        )
+        st.session_state["selected_campaign_run"] = selected_campaign_run
+        selected_run_record = get_campaign_run(selected_campaign_run)
+        st.caption(f"任务包目录：{selected_run_record.get('package_directory', '—')}")
+        _render_campaign_run_status(selected_campaign_run)
+    else:
+        st.info("当前候选还没有一键自动计算记录。")
+
+
+_render_multiscale_campaign_section()
 
 st.divider()
 st.subheader("3. 外部计算任务与结果回写")
-st.caption("每个任务绑定一个候选；任务成功后自动回写真实计算结果，第4板块读取最新数据进行筛选和排序。")
-job_candidate_col, job_engine_col, job_dir_col = st.columns([1, 1, 1.4])
-with job_candidate_col:
-    job_candidate_id = st.selectbox("绑定候选", candidate_ids)
-with job_engine_col:
-    job_engine = st.selectbox("计算引擎", ["VASP", "Quantum ESPRESSO", "CP2K", "LAMMPS", "GROMACS"])
-with job_dir_col:
-    job_workdir = st.text_input("任务工作目录", value="work/external")
-dft_engines = {"VASP", "Quantum ESPRESSO", "CP2K"}
-if job_engine in dft_engines:
-    calculation_kind = "dft"
-    job_temperature_c = 25.0
-    st.caption("计算类型：DFT 表面/吸附计算")
-    facet_col, vacancy_col, hydroxyl_col = st.columns(3)
-    with facet_col:
-        job_facet = st.selectbox("CeO₂ 晶面", ["(111)", "(110)", "(100)"], key="job_facet")
-    with vacancy_col:
-        job_oxygen_vacancy = st.number_input("氧空位比例", min_value=0.0, max_value=0.30, value=0.08, step=0.01, key="job_vacancy")
-    with hydroxyl_col:
-        job_hydroxyl_fraction = st.number_input("羟基化比例", min_value=0.0, max_value=1.0, value=0.35, step=0.05, key="job_hydroxyl")
-    reference_col, oxygen_reference_col = st.columns(2)
-    with reference_col:
-        surface_energy_text = st.text_input("裸表面能量 (eV，可选)", placeholder="用于计算吸附能")
-    with oxygen_reference_col:
-        oxygen_energy_text = st.text_input("吸附物参考能量 (eV，可选)", placeholder="需与裸表面能量同时填写")
-    interface_area_nm2 = 100.0
+st.caption(
+    "推荐直接使用上方“一键启动多尺度计算”。任务完成后，系统自动解析结果、按候选编号回写数据库、"
+    "重训模型并更新；无需再点击单独的“回写”按钮。"
+)
+_watch_standalone_external_jobs()
+standalone_job_snapshot = [
+    item for item in list_jobs()
+    if not (item.metadata or {}).get("campaign_run_id")
+]
+running_standalone = sum(item.status in {"queued", "running"} for item in standalone_job_snapshot)
+pending_writeback = sum(
+    item.status == "completed"
+    and bool((item.metadata or {}).get("candidate_id"))
+    and not bool((item.metadata or {}).get("integrated_at"))
+    for item in standalone_job_snapshot
+)
+integrated_standalone = sum(bool((item.metadata or {}).get("integrated_at")) for item in standalone_job_snapshot)
+failed_standalone = sum(item.status == "failed" for item in standalone_job_snapshot)
+job_metric_columns = st.columns(4)
+for column, label, value in zip(
+    job_metric_columns,
+    ("运行中", "待自动回写", "已自动回写", "失败"),
+    (running_standalone, pending_writeback, integrated_standalone, failed_standalone),
+):
+    column.metric(label, value)
+jobs = [
+    item for item in list_jobs()
+    if not (item.metadata or {}).get("campaign_run_id")
+]
+if jobs:
+    running_count = sum(item.status in {"queued", "running"} for item in jobs)
+    failed_count = sum(item.status == "failed" for item in jobs)
+    st.caption(
+        f"单任务记录 {len(jobs)} 条 · {running_count} 个运行中/等待中 · {failed_count} 个失败 · 状态自动刷新"
+    )
 else:
-    job_facet = None
-    job_oxygen_vacancy = None
-    job_hydroxyl_fraction = None
-    md_kind_col, md_temperature_col = st.columns(2)
-    with md_kind_col:
-        calculation_kind_label = st.selectbox("计算类型", ["体相 MD 性能", "界面 MD 结合"])
-    with md_temperature_col:
-        job_temperature_c = st.number_input("计算温度 (°C)", min_value=-180.0, max_value=1500.0, value=25.0, step=1.0)
-    calculation_kind = "bulk_md" if calculation_kind_label == "体相 MD 性能" else "interface_md"
-    surface_energy_text = oxygen_energy_text = ""
-    interface_area_nm2 = st.number_input("界面面积 (nm²)", min_value=0.001, value=100.0, step=1.0) if calculation_kind == "interface_md" else 100.0
-job_command_text = st.text_input(
-    "任务命令",
-    placeholder=JOB_COMMAND_EXAMPLES[job_engine],
-    help="命令按参数列表直接执行，不经过 shell；请不要使用管道、重定向或 &&。带空格的路径请用双引号包裹。",
-)
-job_result_file = st.text_input(
-    "结果文件（相对于任务目录）",
-    value=JOB_RESULT_FILE_EXAMPLES[job_engine],
-    key=f"job_result_file_{job_engine}",
-    help="优先解析该文件；文件不存在时回退到标准输出。",
-)
-if st.button("提交外部计算任务"):
-    if not job_command_text.strip():
-        st.error("请输入任务命令。")
-    else:
-        try:
-            if bool(surface_energy_text.strip()) != bool(oxygen_energy_text.strip()):
-                raise ValueError("裸表面能量和吸附物参考能量必须同时填写或同时留空。")
-            selected_candidate_row = candidate_frame.loc[candidate_frame["candidate_id"].astype(str) == job_candidate_id].iloc[0]
-            job_metadata: dict[str, object] = {
-                "candidate_id": job_candidate_id,
-                "calculation_kind": calculation_kind,
-                "area_nm2": float(interface_area_nm2),
-                "filler_ratio": float(selected_candidate_row.get("filler_pct", 0.0)) / 100.0,
-                "polar_fraction": float(selected_candidate_row.get("resin_polarity", 0.5)),
-                "compatibility_index": float(selected_candidate_row.get("low_temp_toughness_index", 0.5)),
-                "temperature_c": float(job_temperature_c),
-                "temperature_unit": "K",
-                "energy_unit": "kcal/mol" if job_engine == "LAMMPS" else "kJ/mol",
-                "result_file": job_result_file.strip(),
-            }
-            if surface_energy_text.strip():
-                job_metadata["surface_energy_ev"] = float(surface_energy_text)
-                job_metadata["oxygen_energy_ev"] = float(oxygen_energy_text)
-            if calculation_kind == "dft":
-                job_metadata.update(
-                    facet=job_facet,
-                    oxygen_vacancy_fraction=float(job_oxygen_vacancy),
-                    hydroxyl_fraction=float(job_hydroxyl_fraction),
-                )
-            submitted_job = submit_job(
-                job_engine,
-                split_job_command(job_command_text),
-                workdir=job_workdir,
-                metadata=job_metadata,
-            )
-            st.session_state["last_job_id"] = submitted_job.job_id
-            st.success(f"任务已提交：{submitted_job.job_id}，已绑定 {job_candidate_id}")
-        except Exception as exc:
-            st.error(f"任务提交失败：{exc}")
-
-refresh_col, summary_col = st.columns([1, 4], vertical_alignment="center")
-with refresh_col:
-    st.button("刷新任务状态", width="stretch")
-jobs = list_jobs()
-with summary_col:
-    if jobs:
-        running_count = sum(item.status in {"queued", "running"} for item in jobs)
-        failed_count = sum(item.status == "failed" for item in jobs)
-        st.caption(f"共 {len(jobs)} 个任务 · {running_count} 个运行中/等待中 · {failed_count} 个失败")
-    else:
-        st.caption("尚未提交外部计算任务")
+    st.caption("尚未提交单独的外部计算任务；多尺度任务状态请在上方查看。")
 if jobs:
     job_table = pd.DataFrame([{
         "任务编号": item.job_id,
@@ -1048,19 +1223,45 @@ if jobs:
 st.divider()
 st.subheader("4. AI 筛选与候选排序")
 st.caption("融合已回写的多尺度计算结果和历史实验数据，预测五项输出并生成候选优先级。")
-if st.button("运行 AI 筛选", type="primary", width="stretch"):
+calculation_training_ready = external_candidate_count > 0
+if not calculation_training_ready:
+    st.warning(
+        "尚未发现已自动回写的外部计算结果，正式 AI 训练与模型归档暂不可用。"
+        "请先完成至少一个 VASP/LAMMPS 计算任务。"
+    )
+    previous_screening = st.session_state.get("latest_candidate_screening")
+    previous_model = previous_screening.get("model") if isinstance(previous_screening, dict) else None
+    previous_provenance = getattr(previous_model, "data_provenance", {}) if previous_model is not None else {}
+    if int(previous_provenance.get("external_rows", 0)) <= 0:
+        st.session_state.pop("latest_candidate_screening", None)
+run_ai_screening = st.button(
+    "运行 AI 筛选",
+    type="primary",
+    width="stretch",
+    disabled=not calculation_training_ready,
+    help=(
+        "至少一个外部计算候选完成自动回写后才能训练和归档模型。"
+        if not calculation_training_ready else None
+    ),
+)
+if run_ai_screening:
     with st.spinner("正在生成候选数据库并训练回归/分类模型..."):
         try:
-            model_base_version = "external-v1" if external_candidate_count else "proxy-v1"
             shortlist, closed_loop = screen_candidates(
                 candidate_frame,
                 experiments=experiment_history if not experiment_history.empty else None,
                 top_n=12,
                 minimum_class="C",
-                version=model_base_version,
+                version="external-v1",
             )
         except ValueError as exc:
-            st.error(f"候选数据无法用于训练：{exc}")
+            st.error(
+                _training_error_message(
+                    exc,
+                    external_rows=external_candidate_count,
+                    experiment_rows=len(experiment_history),
+                )
+            )
             st.stop()
     try:
         artifact_path = save_model(closed_loop, Path("work/models") / f"{closed_loop.version}.npz")
@@ -1344,7 +1545,7 @@ if uploaded_experiments is not None:
         upload_display = uploaded_experiments.head(20).rename(columns={**EXPERIMENT_COLUMN_LABELS, **EXPERIMENT_METADATA_LABELS})
         st.dataframe(upload_display, width="stretch", hide_index=True)
 import_csv_feedback = st.button(
-    "导入 CSV 并重新训练",
+    "导入 CSV 并重新训练" if calculation_training_ready else "导入 CSV（计算完成后训练）",
     disabled=uploaded_experiments is None or bool(upload_errors),
     width="stretch",
     key="closed_loop_csv_submit",
@@ -1386,7 +1587,11 @@ with st.form("closed_loop_experiment_form", clear_on_submit=False):
                 optional_feedback["measured_modulus_gpa"] = st.number_input("弹性模量 (GPa)", min_value=0.0, value=2.5, step=0.1, key="feedback_modulus")
             with cte_col:
                 optional_feedback["measured_cte_ppm_k"] = st.number_input("热膨胀系数 (ppm/K)", min_value=0.0, value=55.0, step=1.0, key="feedback_cte")
-    submit_feedback = st.form_submit_button("回写实验数据并重新筛选", type="primary", width="stretch")
+    submit_feedback = st.form_submit_button(
+        "回写实验数据并重新筛选" if calculation_training_ready else "保存实验数据（计算完成后训练）",
+        type="primary",
+        width="stretch",
+    )
 
 experiment_frame = pd.DataFrame([{
     "candidate_id": feedback_candidate_id,
@@ -1417,18 +1622,29 @@ if submit_feedback or import_csv_feedback:
         except Exception as exc:
             st.warning(f"批量实验持久化失败，本批数据仍会用于内存训练：{exc}")
             experiment_history = pd.concat([experiment_history, uploaded_experiments], ignore_index=True)
+    if not calculation_training_ready:
+        st.session_state["feedback_notice"] = (
+            "实验数据已保存；当前尚无已回写的外部计算结果，因此未训练或归档模型。"
+            "请先完成计算，回写后再运行 AI 筛选。"
+        )
+        st.rerun()
     with st.spinner("正在融合实验数据并重新训练..."):
         try:
-            model_base_version = "external-v1" if external_candidate_count else "proxy-v1"
             shortlist, closed_loop = screen_candidates(
                 candidate_frame,
                 experiments=experiment_history if not experiment_history.empty else None,
                 top_n=12,
                 minimum_class="C",
-                version=model_base_version,
+                version="external-v1",
             )
         except ValueError as exc:
-            st.error(f"实验数据无法回灌：{exc}")
+            st.error(
+                _training_error_message(
+                    exc,
+                    external_rows=external_candidate_count,
+                    experiment_rows=len(experiment_history),
+                )
+            )
             st.stop()
     try:
         artifact_path = save_model(closed_loop, Path("work/models") / f"{closed_loop.version}.npz")

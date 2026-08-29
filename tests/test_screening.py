@@ -39,3 +39,18 @@ def test_experimental_feature_mapping_validation_persistence_and_recommendation(
     batch = recommend_next_experiments(restored, candidates, tested_ids=[candidates.iloc[0].candidate_id], batch_size=4)
     assert len(batch) == 4
     assert candidates.iloc[0].candidate_id not in set(batch.candidate_id)
+
+
+def test_duplicate_experiment_rows_keep_latest_measurement_during_calibration():
+    candidates = build_candidate_library(max_records=24, seed=9)
+    candidate_id = candidates.iloc[0].candidate_id
+    experiments = pd.DataFrame([
+        {"candidate_id": candidate_id, "wide_temp_adhesion_mpa": 20.0},
+        {"candidate_id": candidate_id, "wide_temp_adhesion_mpa": 32.0},
+    ])
+
+    selected, model = screen_candidates(candidates, experiments=experiments, top_n=5)
+
+    assert len(selected) == 5
+    assert model.experimental_rows == 1
+    assert model.correction_bias is not None

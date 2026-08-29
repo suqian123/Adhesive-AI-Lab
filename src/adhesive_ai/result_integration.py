@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, is_dataclass
+from decimal import Decimal
 from typing import Any, Mapping
 
 import numpy as np
@@ -19,6 +20,8 @@ def to_jsonable(value: Any) -> Any:
         return value.tolist()
     if isinstance(value, np.generic):
         return value.item()
+    if isinstance(value, Decimal):
+        return float(value)
     if isinstance(value, Mapping):
         return {str(key): to_jsonable(item) for key, item in value.items()}
     if isinstance(value, (list, tuple)):
