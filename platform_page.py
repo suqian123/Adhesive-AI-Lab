@@ -12,10 +12,11 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 from adhesive_ai.candidate_library import build_candidate_library
-from adhesive_ai.campaign import build_multiscale_campaign, campaign_task_frame, requirement_coverage, validate_candidate_contract, write_multiscale_campaign
+from adhesive_ai.campaign import build_multiscale_campaign, campaign_task_frame, requirement_coverage, validate_candidate_contract
 from adhesive_ai.campaign_runner import (
     available_engine_profiles, campaign_environment_frame, campaign_run_frame, get_campaign_run,
     ensure_next_vasp_facet_convergence, integrate_campaign_run, list_campaign_runs, load_engine_profiles,
+    mark_external_campaign_task_imported, match_external_result_archive, register_external_campaign_package,
     prepare_standalone_external_task,
     resume_approved_vasp_tasks, resume_prepared_md_tasks, save_engine_profiles, start_campaign_run,
     terminate_campaign_run,
@@ -151,10 +152,12 @@ CAMPAIGN_RUN_STATUS_LABELS = {
     "queued": "等待启动", "running": "自动计算中", "completed": "全部完成",
     "partial": "部分完成", "blocked": "前置条件阻塞", "failed": "计算失败",
     "cancelled": "已终止", "termination_failed": "终止失败",
+    "external_pending": "等待外部结果导入",
 }
 CAMPAIGN_TASK_STATUS_LABELS = {
     "pending": "等待依赖", "queued": "等待执行", "running": "计算中",
     "completed": "已完成", "failed": "失败", "blocked": "阻塞", "cancelled": "已终止",
+    "external_pending": "等待外部结果导入", "imported": "已导入并回写",
 }
 CAMPAIGN_CATEGORY_LABELS = {
     "dft": "量子化学 DFT", "bulk_md": "树脂体相 MD",
@@ -364,12 +367,54 @@ def _query_parameter(name: str) -> str | None:
     return str(value) if value not in (None, "") else None
 
 
+def _clear_candidate_scoped_state() -> None:
+    """Drop task selections that belong to a previously selected candidate."""
+    st.session_state.pop("last_job_id", None)
+    st.session_state.pop("external_package_archive", None)
+    for key in list(st.session_state):
+        if key.startswith((
+            "external_result_import_",
+            "external_result_upload_",
+            "external_result_archive_",
+        )):
+            st.session_state.pop(key, None)
+
+
+def _clear_external_import_task_state() -> None:
+    """Remove task-level import widgets when their source run changes."""
+    st.session_state.pop("external_result_import_task", None)
+    for key in list(st.session_state):
+        if key.startswith((
+            "external_result_import_engine_",
+            "external_result_import_file_",
+            "external_result_upload_",
+            "external_result_archive_",
+        )):
+            st.session_state.pop(key, None)
+
+
 def _clear_campaign_run_selection() -> None:
     """Avoid carrying a prior candidate's run into a newly selected candidate."""
+    _clear_candidate_scoped_state()
     st.session_state.pop("selected_campaign_run", None)
     st.session_state.pop("campaign_run_selector", None)
     if "campaign_run" in st.query_params:
         del st.query_params["campaign_run"]
+
+
+def _sync_campaign_context_from_run() -> None:
+    """Make a selected automatic run the source of the candidate context."""
+    run_id = str(st.session_state.get("campaign_run_selector") or "")
+    selected_run = next(
+        (record for record in list_campaign_runs() if str(record.get("run_id")) == run_id),
+        None,
+    )
+    candidate_id = str((selected_run or {}).get("candidate_id") or "")
+    if selected_run is not None and candidate_id in candidate_ids:
+        if st.session_state.get("campaign_candidate_id") != candidate_id:
+            _clear_candidate_scoped_state()
+        st.session_state["selected_campaign_run"] = run_id
+        st.session_state["campaign_candidate_id"] = candidate_id
 
 
 def _vasp_progress_text(progress: dict[str, object]) -> str:
@@ -414,8 +459,9 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
             f"当前选择为 {candidate_id}。"
         )
         return
-    record = resume_prepared_md_tasks(run_id)
-    record = resume_approved_vasp_tasks(run_id)
+    if record.get("execution_mode") != "external":
+        record = resume_prepared_md_tasks(run_id)
+        record = resume_approved_vasp_tasks(run_id)
     status = str(record.get("status"))
     tasks = list(record.get("tasks", []))
     waiting_vasp_facets = {
@@ -479,12 +525,14 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
             ],
         }
     counts = {name: sum(task.get("status") == name for task in tasks) for name in CAMPAIGN_TASK_STATUS_LABELS}
+    finished_count = counts["completed"] + counts["imported"]
     formulation_id = str((record.get("candidate_snapshot") or {}).get("formulation_id") or "旧记录")
     st.caption(f"状态记录：候选 {record_candidate_id} · 配方 {formulation_id} · 运行 {run_id}")
     st.caption(
         f"运行状态：{CAMPAIGN_RUN_STATUS_LABELS.get(status, status)} · "
-        f"已完成 {counts['completed']}/{len(tasks)} · 计算中 {counts['running'] + counts['queued']} · "
-        f"阻塞 {counts['blocked']} · 失败 {counts['failed']} · 已终止 {counts['cancelled']}"
+        f"已完成 {finished_count}/{len(tasks)} · 计算中 {counts['running'] + counts['queued']} · "
+        f"等待导入 {counts['external_pending']} · 阻塞 {counts['blocked']} · "
+        f"失败 {counts['failed']} · 已终止 {counts['cancelled']}"
     )
     if waiting_vasp_facets:
         st.caption(
@@ -492,7 +540,7 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
                 facet for facet in ("(111)", "(110)", "(100)") if facet in waiting_vasp_facets
             ) + "；为避免 VASP 资源冲突，系统按晶面顺序单独运行。"
         )
-    st.progress(counts["completed"] / max(1, len(tasks)), text=f"多尺度任务完成度 {counts['completed']}/{len(tasks)}")
+    st.progress(finished_count / max(1, len(tasks)), text=f"多尺度任务完成度 {finished_count}/{len(tasks)}")
     st.dataframe(_localized_campaign_run_table(display_record), width="stretch", hide_index=True)
     if status in {"queued", "running"}:
         st.info("后台监督进程正在自动推进任务；本区域每 5 秒刷新一次。")
@@ -556,6 +604,15 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
         st.warning("当前多尺度运行已终止。可以重新设置最大并行任务数并创建新的运行。")
     elif status == "termination_failed":
         st.error(f"部分外部任务未能终止：{record.get('termination_error', '请检查任务日志。')}")
+    elif status == "external_pending":
+        st.info("该任务包未启动本机求解器。请在外部环境完成计算后，于第 3 板块上传对应结果文件。")
+        st.warning("平台无法终止外部机器上的计算进程；取消跟踪只会停止本平台对该任务包的导入等待。")
+        if st.button("取消跟踪外部运行", key=f"cancel-external-campaign-{run_id}", width="stretch"):
+            try:
+                terminate_campaign_run(run_id)
+                st.rerun(scope="fragment")
+            except (OSError, RuntimeError, ValueError) as exc:
+                st.error(str(exc))
     elif status in {"completed", "partial"} and not record.get("integrated_at"):
         terminal_key = f"campaign_terminal_seen_{run_id}"
         if st.session_state.get(terminal_key) != record.get("updated_at"):
@@ -1134,7 +1191,8 @@ legacy_run_count = 0
 legacy_job_count = 0
 for campaign_run_record in list_campaign_runs():
     if (
-        campaign_run_record.get("status") not in {"completed", "partial"}
+        campaign_run_record.get("execution_mode") == "external"
+        or campaign_run_record.get("status") not in {"completed", "partial"}
         or campaign_run_record.get("integrated_at")
         or str(campaign_run_record.get("candidate_id")) not in set(candidate_frame["candidate_id"].astype(str))
     ):
@@ -1243,15 +1301,15 @@ def _render_multiscale_campaign_section() -> None:
     requested_run_id = _query_parameter("campaign_run")
     requested_candidate_id = _query_parameter("campaign_candidate")
     session_candidate_id = st.session_state.get("campaign_candidate_id")
-    if session_candidate_id in candidate_ids:
+    context_run_id = requested_run_id or str(st.session_state.get("selected_campaign_run") or "")
+    context_run = next(
+        (record for record in all_campaign_runs if str(record.get("run_id")) == context_run_id),
+        None,
+    )
+    if context_run is not None and str(context_run.get("candidate_id")) in candidate_ids:
+        requested_candidate_id = str(context_run.get("candidate_id"))
+    elif session_candidate_id in candidate_ids:
         requested_candidate_id = str(session_candidate_id)
-    elif requested_run_id:
-        requested_run = next(
-            (record for record in all_campaign_runs if str(record.get("run_id")) == requested_run_id),
-            None,
-        )
-        if requested_run is not None:
-            requested_candidate_id = str(requested_run.get("candidate_id"))
     if requested_candidate_id not in candidate_ids and "campaign_candidate_id" not in st.session_state:
         recoverable_run = next(
             (
@@ -1298,19 +1356,10 @@ def _render_multiscale_campaign_section() -> None:
         )
         campaign_display = campaign_display.rename(columns=CAMPAIGN_COLUMN_LABELS)
         st.dataframe(campaign_display, width="stretch", hide_index=True)
-        if st.button("生成多尺度计算任务包", key="write_campaign"):
-            try:
-                written_campaign = write_multiscale_campaign(campaign)
-                st.success(f"任务包已生成：{written_campaign['campaign'].parent}")
-            except Exception as exc:
-                st.error(f"任务包生成失败：{exc}")
 
-    st.markdown("#### 一键启动多尺度计算")
+    st.markdown("#### 多尺度运行方式")
     st.caption(f"当前计算候选：{campaign_candidate_id}")
-    st.caption(
-        "一次生成全部任务并按“量子化学/体相 MD → 界面 MD → 粗粒化”依赖顺序后台执行；"
-        "完成后自动汇总、回写候选数据库并更新 AI 模型。"
-    )
+    st.caption("选择本地运行可自动调度；选择外部运行会登记并导出任务包，供集群或其他工作站计算后导入回写。")
     campaign_profiles: dict[str, dict[str, object]] = {}
     with st.expander("选择计算引擎与执行方式", expanded=True):
         dft_tab, bulk_tab, interface_tab, cg_tab = st.tabs(["量子化学 DFT", "树脂体相 MD", "界面 MD", "粗粒化"])
@@ -1359,7 +1408,8 @@ def _render_multiscale_campaign_section() -> None:
             f"{candidate_active_runs[0].get('run_id')}。为避免重复提交，启动配置已锁定。"
         )
 
-    parallel_col, launch_col = st.columns([1, 2])
+    st.markdown("##### 运行入口")
+    parallel_col, launch_col, export_col = st.columns([1, 1.4, 1.6])
     try:
         configured_parallel = int(os.getenv("ADHESIVE_CAMPAIGN_MAX_PARALLEL", "16"))
     except ValueError:
@@ -1374,13 +1424,51 @@ def _render_multiscale_campaign_section() -> None:
             disabled=launch_locked,
         )
     with launch_col:
-        st.write("")
+        st.caption("本地运行")
         launch_campaign = st.button(
             "一键生成并启动多尺度计算",
             type="primary",
             key="launch_multiscale_campaign",
             width="stretch",
             disabled=launch_locked,
+        )
+    with export_col:
+        st.caption("外部运行")
+        register_external_campaign = st.button(
+            "登记并导出外部计算任务包",
+            key="register_external_multiscale_campaign",
+            width="stretch",
+        )
+
+    st.caption("本地运行会占用该候选的启动锁；外部运行不会启动本机求解器，也不会占用启动锁。")
+
+    if register_external_campaign:
+        try:
+            with st.spinner("正在生成并登记外部计算任务包……"):
+                external_run = register_external_campaign_package(
+                    campaign,
+                    profiles=campaign_profiles,
+                )
+            st.session_state["selected_campaign_run"] = external_run["run_id"]
+            st.session_state["external_package_archive"] = external_run.get("external_package_archive")
+            requested_run_id = str(external_run["run_id"])
+            st.query_params["campaign_run"] = requested_run_id
+            st.success(
+                f"外部计算任务包已登记：{external_run['run_id']}。"
+                f"任务目录：{external_run['package_directory']}。"
+            )
+        except Exception as exc:
+            st.error(f"外部计算任务包登记失败：{exc}")
+
+    external_package_archive = Path(str(st.session_state.get("external_package_archive") or ""))
+    if external_package_archive.is_file():
+        st.download_button(
+            "下载当前外部计算任务包",
+            data=external_package_archive.read_bytes(),
+            file_name=external_package_archive.name,
+            mime="application/zip",
+            key="download_external_multiscale_package",
+            width="stretch",
         )
 
     if launch_campaign:
@@ -1411,6 +1499,7 @@ def _render_multiscale_campaign_section() -> None:
                 except (OSError, RuntimeError, ValueError) as exc:
                     st.warning(f"任务包已创建，但共享 VASP 收敛验证未能自动启动：{exc}")
             st.session_state["selected_campaign_run"] = launched_run["run_id"]
+            st.session_state.pop("external_package_archive", None)
             requested_run_id = str(launched_run["run_id"])
             st.query_params["campaign_run"] = requested_run_id
             if launched_run["status"] == "blocked":
@@ -1677,16 +1766,9 @@ def _render_multiscale_campaign_section() -> None:
                 except Exception as exc:
                     st.error(f"任务提交失败：{exc}")
     candidate_campaign_runs = list_campaign_runs(candidate_id=campaign_candidate_id)
-    active_campaign_runs = [
-        record for record in all_campaign_runs
-        if str(record.get("status")) in {"queued", "running", "blocked", "termination_failed"}
-    ]
-    visible_campaign_runs = active_campaign_runs or candidate_campaign_runs
+    visible_campaign_runs = candidate_campaign_runs
     if visible_campaign_runs:
-        if active_campaign_runs:
-            st.caption("以下显示全部候选中未结束的自动计算记录；终止操作只影响所选运行。")
-        else:
-            st.caption(f"当前显示候选 {campaign_candidate_id} 的历史自动计算记录。")
+        st.caption(f"当前显示候选 {campaign_candidate_id} 的本地与外部多尺度运行记录。")
         campaign_runs_by_id = {str(record["run_id"]): record for record in visible_campaign_runs}
         campaign_run_ids = list(campaign_runs_by_id)
         selected_campaign_run = requested_run_id
@@ -1695,7 +1777,7 @@ def _render_multiscale_campaign_section() -> None:
         if selected_campaign_run not in campaign_run_ids:
             selected_campaign_run = campaign_run_ids[0]
         selected_campaign_run = st.selectbox(
-            "查看自动计算记录（未结束任务优先）",
+            "查看多尺度运行记录（未结束本地任务优先）",
             campaign_run_ids,
             index=campaign_run_ids.index(selected_campaign_run),
             format_func=lambda run_id: (
@@ -1703,6 +1785,7 @@ def _render_multiscale_campaign_section() -> None:
                 f"{CAMPAIGN_RUN_STATUS_LABELS.get(str(campaign_runs_by_id[run_id].get('status')), '未知状态')}"
             ),
             key="campaign_run_selector",
+            on_change=_sync_campaign_context_from_run,
         )
         st.session_state["selected_campaign_run"] = selected_campaign_run
         if _query_parameter("campaign_run") != selected_campaign_run:
@@ -1716,7 +1799,7 @@ def _render_multiscale_campaign_section() -> None:
         )
         _render_campaign_run_status(selected_campaign_run, selected_run_candidate_id)
     else:
-        st.info("当前候选还没有一键自动计算记录。")
+        st.info("当前候选还没有多尺度运行记录。")
 
 
 _render_multiscale_campaign_section()
@@ -1724,41 +1807,40 @@ _render_multiscale_campaign_section()
 st.divider()
 st.subheader("3. 外部计算任务与结果回写")
 st.caption(
-    "推荐直接使用上方“一键启动多尺度计算”。任务完成后，系统自动解析结果、按候选编号回写数据库、"
-    "重训模型并更新；无需再点击单独的“回写”按钮。相同结果类型按生产批准、输入验证、"
+    "本地运行会自动解析并回写；外部运行请在下方选择已登记的运行和任务后上传结果。"
+    "相同结果类型按生产批准、输入验证、"
     "未批准手动任务依次裁决；条件不同的结果会保留为历史记录，不会因完成顺序互相覆盖。"
 )
 with st.expander("导入外部计算结果", expanded=False):
     st.caption(
-        "用于已在外部环境完成的多尺度任务。选择原任务包中的任务并上传结果文件；"
-        "系统会校验候选身份后立即解析、回写并更新模型。"
+        "默认仅显示通过“登记并导出外部计算任务包”创建的运行。"
+        "选择任务并上传结果后，系统会先显示回写目标，再执行身份校验、解析和回写。"
     )
+    current_candidate_id = str(st.session_state.get("campaign_candidate_id") or "")
     importable_runs = [
         record for record in list_campaign_runs()
         if isinstance(record.get("candidate_snapshot"), dict)
         and str((record.get("candidate_snapshot") or {}).get("formulation_id") or "").strip()
         and isinstance(record.get("tasks"), list)
+        and str(record.get("candidate_id") or "") == current_candidate_id
+        and record.get("execution_mode") == "external"
     ]
     if not importable_runs:
-        st.info("尚未找到带候选身份信息的多尺度任务包。请先生成多尺度计算包。")
+        st.info(f"候选 {current_candidate_id} 尚未找到已登记的外部计算任务包。请先在第 2 板块登记并导出任务包。")
     else:
         runs_by_id = {str(record["run_id"]): record for record in importable_runs}
-        current_candidate_id = str(st.session_state.get("campaign_candidate_id") or "")
-        default_run_id = next(
-            (
-                run_id for run_id, record in runs_by_id.items()
-                if str(record.get("candidate_id")) == current_candidate_id
-            ),
-            next(iter(runs_by_id)),
-        )
+        remembered_run_id = str(st.session_state.get("external_result_import_run") or "")
+        default_run_id = remembered_run_id if remembered_run_id in runs_by_id else next(iter(runs_by_id))
         selected_import_run_id = st.selectbox(
             "来源多尺度运行",
             list(runs_by_id),
             index=list(runs_by_id).index(default_run_id),
             format_func=lambda run_id: (
                 f"候选 {runs_by_id[run_id].get('candidate_id', '未知')} · {run_id}"
+                f" · {CAMPAIGN_RUN_STATUS_LABELS.get(str(runs_by_id[run_id].get('status')), '未知状态')}"
             ),
             key="external_result_import_run",
+            on_change=_clear_external_import_task_state,
         )
         selected_import_run = runs_by_id[selected_import_run_id]
         importable_tasks = [
@@ -1766,9 +1848,15 @@ with st.expander("导入外部计算结果", expanded=False):
             if isinstance(task, dict)
             and isinstance(task.get("metadata"), dict)
             and str((task.get("metadata") or {}).get("calculation_kind") or "").strip()
+            and str(task.get("status")) == "external_pending"
         ]
+        task_statuses = [task for task in selected_import_run.get("tasks", []) if isinstance(task, dict)]
+        imported_count = sum(str(task.get("status")) == "imported" for task in task_statuses)
+        pending_count = sum(str(task.get("status")) == "external_pending" for task in task_statuses)
+        failed_count = sum(str(task.get("status")) == "failed" for task in task_statuses)
+        st.caption(f"外部运行导入进度：已导入并回写 {imported_count} · 等待导入 {pending_count} · 失败 {failed_count}")
         if not importable_tasks:
-            st.warning("该任务包没有可识别的 DFT 或 MD 任务清单，无法安全导入结果。")
+            st.info("该外部运行的全部任务结果均已导入并回写。")
         else:
             tasks_by_id = {str(task["task_id"]): task for task in importable_tasks}
             selected_import_task_id = st.selectbox(
@@ -1794,27 +1882,26 @@ with st.expander("导入外部计算结果", expanded=False):
                     else ["LAMMPS", "GROMACS"]
                 )
             )
-            import_engine = st.selectbox(
-                "实际计算引擎",
-                engine_options,
-                key=f"external_result_import_engine_{selected_import_run_id}_{selected_import_task_id}",
-            )
+            import_engine = configured_engine or engine_options[0]
             default_result_file = str(
                 selected_import_task.get("result_file")
                 or import_metadata.get("result_file")
                 or JOB_RESULT_FILE_EXAMPLES[import_engine]
             )
-            import_result_file = st.text_input(
-                "结果文件路径（相对于来源任务目录）",
-                value=default_result_file,
-                key=f"external_result_import_file_{selected_import_run_id}_{selected_import_task_id}_{import_engine}",
-                help="上传的文件会保存为此相对路径，不能使用绝对路径或 ..。",
-            )
-            uploaded_result = st.file_uploader(
-                "上传外部计算结果文件",
-                key=f"external_result_upload_{selected_import_run_id}_{selected_import_task_id}",
-                help="例如 VASP 的 OUTCAR、LAMMPS 的 log.lammps 或 GROMACS 的 .xvg 输出。",
-            )
+            import_result_file = default_result_file
+            with st.expander("高级：修改引擎和结果文件路径", expanded=False):
+                import_engine = st.selectbox(
+                    "实际计算引擎",
+                    engine_options,
+                    index=engine_options.index(import_engine) if import_engine in engine_options else 0,
+                    key=f"external_result_import_engine_{selected_import_run_id}_{selected_import_task_id}",
+                )
+                import_result_file = st.text_input(
+                    "结果文件路径（相对于来源任务目录）",
+                    value=default_result_file,
+                    key=f"external_result_import_file_{selected_import_run_id}_{selected_import_task_id}_{import_engine}",
+                    help="上传的文件会保存为此相对路径，不能使用绝对路径或 ..。",
+                )
             expected_candidate_id = str(
                 import_metadata.get("candidate_id")
                 or import_run_snapshot.get("candidate_id")
@@ -1851,49 +1938,97 @@ with st.expander("导入外部计算结果", expanded=False):
             if identity_errors:
                 st.error("；".join(identity_errors) + "，已禁止导入回写。")
             else:
+                expected_outputs = "、".join(
+                    CALCULATION_OUTPUT_LABELS.get(str(name), str(name))
+                    for name in selected_import_task.get("expected_outputs", [])
+                )
+                st.success("候选身份校验通过")
                 st.caption(
-                    f"将回写到候选：{expected_candidate_id} · 配方指纹：{expected_formulation_id} · "
+                    f"候选编号：{expected_candidate_id} · 配方指纹：{expected_formulation_id} · "
                     f"候选库版本：{expected_library_version}"
                 )
+                st.caption(
+                    f"回写目录：{selected_import_task.get('workdir')} · 计算引擎：{import_engine} · "
+                    f"结果路径：{import_result_file} · 解析指标：{expected_outputs or '由结果文件决定'}"
+                )
+
+            def import_result_for_task(
+                task: dict[str, object],
+                *,
+                engine: str,
+                result_file: str,
+                result_content: bytes,
+                source_filename: str,
+                candidates_for_integration: pd.DataFrame,
+            ):
+                task_metadata = dict(task.get("metadata") or {})
+                task_metadata.pop("campaign_run_id", None)
+                task_metadata.pop("campaign_task_id", None)
+                task_metadata.update(
+                    candidate_id=expected_candidate_id,
+                    formulation_id=expected_formulation_id,
+                    candidate_library_version=expected_library_version,
+                    result_file=result_file.strip(),
+                    imported_from_campaign_run=selected_import_run_id,
+                    imported_from_campaign_task=str(task.get("task_id") or ""),
+                    input_validation=task.get("input_validation"),
+                    production_approved=(
+                        "approved" in str(task.get("input_validation") or "").lower()
+                    ),
+                )
+                job_root = str(selected_import_run.get("job_root") or "work/jobs")
+                imported_job = register_imported_job(
+                    engine,
+                    workdir=str(task.get("workdir") or ""),
+                    result_file=result_file.strip(),
+                    result_content=result_content,
+                    metadata=task_metadata,
+                    source_filename=source_filename,
+                    root=job_root,
+                )
+                integrated = integrate_completed_job(
+                    imported_job.job_id,
+                    candidates_for_integration,
+                    experiments=experiment_history,
+                    top_n=12,
+                    root=job_root,
+                )
+                if integrated is None:
+                    raise RuntimeError("导入记录未产生可回写的数据，请检查结果文件内容。")
+                mark_external_campaign_task_imported(
+                    selected_import_run_id,
+                    str(task.get("task_id") or ""),
+                    imported_job.job_id,
+                )
+                return imported_job, integrated
+
+            uploaded_result = st.file_uploader(
+                "上传单个外部计算结果文件",
+                key=f"external_result_upload_{selected_import_run_id}_{selected_import_task_id}",
+                help="例如 VASP 的 OUTCAR、LAMMPS 的 log.lammps 或 GROMACS 的 .xvg 输出。",
+            )
+            if uploaded_result is not None and not identity_errors:
+                st.info("上传文件已就绪。确认后将写入上述目录，并按列出的解析指标执行自动回写。")
             import_and_integrate = st.button(
-                "导入结果并自动回写",
+                "确认导入单个结果并自动回写",
                 disabled=uploaded_result is None or bool(identity_errors),
                 width="stretch",
                 key="external_result_import_submit",
             )
             if import_and_integrate:
                 try:
-                    registered_metadata = dict(import_metadata)
-                    registered_metadata.pop("campaign_run_id", None)
-                    registered_metadata.pop("campaign_task_id", None)
-                    registered_metadata.update(
-                        candidate_id=expected_candidate_id,
-                        formulation_id=expected_formulation_id,
-                        candidate_library_version=expected_library_version,
-                        result_file=import_result_file.strip(),
-                        imported_from_campaign_run=selected_import_run_id,
-                        imported_from_campaign_task=selected_import_task_id,
-                        input_validation=selected_import_task.get("input_validation"),
-                        production_approved=(
-                            "approved" in str(selected_import_task.get("input_validation") or "").lower()
-                        ),
-                    )
-                    imported_job = register_imported_job(
-                        import_engine,
-                        workdir=str(selected_import_task.get("workdir") or ""),
-                        result_file=import_result_file.strip(),
+                    _, integrated = import_result_for_task(
+                        selected_import_task,
+                        engine=import_engine,
+                        result_file=import_result_file,
                         result_content=uploaded_result.getvalue(),
-                        metadata=registered_metadata,
                         source_filename=uploaded_result.name,
+                        candidates_for_integration=candidate_frame,
                     )
-                    integrated = integrate_completed_job(
-                        imported_job.job_id,
-                        candidate_frame,
-                        experiments=experiment_history,
-                        top_n=12,
-                    )
-                    if integrated is None:
-                        raise RuntimeError("导入记录未产生可回写的数据，请检查结果文件内容。")
+                    st.session_state["selected_campaign_run"] = selected_import_run_id
+                    st.session_state["campaign_candidate_id"] = expected_candidate_id
+                    st.query_params["campaign_run"] = selected_import_run_id
+                    st.query_params["campaign_candidate"] = expected_candidate_id
                     st.session_state["external_import_notice"] = (
                         f"外部结果 {uploaded_result.name} 已导入并回写候选 {integrated.candidate_id}；"
                         f"模型 {integrated.model.version} 已更新。"
@@ -1901,13 +2036,90 @@ with st.expander("导入外部计算结果", expanded=False):
                     st.rerun()
                 except Exception as exc:
                     st.error(f"导入或回写失败：{exc}")
+
+            if selected_import_run.get("execution_mode") == "external":
+                st.markdown("##### ZIP 批量导入")
+                st.caption("ZIP 内的结果文件须位于 `tasks/<任务编号>/<结果文件路径>` 或 `<任务编号>/<结果文件路径>`。")
+                uploaded_archive = st.file_uploader(
+                    "上传外部计算结果 ZIP",
+                    type=["zip"],
+                    key=f"external_result_archive_{selected_import_run_id}",
+                )
+                archive_report: dict[str, object] | None = None
+                if uploaded_archive is not None:
+                    try:
+                        archive_report = match_external_result_archive(
+                            selected_import_run,
+                            uploaded_archive.getvalue(),
+                        )
+                        matched_rows = pd.DataFrame([
+                            {
+                                "任务编号": item["task_id"],
+                                "引擎": item.get("engine") or "未配置",
+                                "结果文件": item["result_file"],
+                                "ZIP 文件": item["source_filename"],
+                            }
+                            for item in archive_report["matches"]
+                        ])
+                        if not matched_rows.empty:
+                            st.dataframe(matched_rows, width="stretch", hide_index=True)
+                        else:
+                            st.warning("ZIP 中没有匹配到等待导入任务的结果文件。")
+                        if archive_report["pending_task_ids"]:
+                            st.caption("仍等待结果的任务：" + "、".join(archive_report["pending_task_ids"]))
+                        if archive_report["unmatched_files"]:
+                            st.warning("未匹配文件：" + "、".join(archive_report["unmatched_files"]))
+                    except Exception as exc:
+                        st.error(f"ZIP 结果包检查失败：{exc}")
+                batch_import = st.button(
+                    "确认批量导入并自动回写",
+                    disabled=not archive_report or not archive_report["matches"] or bool(identity_errors),
+                    width="stretch",
+                    key=f"external_result_archive_submit_{selected_import_run_id}",
+                )
+                if batch_import and archive_report:
+                    successes: list[str] = []
+                    failures: list[str] = []
+                    batch_candidates = candidate_frame
+                    tasks_by_id = {str(task.get("task_id")): task for task in importable_tasks}
+                    for item in archive_report["matches"]:
+                        task = tasks_by_id[str(item["task_id"])]
+                        try:
+                            _, integrated = import_result_for_task(
+                                task,
+                                engine=str(item.get("engine") or task.get("engine") or import_engine),
+                                result_file=str(item["result_file"]),
+                                result_content=bytes(item["result_content"]),
+                                source_filename=str(item["source_filename"]),
+                                candidates_for_integration=batch_candidates,
+                            )
+                            batch_candidates = integrated.candidates
+                            successes.append(str(item["task_id"]))
+                        except Exception as exc:
+                            failures.append(f"{item['task_id']}：{exc}")
+                    st.session_state["selected_campaign_run"] = selected_import_run_id
+                    st.session_state["campaign_candidate_id"] = expected_candidate_id
+                    st.query_params["campaign_run"] = selected_import_run_id
+                    st.query_params["campaign_candidate"] = expected_candidate_id
+                    st.session_state["external_import_notice"] = (
+                        f"ZIP 批量导入完成：成功 {len(successes)} 个，失败 {len(failures)} 个。"
+                        + (f"已回写任务：{'、'.join(successes)}。" if successes else "")
+                    )
+                    if failures:
+                        st.session_state["external_import_failure_notice"] = failures
+                    st.rerun()
 import_notice = st.session_state.pop("external_import_notice", None)
 if import_notice:
     st.success(import_notice)
+import_failure_notice = st.session_state.pop("external_import_failure_notice", [])
+if import_failure_notice:
+    st.warning("以下任务未导入，请修正结果后重新上传：" + "；".join(import_failure_notice))
 _watch_standalone_external_jobs()
+current_task_candidate_id = str(st.session_state.get("campaign_candidate_id") or "")
 standalone_job_snapshot = [
     item for item in list_jobs()
     if not (item.metadata or {}).get("campaign_run_id")
+    and str((item.metadata or {}).get("candidate_id") or "") == current_task_candidate_id
 ]
 running_standalone = sum(item.status in {"queued", "running"} for item in standalone_job_snapshot)
 pending_writeback = sum(
@@ -1925,18 +2137,16 @@ for column, label, value in zip(
     (running_standalone, pending_writeback, integrated_standalone, failed_standalone),
 ):
     column.metric(label, value)
-jobs = [
-    item for item in list_jobs()
-    if not (item.metadata or {}).get("campaign_run_id")
-]
+jobs = standalone_job_snapshot
 if jobs:
     running_count = sum(item.status in {"queued", "running"} for item in jobs)
     failed_count = sum(item.status == "failed" for item in jobs)
     st.caption(
-        f"单任务记录 {len(jobs)} 条 · {running_count} 个运行中/等待中 · {failed_count} 个失败 · 状态自动刷新"
+        f"当前候选 {current_task_candidate_id} 的单任务记录 {len(jobs)} 条 · "
+        f"{running_count} 个运行中/等待中 · {failed_count} 个失败 · 状态自动刷新"
     )
 else:
-    st.caption("尚未提交单独的外部计算任务；多尺度任务状态请在上方查看。")
+    st.caption(f"候选 {current_task_candidate_id} 尚未提交单独的外部计算任务；多尺度任务状态请在上方查看。")
 if jobs:
     job_table = pd.DataFrame([{
         "任务编号": item.job_id,
@@ -1985,7 +2195,7 @@ if jobs:
         st.error(f"任务失败：{_localized_job_failure_message(failure_output)}")
 
 st.divider()
-st.subheader("4. 候选机理与真实数据融合")
+st.subheader("4. 候选结果汇总与综合分析")
 st.caption("融合当前多尺度计算候选的实验、外部 DFT/MD/界面结果和代理数据；优先级为实验 > 外部计算 > 代理。")
 mechanism_candidate_id = st.session_state.get("campaign_candidate_id")
 if mechanism_candidate_id not in candidate_ids:
@@ -2001,42 +2211,60 @@ mechanism_candidate = candidate_frame.loc[
 ].iloc[0]
 mechanism_payload = external_payloads.get(mechanism_candidate_id, {})
 recorded_dft = mechanism_payload.get("dft", {}) if isinstance(mechanism_payload, dict) else {}
-condition_col1, condition_col2, condition_col3, condition_col4 = st.columns(4)
-with condition_col1:
-    mechanism_facet = st.selectbox(
-        "代理补全晶面",
-        ["(111)", "(110)", "(100)"],
-        index=["(111)", "(110)", "(100)"].index(recorded_dft.get("facet")) if recorded_dft.get("facet") in {"(111)", "(110)", "(100)"} else 0,
-        key="mechanism_facet",
-        help="已有真实 DFT 时采用任务记录的晶面；否则用于补全缺失指标。",
-    )
-with condition_col2:
-    mechanism_vacancy = st.number_input(
-        "代理补全氧空位",
-        min_value=0.0,
-        max_value=0.30,
-        value=float(recorded_dft.get("oxygen_vacancy_fraction") if recorded_dft.get("oxygen_vacancy_fraction") is not None else 0.08),
-        step=0.01,
-        key="mechanism_vacancy",
-    )
-with condition_col3:
-    mechanism_hydroxyl = st.number_input(
-        "代理补全羟基化",
-        min_value=0.0,
-        max_value=1.0,
-        value=float(recorded_dft.get("hydroxyl_fraction") if recorded_dft.get("hydroxyl_fraction") is not None else 0.35),
-        step=0.05,
-        key="mechanism_hydroxyl",
-    )
-with condition_col4:
-    mechanism_particle_size = st.number_input(
-        "CeO₂ 粒径 (nm)",
-        min_value=8.0,
-        max_value=200.0,
-        value=35.0,
-        step=1.0,
-        key="mechanism_particle_size",
-    )
+default_mechanism_facet = recorded_dft.get("facet") if recorded_dft.get("facet") in {"(111)", "(110)", "(100)"} else "(111)"
+default_mechanism_vacancy = float(
+    recorded_dft.get("oxygen_vacancy_fraction")
+    if recorded_dft.get("oxygen_vacancy_fraction") is not None else 0.08
+)
+default_mechanism_hydroxyl = float(
+    recorded_dft.get("hydroxyl_fraction")
+    if recorded_dft.get("hydroxyl_fraction") is not None else 0.35
+)
+mechanism_proxy_signature = (
+    mechanism_candidate_id,
+    default_mechanism_facet,
+    default_mechanism_vacancy,
+    default_mechanism_hydroxyl,
+)
+if st.session_state.get("mechanism_proxy_signature") != mechanism_proxy_signature:
+    st.session_state["mechanism_facet"] = default_mechanism_facet
+    st.session_state["mechanism_vacancy"] = default_mechanism_vacancy
+    st.session_state["mechanism_hydroxyl"] = default_mechanism_hydroxyl
+    st.session_state["mechanism_particle_size"] = 35.0
+    st.session_state["mechanism_proxy_signature"] = mechanism_proxy_signature
+with st.expander("高级：代理补全条件", expanded=False):
+    condition_col1, condition_col2, condition_col3, condition_col4 = st.columns(4)
+    with condition_col1:
+        mechanism_facet = st.selectbox(
+            "代理补全晶面",
+            ["(111)", "(110)", "(100)"],
+            key="mechanism_facet",
+            help="仅用于补全缺失的真实 DFT 指标。",
+        )
+    with condition_col2:
+        mechanism_vacancy = st.number_input(
+            "代理补全氧空位",
+            min_value=0.0,
+            max_value=0.30,
+            step=0.01,
+            key="mechanism_vacancy",
+        )
+    with condition_col3:
+        mechanism_hydroxyl = st.number_input(
+            "代理补全羟基化",
+            min_value=0.0,
+            max_value=1.0,
+            step=0.05,
+            key="mechanism_hydroxyl",
+        )
+    with condition_col4:
+        mechanism_particle_size = st.number_input(
+            "CeO₂ 粒径 (nm)",
+            min_value=8.0,
+            max_value=200.0,
+            step=1.0,
+            key="mechanism_particle_size",
+        )
 
 mechanism_result = fuse_candidate_mechanism(
     mechanism_candidate,

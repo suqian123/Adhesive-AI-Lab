@@ -1,0 +1,27 @@
+{
+  "task_id": "dft-pda-binding-100",
+  "candidate_id": "CL-00327",
+  "scale": "quantum",
+  "calculation_kind": "dft",
+  "objective": "pda-resin-and-surface-binding",
+  "engine_options": [
+    "VASP",
+    "Quantum ESPRESSO",
+    "CP2K"
+  ],
+  "conditions": {
+    "facet": "(100)",
+    "functional_group_type": "urethane"
+  },
+  "expected_outputs": [
+    "pda_resin_hbond_ev",
+    "pda_surface_coordination_ev",
+    "pda_reaction_ev"
+  ],
+  "readiness": "planned-requires-atomistic-structure",
+  "blocking_requirements": [
+    "validated PDA/resin fragments",
+    "ceria slab",
+    "binding-energy reference calculations"
+  ]
+}

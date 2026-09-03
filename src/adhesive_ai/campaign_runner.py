@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -20,6 +21,7 @@ import subprocess
 import sys
 import time
 import uuid
+import zipfile
 from typing import Any, Mapping
 
 import numpy as np
@@ -1026,6 +1028,13 @@ def _job_metadata(
 
 def _run_status(tasks: list[dict[str, Any]]) -> str:
     statuses = {str(task.get("status")) for task in tasks}
+    if statuses and statuses <= {"external_pending", "imported", "cancelled"}:
+        if "external_pending" in statuses:
+            return "external_pending"
+        if statuses == {"cancelled"}:
+            return "cancelled"
+        if "imported" in statuses:
+            return "completed"
     if statuses & {"pending", "queued", "running"}:
         return "running"
     completed = sum(task.get("status") == "completed" for task in tasks)
@@ -1036,6 +1045,240 @@ def _run_status(tasks: list[dict[str, Any]]) -> str:
     if "failed" in statuses:
         return "failed"
     return "blocked"
+
+
+def _write_external_execution_manifest(
+    package_directory: Path,
+    *,
+    run_id: str,
+    campaign: MultiscaleCampaign,
+    task_states: list[dict[str, Any]],
+) -> Path:
+    """Record the identity and expected result path for off-platform execution."""
+    payload = {
+        "run_id": run_id,
+        "execution_mode": "external",
+        "candidate_id": campaign.candidate_id,
+        "formulation_id": campaign.candidate_snapshot.get("formulation_id"),
+        "candidate_library_version": campaign.candidate_snapshot.get("candidate_library_version"),
+        "tasks": [
+            {
+                "task_id": task["task_id"],
+                "engine": task.get("engine"),
+                "command": task.get("command"),
+                "result_file": task.get("result_file"),
+                "workdir": task.get("workdir"),
+                "input_validation": task.get("input_validation"),
+                "expected_outputs": task.get("expected_outputs"),
+            }
+            for task in task_states
+        ],
+    }
+    manifest = package_directory / "external_execution.json"
+    manifest.write_text(json.dumps(to_jsonable(payload), ensure_ascii=False, indent=2), encoding="utf-8")
+    return manifest
+
+
+def register_external_campaign_package(
+    campaign: MultiscaleCampaign,
+    *,
+    profiles: Mapping[str, Mapping[str, Any]] | None = None,
+    root: str | Path = "work/campaign_runs",
+    job_root: str | Path = "work/jobs",
+    vasp_resources: str | Path = VASP_RESOURCE_CONFIG_PATH,
+) -> dict[str, Any]:
+    """Create a tracked campaign package for execution on an external machine.
+
+    This deliberately performs no preflight executable check and never submits a
+    child job. It records enough identity and result-path metadata for the
+    uploaded external output to be safely matched and written back later.
+    """
+    selected_profiles = {key: dict(value) for key, value in (profiles or engine_profiles_from_env()).items()}
+    run_id = f"{campaign.candidate_id}-{uuid.uuid4().hex[:10]}"
+    run_directory = _run_path(root, run_id).parent
+    package_paths = write_multiscale_campaign(campaign, run_directory / "package")
+    package_directory = package_paths["campaign"].parent
+    task_states: list[dict[str, Any]] = []
+    for task in campaign.tasks:
+        category = _category(task)
+        profile = selected_profiles.get(category, {})
+        task_dir = package_directory / "tasks" / task.task_id
+        input_validation, input_note = _prepare_direct_vasp_inputs(
+            task, profile, task_dir, resources=vasp_resources,
+        )
+        md_input_validation, md_input_note = _prepare_direct_lammps_inputs(task, profile, task_dir)
+        input_validation = input_validation or md_input_validation
+        input_note = input_note or md_input_note
+        if input_validation is None:
+            required = _required_inputs(category, str(profile.get("engine") or ""))
+            present = [name for name in required if (task_dir / name).is_file()]
+            input_validation = "external-inputs-ready" if len(present) == len(required) else "external-inputs-required"
+        command: tuple[str, ...] = ()
+        command_text = str(profile.get("command") or "").strip()
+        if command_text:
+            try:
+                command = _expand_command(
+                    command_text, task_dir=task_dir, task_file=task_dir / "task.json", campaign=campaign,
+                )
+            except (ValueError, KeyError):
+                # The remote environment may use a different launcher; retain the task package regardless.
+                command = ()
+        task_states.append({
+            "task_id": task.task_id,
+            "scale": task.scale,
+            "calculation_kind": task.calculation_kind,
+            "category": category,
+            "objective": task.objective,
+            "conditions": to_jsonable(task.conditions),
+            "expected_outputs": list(task.expected_outputs),
+            "dependencies": _dependencies(task, campaign.tasks),
+            "engine": profile.get("engine"),
+            "command": list(command),
+            "result_file": profile.get("result_file"),
+            "metadata": _job_metadata(task, profile, campaign, run_id, task_dir=task_dir),
+            "input_artifacts": _input_artifact_manifest(task_dir, category, str(profile.get("engine") or "")),
+            "workdir": str(task_dir),
+            "input_validation": input_validation,
+            "blocker": input_note,
+            "status": "external_pending",
+            "job_id": None,
+            "imported_job_id": None,
+        })
+    external_manifest = _write_external_execution_manifest(
+        package_directory, run_id=run_id, campaign=campaign, task_states=task_states,
+    )
+    archive = Path(shutil.make_archive(
+        str(run_directory / "external-task-package"),
+        "zip",
+        root_dir=package_directory,
+    ))
+    return _write_run({
+        "run_id": run_id,
+        "campaign_id": campaign.campaign_id,
+        "candidate_id": campaign.candidate_id,
+        "created_at": _now(),
+        "status": "external_pending",
+        "execution_mode": "external",
+        "integrated_at": None,
+        "integration_error": None,
+        "package_directory": str(package_directory),
+        "external_execution_manifest": str(external_manifest),
+        "external_package_archive": str(archive),
+        "job_root": str(Path(job_root).expanduser().resolve()),
+        "max_parallel": None,
+        "candidate_snapshot": campaign.candidate_snapshot,
+        "tasks": task_states,
+        "result_payload": {},
+    }, root)
+
+
+def mark_external_campaign_task_imported(
+    run_id: str,
+    task_id: str,
+    job_id: str,
+    *,
+    root: str | Path = "work/campaign_runs",
+) -> dict[str, Any]:
+    """Mark an externally executed task after its uploaded output was integrated."""
+    record = get_campaign_run(run_id, root=root)
+    if record.get("execution_mode") != "external":
+        return record
+    tasks = [dict(task) for task in record.get("tasks", [])]
+    matched = False
+    for task in tasks:
+        if str(task.get("task_id")) != task_id:
+            continue
+        task.update(
+            status="imported",
+            imported_job_id=job_id,
+            imported_at=_now(),
+            blocker=None,
+            error=None,
+        )
+        matched = True
+        break
+    if not matched:
+        raise ValueError(f"Campaign task not found: {task_id}")
+    record["tasks"] = tasks
+    record["status"] = _run_status(tasks)
+    if record["status"] == "completed":
+        # Each upload is already integrated independently; skip campaign aggregation.
+        record["integrated_at"] = _now()
+        record["integrated_model_version"] = "individual-external-imports"
+    return _write_run(record, root)
+
+
+def match_external_result_archive(
+    record: Mapping[str, Any], archive_content: bytes,
+) -> dict[str, Any]:
+    """Match an external-result ZIP to pending task result paths without extracting it."""
+    if record.get("execution_mode") != "external":
+        raise ValueError("Only externally registered campaign packages support ZIP result import")
+    if not archive_content:
+        raise ValueError("External result ZIP is empty")
+    try:
+        archive = zipfile.ZipFile(io.BytesIO(archive_content))
+    except zipfile.BadZipFile as exc:
+        raise ValueError("Uploaded file is not a valid ZIP archive") from exc
+    with archive:
+        entries = [
+            entry for entry in archive.infolist()
+            if not entry.is_dir() and entry.file_size > 0
+        ]
+        if sum(entry.file_size for entry in entries) > 512 * 1024 * 1024:
+            raise ValueError("External result ZIP exceeds the 512 MB import limit")
+        normalized_entries = {
+            entry.filename.replace("\\", "/").strip("/").lower(): entry
+            for entry in entries
+        }
+        matches: list[dict[str, Any]] = []
+        used_paths: set[str] = set()
+        pending_task_ids: list[str] = []
+        expected_result_names: set[str] = set()
+        for task in record.get("tasks", []):
+            if not isinstance(task, Mapping) or task.get("status") != "external_pending":
+                continue
+            task_id = str(task.get("task_id") or "")
+            result_file = str(task.get("result_file") or (task.get("metadata") or {}).get("result_file") or "").strip()
+            if not task_id or not result_file:
+                continue
+            result_path = Path(result_file)
+            if result_path.is_absolute() or ".." in result_path.parts or not result_path.name:
+                continue
+            expected = result_path.as_posix().lower()
+            expected_result_names.add(result_path.name.lower())
+            candidate_paths = (
+                f"tasks/{task_id}/{expected}",
+                f"{task_id}/{expected}",
+            )
+            entry_path = next(
+                (
+                    path for path in normalized_entries
+                    if any(path == suffix or path.endswith(f"/{suffix}") for suffix in candidate_paths)
+                ),
+                None,
+            )
+            if entry_path is None:
+                pending_task_ids.append(task_id)
+                continue
+            entry = normalized_entries[entry_path]
+            matches.append({
+                "task_id": task_id,
+                "result_file": result_file,
+                "engine": task.get("engine"),
+                "source_filename": entry.filename,
+                "result_content": archive.read(entry),
+            })
+            used_paths.add(entry_path)
+        return {
+            "matches": matches,
+            "pending_task_ids": pending_task_ids,
+            "unmatched_files": [
+                entry.filename
+                for path, entry in normalized_entries.items()
+                if path not in used_paths and Path(path).name.lower() in expected_result_names
+            ],
+        }
 
 
 def _vasp_approval_for_task(task: Mapping[str, Any], override: str | Path | None = None) -> tuple[str, Path]:

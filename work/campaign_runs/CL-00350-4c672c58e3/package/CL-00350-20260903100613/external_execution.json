@@ -1,0 +1,687 @@
+{
+  "run_id": "CL-00350-4c672c58e3",
+  "execution_mode": "external",
+  "candidate_id": "CL-00350",
+  "formulation_id": "FMT-50B6272DCD3A4CC8",
+  "candidate_library_version": "candidate-library-v3",
+  "tasks": [
+    {
+      "task_id": "dft-o-111-v00-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-111-v00-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v00-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-111-v00-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v08-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-111-v08-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v08-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-111-v08-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v15-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-111-v15-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v15-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-111-v15-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-pda-binding-111",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-pda-binding-111",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v00-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-110-v00-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v00-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-110-v00-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v08-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-110-v08-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v08-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-110-v08-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v15-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-110-v15-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v15-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-110-v15-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-pda-binding-110",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-pda-binding-110",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v00-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-100-v00-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v00-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-100-v00-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v08-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-100-v08-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v08-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-100-v08-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v15-h00",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-100-v15-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v15-h35",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-o-100-v15-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ]
+    },
+    {
+      "task_id": "dft-pda-binding-100",
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\dft-pda-binding-100",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ]
+    },
+    {
+      "task_id": "md-resin-x1",
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.production"
+      ],
+      "result_file": "log.lammps",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\md-resin-x1",
+      "input_validation": "static-valid; pending-md-production-approval",
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ]
+    },
+    {
+      "task_id": "md-resin-x2",
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.production"
+      ],
+      "result_file": "log.lammps",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\md-resin-x2",
+      "input_validation": "static-valid; pending-md-production-approval",
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ]
+    },
+    {
+      "task_id": "md-resin-pda-ceo2-interface",
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.production"
+      ],
+      "result_file": "log.lammps",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\md-resin-pda-ceo2-interface",
+      "input_validation": "static-valid; pending-md-production-approval",
+      "expected_outputs": [
+        "interface_binding_energy_mj_m2",
+        "interface_covalent_bond_count",
+        "adhesion_retention",
+        "self_healing_efficiency"
+      ]
+    },
+    {
+      "task_id": "cg-pda-ceo2-dispersion",
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.cg"
+      ],
+      "result_file": "log.lammps",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00350-4c672c58e3\\package\\CL-00350-20260903100613\\tasks\\cg-pda-ceo2-dispersion",
+      "input_validation": "external-inputs-ready",
+      "expected_outputs": [
+        "dispersion_index",
+        "coarse_grained_reinforcement_index",
+        "interface_binding_energy_mj_m2"
+      ]
+    }
+  ]
+}

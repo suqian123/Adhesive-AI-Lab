@@ -1,8 +1,11 @@
 import json
 import hashlib
+import io
 import os
+from pathlib import Path
 import sys
 import time
+import zipfile
 
 from adhesive_ai.campaign import CalculationTask, MultiscaleCampaign
 from adhesive_ai.campaign_runner import (
@@ -18,7 +21,10 @@ from adhesive_ai.campaign_runner import (
     engine_profiles_from_env,
     get_campaign_run,
     load_engine_profiles,
+    mark_external_campaign_task_imported,
+    match_external_result_archive,
     prepare_standalone_external_task,
+    register_external_campaign_package,
     resume_approved_vasp_tasks,
     resume_prepared_md_tasks,
     save_engine_profiles,
@@ -135,6 +141,58 @@ def test_one_click_campaign_marks_missing_command_as_blocked(tmp_path):
 
     assert run["status"] == "blocked"
     assert "ADHESIVE_CG_COMMAND" in run["tasks"][0]["blocker"]
+
+
+def test_external_campaign_package_is_registered_without_local_submission(tmp_path):
+    root, job_root = tmp_path / "runs", tmp_path / "jobs"
+
+    run = register_external_campaign_package(
+        _cg_campaign(),
+        profiles={
+            "coarse_grained": {
+                "engine": "LAMMPS",
+                "command": "not-installed-on-this-machine -in in.cg",
+                "result_file": "log.lammps",
+            },
+        },
+        root=root,
+        job_root=job_root,
+    )
+
+    assert run["execution_mode"] == "external"
+    assert run["status"] == "external_pending"
+    assert run["tasks"][0]["status"] == "external_pending"
+    assert run["tasks"][0]["job_id"] is None
+    assert (Path(run["package_directory"]) / "external_execution.json").is_file()
+    assert Path(run["external_package_archive"]).is_file()
+    assert not job_root.exists()
+
+    updated = mark_external_campaign_task_imported(
+        run["run_id"], "cg-pda-ceo2-dispersion", "external-job-001", root=root,
+    )
+    assert updated["tasks"][0]["status"] == "imported"
+    assert updated["status"] == "completed"
+    assert updated["integrated_at"]
+
+
+def test_external_result_zip_matches_pending_task_by_task_directory(tmp_path):
+    run = register_external_campaign_package(
+        _cg_campaign(),
+        profiles={"coarse_grained": {"engine": "LAMMPS", "result_file": "log.lammps"}},
+        root=tmp_path / "runs",
+    )
+    archive_buffer = io.BytesIO()
+    with zipfile.ZipFile(archive_buffer, "w") as archive:
+        archive.writestr("tasks/cg-pda-ceo2-dispersion/log.lammps", "Step Temp PotEng\n0 298 -10\n")
+        archive.writestr("tasks/cg-pda-ceo2-dispersion/interface.data", "input topology")
+
+    report = match_external_result_archive(run, archive_buffer.getvalue())
+
+    assert report["pending_task_ids"] == []
+    assert report["unmatched_files"] == []
+    assert len(report["matches"]) == 1
+    assert report["matches"][0]["task_id"] == "cg-pda-ceo2-dispersion"
+    assert report["matches"][0]["result_content"].startswith(b"Step Temp")
 
 
 def test_vasp_preflight_accepts_neb_image_zero_poscar(tmp_path):
