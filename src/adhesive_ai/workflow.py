@@ -19,6 +19,7 @@ from .database import (
 from .engines import compute_md_observables
 from .jobs import JobRecord, get_job_status, parse_job_result, read_job_result_text, update_job_metadata
 from .result_integration import apply_external_results, to_jsonable
+from .result_arbitration import annotate_payload, build_provenance, merge_external_payloads
 from .screening import predict_screening, save_model, screen_candidates
 from .simulation import run_interface_simulation
 
@@ -38,7 +39,8 @@ def load_connected_state(
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, dict[str, Any]]]:
     """Overlay persisted external results and load all matching experiments."""
     candidate_ids = candidates["candidate_id"].astype(str).tolist()
-    payloads = load_latest_simulation_results(candidate_ids)
+    formulations = dict(zip(candidate_ids, candidates["formulation_id"].astype(str)))
+    payloads = load_latest_simulation_results(candidate_ids, formulation_ids=formulations)
     external = {
         candidate_id: {
             "dft": payload.get("dft", {}),
@@ -48,7 +50,24 @@ def load_connected_state(
         for candidate_id, payload in payloads.items()
     }
     connected = apply_external_results(candidates, external) if external else candidates.copy()
-    return connected, load_experiments(candidate_ids), payloads
+    return connected, load_experiments(candidate_ids, formulation_ids=formulations), payloads
+
+
+def _require_matching_formulation(
+    candidates: pd.DataFrame,
+    candidate_id: str,
+    recorded_formulation_id: object,
+) -> tuple[str, str]:
+    matched = candidates.loc[candidates["candidate_id"].astype(str) == candidate_id]
+    if len(matched) != 1:
+        raise ValueError(f"Candidate {candidate_id} is not present in the current candidate library")
+    expected = str(matched.iloc[0].get("formulation_id") or "").strip()
+    actual = str(recorded_formulation_id or "").strip()
+    if not actual:
+        raise ValueError(f"任务 {candidate_id} 缺少配方指纹，属于旧记录，不能自动回写。")
+    if actual != expected:
+        raise ValueError(f"任务配方指纹与当前候选不匹配：{candidate_id}。为避免错配，已拒绝自动回写。")
+    return candidate_id, expected
 
 
 def _case_insensitive(series: Mapping[str, Any], *names: str) -> Any:
@@ -162,10 +181,13 @@ def integrate_completed_job(
     candidate_id = str(metadata.get("candidate_id") or "")
     if not candidate_id:
         raise ValueError(f"Job {job_id} is not bound to a candidate")
-    if candidate_id not in set(candidates["candidate_id"].astype(str)):
-        raise ValueError(f"Candidate {candidate_id} is not present in the current candidate library")
+    candidate_id, formulation_id = _require_matching_formulation(
+        candidates, candidate_id, metadata.get("formulation_id"),
+    )
 
-    latest = load_latest_simulation_results([candidate_id]).get(candidate_id, {})
+    latest = load_latest_simulation_results(
+        [candidate_id], formulation_ids={candidate_id: formulation_id},
+    ).get(candidate_id, {})
     if any(
         isinstance(latest.get(component), Mapping) and latest[component].get("job_id") == job_id
         for component in ("dft", "md", "interface")
@@ -174,15 +196,23 @@ def integrate_completed_job(
         return None
 
     parsed = parse_job_result(job_id, root=root)
-    addition = calculation_payload(record, parsed, root=root)
-    cumulative = {
-        "dft": dict(latest.get("dft", {})),
-        "md": dict(latest.get("md", {})),
-        "interface": dict(latest.get("interface", {})),
-    }
-    cumulative.update(addition)
+    addition = annotate_payload(
+        calculation_payload(record, parsed, root=root),
+        build_provenance(
+            metadata,
+            source="campaign" if metadata.get("campaign_run_id") else "standalone",
+            result_id=record.job_id,
+            completed_at=record.finished_at,
+        ),
+    )
+    cumulative = merge_external_payloads(latest, addition)
     updated_candidates = apply_external_results(candidates, {candidate_id: cumulative})
-    history = experiments if experiments is not None else load_experiments(updated_candidates["candidate_id"].astype(str).tolist())
+    formulations = dict(zip(
+        updated_candidates["candidate_id"].astype(str), updated_candidates["formulation_id"].astype(str),
+    ))
+    history = experiments if experiments is not None else load_experiments(
+        updated_candidates["candidate_id"].astype(str).tolist(), formulation_ids=formulations,
+    )
     shortlist, model = screen_candidates(
         updated_candidates,
         experiments=history if history is not None and not history.empty else None,

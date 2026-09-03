@@ -1,0 +1,24 @@
+# Generated production protocol. Supply validated topology and force-field files before running.
+clear
+units real
+atom_style full
+boundary p p p
+include forcefield.production
+read_data system.data
+
+neighbor 2.0 bin
+neigh_modify delay 0 every 1 check yes
+thermo 1000
+thermo_style custom step temp pe ke etotal vol press density
+timestep 1.0
+
+variable target_temperature index 298.15
+label temperature_loop
+velocity all create ${target_temperature} 4928459 mom yes rot yes dist gaussian
+fix production all npt temp ${target_temperature} ${target_temperature} 100.0 iso 1.0 1.0 1000.0
+run 100000
+write_restart restart.${target_temperature}K
+unfix production
+next target_temperature
+jump SELF temperature_loop
+write_data final.data

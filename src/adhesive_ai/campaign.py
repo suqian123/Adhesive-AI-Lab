@@ -177,9 +177,11 @@ def build_multiscale_campaign(
     )
 
 
-def campaign_task_frame(campaign: MultiscaleCampaign) -> pd.DataFrame:
+def campaign_task_frame(campaign: MultiscaleCampaign, *, run_id: str | None = None) -> pd.DataFrame:
     """Return a UI-friendly task table."""
     return pd.DataFrame([{
+        "candidate_id": campaign.candidate_id,
+        "run_id": run_id or "待启动",
         "task_id": task.task_id,
         "scale": task.scale,
         "objective": task.objective,
@@ -211,9 +213,109 @@ def write_multiscale_campaign(campaign: MultiscaleCampaign, output_root: str | P
 
 def requirement_coverage(
     profiles: Mapping[str, Mapping[str, Any]] | None = None,
+    *,
+    vasp_validation_root: str | Path | None = None,
+    vasp_validation_roots: Mapping[str, str | Path] | None = None,
+    md_baseline_root: str | Path | None = None,
 ) -> tuple[dict[str, str], ...]:
     """Expose software, environment, and scientific readiness separately."""
     selected_profiles = profiles or {}
+
+    bulk_md_scientific_status = "待力场标定"
+    bulk_md_note = "温度扫描、外部日志解析和回写已实现；交联拓扑、力场及时间尺度仍需标定"
+    interface_scientific_status = "待多尺度标定"
+    interface_note = "依赖调度和 CG 起始模型已实现；定量使用前需由 DFT、PMF 和实验标定"
+    if md_baseline_root is not None:
+        baseline_root = Path(md_baseline_root).expanduser().resolve()
+        resin_files = (
+            baseline_root / "structure_contract.json",
+            baseline_root / "polyimide-cell" / "system.data",
+            baseline_root / "polyimide-cell" / "forcefield.production",
+        )
+        interface_files = (
+            baseline_root / "interface-cell" / "interface.data",
+            baseline_root / "interface-cell" / "forcefield.production",
+        )
+        if all(path.is_file() for path in resin_files):
+            bulk_md_scientific_status = "结构与前驱输入已生成"
+            bulk_md_note = (
+                "ODPA-ODA/DABA-多巴胺 DP8 全原子结构和 GAFF2 可读拓扑已生成；"
+                "PDBA 交联、RESP 电荷、独立副本及 Tg/模量/CTE 验证完成前保持生产锁定"
+            )
+        if all(path.is_file() for path in interface_files):
+            interface_scientific_status = "全原子前驱输入已生成"
+            interface_note = (
+                "树脂/PDA@CeO2(111) 前驱体已通过 LAMMPS 静态读取；"
+                "PDA 键合参数、IP10a 核壳模型和 VASP 标定交叉项完成前保持生产锁定"
+            )
+
+    dft_scientific_status = "待验证输入"
+    dft_scientific_note = (
+        "任务调度、求解器调用、输出解析和回写已实现；"
+        "生产计算仍需验证结构、赝势及 DFT(+U) 参数"
+    )
+    if vasp_validation_root is not None:
+        validation_root = Path(vasp_validation_root).expanduser().resolve()
+        plan_path = validation_root / "validation_plan.json"
+        report_path = validation_root / "convergence_report.json"
+        try:
+            plan = json.loads(plan_path.read_text(encoding="utf-8")) if plan_path.is_file() else {}
+            jobs = list(plan.get("jobs", []))
+            total = int(plan.get("job_count", len(jobs)))
+            completed = 0
+            active = False
+            failed = False
+            for job in jobs:
+                job_root = Path(str(job["path"]))
+                marker_path = job_root / "run_status.json"
+                marker = json.loads(marker_path.read_text(encoding="utf-8")) if marker_path.is_file() else {}
+                completed += marker.get("complete") is True
+                active = active or marker.get("status") == "running"
+                failed = failed or marker.get("status") == "failed"
+                stage_path = job_root / ".model-preconverge" / "run_status.json"
+                if stage_path.is_file():
+                    stage = json.loads(stage_path.read_text(encoding="utf-8"))
+                    active = active or stage.get("status") == "running"
+                    failed = failed or stage.get("status") == "failed"
+            report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.is_file() else {}
+            if report.get("passed") is True and report.get("scientific_status") == "convergence-approved":
+                dft_scientific_status = "收敛验证已通过"
+                dft_scientific_note = "数值收敛报告已通过；生产任务仍需逐任务检查结构弛豫与结果质量"
+            elif total and completed == total:
+                dft_scientific_status = "待汇总收敛结果"
+                dft_scientific_note = f"{completed}/{total} 项计算已完成；等待生成并审核收敛报告"
+            elif total and active:
+                dft_scientific_status = f"收敛验证中（{completed}/{total}）"
+                dft_scientific_note = (
+                    "VASP 输入与资源已生成，数值收敛矩阵正在运行；"
+                    "生产计算保持锁定，直至收敛报告通过"
+                )
+            elif total and failed:
+                dft_scientific_status = f"收敛验证受阻（{completed}/{total}）"
+                dft_scientific_note = "已有收敛任务失败或中断；生产计算保持锁定，需检查运行日志后续跑"
+            elif total:
+                dft_scientific_status = f"输入已生成（{completed}/{total}）"
+                dft_scientific_note = "VASP 输入与资源已生成；等待完成数值收敛矩阵并审核报告"
+        except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError):
+            dft_scientific_status = "验证状态不可读"
+            dft_scientific_note = "VASP 验证文件存在但无法解析；生产计算保持锁定"
+
+    if vasp_validation_roots:
+        facet_rows = []
+        for facet, root in vasp_validation_roots.items():
+            coverage = requirement_coverage(
+                selected_profiles,
+                vasp_validation_root=root,
+                md_baseline_root=md_baseline_root,
+            )
+            facet_rows.append((str(facet), next(row for row in coverage if row["模块"] == "真实 DFT 计算")))
+        dft_scientific_status = "；".join(
+            f"CeO₂{facet}：{row['科学就绪']}" for facet, row in facet_rows
+        )
+        dft_scientific_note = (
+            "各晶面独立进行 VASP 收敛验证并分别批准生产计算；"
+            + "；".join(f"CeO₂{facet}：{row['说明']}" for facet, row in facet_rows)
+        )
 
     def environment_status(*categories: str) -> str:
         if not profiles:
@@ -241,7 +343,7 @@ def requirement_coverage(
             "实现状态": "已实现",
             "运行环境": "已就绪",
             "科学就绪": "代理数据可用",
-            "说明": "候选生成、来源追踪和持久化已实现；仍需真实实验持续扩充与校准",
+            "说明": "候选生成、配方指纹、候选库版本、来源追踪和 MySQL 持久化已实现；仍需真实实验持续扩充与校准",
         },
         {
             "模块": "量子化学代理预测",
@@ -254,29 +356,43 @@ def requirement_coverage(
             "模块": "真实 DFT 计算",
             "实现状态": "已实现",
             "运行环境": environment_status("dft"),
-            "科学就绪": "待验证输入",
-            "说明": "任务调度、求解器调用、输出解析和回写已实现；生产计算仍需验证结构、赝势及 DFT(+U) 参数",
+            "科学就绪": dft_scientific_status,
+            "说明": dft_scientific_note,
         },
         {
             "模块": "树脂 MD 与宽温域评价",
             "实现状态": "已实现",
             "运行环境": environment_status("bulk_md"),
-            "科学就绪": "待力场标定",
-            "说明": "温度扫描、外部日志解析和回写已实现；交联拓扑、力场及时间尺度仍需标定",
+            "科学就绪": bulk_md_scientific_status,
+            "说明": bulk_md_note,
         },
         {
             "模块": "界面与粗粒化动力学",
             "实现状态": "已实现",
             "运行环境": environment_status("interface_md", "coarse_grained"),
-            "科学就绪": "待多尺度标定",
-            "说明": "依赖调度和 CG 起始模型已实现；定量使用前需由 DFT、PMF 和实验标定",
+            "科学就绪": interface_scientific_status,
+            "说明": interface_note,
         },
         {
             "模块": "多尺度任务自动编排",
             "实现状态": "已实现",
             "运行环境": environment_status("dft", "bulk_md", "interface_md", "coarse_grained"),
             "科学就绪": "流程已就绪",
-            "说明": "支持前置检查、并行后台执行、依赖推进、实时状态、汇总回写和模型更新",
+            "说明": "支持前置检查、最多 16 个并行后台任务、依赖推进、终止、实时状态、汇总回写和模型更新；生产任务仍受 DFT/MD 科学批准锁定",
+        },
+        {
+            "模块": "外部结果回写与身份校验",
+            "实现状态": "已实现",
+            "运行环境": "已就绪",
+            "科学就绪": "待真实结果积累",
+            "说明": "计算与实验结果以候选编号、配方指纹和候选库版本校验后写回；保留历史结果，并按已批准生产计算、已验证输入、未批准手动任务确定优先级",
+        },
+        {
+            "模块": "候选机理与真实数据融合",
+            "实现状态": "已实现",
+            "运行环境": "已就绪",
+            "科学就绪": "混合数据可用",
+            "说明": "绑定当前多尺度候选，融合实验、真实 DFT、树脂 MD、界面 MD 与代理数据；缺失指标明确保留代理来源标记",
         },
         {
             "模块": "回归/分类筛选",
@@ -290,6 +406,6 @@ def requirement_coverage(
             "实现状态": "已实现",
             "运行环境": "已就绪",
             "科学就绪": "待真实数据积累",
-            "说明": "历史数据、单条/批量反馈、重训、版本归档和再推荐流程已实现",
+            "说明": "历史数据、带必填候选编号和配方指纹的单条/批量反馈、自动更新、模型归档和再推荐流程已实现",
         },
     )

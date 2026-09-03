@@ -1,0 +1,31 @@
+{
+  "task_id": "dft-o-111-v15-h35",
+  "candidate_id": "CL-00001",
+  "scale": "quantum",
+  "calculation_kind": "dft",
+  "objective": "atomic-oxygen-surface-chemistry",
+  "engine_options": [
+    "VASP",
+    "Quantum ESPRESSO",
+    "CP2K"
+  ],
+  "conditions": {
+    "facet": "(111)",
+    "oxygen_vacancy_fraction": 0.15,
+    "hydroxyl_fraction": 0.35
+  },
+  "expected_outputs": [
+    "adsorption_energy_ev",
+    "reaction_energy_ev",
+    "reaction_barrier_ev",
+    "ce3_fraction",
+    "reactive_oxygen_capture_index"
+  ],
+  "readiness": "planned-requires-atomistic-structure",
+  "blocking_requirements": [
+    "validated CeO2 slab",
+    "spin-polarized DFT(+U) settings",
+    "adsorbate reference energy",
+    "NEB endpoints"
+  ]
+}

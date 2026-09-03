@@ -1,0 +1,41 @@
+{
+  "job_id": "lammps-2407207d01",
+  "engine": "LAMMPS",
+  "command": [
+    "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+    "-in",
+    "in.production"
+  ],
+  "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00087-523c484e54\\package\\CL-00087-20260901072109\\tasks\\md-resin-x2",
+  "status": "failed",
+  "submitted_at": "2026-09-01T08:40:20.423482+00:00",
+  "started_at": "2026-09-01T08:40:20.896044+00:00",
+  "finished_at": "2026-09-01T08:40:22.120501+00:00",
+  "return_code": 1,
+  "stdout_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\lammps-2407207d01\\stdout.log",
+  "stderr_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\lammps-2407207d01\\stderr.log",
+  "metadata": {
+    "candidate_id": "CL-00087",
+    "campaign_run_id": "CL-00087-523c484e54",
+    "campaign_task_id": "md-resin-x2",
+    "calculation_kind": "bulk_md",
+    "result_file": "log.lammps",
+    "area_nm2": 100.0,
+    "filler_ratio": 0.01,
+    "polar_fraction": 0.53,
+    "compatibility_index": 0.5725819999999999,
+    "temperature_c": 25.0,
+    "temperature_unit": "K",
+    "energy_unit": "kcal/mol",
+    "crosslink_density": 1.0,
+    "temperatures_c": [
+      -180.0,
+      -120.0,
+      -60.0,
+      25.0,
+      80.0,
+      150.0
+    ]
+  },
+  "error": "Command exited with code 1"
+}

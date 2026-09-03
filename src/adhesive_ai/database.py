@@ -9,7 +9,7 @@ from decimal import Decimal
 from pathlib import Path
 from dataclasses import asdict, is_dataclass
 from contextlib import contextmanager
-from typing import Any, Iterator
+from typing import Any, Iterator, Mapping
 from urllib.parse import parse_qs, unquote, urlparse
 
 import pandas as pd
@@ -27,15 +27,15 @@ except ModuleNotFoundError:  # pragma: no cover - optional dependency
 # privilege, which is commonly withheld from application service accounts.
 SCHEMA = (
     "CREATE TABLE IF NOT EXISTS candidates ("
-    "candidate_id VARCHAR(32) PRIMARY KEY, resin VARCHAR(32) NOT NULL, blend_resin VARCHAR(32) NULL, blend_fraction DECIMAL(5,3) NOT NULL, "
+    "candidate_id VARCHAR(32) PRIMARY KEY, formulation_id VARCHAR(80) NOT NULL, candidate_library_version VARCHAR(64) NOT NULL, resin VARCHAR(32) NOT NULL, blend_resin VARCHAR(32) NULL, blend_fraction DECIMAL(5,3) NOT NULL, "
     "dynamic_unit VARCHAR(32) NOT NULL, cure_system VARCHAR(32) NOT NULL, catalyst VARCHAR(64) NULL, toughener_pct DECIMAL(6,3) NOT NULL, "
-    "filler_pct DECIMAL(6,3) NOT NULL, crosslink_density DECIMAL(6,4) NOT NULL, properties JSON NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+    "filler_pct DECIMAL(6,3) NOT NULL, crosslink_density DECIMAL(6,4) NOT NULL, properties JSON NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, INDEX ix_candidate_formulation (formulation_id)"
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS simulation_results ("
-    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, model_version VARCHAR(32) NOT NULL, qchem JSON NOT NULL, md JSON NOT NULL, interface_data JSON NOT NULL, predictions JSON NOT NULL, multi_objective_score DECIMAL(8,3) NOT NULL, screening_class VARCHAR(32) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_result_candidate (candidate_id)"
+    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, formulation_id VARCHAR(80) NULL, candidate_library_version VARCHAR(64) NULL, model_version VARCHAR(32) NOT NULL, qchem JSON NOT NULL, md JSON NOT NULL, interface_data JSON NOT NULL, predictions JSON NOT NULL, multi_objective_score DECIMAL(8,3) NOT NULL, screening_class VARCHAR(32) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_result_candidate (candidate_id), INDEX ix_result_formulation (formulation_id)"
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS experimental_results ("
-    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, test_batch VARCHAR(64) NOT NULL, test_temperature_c DECIMAL(7,2) NULL, properties JSON NOT NULL, source VARCHAR(128) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_experiment_candidate (candidate_id)"
+    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, formulation_id VARCHAR(80) NULL, candidate_library_version VARCHAR(64) NULL, test_batch VARCHAR(64) NOT NULL, test_temperature_c DECIMAL(7,2) NULL, properties JSON NOT NULL, source VARCHAR(128) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_experiment_candidate (candidate_id), INDEX ix_experiment_formulation (formulation_id)"
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS model_versions ("
     "model_version VARCHAR(96) PRIMARY KEY, metadata JSON NOT NULL, artifact_path VARCHAR(512) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
@@ -72,13 +72,58 @@ def _sqlite_path() -> str:
     return os.getenv("ADHESIVE_SQLITE_PATH", "work/adhesive_ai_lab.sqlite3")
 
 
+def _ensure_mysql_identity_columns(conn: Any) -> None:
+    """Add identity columns to existing installations without deleting legacy history."""
+    specifications = {
+        "candidates": (
+            ("formulation_id", "VARCHAR(80) NULL"),
+            ("candidate_library_version", "VARCHAR(64) NULL"),
+        ),
+        "simulation_results": (
+            ("formulation_id", "VARCHAR(80) NULL"),
+            ("candidate_library_version", "VARCHAR(64) NULL"),
+        ),
+        "experimental_results": (
+            ("formulation_id", "VARCHAR(80) NULL"),
+            ("candidate_library_version", "VARCHAR(64) NULL"),
+        ),
+    }
+    cursor = conn.cursor()
+    try:
+        for table, columns in specifications.items():
+            cursor.execute(f"SHOW COLUMNS FROM {table}")
+            existing = {str(row[0]) for row in cursor.fetchall()}
+            for name, definition in columns:
+                if name not in existing:
+                    cursor.execute(f"ALTER TABLE {table} ADD COLUMN {name} {definition}")
+            if table == "candidates":
+                cursor.execute(
+                    "UPDATE candidates SET formulation_id=JSON_UNQUOTE(JSON_EXTRACT(properties, '$.formulation_id')) "
+                    "WHERE formulation_id IS NULL"
+                )
+                cursor.execute(
+                    "UPDATE candidates SET candidate_library_version=JSON_UNQUOTE(JSON_EXTRACT(properties, '$.candidate_library_version')) "
+                    "WHERE candidate_library_version IS NULL"
+                )
+                cursor.execute("SHOW INDEX FROM candidates WHERE Key_name='ix_candidate_formulation'")
+                if not cursor.fetchall():
+                    cursor.execute("CREATE INDEX ix_candidate_formulation ON candidates (formulation_id)")
+    finally:
+        cursor.close()
+
+
 @contextmanager
 def sqlite_connection() -> Iterator[sqlite3.Connection]:
     path = _sqlite_path()
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(path)
     try:
-        conn.execute("CREATE TABLE IF NOT EXISTS experimental_results (id INTEGER PRIMARY KEY AUTOINCREMENT, candidate_id TEXT NOT NULL, test_batch TEXT NOT NULL, test_temperature_c REAL, properties TEXT NOT NULL, source TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
+        conn.execute("CREATE TABLE IF NOT EXISTS experimental_results (id INTEGER PRIMARY KEY AUTOINCREMENT, candidate_id TEXT NOT NULL, formulation_id TEXT, candidate_library_version TEXT, test_batch TEXT NOT NULL, test_temperature_c REAL, properties TEXT NOT NULL, source TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
+        existing_columns = {row[1] for row in conn.execute("PRAGMA table_info(experimental_results)")}
+        if "formulation_id" not in existing_columns:
+            conn.execute("ALTER TABLE experimental_results ADD COLUMN formulation_id TEXT")
+        if "candidate_library_version" not in existing_columns:
+            conn.execute("ALTER TABLE experimental_results ADD COLUMN candidate_library_version TEXT")
         conn.execute("CREATE TABLE IF NOT EXISTS model_versions (model_version TEXT PRIMARY KEY, metadata TEXT NOT NULL, artifact_path TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
         yield conn
         conn.commit()
@@ -157,6 +202,7 @@ def initialize_schema() -> None:
                 cursor.execute(statement)
         finally:
             cursor.close()
+        _ensure_mysql_identity_columns(conn)
 
 
 def save_candidate(row: dict[str, Any]) -> None:
@@ -174,6 +220,8 @@ def save_candidates(rows: Any) -> int:
         return 0
     formulation_keys = (
         "candidate_id",
+        "formulation_id",
+        "candidate_library_version",
         "resin",
         "blend_resin",
         "blend_fraction",
@@ -189,13 +237,14 @@ def save_candidates(rows: Any) -> int:
         properties = {key: value for key, value in row.items() if key not in formulation_keys}
         params.append(tuple([row.get(key) for key in formulation_keys] + [_json(properties)]))
     sql = (
-        "INSERT INTO candidates (candidate_id,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,toughener_pct,filler_pct,crosslink_density,properties) "
-        "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) "
-        "ON DUPLICATE KEY UPDATE resin=VALUES(resin), blend_resin=VALUES(blend_resin), blend_fraction=VALUES(blend_fraction), "
+        "INSERT INTO candidates (candidate_id,formulation_id,candidate_library_version,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,toughener_pct,filler_pct,crosslink_density,properties) "
+        "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) "
+        "ON DUPLICATE KEY UPDATE formulation_id=VALUES(formulation_id), candidate_library_version=VALUES(candidate_library_version), resin=VALUES(resin), blend_resin=VALUES(blend_resin), blend_fraction=VALUES(blend_fraction), "
         "dynamic_unit=VALUES(dynamic_unit), cure_system=VALUES(cure_system), catalyst=VALUES(catalyst), toughener_pct=VALUES(toughener_pct), "
         "filler_pct=VALUES(filler_pct), crosslink_density=VALUES(crosslink_density), properties=VALUES(properties)"
     )
     with connection() as conn:
+        _ensure_mysql_identity_columns(conn)
         cursor = conn.cursor()
         try:
             cursor.executemany(sql, params)
@@ -207,7 +256,7 @@ def save_candidates(rows: Any) -> int:
 def load_candidates(candidate_ids: list[str] | None = None) -> pd.DataFrame:
     """Load candidate formulations with JSON properties expanded into columns."""
     query = (
-        "SELECT candidate_id,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,"
+        "SELECT candidate_id,formulation_id,candidate_library_version,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,"
         "toughener_pct,filler_pct,crosslink_density,properties FROM candidates"
     )
     params: tuple[Any, ...] = ()
@@ -244,6 +293,9 @@ def save_simulation(
     model_version: str = "proxy-v1",
 ) -> None:
     """Append a cumulative simulation snapshot for one candidate."""
+    formulation_id = str(row.get("formulation_id") or "").strip()
+    if not formulation_id:
+        raise ValueError("Simulation snapshots require formulation_id")
     prediction_keys = ("wide_temp_adhesion_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct", "uv_retention_pct", "am_feasibility")
     predictions = {
         key: row.get(key, row.get(f"predicted_{key}"))
@@ -251,6 +303,8 @@ def save_simulation(
     }
     params = (
         row["candidate_id"],
+        formulation_id,
+        str(row.get("candidate_library_version") or "") or None,
         model_version,
         _json(qchem),
         _json(md),
@@ -260,25 +314,30 @@ def save_simulation(
         row.get("screening_class", row.get("predicted_screening_class")),
     )
     with connection() as conn:
+        _ensure_mysql_identity_columns(conn)
         cursor = conn.cursor()
         try:
             cursor.execute(
-                "INSERT INTO simulation_results (candidate_id,model_version,qchem,md,interface_data,predictions,multi_objective_score,screening_class) "
-                "VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+                "INSERT INTO simulation_results (candidate_id,formulation_id,candidate_library_version,model_version,qchem,md,interface_data,predictions,multi_objective_score,screening_class) "
+                "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                 params,
             )
         finally:
             cursor.close()
 
 
-def load_latest_simulation_results(candidate_ids: list[str] | None = None) -> dict[str, dict[str, Any]]:
+def load_latest_simulation_results(
+    candidate_ids: list[str] | None = None,
+    *,
+    formulation_ids: Mapping[str, str] | None = None,
+) -> dict[str, dict[str, Any]]:
     """Return the latest cumulative external-calculation snapshot per candidate."""
     query = (
-        "SELECT s.candidate_id,s.model_version,s.qchem,s.md,s.interface_data,s.predictions,"
+        "SELECT s.candidate_id,s.formulation_id,s.candidate_library_version,s.model_version,s.qchem,s.md,s.interface_data,s.predictions,"
         "s.multi_objective_score,s.screening_class,s.created_at "
         "FROM simulation_results s "
-        "JOIN (SELECT candidate_id,MAX(id) AS latest_id FROM simulation_results GROUP BY candidate_id) latest "
-        "ON latest.latest_id=s.id"
+        "JOIN (SELECT candidate_id,formulation_id,MAX(id) AS latest_id FROM simulation_results GROUP BY candidate_id,formulation_id) latest "
+        "ON latest.latest_id=s.id AND latest.candidate_id=s.candidate_id AND latest.formulation_id=s.formulation_id"
     )
     params: tuple[Any, ...] = ()
     if candidate_ids:
@@ -286,6 +345,7 @@ def load_latest_simulation_results(candidate_ids: list[str] | None = None) -> di
         query += f" WHERE s.candidate_id IN ({placeholders})"
         params = tuple(candidate_ids)
     with connection() as conn:
+        _ensure_mysql_identity_columns(conn)
         cursor = conn.cursor(dictionary=True)
         try:
             cursor.execute(query, params)
@@ -300,6 +360,8 @@ def load_latest_simulation_results(candidate_ids: list[str] | None = None) -> di
 
     return {
         str(row["candidate_id"]): {
+            "formulation_id": row.get("formulation_id"),
+            "candidate_library_version": row.get("candidate_library_version"),
             "model_version": row["model_version"],
             "dft": decoded(row["qchem"]),
             "md": decoded(row["md"]),
@@ -310,6 +372,7 @@ def load_latest_simulation_results(candidate_ids: list[str] | None = None) -> di
             "created_at": row["created_at"],
         }
         for row in rows
+        if not formulation_ids or row.get("formulation_id") == formulation_ids.get(str(row["candidate_id"]))
     }
 
 
@@ -332,23 +395,62 @@ def save_experiment(
     test_batch: str = "manual",
     temperature_c: float | None = None,
     source: str | None = None,
+    *,
+    formulation_id: str,
+    candidate_library_version: str,
 ) -> None:
-    row = {"candidate_id": candidate_id, "test_batch": test_batch, "test_temperature_c": temperature_c, "source": source, **properties}
+    row = {
+        "candidate_id": candidate_id,
+        "formulation_id": formulation_id,
+        "candidate_library_version": candidate_library_version,
+        "test_batch": test_batch,
+        "test_temperature_c": temperature_c,
+        "source": source,
+        **properties,
+    }
     save_experiments(pd.DataFrame([row]))
 
 
-def save_experiments(frame: pd.DataFrame, *, default_source: str | None = None) -> int:
+def save_experiments(
+    frame: pd.DataFrame,
+    *,
+    default_source: str | None = None,
+    candidate_formulations: Mapping[str, str] | None = None,
+    candidate_library_versions: Mapping[str, str] | None = None,
+) -> int:
     """Append a validated batch of experimental feedback rows."""
     if frame is None or frame.empty:
         return 0
     records = frame.to_dict("records")
-    metadata_keys = {"candidate_id", "test_batch", "test_temperature_c", "source", "created_at"}
+    metadata_keys = {
+        "candidate_id", "formulation_id", "candidate_library_version",
+        "test_batch", "test_temperature_c", "source", "created_at",
+    }
     params = []
     for row in records:
         raw_candidate_id = row.get("candidate_id")
         candidate_id = "" if raw_candidate_id is None or pd.isna(raw_candidate_id) else str(raw_candidate_id).strip()
         if not candidate_id:
             raise ValueError("Experimental rows require candidate_id")
+        raw_formulation_id = row.get("formulation_id")
+        formulation_id = "" if raw_formulation_id is None or pd.isna(raw_formulation_id) else str(raw_formulation_id).strip()
+        if not formulation_id:
+            raise ValueError(f"实验记录缺少配方指纹：{candidate_id}")
+        if candidate_formulations is not None:
+            expected = candidate_formulations.get(candidate_id)
+            if not expected:
+                raise ValueError(f"实验记录候选编号不在当前候选库：{candidate_id}")
+            if formulation_id != expected:
+                raise ValueError(f"实验记录的配方指纹与候选编号不匹配：{candidate_id}")
+        raw_library_version = row.get("candidate_library_version")
+        library_version = (
+            None if raw_library_version is None or pd.isna(raw_library_version)
+            else str(raw_library_version).strip() or None
+        )
+        if not library_version:
+            raise ValueError(f"实验记录缺少候选库版本：{candidate_id}")
+        if candidate_library_versions is not None and library_version != candidate_library_versions.get(candidate_id):
+            raise ValueError(f"实验记录的候选库版本与当前候选不匹配：{candidate_id}")
         raw_batch = row.get("test_batch")
         test_batch = "manual" if raw_batch is None or pd.isna(raw_batch) else str(raw_batch).strip() or "manual"
         temperature_c = row.get("test_temperature_c")
@@ -360,28 +462,34 @@ def save_experiments(frame: pd.DataFrame, *, default_source: str | None = None) 
             key: value for key, value in row.items()
             if key not in metadata_keys and not (isinstance(value, float) and np.isnan(value))
         }
-        params.append((candidate_id, test_batch, temperature_c, _json(properties), source))
+        params.append((candidate_id, formulation_id, library_version, test_batch, temperature_c, _json(properties), source))
     try:
         with connection() as conn:
+            _ensure_mysql_identity_columns(conn)
             cursor = conn.cursor()
             try:
                 cursor.executemany(
-                    "INSERT INTO experimental_results (candidate_id,test_batch,test_temperature_c,properties,source) VALUES (%s,%s,%s,%s,%s)",
+                    "INSERT INTO experimental_results (candidate_id,formulation_id,candidate_library_version,test_batch,test_temperature_c,properties,source) VALUES (%s,%s,%s,%s,%s,%s,%s)",
                     params,
                 )
             finally:
                 cursor.close()
     except DatabaseError:
         with sqlite_connection() as conn:
-            conn.executemany("INSERT INTO experimental_results (candidate_id,test_batch,test_temperature_c,properties,source) VALUES (?,?,?,?,?)", params)
+            conn.executemany("INSERT INTO experimental_results (candidate_id,formulation_id,candidate_library_version,test_batch,test_temperature_c,properties,source) VALUES (?,?,?,?,?,?,?)", params)
     return len(params)
 
 
-def load_experiments(candidate_ids: list[str] | None = None) -> pd.DataFrame:
+def load_experiments(
+    candidate_ids: list[str] | None = None,
+    *,
+    formulation_ids: Mapping[str, str] | None = None,
+) -> pd.DataFrame:
     """Load persisted experimental rows, preferring MySQL and falling back to SQLite."""
     try:
         with connection() as conn:
-            query = "SELECT candidate_id,test_batch,test_temperature_c,properties,source,created_at FROM experimental_results"
+            _ensure_mysql_identity_columns(conn)
+            query = "SELECT candidate_id,formulation_id,candidate_library_version,test_batch,test_temperature_c,properties,source,created_at FROM experimental_results"
             params: tuple[Any, ...] = ()
             if candidate_ids:
                 placeholders = ",".join(["%s"] * len(candidate_ids))
@@ -395,7 +503,7 @@ def load_experiments(candidate_ids: list[str] | None = None) -> pd.DataFrame:
                 cursor.close()
     except DatabaseError:
         with sqlite_connection() as conn:
-            query = "SELECT candidate_id,test_batch,test_temperature_c,properties,source,created_at FROM experimental_results"
+            query = "SELECT candidate_id,formulation_id,candidate_library_version,test_batch,test_temperature_c,properties,source,created_at FROM experimental_results"
             params = []
             if candidate_ids:
                 query += " WHERE candidate_id IN (" + ",".join(["?"] * len(candidate_ids)) + ")"
@@ -403,6 +511,12 @@ def load_experiments(candidate_ids: list[str] | None = None) -> pd.DataFrame:
             frame = pd.read_sql_query(query, conn, params=params)
     if frame.empty:
         return frame
+    if formulation_ids:
+        frame = frame.loc[
+            frame["candidate_id"].astype(str).map(formulation_ids).eq(frame["formulation_id"])
+        ].copy()
+    if frame.empty:
+        return frame.drop(columns=["properties"])
     expanded = frame["properties"].apply(lambda value: json.loads(value) if isinstance(value, str) else {}).apply(pd.Series)
     return pd.concat([frame.drop(columns=["properties"]), expanded], axis=1)
 

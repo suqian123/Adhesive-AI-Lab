@@ -1,0 +1,34 @@
+{
+  "task_id": "md-resin-pda-ceo2-interface",
+  "candidate_id": "CL-00171",
+  "scale": "atomistic-md",
+  "calculation_kind": "interface_md",
+  "objective": "resin-pda-ceo2-interface-binding",
+  "engine_options": [
+    "LAMMPS",
+    "GROMACS"
+  ],
+  "conditions": {
+    "temperatures_c": [
+      -180.0,
+      -120.0,
+      -60.0,
+      25.0,
+      80.0,
+      150.0
+    ],
+    "filler_pct": 0.0
+  },
+  "expected_outputs": [
+    "interface_binding_energy_mj_m2",
+    "interface_covalent_bond_count",
+    "adhesion_retention",
+    "self_healing_efficiency"
+  ],
+  "readiness": "planned-requires-interface-topology",
+  "blocking_requirements": [
+    "resin/PDA@CeO2 atomistic interface",
+    "validated cross interactions",
+    "interface area"
+  ]
+}

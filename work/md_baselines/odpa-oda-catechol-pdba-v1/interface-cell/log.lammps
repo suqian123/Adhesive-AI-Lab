@@ -1,0 +1,115 @@
+LAMMPS (4 Jul 2026)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread.
+  using 1 OpenMP thread(s) per MPI task
+Loaded 1 plugins from D:\LAMMPS 64-bit 4Jul2026-MSMPI\plugins
+clear
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread.
+  using 1 OpenMP thread(s) per MPI task
+Restoring plugin: Hello world command v1.1 by Axel Kohlmeyer (akohlmey@gmail.com)
+WARNING: Overriding built-in command style hello from plugin (src/PLUGIN/plugin.cpp:556)
+Loaded 1 plugins from D:\LAMMPS 64-bit 4Jul2026-MSMPI\plugins
+units real
+atom_style full
+boundary p p p
+include forcefield.production
+# Static-readability precursor only; scientific production approval is intentionally blocked.
+pair_style lj/cut/coul/long 12.0
+pair_modify mix arithmetic
+bond_style harmonic
+angle_style harmonic
+dihedral_style fourier
+improper_style cvff
+special_bonds amber
+kspace_style pppm 1.0e-4
+read_data interface.data
+Reading data file ...
+  orthogonal box = (0 0 0) to (90 90 91.883654)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  3100 atoms
+  scanning bonds ...
+  3 = max bonds/atom
+  scanning angles ...
+  6 = max angles/atom
+  scanning dihedrals ...
+  11 = max dihedrals/atom
+  scanning impropers ...
+  2 = max impropers/atom
+  orthogonal box = (0 0 0) to (90 90 91.883654)
+  1 by 1 by 1 MPI processor grid
+  reading bonds ...
+  2988 bonds
+  reading angles ...
+  4902 angles
+  reading dihedrals ...
+  7656 dihedrals
+  reading impropers ...
+  1548 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0.5     
+  special bond factors coul:  0        0        0.8333333333333334
+     4 = max # of 1-2 neighbors
+     7 = max # of 1-3 neighbors
+    14 = max # of 1-4 neighbors
+    16 = max # of special neighbors
+  special bonds CPU = 0.002 seconds
+  read_data CPU = 0.117 seconds
+run 0
+WARNING: No fixes with time integration, atoms won't move
+For more information see https://docs.lammps.org/err0028 (src/verlet.cpp:60)
+PPPM initialization ...
+WARNING: System is not charge neutral, net charge = -6.59172e-05
+For more information see https://docs.lammps.org/err0029 (src/kspace.cpp:329)
+  using 12-bit tables for long-range coulomb
+  G vector (1/distance) = 0.20533657
+  grid = 32 32 32
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.03447463
+  estimated relative force accuracy = 0.00010381932
+  using double precision FFTW3
+  3d grid and FFT values/proc = 50653 32768
+Generated 120 of 120 mixed pair_coeff terms from arithmetic mixing rule
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 14
+  ghost atom cutoff = 14
+  binsize = 7, bins = 13 13 14
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/coul/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 19.53 | 19.53 | 19.53 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0              1574641.4      4134.4453      1578775.9      637483.76    
+Loop time of 4e-06 on 1 procs for 0 steps with 3100 atoms
+
+0.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0          | 0          | 0          |   0.0 |  0.00
+Kspace  | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 4e-06      |            |       |100.00
+
+Nlocal:           3100 ave        3100 max        3100 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            820 ave         820 max         820 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         381329 ave      381329 max      381329 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 381329
+Ave neighs/atom = 123.00935
+Ave special neighs/atom = 9.3019355
+Neighbor list builds = 0
+Dangerous builds = 0
+Total wall time: 0:00:00

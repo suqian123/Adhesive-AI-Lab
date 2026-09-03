@@ -3,7 +3,7 @@
   "campaign_id": "CL-00058-20260826084507",
   "candidate_id": "CL-00058",
   "created_at": "2026-08-26T08:45:07.358106+00:00",
-  "status": "blocked",
+  "status": "cancelled",
   "integrated_at": null,
   "integration_error": null,
   "package_directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507",
@@ -175,9 +175,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-111-v00-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-111-v00-h35",
@@ -219,9 +220,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-111-v00-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-111-v08-h00",
@@ -263,9 +265,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-111-v08-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-111-v08-h35",
@@ -307,9 +310,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-111-v08-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-111-v15-h00",
@@ -351,9 +355,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-111-v15-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-111-v15-h35",
@@ -395,9 +400,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-111-v15-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-pda-binding-111",
@@ -435,9 +441,10 @@
         "functional_group_type": "phthalonitrile/nitrile-triazine"
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-pda-binding-111",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-110-v00-h00",
@@ -479,9 +486,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-110-v00-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-110-v00-h35",
@@ -523,9 +531,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-110-v00-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-110-v08-h00",
@@ -567,9 +576,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-110-v08-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-110-v08-h35",
@@ -611,9 +621,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-110-v08-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-110-v15-h00",
@@ -655,9 +666,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-110-v15-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-110-v15-h35",
@@ -699,9 +711,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-110-v15-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-pda-binding-110",
@@ -739,9 +752,10 @@
         "functional_group_type": "phthalonitrile/nitrile-triazine"
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-pda-binding-110",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-100-v00-h00",
@@ -783,9 +797,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-100-v00-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-100-v00-h35",
@@ -827,9 +842,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-100-v00-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-100-v08-h00",
@@ -871,9 +887,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-100-v08-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-100-v08-h35",
@@ -915,9 +932,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-100-v08-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-100-v15-h00",
@@ -959,9 +977,10 @@
         "hydroxyl_fraction": 0.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-100-v15-h00",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-o-100-v15-h35",
@@ -1003,9 +1022,10 @@
         "hydroxyl_fraction": 0.35
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-o-100-v15-h35",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "dft-pda-binding-100",
@@ -1043,9 +1063,10 @@
         "functional_group_type": "phthalonitrile/nitrile-triazine"
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\dft-pda-binding-100",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_DFT_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "md-resin-x1",
@@ -1100,9 +1121,10 @@
         ]
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\md-resin-x1",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_BULK_MD_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "md-resin-x2",
@@ -1157,9 +1179,10 @@
         ]
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\md-resin-x2",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_BULK_MD_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "md-resin-x3",
@@ -1214,9 +1237,10 @@
         ]
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\md-resin-x3",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_BULK_MD_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "md-resin-pda-ceo2-interface",
@@ -1294,9 +1318,10 @@
         "filler_pct": 1.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\md-resin-pda-ceo2-interface",
-      "status": "blocked",
-      "blocker": "未配置 ADHESIVE_INTERFACE_MD_COMMAND",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     },
     {
       "task_id": "cg-pda-ceo2-dispersion",
@@ -1339,9 +1364,10 @@
         "filler_pct": 1.0
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00058-e85c3c07b0\\package\\CL-00058-20260826084507\\tasks\\cg-pda-ceo2-dispersion",
-      "status": "blocked",
-      "blocker": "依赖任务失败或被阻塞",
-      "job_id": null
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
     }
   ],
   "result_payload": {
@@ -1349,5 +1375,7 @@
     "md": {},
     "interface": {}
   },
-  "updated_at": "2026-08-26T08:45:07.367855+00:00"
+  "updated_at": "2026-09-02T03:10:38.789627+00:00",
+  "terminated_at": "2026-09-02T03:10:38.788117+00:00",
+  "termination_error": null
 }

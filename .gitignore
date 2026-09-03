@@ -7,4 +7,7 @@ venv/
 *.egg-info/
 .streamlit/secrets.toml
 work/multiscale_profiles.json
+work/vasp_resources.json
+work/vasp_resources/
+work/vasp_validation/
 outputs/

@@ -1,0 +1,9 @@
+
+Welcome to antechamber 19.0: molecular input file processor.
+
+acdoctor mode is on: check and diagnose problems in the input file.
+-- Check Format for sdf File --
+   Status: pass
+-- Check Unusual Elements --
+Warning: Unusual element (B) for atom (ID: 2, Name: B1).
+Warning: Unusual element (B) for atom (ID: 8, Name: B2).

@@ -1,0 +1,24 @@
+
+Welcome to antechamber 19.0: molecular input file processor.
+
+acdoctor mode is on: check and diagnose problems in the input file.
+-- Check Format for sdf File --
+   Status: pass
+-- Check Unusual Elements --
+   Status: pass
+-- Check Open Valences --
+   Status: pass
+-- Check Geometry --
+      for those bonded   
+      for those not bonded   
+   Status: pass
+-- Check Weird Bonds --
+   Status: pass
+-- Check Number of Units --
+   Status: pass
+acdoctor mode has completed checking the input file.
+
+Info: Total number of electrons: 82; net charge: 0
+
+Running: /opt/ambertools/bin/sqm -O -i sqm.in -o sqm.out
+

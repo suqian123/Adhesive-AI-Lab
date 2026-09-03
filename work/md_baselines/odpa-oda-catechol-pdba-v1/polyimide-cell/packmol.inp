@@ -1,0 +1,9 @@
+tolerance 2.2
+filetype pdb
+output /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/packed.pdb
+seed 20260901
+
+structure /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/polyimide_dp8.pdb
+  number 6
+  inside box 2.0 2.0 2.0 88.0 88.0 88.0
+end structure

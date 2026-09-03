@@ -1,0 +1,72 @@
+{
+  "baseline_id": "odpa-oda-catechol-pdba-v1",
+  "created_at": "2026-09-01T08:10:58.483194+00:00",
+  "scientific_status": "structure-defined; force-field-validation-pending",
+  "production_approved": false,
+  "artifacts": {
+    "DABA_DA_pdb": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\DABA_DA.pdb",
+      "sha256": "5c1a4c243cc887ddab0f7fa8a646cfa7e5762a2fdcc0cd7de3ccb2d979c9dc30"
+    },
+    "DABA_DA_sdf": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\DABA_DA.sdf",
+      "sha256": "c0509461546e1ce748cc8fbcae1968899c0e27a793fab931d214e72195a8bcb7"
+    },
+    "DOPAMINE_pdb": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\DOPAMINE.pdb",
+      "sha256": "134229b5667572258554fe029a2c6e8b35dfa079f76e665d98f87ea80ea9cac9"
+    },
+    "DOPAMINE_sdf": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\DOPAMINE.sdf",
+      "sha256": "093a8dc02a1239c3b265bae5e51460d853864f0784dcba17669a9eba4c0fd73c"
+    },
+    "ODA_pdb": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\ODA.pdb",
+      "sha256": "16878957c03f27e580052c4610b86f8d7fa200d124e853eb3c115f32120cf0c8"
+    },
+    "ODA_sdf": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\ODA.sdf",
+      "sha256": "5b78d4f97fa4827bd26bb148d8992d63b4abcb45049d8e23324d89895c280366"
+    },
+    "ODPA_pdb": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\ODPA.pdb",
+      "sha256": "f683a8839cbac9baf06533487da5f618e3ba8671555219e3ca898542b7748c74"
+    },
+    "ODPA_sdf": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\ODPA.sdf",
+      "sha256": "9c0cb9e9b2584b56f43a7f10fcd08a2043f3400a7d67d0267b2a06e5e4f8bd0a"
+    },
+    "PDBA_pdb": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\PDBA.pdb",
+      "sha256": "33aee50cd1b17e3bd50546201de28cadb927fd5daa09ad2996db96af21a08fb8"
+    },
+    "PDBA_sdf": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\components\\PDBA.sdf",
+      "sha256": "a40914d69ff98a5c99af812a17958ec0bdc9f9c1764531cf402f10177e3cbab5"
+    },
+    "contract": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\structure_contract.json",
+      "sha256": "9a97baaefa3347eb6ba5fbb2d3ba59bd0f77c061a53e747bc94dae2664161d29"
+    },
+    "oligomer_metadata": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\oligomers\\oligomer_metadata.json",
+      "sha256": "87913c436bd3d7f35389efced4527416c5ae45985a24f4012f29fac5275bebc8"
+    },
+    "oligomer_pdb": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\oligomers\\polyimide_dp8.pdb",
+      "sha256": "b34960e40bb0c0768cb0eda204bfffcf7e8f58e29d07ba33955f3a87aa5f3b13"
+    },
+    "oligomer_sdf": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\oligomers\\polyimide_dp8.sdf",
+      "sha256": "3aec722628cecd3c219b980abcf4b52c6599a5857ea162f49cc794110adec399"
+    },
+    "parameterization_plan": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\parameterization_plan.json",
+      "sha256": "67a63292dd4fb580bf5f0101cf6adc071c30bcda9731e770db8072a2c69230ea"
+    },
+    "reaction_contract": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\boronic_reaction_contract.json",
+      "sha256": "ef26db81dcb2cd079d0c1bfbbd113c026bf5b78b0e818087600ce43bbcf5f22f"
+    }
+  }
+}

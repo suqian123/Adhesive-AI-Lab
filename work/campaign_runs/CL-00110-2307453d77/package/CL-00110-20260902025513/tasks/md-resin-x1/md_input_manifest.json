@@ -1,0 +1,26 @@
+{
+  "baseline_id": "odpa-oda-catechol-pdba-v1",
+  "resolution": "all-atom",
+  "model": "six-chain ODPA-ODA/DABA-dopamine DP8 amorphous pre-crosslink cell",
+  "target_crosslink_density": 0.7464,
+  "charge_model": "Gasteiger topology-development fallback",
+  "scientific_status": "static-valid; crosslink-RESP-property-validation-pending",
+  "production_approved": false,
+  "limitations": [
+    "PDBA crosslinker and boronic-ester reaction topology are not yet inserted",
+    "RESP charges have not replaced topology-development fallback charges",
+    "density, Tg, modulus, CTE, and replica convergence validation are pending"
+  ],
+  "artifacts": {
+    "system.data": {
+      "source": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\polyimide-cell\\system.data",
+      "source_sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9",
+      "task_sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9"
+    },
+    "forcefield.production": {
+      "source": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\polyimide-cell\\forcefield.production",
+      "source_sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446",
+      "task_sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446"
+    }
+  }
+}

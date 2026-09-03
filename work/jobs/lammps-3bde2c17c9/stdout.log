@@ -1,0 +1,7 @@
+ERROR on proc 0: Cannot open input script in.production: No such file or directory (src/lammps.cpp:569)
+
+job aborted:
+[ranks] message
+
+[0] application aborted
+aborting MPI_COMM_WORLD (comm=0x44000000), error 1, comm rank 0

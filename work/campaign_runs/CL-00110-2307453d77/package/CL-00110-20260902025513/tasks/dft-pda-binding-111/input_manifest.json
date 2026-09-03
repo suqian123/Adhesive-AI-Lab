@@ -1,0 +1,56 @@
+{
+  "task_id": "dft-pda-binding-111",
+  "objective": "pda-resin-and-surface-binding",
+  "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+  "scientific_status": "pending-convergence-validation",
+  "facet": "(111)",
+  "miller_indices": [
+    1,
+    1,
+    1
+  ],
+  "repeat": [
+    3,
+    3,
+    1
+  ],
+  "slab_layers": 3,
+  "vacuum_a": 18.0,
+  "surface_oxygen_sites": 36,
+  "requested_vacancy_fraction": 0.0,
+  "actual_vacancy_fraction": 0.0,
+  "requested_hydroxyl_fraction": 0.0,
+  "actual_hydroxyl_fraction": 0.0,
+  "vacancy_count": 0,
+  "hydroxyl_count": 0,
+  "adsorbate_index": null,
+  "atom_count": 406,
+  "species": [
+    "Ce",
+    "O",
+    "C",
+    "N",
+    "H"
+  ],
+  "species_counts": [
+    108,
+    224,
+    32,
+    4,
+    38
+  ],
+  "functional": "PBE-D3(BJ)",
+  "ce_u_eff_ev": 4.5,
+  "vdw_kernel_installed": true,
+  "vdw_kernel_used": false,
+  "encut_ev": 520,
+  "kpoints": [
+    1,
+    1,
+    1
+  ],
+  "resource_hashes": {
+    "potcar_sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+    "vdw_kernel_sha256": "b3c9452a98e86a0efb775c5d9bfc1182d331e6949e930b8c172bb5b13f6809a9"
+  }
+}

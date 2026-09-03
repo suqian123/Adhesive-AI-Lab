@@ -1,0 +1,985 @@
+{
+  "campaign_id": "CL-00171-20260831074232",
+  "candidate_id": "CL-00171",
+  "created_at": "2026-08-31T07:42:32.666501+00:00",
+  "composition": {
+    "resin": "PI",
+    "resin_variant": "flexible_imide",
+    "blend_resin": NaN,
+    "blend_fraction": 0.0,
+    "dynamic_unit": "Boronic",
+    "cure_system": "Catalytic",
+    "curing_agent": "amino-terminated",
+    "catalyst": "none",
+    "toughener_type": "none",
+    "toughener_pct": 0.0,
+    "filler_type": "PDA@CeO₂",
+    "filler_pct": 0.0
+  },
+  "process_conditions": {
+    "curing_temperature_c": 301.3472,
+    "curing_time_h": 1.33068,
+    "post_cure_temperature_c": 328.0,
+    "post_cure_time_h": 1.252,
+    "mixing_temperature_c": 50.0,
+    "vacuum_degassing_min": 15.0
+  },
+  "feature_contract": {
+    "resin": [
+      "functional_group_type",
+      "crosslink_density",
+      "glass_transition_c",
+      "free_volume_fraction",
+      "chain_mobility",
+      "cohesive_energy_density_mj_m3",
+      "elastic_modulus_gpa",
+      "cte_ppm_k"
+    ],
+    "filler": [
+      "filler_oxygen_adsorption_ev",
+      "filler_radical_capture_index"
+    ],
+    "interface": [
+      "interface_binding_energy_mj_m2",
+      "interface_covalent_bond_count"
+    ]
+  },
+  "output_contract": [
+    "wide_temp_adhesion_mpa",
+    "healing_efficiency_pct",
+    "atomic_oxygen_retention_pct",
+    "uv_retention_pct",
+    "am_feasibility"
+  ],
+  "candidate_snapshot": {
+    "candidate_id": "CL-00171",
+    "resin": "PI",
+    "resin_variant": "flexible_imide",
+    "resin_architecture": "semi-flexible PI",
+    "resin_functionality": 2,
+    "blend_resin": NaN,
+    "blend_fraction": 0.0,
+    "dynamic_unit": "Boronic",
+    "cure_system": "Catalytic",
+    "catalyst": "none",
+    "curing_agent": "amino-terminated",
+    "toughener_type": "none",
+    "toughener_pct": 0.0,
+    "filler_type": "PDA@CeO₂",
+    "filler_surface": "PDA-coated CeO₂",
+    "filler_pct": 0.0,
+    "curing_temperature_c": 301.3472,
+    "curing_time_h": 1.33068,
+    "post_cure_temperature_c": 328.0,
+    "post_cure_time_h": 1.252,
+    "mixing_temperature_c": 50.0,
+    "vacuum_degassing_min": 15.0,
+    "crosslink_density": 0.7624,
+    "thermal_resistance_index": 0.7470720000000001,
+    "low_temp_toughness_index": 0.56781304,
+    "adhesion_strength_mpa": 11.45182,
+    "self_healing_efficiency_pct": 68.82,
+    "space_environment_stability_index": 0.5880646946031747,
+    "wide_temp_adhesion_mpa": 17.528679519999997,
+    "healing_efficiency_pct": 68.82,
+    "atomic_oxygen_retention_pct": 85.78546666666665,
+    "uv_retention_pct": 86.49285714285715,
+    "am_feasibility": 72.89280000000001,
+    "multi_objective_score": 63.597545831111105,
+    "screening_class": "C",
+    "resin_name": "聚酰亚胺（PI）",
+    "dynamic_name": "硼酸酯动态键",
+    "cure_name": "催化固化",
+    "functional_group_type": "imide/amine",
+    "structure_params": {
+      "cte_bias": 0.01,
+      "cte_ppm_k": 59.03288,
+      "space_bias": 0.04,
+      "free_volume": 0.11264399999999997,
+      "architecture": "semi-flexible PI",
+      "thermal_bias": 0.05,
+      "functionality": 2,
+      "polarity_bias": 0.03,
+      "chain_mobility": 0.25323999999999997,
+      "toughness_bias": 0.1,
+      "radical_capture": 0.7202,
+      "ao_adsorption_ev": -1.0178,
+      "crosslink_density": 0.7624000000000001,
+      "elastic_modulus_gpa": 4.51944,
+      "functional_group_type": "imide/amine",
+      "cohesive_energy_density": 459.4,
+      "interface_binding_mj_m2": 8.2452,
+      "interface_covalent_bonds": 6
+    },
+    "process_conditions": {
+      "curing_time_h": 1.3738,
+      "post_cure_time_h": 1.252,
+      "curing_temperature_c": 299.152,
+      "mixing_temperature_c": 50.0,
+      "vacuum_degassing_min": 15.0,
+      "post_cure_temperature_c": 328.0
+    },
+    "performance_targets": {
+      "screening_class": "C",
+      "adhesion_strength_mpa": 11.45182,
+      "multi_objective_score": 63.597545831111105,
+      "low_temp_toughness_index": 0.56781304,
+      "thermal_resistance_index": 0.7470720000000001,
+      "self_healing_efficiency_pct": 68.82,
+      "space_environment_stability_index": 0.5880646946031747
+    },
+    "resin_thermal": 0.93,
+    "resin_toughness": 0.58,
+    "resin_polarity": 0.74,
+    "dynamic_healing": 0.82,
+    "dynamic_mobility": 0.28,
+    "cure_factor": 0.84,
+    "tg_c": 371.6772,
+    "free_volume": 0.11264399999999997,
+    "cohesive_energy_density": 459.4,
+    "elastic_modulus_gpa": 4.51944,
+    "cte_ppm_k": 59.03288,
+    "chain_mobility": 0.25323999999999997,
+    "glass_transition_c": 371.6772,
+    "glass_transition_temperature_c": 371.6772,
+    "free_volume_fraction": 0.11264399999999997,
+    "cohesive_energy_density_mj_m3": 459.4,
+    "elastic_modulus": 4.51944,
+    "thermal_expansion_coefficient_ppm_k": 59.03288,
+    "filler_oxygen_adsorption_ev": -1.0178,
+    "oxygen_adsorption_energy_ev": -1.0178,
+    "filler_radical_capture_index": 0.7202,
+    "radical_capture_capability": 0.7202,
+    "interface_binding_energy_mj_m2": 8.2452,
+    "interface_binding_energy": 8.2452,
+    "interface_covalent_bond_count": 6,
+    "data_source": "physics-informed-proxy",
+    "feature_provenance": {
+      "cte_ppm_k": "physics-informed-proxy",
+      "chain_mobility": "physics-informed-proxy",
+      "crosslink_density": "physics-informed-proxy",
+      "glass_transition_c": "physics-informed-proxy",
+      "elastic_modulus_gpa": "physics-informed-proxy",
+      "free_volume_fraction": "physics-informed-proxy",
+      "functional_group_type": "physics-informed-proxy",
+      "filler_oxygen_adsorption_ev": "physics-informed-proxy",
+      "filler_radical_capture_index": "physics-informed-proxy",
+      "cohesive_energy_density_mj_m3": "physics-informed-proxy",
+      "interface_covalent_bond_count": "physics-informed-proxy",
+      "interface_binding_energy_mj_m2": "physics-informed-proxy"
+    },
+    "target_provenance": {
+      "am_feasibility": "physics-informed-proxy",
+      "uv_retention_pct": "physics-informed-proxy",
+      "healing_efficiency_pct": "physics-informed-proxy",
+      "wide_temp_adhesion_mpa": "physics-informed-proxy",
+      "atomic_oxygen_retention_pct": "physics-informed-proxy"
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "dft-o-111-v00-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v00-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v08-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v08-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v15-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-111-v15-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-pda-binding-111",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "pda-resin-and-surface-binding",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(111)",
+        "functional_group_type": "imide/amine"
+      },
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated PDA/resin fragments",
+        "ceria slab",
+        "binding-energy reference calculations"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v00-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v00-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v08-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v08-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v15-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-110-v15-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-pda-binding-110",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "pda-resin-and-surface-binding",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(110)",
+        "functional_group_type": "imide/amine"
+      },
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated PDA/resin fragments",
+        "ceria slab",
+        "binding-energy reference calculations"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v00-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v00-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v08-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v08-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v15-h00",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-o-100-v15-h35",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated CeO2 slab",
+        "spin-polarized DFT(+U) settings",
+        "adsorbate reference energy",
+        "NEB endpoints"
+      ]
+    },
+    {
+      "task_id": "dft-pda-binding-100",
+      "candidate_id": "CL-00171",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "objective": "pda-resin-and-surface-binding",
+      "engine_options": [
+        "VASP",
+        "Quantum ESPRESSO",
+        "CP2K"
+      ],
+      "conditions": {
+        "facet": "(100)",
+        "functional_group_type": "imide/amine"
+      },
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ],
+      "readiness": "planned-requires-atomistic-structure",
+      "blocking_requirements": [
+        "validated PDA/resin fragments",
+        "ceria slab",
+        "binding-energy reference calculations"
+      ]
+    },
+    {
+      "task_id": "md-resin-x1",
+      "candidate_id": "CL-00171",
+      "scale": "atomistic-md",
+      "calculation_kind": "bulk_md",
+      "objective": "crosslinked-resin-temperature-sweep",
+      "engine_options": [
+        "LAMMPS",
+        "GROMACS"
+      ],
+      "conditions": {
+        "crosslink_density": 0.6123999999999999,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ]
+      },
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ],
+      "readiness": "planned-requires-crosslinked-topology",
+      "blocking_requirements": [
+        "crosslinked atomistic topology",
+        "validated resin/dynamic-bond force field",
+        "equilibrated temperature replicas"
+      ]
+    },
+    {
+      "task_id": "md-resin-x2",
+      "candidate_id": "CL-00171",
+      "scale": "atomistic-md",
+      "calculation_kind": "bulk_md",
+      "objective": "crosslinked-resin-temperature-sweep",
+      "engine_options": [
+        "LAMMPS",
+        "GROMACS"
+      ],
+      "conditions": {
+        "crosslink_density": 0.7624,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ]
+      },
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ],
+      "readiness": "planned-requires-crosslinked-topology",
+      "blocking_requirements": [
+        "crosslinked atomistic topology",
+        "validated resin/dynamic-bond force field",
+        "equilibrated temperature replicas"
+      ]
+    },
+    {
+      "task_id": "md-resin-x3",
+      "candidate_id": "CL-00171",
+      "scale": "atomistic-md",
+      "calculation_kind": "bulk_md",
+      "objective": "crosslinked-resin-temperature-sweep",
+      "engine_options": [
+        "LAMMPS",
+        "GROMACS"
+      ],
+      "conditions": {
+        "crosslink_density": 0.9124,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ]
+      },
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ],
+      "readiness": "planned-requires-crosslinked-topology",
+      "blocking_requirements": [
+        "crosslinked atomistic topology",
+        "validated resin/dynamic-bond force field",
+        "equilibrated temperature replicas"
+      ]
+    },
+    {
+      "task_id": "md-resin-pda-ceo2-interface",
+      "candidate_id": "CL-00171",
+      "scale": "atomistic-md",
+      "calculation_kind": "interface_md",
+      "objective": "resin-pda-ceo2-interface-binding",
+      "engine_options": [
+        "LAMMPS",
+        "GROMACS"
+      ],
+      "conditions": {
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ],
+        "filler_pct": 0.0
+      },
+      "expected_outputs": [
+        "interface_binding_energy_mj_m2",
+        "interface_covalent_bond_count",
+        "adhesion_retention",
+        "self_healing_efficiency"
+      ],
+      "readiness": "planned-requires-interface-topology",
+      "blocking_requirements": [
+        "resin/PDA@CeO2 atomistic interface",
+        "validated cross interactions",
+        "interface area"
+      ]
+    },
+    {
+      "task_id": "cg-pda-ceo2-dispersion",
+      "candidate_id": "CL-00171",
+      "scale": "coarse-grained",
+      "calculation_kind": "interface_md",
+      "objective": "pda-ceo2-dispersion-and-reinforcement",
+      "engine_options": [
+        "LAMMPS"
+      ],
+      "conditions": {
+        "filler_pct": 0.0,
+        "temperature_c": 25.0
+      },
+      "expected_outputs": [
+        "dispersion_index",
+        "coarse_grained_reinforcement_index",
+        "interface_binding_energy_mj_m2"
+      ],
+      "readiness": "generator-available-requires-calibration",
+      "blocking_requirements": [
+        "calibration against atomistic PMF/DFT/experiment"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "model": "ODPA-ODA/DABA-dopamine DP8, six-chain amorphous starting cell",
+  "organic_force_field": "GAFF2",
+  "charge_model": "Gasteiger topology-development fallback",
+  "scientific_status": "generated; RESP-and-property-validation-pending",
+  "production_approved": false
+}

@@ -1,0 +1,9 @@
+clear
+units real
+atom_style full
+boundary p p p
+include forcefield.production
+read_data system.data
+thermo 1
+thermo_style custom step atoms temp pe ke etotal vol press
+run 0

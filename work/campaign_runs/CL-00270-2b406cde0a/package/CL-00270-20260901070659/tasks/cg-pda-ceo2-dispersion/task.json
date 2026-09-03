@@ -1,0 +1,23 @@
+{
+  "task_id": "cg-pda-ceo2-dispersion",
+  "candidate_id": "CL-00270",
+  "scale": "coarse-grained",
+  "calculation_kind": "interface_md",
+  "objective": "pda-ceo2-dispersion-and-reinforcement",
+  "engine_options": [
+    "LAMMPS"
+  ],
+  "conditions": {
+    "filler_pct": 0.0,
+    "temperature_c": 25.0
+  },
+  "expected_outputs": [
+    "dispersion_index",
+    "coarse_grained_reinforcement_index",
+    "interface_binding_energy_mj_m2"
+  ],
+  "readiness": "generator-available-requires-calibration",
+  "blocking_requirements": [
+    "calibration against atomistic PMF/DFT/experiment"
+  ]
+}

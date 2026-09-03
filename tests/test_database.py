@@ -52,8 +52,11 @@ def test_database_jsonable_handles_md_dataclasses_and_numpy():
 def test_experiment_and_model_persistence_fall_back_to_sqlite(monkeypatch, tmp_path):
     monkeypatch.setattr(database, "mysql_connector", None)
     monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
-    database.save_experiment("CL-00001", {"wide_temp_adhesion_mpa": 28.5}, test_batch="batch-1", temperature_c=25)
-    stored = database.load_experiments(["CL-00001"])
+    database.save_experiment(
+        "CL-00001", {"wide_temp_adhesion_mpa": 28.5}, test_batch="batch-1", temperature_c=25,
+        formulation_id="FMT-001", candidate_library_version="candidate-library-v3",
+    )
+    stored = database.load_experiments(["CL-00001"], formulation_ids={"CL-00001": "FMT-001"})
     assert len(stored) == 1 and stored.iloc[0].wide_temp_adhesion_mpa == 28.5
 
 
@@ -61,17 +64,45 @@ def test_batch_experiment_persistence_falls_back_to_sqlite(monkeypatch, tmp_path
     monkeypatch.setattr(database, "mysql_connector", None)
     monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
     frame = pd.DataFrame([
-        {"candidate_id": "CL-00001", "wide_temp_adhesion_mpa": 28.5, "source": "lab-a"},
-        {"candidate_id": "CL-00002", "healing_efficiency_pct": 86.0},
+        {"candidate_id": "CL-00001", "formulation_id": "FMT-001", "candidate_library_version": "candidate-library-v3", "wide_temp_adhesion_mpa": 28.5, "source": "lab-a"},
+        {"candidate_id": "CL-00002", "formulation_id": "FMT-002", "candidate_library_version": "candidate-library-v3", "healing_efficiency_pct": 86.0},
     ])
 
-    saved = database.save_experiments(frame, default_source="csv-upload")
-    stored = database.load_experiments(["CL-00001", "CL-00002"])
+    saved = database.save_experiments(
+        frame,
+        default_source="csv-upload",
+        candidate_formulations={"CL-00001": "FMT-001", "CL-00002": "FMT-002"},
+        candidate_library_versions={"CL-00001": "candidate-library-v3", "CL-00002": "candidate-library-v3"},
+    )
+    stored = database.load_experiments(
+        ["CL-00001", "CL-00002"],
+        formulation_ids={"CL-00001": "FMT-001", "CL-00002": "FMT-002"},
+    )
 
     assert saved == 2
     assert set(stored.candidate_id) == {"CL-00001", "CL-00002"}
     assert stored.loc[stored.candidate_id == "CL-00001", "source"].iloc[0] == "lab-a"
     assert stored.loc[stored.candidate_id == "CL-00002", "source"].iloc[0] == "csv-upload"
+
+
+def test_experiments_reject_mismatched_formulation_and_filter_legacy_rows(monkeypatch, tmp_path):
+    monkeypatch.setattr(database, "mysql_connector", None)
+    monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
+    frame = pd.DataFrame([{"candidate_id": "CL-00001", "formulation_id": "FMT-wrong", "candidate_library_version": "candidate-library-v3", "wide_temp_adhesion_mpa": 28.5}])
+
+    with pytest.raises(ValueError, match="配方指纹"):
+        database.save_experiments(
+            frame,
+            candidate_formulations={"CL-00001": "FMT-current"},
+            candidate_library_versions={"CL-00001": "candidate-library-v3"},
+        )
+
+    with database.sqlite_connection() as conn:
+        conn.execute(
+            "INSERT INTO experimental_results (candidate_id,test_batch,properties) VALUES (?,?,?)",
+            ("CL-00001", "legacy", "{}"),
+        )
+    assert database.load_experiments(["CL-00001"], formulation_ids={"CL-00001": "FMT-current"}).empty
 
 
 def test_load_candidates_expands_database_properties(monkeypatch):
@@ -83,6 +114,8 @@ def test_load_candidates_expands_database_properties(monkeypatch):
         def fetchall(self):
             return [{
                 "candidate_id": "CL-00001",
+                "formulation_id": "FMT-001",
+                "candidate_library_version": "candidate-library-v3",
                 "resin": "CE",
                 "blend_resin": None,
                 "blend_fraction": 0.0,
@@ -112,5 +145,7 @@ def test_load_candidates_expands_database_properties(monkeypatch):
     frame = database.load_candidates(["CL-00001"])
 
     assert frame.iloc[0].candidate_id == "CL-00001"
+    assert frame.iloc[0].formulation_id == "FMT-001"
+    assert frame.iloc[0].candidate_library_version == "candidate-library-v3"
     assert frame.iloc[0].curing_agent == "imidazole-activated"
     assert frame.iloc[0].data_source == "physics-informed-proxy"

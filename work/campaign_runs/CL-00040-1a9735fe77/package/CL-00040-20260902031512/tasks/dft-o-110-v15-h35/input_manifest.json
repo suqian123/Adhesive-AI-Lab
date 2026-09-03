@@ -1,0 +1,52 @@
+{
+  "task_id": "dft-o-110-v15-h35",
+  "objective": "atomic-oxygen-surface-chemistry",
+  "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+  "scientific_status": "pending-convergence-validation",
+  "facet": "(110)",
+  "miller_indices": [
+    1,
+    1,
+    0
+  ],
+  "repeat": [
+    3,
+    2,
+    1
+  ],
+  "slab_layers": 3,
+  "vacuum_a": 18.0,
+  "surface_oxygen_sites": 12,
+  "requested_vacancy_fraction": 0.15,
+  "actual_vacancy_fraction": 0.16666666666666666,
+  "requested_hydroxyl_fraction": 0.35,
+  "actual_hydroxyl_fraction": 0.4,
+  "vacancy_count": 2,
+  "hydroxyl_count": 4,
+  "adsorbate_index": 218,
+  "atom_count": 219,
+  "species": [
+    "Ce",
+    "O",
+    "H"
+  ],
+  "species_counts": [
+    72,
+    143,
+    4
+  ],
+  "functional": "PBE-D3(BJ)",
+  "ce_u_eff_ev": 4.5,
+  "vdw_kernel_installed": true,
+  "vdw_kernel_used": false,
+  "encut_ev": 520,
+  "kpoints": [
+    1,
+    2,
+    1
+  ],
+  "resource_hashes": {
+    "potcar_sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+    "vdw_kernel_sha256": "b3c9452a98e86a0efb775c5d9bfc1182d331e6949e930b8c172bb5b13f6809a9"
+  }
+}

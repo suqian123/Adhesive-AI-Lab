@@ -1,0 +1,26 @@
+{
+  "baseline_id": "odpa-oda-catechol-pdba-v1",
+  "resolution": "all-atom coordinates with incomplete interface force-field topology",
+  "model": "DP8 resin plus CeO2(111)/dopamine-tetramer DFT coordinate baseline",
+  "target_filler_pct": 3.0,
+  "scientific_status": "static-valid; interface-parameterization-property-validation-pending",
+  "production_approved": false,
+  "limitations": [
+    "PDA tetramer bonded GAFF2/RESP topology is pending",
+    "CeO2 IP10a core-shell parameters are pending; present Ce/O terms are readability-only",
+    "organic-inorganic cross interactions await VASP fitting",
+    "resin PDBA crosslinks and RESP charges are pending"
+  ],
+  "artifacts": {
+    "interface.data": {
+      "source": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\interface-cell\\interface.data",
+      "source_sha256": "4811b68369c5195b5bb71bbd354c8233cd1c42ab04a496bf6122fad9f7f80e5b",
+      "task_sha256": "4811b68369c5195b5bb71bbd354c8233cd1c42ab04a496bf6122fad9f7f80e5b"
+    },
+    "forcefield.production": {
+      "source": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\interface-cell\\forcefield.production",
+      "source_sha256": "a9a2d068fe5b7c0b704a5418be50725acd9e5bc27adac36b529282cafb747a3b",
+      "task_sha256": "a9a2d068fe5b7c0b704a5418be50725acd9e5bc27adac36b529282cafb747a3b"
+    }
+  }
+}

@@ -3,12 +3,23 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 from itertools import product
+import json
 
 import numpy as np
 import pandas as pd
 
 from .features import Formulation, CURING_SYSTEMS, DYNAMIC_UNITS, RESIN_SYSTEMS, formulation_features
+
+
+CANDIDATE_LIBRARY_VERSION = "candidate-library-v3"
+
+
+def _formulation_id(contract: dict[str, object]) -> str:
+    """Return a stable identifier for chemistry/process identity, independent of ranking order."""
+    canonical = json.dumps(contract, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+    return "FMT-" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16].upper()
 
 
 @dataclass(frozen=True)
@@ -126,6 +137,22 @@ def _compose_candidate(
         filler_pct=float(filler_pct),
         crosslink_density=crosslink_density,
     )
+    formulation_contract = {
+        "resin": variant.family,
+        "resin_variant": variant.variant,
+        "blend_resin": blend_resin,
+        "blend_fraction": float(blend_fraction),
+        "dynamic_unit": dynamic_unit,
+        "cure_system": cure_system,
+        "curing_agent": curing_agent,
+        "catalyst": catalyst,
+        "toughener_type": toughener_type,
+        "toughener_pct": float(toughener_pct),
+        "filler_type": "PDA@CeO2",
+        "filler_surface": "PDA-coated CeO2",
+        "filler_pct": float(filler_pct),
+        "crosslink_density": round(crosslink_density, 8),
+    }
     features = formulation_features(formulation)
     effective_crosslink = float(features["crosslink_density"])
     resin_label = RESIN_SYSTEMS[variant.family]["label"]
@@ -194,6 +221,9 @@ def _compose_candidate(
 
     row: dict[str, object] = {
         "candidate_id": candidate_id,
+        "formulation_id": _formulation_id(formulation_contract),
+        "candidate_library_version": CANDIDATE_LIBRARY_VERSION,
+        "formulation_contract": formulation_contract,
         "resin": variant.family,
         "blend_resin": blend_resin,
         "blend_fraction": float(blend_fraction),
@@ -292,6 +322,7 @@ def _compose_candidate(
     row["am_feasibility"] = am_feasibility
     row["curing_agent"] = curing_agent
     row["data_source"] = "physics-informed-proxy"
+    row["scientific_data_tier"] = "proxy-screening"
     row["feature_provenance"] = {
         name: "physics-informed-proxy"
         for name in (
@@ -344,7 +375,7 @@ def build_candidate_library(max_records: int = 720, seed: int = 7) -> pd.DataFra
     ]
     frame = pd.DataFrame.from_records(records)
     ordered = [
-        "candidate_id", "resin", "resin_variant", "resin_architecture", "resin_functionality",
+        "candidate_id", "formulation_id", "candidate_library_version", "resin", "resin_variant", "resin_architecture", "resin_functionality",
         "blend_resin", "blend_fraction", "dynamic_unit", "cure_system", "catalyst", "curing_agent",
         "toughener_type", "toughener_pct", "filler_type", "filler_surface", "filler_pct",
         "curing_temperature_c", "curing_time_h", "post_cure_temperature_c", "post_cure_time_h",

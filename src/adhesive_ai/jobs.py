@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import shlex
+import signal
 import subprocess
 import sys
 import uuid
@@ -139,6 +140,8 @@ def submit_job(
 def _run_job(root: str | Path, job_id: str) -> int:
     """Worker entry point that preserves the real exit status across UI reruns."""
     record = _read_record(root, job_id)
+    if record.status == "cancelled":
+        return 0
     running = _updated(record, status="running", started_at=_now(), error=None)
     _write_record(running, root)
     try:
@@ -148,6 +151,9 @@ def _run_job(root: str | Path, job_id: str) -> int:
                 stdout=stdout_handle, stderr=stderr_handle, text=True, check=False,
             )
         return_code = completed.returncode
+        latest = _read_record(root, job_id)
+        if latest.status == "cancelled":
+            return 0
         final = _updated(
             running, status="completed" if return_code == 0 else "failed",
             finished_at=_now(), return_code=return_code,
@@ -159,6 +165,43 @@ def _run_job(root: str | Path, job_id: str) -> int:
         final = _updated(running, status="failed", finished_at=_now(), return_code=None, error=str(exc))
     _write_record(final, root)
     return final.return_code or (0 if final.status == "completed" else 1)
+
+
+def cancel_job(job_id: str, *, root: str | Path = "work/jobs") -> JobRecord:
+    """Terminate a locally managed job runner and prevent queued work from starting."""
+    record = _read_record(root, job_id)
+    if record.status not in {"queued", "running"}:
+        return record
+    pid_path = _job_dir(root, job_id) / "process.pid"
+    try:
+        pid = int(pid_path.read_text(encoding="ascii")) if pid_path.is_file() else None
+    except (OSError, ValueError):
+        pid = None
+    if pid is not None and _pid_is_running(pid):
+        if os.name == "nt":
+            completed = subprocess.run(
+                ["taskkill", "/PID", str(pid), "/T", "/F"],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            if completed.returncode != 0:
+                detail = (completed.stderr or completed.stdout or "taskkill failed").strip()
+                raise RuntimeError(f"Unable to terminate job runner {job_id}: {detail}")
+        else:
+            try:
+                os.killpg(pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+    cancelled = _updated(
+        record,
+        status="cancelled",
+        finished_at=_now(),
+        return_code=None,
+        error="Cancelled by user",
+    )
+    _write_record(cancelled, root)
+    return cancelled
 
 
 def get_job_status(job_id: str, *, root: str | Path = "work/jobs") -> JobRecord:

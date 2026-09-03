@@ -1,0 +1,9 @@
+source leaprc.gaff2
+loadamberparams /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/polyimide_dp8.frcmod
+POL = loadmol2 /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/polyimide_dp8.mol2
+system = loadpdb /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/packed.pdb
+set system box { 90.0 90.0 90.0 }
+check system
+saveamberparm system /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/system.prmtop /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/system.inpcrd
+savepdb system /mnt/e/Adhesive-AI-Lab/work/md_baselines/odpa-oda-catechol-pdba-v1/polyimide-cell/system.pdb
+quit

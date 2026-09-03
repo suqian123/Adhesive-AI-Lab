@@ -1,0 +1,30 @@
+{
+  "job_id": "lammps-3bde2c17c9",
+  "engine": "LAMMPS",
+  "command": [
+    "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+    "-in",
+    "in.production"
+  ],
+  "workdir": "E:\\Adhesive-AI-Lab\\work\\external\\CL-00040\\bulk_md-lammps",
+  "status": "failed",
+  "submitted_at": "2026-09-02T06:53:03.204530+00:00",
+  "started_at": "2026-09-02T06:53:04.070739+00:00",
+  "finished_at": "2026-09-02T06:53:06.562031+00:00",
+  "return_code": 1,
+  "stdout_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\lammps-3bde2c17c9\\stdout.log",
+  "stderr_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\lammps-3bde2c17c9\\stderr.log",
+  "metadata": {
+    "candidate_id": "CL-00040",
+    "calculation_kind": "bulk_md",
+    "area_nm2": 100.0,
+    "filler_ratio": 0.0,
+    "polar_fraction": 0.6,
+    "compatibility_index": 0.44884024,
+    "temperature_c": 25.0,
+    "temperature_unit": "K",
+    "energy_unit": "kcal/mol",
+    "result_file": "log.lammps"
+  },
+  "error": "Command exited with code 1"
+}

@@ -13,6 +13,8 @@ dependencies = [
     "streamlit>=1.37",
     "mysql-connector-python>=9.0",
     "python-dotenv>=1.0",
+    "ase>=3.26",
+    "rdkit>=2025.3",
 ]
 
 [tool.pytest.ini_options]

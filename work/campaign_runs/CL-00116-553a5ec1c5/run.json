@@ -1,0 +1,3628 @@
+{
+  "run_id": "CL-00116-553a5ec1c5",
+  "campaign_id": "CL-00116-20260902015017",
+  "candidate_id": "CL-00116",
+  "created_at": "2026-09-02T01:50:56.334370+00:00",
+  "status": "cancelled",
+  "integrated_at": null,
+  "integration_error": null,
+  "package_directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017",
+  "job_root": "E:\\Adhesive-AI-Lab\\work\\jobs",
+  "max_parallel": 16,
+  "candidate_snapshot": {
+    "candidate_id": "CL-00116",
+    "formulation_id": "FMT-DD320AC63BFBE6F3",
+    "candidate_library_version": "candidate-library-v3",
+    "resin": "PN",
+    "resin_variant": "rigid_linear",
+    "resin_architecture": "rigid PN",
+    "resin_functionality": 2,
+    "blend_resin": "CE",
+    "blend_fraction": 0.15,
+    "dynamic_unit": "Disulfide",
+    "cure_system": "Stepwise",
+    "catalyst": "amine-salt",
+    "curing_agent": "phenolic",
+    "toughener_type": "none",
+    "toughener_pct": 0.0,
+    "filler_type": "PDA@CeO₂",
+    "filler_surface": "PDA-coated CeO₂",
+    "filler_pct": 5.0,
+    "curing_temperature_c": 235.7232,
+    "curing_time_h": 1.59383,
+    "post_cure_temperature_c": 270.4,
+    "post_cure_time_h": 1.479,
+    "mixing_temperature_c": 52.5,
+    "vacuum_degassing_min": 24.0,
+    "crosslink_density": 0.8294,
+    "thermal_resistance_index": 0.783832,
+    "low_temp_toughness_index": 0.43723924,
+    "adhesion_strength_mpa": 12.833435,
+    "self_healing_efficiency_pct": 63.315,
+    "space_environment_stability_index": 0.5936043501587303,
+    "wide_temp_adhesion_mpa": 17.524162720000003,
+    "healing_efficiency_pct": 63.315,
+    "atomic_oxygen_retention_pct": 85.50636666666666,
+    "uv_retention_pct": 84.28735714285713,
+    "am_feasibility": 60.9718,
+    "multi_objective_score": 60.97621387555555,
+    "screening_class": "C",
+    "formulation_contract": {
+      "resin": "PN",
+      "catalyst": "amine-salt",
+      "filler_pct": 5.0,
+      "blend_resin": "CE",
+      "cure_system": "Stepwise",
+      "filler_type": "PDA@CeO2",
+      "curing_agent": "phenolic",
+      "dynamic_unit": "Disulfide",
+      "resin_variant": "rigid_linear",
+      "toughener_pct": 0.0,
+      "blend_fraction": 0.15,
+      "filler_surface": "PDA-coated CeO2",
+      "toughener_type": "none",
+      "crosslink_density": 0.737
+    },
+    "resin_name": "邻苯二甲腈",
+    "dynamic_name": "二硫键",
+    "cure_name": "分步固化",
+    "functional_group_type": "phthalonitrile/nitrile-triazine",
+    "structure_params": {
+      "cte_bias": -0.04,
+      "cte_ppm_k": 49.81328,
+      "space_bias": 0.09,
+      "free_volume": 0.07966399999999998,
+      "architecture": "rigid PN",
+      "thermal_bias": 0.12,
+      "functionality": 2,
+      "polarity_bias": 0.03,
+      "chain_mobility": 0.11328999999999996,
+      "toughness_bias": -0.01,
+      "radical_capture": 0.68175,
+      "ao_adsorption_ev": -0.8742099999999999,
+      "crosslink_density": 0.8294000000000001,
+      "elastic_modulus_gpa": 4.962140000000001,
+      "functional_group_type": "phthalonitrile/nitrile-triazine",
+      "cohesive_energy_density": 437.6675,
+      "interface_binding_mj_m2": 9.008500000000002,
+      "interface_covalent_bonds": 6
+    },
+    "process_conditions": {
+      "curing_time_h": 1.64465,
+      "post_cure_time_h": 1.479,
+      "curing_temperature_c": 233.136,
+      "mixing_temperature_c": 52.5,
+      "vacuum_degassing_min": 24.0,
+      "post_cure_temperature_c": 270.4
+    },
+    "performance_targets": {
+      "screening_class": "C",
+      "adhesion_strength_mpa": 12.833435,
+      "multi_objective_score": 60.97621387555555,
+      "low_temp_toughness_index": 0.43723924,
+      "thermal_resistance_index": 0.783832,
+      "self_healing_efficiency_pct": 63.315,
+      "space_environment_stability_index": 0.5936043501587303
+    },
+    "resin_thermal": 0.939,
+    "resin_toughness": 0.3875,
+    "resin_polarity": 0.5895,
+    "dynamic_healing": 0.76,
+    "dynamic_mobility": 0.24,
+    "cure_factor": 0.93,
+    "tg_c": 380.5882,
+    "free_volume": 0.07966399999999998,
+    "cohesive_energy_density": 437.6675,
+    "elastic_modulus_gpa": 4.962140000000001,
+    "cte_ppm_k": 49.81328,
+    "chain_mobility": 0.11328999999999996,
+    "glass_transition_c": 380.5882,
+    "glass_transition_temperature_c": 380.5882,
+    "free_volume_fraction": 0.07966399999999998,
+    "cohesive_energy_density_mj_m3": 437.6675,
+    "elastic_modulus": 4.962140000000001,
+    "thermal_expansion_coefficient_ppm_k": 49.81328,
+    "filler_oxygen_adsorption_ev": -0.8742099999999999,
+    "oxygen_adsorption_energy_ev": -0.8742099999999999,
+    "filler_radical_capture_index": 0.68175,
+    "radical_capture_capability": 0.68175,
+    "interface_binding_energy_mj_m2": 9.008500000000002,
+    "interface_binding_energy": 9.008500000000002,
+    "interface_covalent_bond_count": 6,
+    "data_source": "physics-informed-proxy",
+    "scientific_data_tier": "proxy-screening",
+    "feature_provenance": {
+      "cte_ppm_k": "physics-informed-proxy",
+      "chain_mobility": "physics-informed-proxy",
+      "crosslink_density": "physics-informed-proxy",
+      "glass_transition_c": "physics-informed-proxy",
+      "elastic_modulus_gpa": "physics-informed-proxy",
+      "free_volume_fraction": "physics-informed-proxy",
+      "functional_group_type": "physics-informed-proxy",
+      "filler_oxygen_adsorption_ev": "physics-informed-proxy",
+      "filler_radical_capture_index": "physics-informed-proxy",
+      "cohesive_energy_density_mj_m3": "physics-informed-proxy",
+      "interface_covalent_bond_count": "physics-informed-proxy",
+      "interface_binding_energy_mj_m2": "physics-informed-proxy"
+    },
+    "target_provenance": {
+      "am_feasibility": "physics-informed-proxy",
+      "uv_retention_pct": "physics-informed-proxy",
+      "healing_efficiency_pct": "physics-informed-proxy",
+      "wide_temp_adhesion_mpa": "physics-informed-proxy",
+      "atomic_oxygen_retention_pct": "physics-informed-proxy"
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "dft-o-111-v00-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-111-v00-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\POSCAR",
+              "sha256": "d1a20a0e82420c8b695cb07ec6b08070eb8cdf2d20b8a4523e579c8dfa48d2f1",
+              "bytes": 11013
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\INCAR",
+              "sha256": "a97b33db9c6120fd7eba01d5628b5de5aaf8bb9bd9e7204199d24320fec0fd21",
+              "bytes": 831
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\POSCAR",
+            "sha256": "d1a20a0e82420c8b695cb07ec6b08070eb8cdf2d20b8a4523e579c8dfa48d2f1",
+            "bytes": 11013
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\INCAR",
+            "sha256": "a97b33db9c6120fd7eba01d5628b5de5aaf8bb9bd9e7204199d24320fec0fd21",
+            "bytes": 831
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-111-v00-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-111-v00-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\POSCAR",
+              "sha256": "210b3bab69e6cea923ba1c85b7db5c2bddef6141871600719d831303e5ac2d6e",
+              "bytes": 11468
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\INCAR",
+              "sha256": "ec6de93801e7e6686034fac3ec8f44c38a27eaf78cbc5385401a291f1794c7d6",
+              "bytes": 850
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\POSCAR",
+            "sha256": "210b3bab69e6cea923ba1c85b7db5c2bddef6141871600719d831303e5ac2d6e",
+            "bytes": 11468
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\INCAR",
+            "sha256": "ec6de93801e7e6686034fac3ec8f44c38a27eaf78cbc5385401a291f1794c7d6",
+            "bytes": 850
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v00-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-111-v08-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-111-v08-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\POSCAR",
+              "sha256": "873530bda05d3280155a1ecc8b6dde80c4ba7149e70bfb15deaae8e7019b968a",
+              "bytes": 10939
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\INCAR",
+              "sha256": "0959766a0f0250a40e7f4c145107e830d4c2e32e816792134ffd7bafd53a5900",
+              "bytes": 829
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\POSCAR",
+            "sha256": "873530bda05d3280155a1ecc8b6dde80c4ba7149e70bfb15deaae8e7019b968a",
+            "bytes": 10939
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\INCAR",
+            "sha256": "0959766a0f0250a40e7f4c145107e830d4c2e32e816792134ffd7bafd53a5900",
+            "bytes": 829
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-111-v08-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-111-v08-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\POSCAR",
+              "sha256": "45e6f3544747688cc7fd373c651290b7abb23d1dd49ea26f368a32eb8d7c078a",
+              "bytes": 11320
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\INCAR",
+              "sha256": "871deefa66b843c214202fda6a7a737018102f56dba8d392f96332f8a9f94fba",
+              "bytes": 846
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\POSCAR",
+            "sha256": "45e6f3544747688cc7fd373c651290b7abb23d1dd49ea26f368a32eb8d7c078a",
+            "bytes": 11320
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\INCAR",
+            "sha256": "871deefa66b843c214202fda6a7a737018102f56dba8d392f96332f8a9f94fba",
+            "bytes": 846
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v08-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-111-v15-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-111-v15-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\POSCAR",
+              "sha256": "89d0b7cc541511337bed0ada137b626b616aa72ca8f751ab6c2a556556d58bf5",
+              "bytes": 10865
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\INCAR",
+              "sha256": "8c71f6950a0d4d6c6da6b073d63a2872f70e8224a27f59e4e0600a1d03fcccba",
+              "bytes": 827
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\POSCAR",
+            "sha256": "89d0b7cc541511337bed0ada137b626b616aa72ca8f751ab6c2a556556d58bf5",
+            "bytes": 10865
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\INCAR",
+            "sha256": "8c71f6950a0d4d6c6da6b073d63a2872f70e8224a27f59e4e0600a1d03fcccba",
+            "bytes": 827
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-111-v15-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-111-v15-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\POSCAR",
+              "sha256": "992f88169a34ee5b8e569adadf272451adc8dea95e5f985efe301dcb846136a3",
+              "bytes": 11246
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\INCAR",
+              "sha256": "bbbfc468ef710d6662702787b50e8446a0f935aaaf001c69abf686cef929ca06",
+              "bytes": 844
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\POSCAR",
+            "sha256": "992f88169a34ee5b8e569adadf272451adc8dea95e5f985efe301dcb846136a3",
+            "bytes": 11246
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\INCAR",
+            "sha256": "bbbfc468ef710d6662702787b50e8446a0f935aaaf001c69abf686cef929ca06",
+            "bytes": 844
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-111-v15-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-pda-binding-111",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "pda-resin-and-surface-binding",
+      "conditions": {
+        "facet": "(111)",
+        "functional_group_type": "phthalonitrile/nitrile-triazine"
+      },
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-pda-binding-111",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "functional_group_type": "phthalonitrile/nitrile-triazine",
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\POSCAR",
+              "sha256": "3836a9506b103dee1209b02e0181fb64a60e2bf282fc22cba5f281c3f97a4b4a",
+              "bytes": 30360
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\INCAR",
+              "sha256": "11d95935f488dc330621be136f382b68bdf4bb0d6831cf26b5c518402fc8badd",
+              "bytes": 1374
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\POTCAR",
+              "sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+              "bytes": 1053727
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\POSCAR",
+            "sha256": "3836a9506b103dee1209b02e0181fb64a60e2bf282fc22cba5f281c3f97a4b4a",
+            "bytes": 30360
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\INCAR",
+            "sha256": "11d95935f488dc330621be136f382b68bdf4bb0d6831cf26b5c518402fc8badd",
+            "bytes": 1374
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111\\POTCAR",
+            "sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+            "bytes": 1053727
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-111",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-110-v00-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-110-v00-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\POSCAR",
+              "sha256": "4f10eae958c05963d31bbcf0f143a3ebe81b77fce9355c2993dd759527bf1414",
+              "bytes": 16341
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\INCAR",
+              "sha256": "ad710dd6c96d70e24207c9123e1c1e320540f6d61701550c8f2c8665d380da06",
+              "bytes": 975
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\KPOINTS",
+              "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\POSCAR",
+            "sha256": "4f10eae958c05963d31bbcf0f143a3ebe81b77fce9355c2993dd759527bf1414",
+            "bytes": 16341
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\INCAR",
+            "sha256": "ad710dd6c96d70e24207c9123e1c1e320540f6d61701550c8f2c8665d380da06",
+            "bytes": 975
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\KPOINTS",
+            "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-110-v00-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-110-v00-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\POSCAR",
+              "sha256": "cd2a22b631ecfe330a49d43be6dc01be17ad18336982025abe4d3f1d1f7c3e71",
+              "bytes": 16648
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\INCAR",
+              "sha256": "0d5bbb81b2e20a65e537bfd432d6637ec89d9e6c34520473c33c1282d29af9e7",
+              "bytes": 990
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\KPOINTS",
+              "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\POSCAR",
+            "sha256": "cd2a22b631ecfe330a49d43be6dc01be17ad18336982025abe4d3f1d1f7c3e71",
+            "bytes": 16648
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\INCAR",
+            "sha256": "0d5bbb81b2e20a65e537bfd432d6637ec89d9e6c34520473c33c1282d29af9e7",
+            "bytes": 990
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\KPOINTS",
+            "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v00-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-110-v08-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-110-v08-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\POSCAR",
+              "sha256": "88448107a4cbcacd0ea13ac2e77f507f6c7e440beae22471ecd6ffa21789a4ff",
+              "bytes": 16267
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\INCAR",
+              "sha256": "dd4c57fe2be98627be40a2321ebc77e74fb02727113532f9cf5b7e79dca47d48",
+              "bytes": 973
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\KPOINTS",
+              "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\POSCAR",
+            "sha256": "88448107a4cbcacd0ea13ac2e77f507f6c7e440beae22471ecd6ffa21789a4ff",
+            "bytes": 16267
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\INCAR",
+            "sha256": "dd4c57fe2be98627be40a2321ebc77e74fb02727113532f9cf5b7e79dca47d48",
+            "bytes": 973
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\KPOINTS",
+            "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-110-v08-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-110-v08-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\POSCAR",
+              "sha256": "e3131d0ea13b47b2f44a9232ac6d2a47ff7944ef7a3720fae5a8010eaac7a643",
+              "bytes": 16574
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\INCAR",
+              "sha256": "1f549504fa9b1269602f3f5eaa94798cdba5ddce7bda8fa6c46f2d505fdbbefb",
+              "bytes": 988
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\KPOINTS",
+              "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\POSCAR",
+            "sha256": "e3131d0ea13b47b2f44a9232ac6d2a47ff7944ef7a3720fae5a8010eaac7a643",
+            "bytes": 16574
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\INCAR",
+            "sha256": "1f549504fa9b1269602f3f5eaa94798cdba5ddce7bda8fa6c46f2d505fdbbefb",
+            "bytes": 988
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\KPOINTS",
+            "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v08-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-110-v15-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-110-v15-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\POSCAR",
+              "sha256": "ae4ded04f4470f014c5f278735e1934750af034a24869a5cbe5da666010ab1fb",
+              "bytes": 16193
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\INCAR",
+              "sha256": "f6ca2beaac66c84ce712d1b3e1d4663d513b90b629858e1804fb5d6bf2378879",
+              "bytes": 971
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\KPOINTS",
+              "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\POSCAR",
+            "sha256": "ae4ded04f4470f014c5f278735e1934750af034a24869a5cbe5da666010ab1fb",
+            "bytes": 16193
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\INCAR",
+            "sha256": "f6ca2beaac66c84ce712d1b3e1d4663d513b90b629858e1804fb5d6bf2378879",
+            "bytes": 971
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\KPOINTS",
+            "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-110-v15-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-110-v15-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(110)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\POSCAR",
+              "sha256": "81f1227b12d0461bf0e7c230bd1218d936767edd5adfc87cb88b01bae7835001",
+              "bytes": 16500
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\INCAR",
+              "sha256": "7b4f449d3d973b7c936e8cb581b2f8927e3ce165bc164fc5107fa8c870d1357c",
+              "bytes": 986
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\KPOINTS",
+              "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\POSCAR",
+            "sha256": "81f1227b12d0461bf0e7c230bd1218d936767edd5adfc87cb88b01bae7835001",
+            "bytes": 16500
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\INCAR",
+            "sha256": "7b4f449d3d973b7c936e8cb581b2f8927e3ce165bc164fc5107fa8c870d1357c",
+            "bytes": 986
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\KPOINTS",
+            "sha256": "75aefdec9b646737652406749085a802f4152870837dec3ddd1a9c93693e04fe",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-110-v15-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-pda-binding-110",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "pda-resin-and-surface-binding",
+      "conditions": {
+        "facet": "(110)",
+        "functional_group_type": "phthalonitrile/nitrile-triazine"
+      },
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-pda-binding-110",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(110)",
+        "functional_group_type": "phthalonitrile/nitrile-triazine",
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\POSCAR",
+              "sha256": "544f55c032088dc9fa0d76b9e4840766f97f0ed0d937937512a74e047862d6e9",
+              "bytes": 30360
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\INCAR",
+              "sha256": "11d95935f488dc330621be136f382b68bdf4bb0d6831cf26b5c518402fc8badd",
+              "bytes": 1374
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\POTCAR",
+              "sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+              "bytes": 1053727
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\POSCAR",
+            "sha256": "544f55c032088dc9fa0d76b9e4840766f97f0ed0d937937512a74e047862d6e9",
+            "bytes": 30360
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\INCAR",
+            "sha256": "11d95935f488dc330621be136f382b68bdf4bb0d6831cf26b5c518402fc8badd",
+            "bytes": 1374
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110\\POTCAR",
+            "sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+            "bytes": 1053727
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-110",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-100-v00-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-100-v00-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\POSCAR",
+              "sha256": "10a27d9f44031ae399a959f327b57d07142d123b1140e4134e3eb23590c235d9",
+              "bytes": 11013
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\INCAR",
+              "sha256": "a97b33db9c6120fd7eba01d5628b5de5aaf8bb9bd9e7204199d24320fec0fd21",
+              "bytes": 831
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\KPOINTS",
+              "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\POSCAR",
+            "sha256": "10a27d9f44031ae399a959f327b57d07142d123b1140e4134e3eb23590c235d9",
+            "bytes": 11013
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\INCAR",
+            "sha256": "a97b33db9c6120fd7eba01d5628b5de5aaf8bb9bd9e7204199d24320fec0fd21",
+            "bytes": 831
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\KPOINTS",
+            "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-100-v00-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-100-v00-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\POSCAR",
+              "sha256": "5ab810583031b28d7597e1ec465ce79c2766045259706675d1836a9bc89575a7",
+              "bytes": 11468
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\INCAR",
+              "sha256": "ec6de93801e7e6686034fac3ec8f44c38a27eaf78cbc5385401a291f1794c7d6",
+              "bytes": 850
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\KPOINTS",
+              "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\POSCAR",
+            "sha256": "5ab810583031b28d7597e1ec465ce79c2766045259706675d1836a9bc89575a7",
+            "bytes": 11468
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\INCAR",
+            "sha256": "ec6de93801e7e6686034fac3ec8f44c38a27eaf78cbc5385401a291f1794c7d6",
+            "bytes": 850
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\KPOINTS",
+            "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v00-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-100-v08-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-100-v08-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\POSCAR",
+              "sha256": "6f482dba193a36c7a9dc121725a9f966e553008c1fdeed4a11d7d83306ae1cec",
+              "bytes": 10939
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\INCAR",
+              "sha256": "0959766a0f0250a40e7f4c145107e830d4c2e32e816792134ffd7bafd53a5900",
+              "bytes": 829
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\KPOINTS",
+              "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\POSCAR",
+            "sha256": "6f482dba193a36c7a9dc121725a9f966e553008c1fdeed4a11d7d83306ae1cec",
+            "bytes": 10939
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\INCAR",
+            "sha256": "0959766a0f0250a40e7f4c145107e830d4c2e32e816792134ffd7bafd53a5900",
+            "bytes": 829
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\KPOINTS",
+            "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-100-v08-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-100-v08-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.08,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\POSCAR",
+              "sha256": "432e0bbe3cca3d2b1dd813df32d7489eb292aa5531348549d806dc0ea4c34920",
+              "bytes": 11320
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\INCAR",
+              "sha256": "871deefa66b843c214202fda6a7a737018102f56dba8d392f96332f8a9f94fba",
+              "bytes": 846
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\KPOINTS",
+              "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\POSCAR",
+            "sha256": "432e0bbe3cca3d2b1dd813df32d7489eb292aa5531348549d806dc0ea4c34920",
+            "bytes": 11320
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\INCAR",
+            "sha256": "871deefa66b843c214202fda6a7a737018102f56dba8d392f96332f8a9f94fba",
+            "bytes": 846
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\KPOINTS",
+            "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v08-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-100-v15-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-100-v15-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\POSCAR",
+              "sha256": "140d28fb4167be54deb61446cdcb76ee14f954415aeccc5759cd51017a4e7aad",
+              "bytes": 10865
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\INCAR",
+              "sha256": "8c71f6950a0d4d6c6da6b073d63a2872f70e8224a27f59e4e0600a1d03fcccba",
+              "bytes": 827
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\KPOINTS",
+              "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\POTCAR",
+              "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+              "bytes": 493194
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\POSCAR",
+            "sha256": "140d28fb4167be54deb61446cdcb76ee14f954415aeccc5759cd51017a4e7aad",
+            "bytes": 10865
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\INCAR",
+            "sha256": "8c71f6950a0d4d6c6da6b073d63a2872f70e8224a27f59e4e0600a1d03fcccba",
+            "bytes": 827
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\KPOINTS",
+            "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00\\POTCAR",
+            "sha256": "5b42feed02920dc855761364415a8a06b7cff00c53295aa7674a2297a5c8f8cf",
+            "bytes": 493194
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h00",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-o-100-v15-h35",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35
+      },
+      "expected_outputs": [
+        "adsorption_energy_ev",
+        "reaction_energy_ev",
+        "reaction_barrier_ev",
+        "ce3_fraction",
+        "reactive_oxygen_capture_index"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-o-100-v15-h35",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(100)",
+        "oxygen_vacancy_fraction": 0.15,
+        "hydroxyl_fraction": 0.35,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\POSCAR",
+              "sha256": "72e8a2594003d69484b3ad0fbd38967b7bd1f0bd1af24d89f12a1dd27dd818b5",
+              "bytes": 11246
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\INCAR",
+              "sha256": "bbbfc468ef710d6662702787b50e8446a0f935aaaf001c69abf686cef929ca06",
+              "bytes": 844
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\KPOINTS",
+              "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\POTCAR",
+              "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+              "bytes": 634689
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\POSCAR",
+            "sha256": "72e8a2594003d69484b3ad0fbd38967b7bd1f0bd1af24d89f12a1dd27dd818b5",
+            "bytes": 11246
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\INCAR",
+            "sha256": "bbbfc468ef710d6662702787b50e8446a0f935aaaf001c69abf686cef929ca06",
+            "bytes": 844
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\KPOINTS",
+            "sha256": "514b3aefa0acc73393b8e367643af0b0f919717c0a991c1128ec0fbb1eacf95a",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35\\POTCAR",
+            "sha256": "58cc0d1b58bf6bfbbf01d7ed8e3b9a3fb545ea52554f7945bee0a0d9c5d2505f",
+            "bytes": 634689
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-o-100-v15-h35",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "dft-pda-binding-100",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "pda-resin-and-surface-binding",
+      "conditions": {
+        "facet": "(100)",
+        "functional_group_type": "phthalonitrile/nitrile-triazine"
+      },
+      "expected_outputs": [
+        "pda_resin_hbond_ev",
+        "pda_surface_coordination_ev",
+        "pda_reaction_ev"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "-u",
+        "vasp",
+        "--",
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OMP_STACKSIZE=512m",
+        "mpirun",
+        "-np",
+        "4",
+        "/usr/local/bin/vasp_std"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "dft-pda-binding-100",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(100)",
+        "functional_group_type": "phthalonitrile/nitrile-triazine",
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\POSCAR",
+              "sha256": "f63174940103881cc9c0c642ce2bc47ece79cec07cd6f7d493f8d91e09fff9a1",
+              "bytes": 38352
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\INCAR",
+              "sha256": "b1b2f00a9d46e6eb8236d3c9b36cd2d29ad0092a13c132a18f566beeac89c05d",
+              "bytes": 1590
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\KPOINTS",
+              "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+              "bytes": 36
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\POTCAR",
+              "sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+              "bytes": 1053727
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\POSCAR",
+            "sha256": "f63174940103881cc9c0c642ce2bc47ece79cec07cd6f7d493f8d91e09fff9a1",
+            "bytes": 38352
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\INCAR",
+            "sha256": "b1b2f00a9d46e6eb8236d3c9b36cd2d29ad0092a13c132a18f566beeac89c05d",
+            "bytes": 1590
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\KPOINTS",
+            "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+            "bytes": 36
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100\\POTCAR",
+            "sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+            "bytes": 1053727
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\dft-pda-binding-100",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "md-resin-x1",
+      "scale": "atomistic-md",
+      "calculation_kind": "bulk_md",
+      "category": "bulk_md",
+      "objective": "crosslinked-resin-temperature-sweep",
+      "conditions": {
+        "crosslink_density": 0.6794,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ]
+      },
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ],
+      "dependencies": [],
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.production"
+      ],
+      "result_file": "log.lammps",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "md-resin-x1",
+        "calculation_kind": "bulk_md",
+        "result_file": "log.lammps",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kcal/mol",
+        "crosslink_density": 0.6794,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ],
+        "input_artifacts": {
+          "required": [
+            "system.data",
+            "forcefield.production",
+            "in.production"
+          ],
+          "present": [
+            "forcefield.production",
+            "in.production",
+            "system.data"
+          ],
+          "complete": true,
+          "production_approved": false,
+          "artifacts": {
+            "system.data": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x1\\system.data",
+              "sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9",
+              "bytes": 570653
+            },
+            "forcefield.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x1\\forcefield.production",
+              "sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446",
+              "bytes": 189
+            },
+            "in.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x1\\in.production",
+              "sha256": "4a2f1b60fe186529f952a9ec330c4cf440c040ab80f0fd42b079e19798eb8c9c",
+              "bytes": 786
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "system.data",
+          "forcefield.production",
+          "in.production"
+        ],
+        "present": [
+          "forcefield.production",
+          "in.production",
+          "system.data"
+        ],
+        "complete": true,
+        "production_approved": false,
+        "artifacts": {
+          "system.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x1\\system.data",
+            "sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9",
+            "bytes": 570653
+          },
+          "forcefield.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x1\\forcefield.production",
+            "sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446",
+            "bytes": 189
+          },
+          "in.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x1\\in.production",
+            "sha256": "4a2f1b60fe186529f952a9ec330c4cf440c040ab80f0fd42b079e19798eb8c9c",
+            "bytes": 786
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x1",
+      "input_validation": "static-valid; pending-md-production-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "md-resin-x2",
+      "scale": "atomistic-md",
+      "calculation_kind": "bulk_md",
+      "category": "bulk_md",
+      "objective": "crosslinked-resin-temperature-sweep",
+      "conditions": {
+        "crosslink_density": 0.8294,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ]
+      },
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ],
+      "dependencies": [],
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.production"
+      ],
+      "result_file": "log.lammps",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "md-resin-x2",
+        "calculation_kind": "bulk_md",
+        "result_file": "log.lammps",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kcal/mol",
+        "crosslink_density": 0.8294,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ],
+        "input_artifacts": {
+          "required": [
+            "system.data",
+            "forcefield.production",
+            "in.production"
+          ],
+          "present": [
+            "forcefield.production",
+            "in.production",
+            "system.data"
+          ],
+          "complete": true,
+          "production_approved": false,
+          "artifacts": {
+            "system.data": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x2\\system.data",
+              "sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9",
+              "bytes": 570653
+            },
+            "forcefield.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x2\\forcefield.production",
+              "sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446",
+              "bytes": 189
+            },
+            "in.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x2\\in.production",
+              "sha256": "4a2f1b60fe186529f952a9ec330c4cf440c040ab80f0fd42b079e19798eb8c9c",
+              "bytes": 786
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "system.data",
+          "forcefield.production",
+          "in.production"
+        ],
+        "present": [
+          "forcefield.production",
+          "in.production",
+          "system.data"
+        ],
+        "complete": true,
+        "production_approved": false,
+        "artifacts": {
+          "system.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x2\\system.data",
+            "sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9",
+            "bytes": 570653
+          },
+          "forcefield.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x2\\forcefield.production",
+            "sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446",
+            "bytes": 189
+          },
+          "in.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x2\\in.production",
+            "sha256": "4a2f1b60fe186529f952a9ec330c4cf440c040ab80f0fd42b079e19798eb8c9c",
+            "bytes": 786
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x2",
+      "input_validation": "static-valid; pending-md-production-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "md-resin-x3",
+      "scale": "atomistic-md",
+      "calculation_kind": "bulk_md",
+      "category": "bulk_md",
+      "objective": "crosslinked-resin-temperature-sweep",
+      "conditions": {
+        "crosslink_density": 0.9794,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ]
+      },
+      "expected_outputs": [
+        "glass_transition_c",
+        "free_volume_fraction",
+        "cohesive_energy_density_mj_m3",
+        "elastic_modulus_gpa",
+        "cte_ppm_k",
+        "chain_mobility"
+      ],
+      "dependencies": [],
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.production"
+      ],
+      "result_file": "log.lammps",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "md-resin-x3",
+        "calculation_kind": "bulk_md",
+        "result_file": "log.lammps",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kcal/mol",
+        "crosslink_density": 0.9794,
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ],
+        "input_artifacts": {
+          "required": [
+            "system.data",
+            "forcefield.production",
+            "in.production"
+          ],
+          "present": [
+            "forcefield.production",
+            "in.production",
+            "system.data"
+          ],
+          "complete": true,
+          "production_approved": false,
+          "artifacts": {
+            "system.data": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x3\\system.data",
+              "sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9",
+              "bytes": 570653
+            },
+            "forcefield.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x3\\forcefield.production",
+              "sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446",
+              "bytes": 189
+            },
+            "in.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x3\\in.production",
+              "sha256": "4a2f1b60fe186529f952a9ec330c4cf440c040ab80f0fd42b079e19798eb8c9c",
+              "bytes": 786
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "system.data",
+          "forcefield.production",
+          "in.production"
+        ],
+        "present": [
+          "forcefield.production",
+          "in.production",
+          "system.data"
+        ],
+        "complete": true,
+        "production_approved": false,
+        "artifacts": {
+          "system.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x3\\system.data",
+            "sha256": "c949480f42e6185c5f46ab575f62dedc46783d154c4f093245018923f958aee9",
+            "bytes": 570653
+          },
+          "forcefield.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x3\\forcefield.production",
+            "sha256": "20451725c3f36ce617ee811fa19d45f52a2263c36d459e37fbf47dd0b0483446",
+            "bytes": 189
+          },
+          "in.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x3\\in.production",
+            "sha256": "4a2f1b60fe186529f952a9ec330c4cf440c040ab80f0fd42b079e19798eb8c9c",
+            "bytes": 786
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-x3",
+      "input_validation": "static-valid; pending-md-production-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "md-resin-pda-ceo2-interface",
+      "scale": "atomistic-md",
+      "calculation_kind": "interface_md",
+      "category": "interface_md",
+      "objective": "resin-pda-ceo2-interface-binding",
+      "conditions": {
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ],
+        "filler_pct": 5.0
+      },
+      "expected_outputs": [
+        "interface_binding_energy_mj_m2",
+        "interface_covalent_bond_count",
+        "adhesion_retention",
+        "self_healing_efficiency"
+      ],
+      "dependencies": [
+        "dft-o-111-v00-h00",
+        "dft-o-111-v00-h35",
+        "dft-o-111-v08-h00",
+        "dft-o-111-v08-h35",
+        "dft-o-111-v15-h00",
+        "dft-o-111-v15-h35",
+        "dft-pda-binding-111",
+        "dft-o-110-v00-h00",
+        "dft-o-110-v00-h35",
+        "dft-o-110-v08-h00",
+        "dft-o-110-v08-h35",
+        "dft-o-110-v15-h00",
+        "dft-o-110-v15-h35",
+        "dft-pda-binding-110",
+        "dft-o-100-v00-h00",
+        "dft-o-100-v00-h35",
+        "dft-o-100-v08-h00",
+        "dft-o-100-v08-h35",
+        "dft-o-100-v15-h00",
+        "dft-o-100-v15-h35",
+        "dft-pda-binding-100",
+        "md-resin-x1",
+        "md-resin-x2",
+        "md-resin-x3"
+      ],
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.production"
+      ],
+      "result_file": "log.lammps",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "md-resin-pda-ceo2-interface",
+        "calculation_kind": "interface_md",
+        "result_file": "log.lammps",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kcal/mol",
+        "temperatures_c": [
+          -180.0,
+          -120.0,
+          -60.0,
+          25.0,
+          80.0,
+          150.0
+        ],
+        "filler_pct": 5.0,
+        "input_artifacts": {
+          "required": [
+            "interface.data",
+            "forcefield.production",
+            "in.production"
+          ],
+          "present": [
+            "forcefield.production",
+            "in.production",
+            "interface.data"
+          ],
+          "complete": true,
+          "production_approved": false,
+          "artifacts": {
+            "interface.data": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-pda-ceo2-interface\\interface.data",
+              "sha256": "4811b68369c5195b5bb71bbd354c8233cd1c42ab04a496bf6122fad9f7f80e5b",
+              "bytes": 614305
+            },
+            "forcefield.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-pda-ceo2-interface\\forcefield.production",
+              "sha256": "a9a2d068fe5b7c0b704a5418be50725acd9e5bc27adac36b529282cafb747a3b",
+              "bytes": 292
+            },
+            "in.production": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-pda-ceo2-interface\\in.production",
+              "sha256": "0b1c8d62ff0ace79d7b5cbc468443711334dbea87cfcad7c5f4055aba82b28cf",
+              "bytes": 789
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "interface.data",
+          "forcefield.production",
+          "in.production"
+        ],
+        "present": [
+          "forcefield.production",
+          "in.production",
+          "interface.data"
+        ],
+        "complete": true,
+        "production_approved": false,
+        "artifacts": {
+          "interface.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-pda-ceo2-interface\\interface.data",
+            "sha256": "4811b68369c5195b5bb71bbd354c8233cd1c42ab04a496bf6122fad9f7f80e5b",
+            "bytes": 614305
+          },
+          "forcefield.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-pda-ceo2-interface\\forcefield.production",
+            "sha256": "a9a2d068fe5b7c0b704a5418be50725acd9e5bc27adac36b529282cafb747a3b",
+            "bytes": 292
+          },
+          "in.production": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-pda-ceo2-interface\\in.production",
+            "sha256": "0b1c8d62ff0ace79d7b5cbc468443711334dbea87cfcad7c5f4055aba82b28cf",
+            "bytes": 789
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\md-resin-pda-ceo2-interface",
+      "input_validation": "static-valid; pending-md-production-approval",
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    },
+    {
+      "task_id": "cg-pda-ceo2-dispersion",
+      "scale": "coarse-grained",
+      "calculation_kind": "interface_md",
+      "category": "coarse_grained",
+      "objective": "pda-ceo2-dispersion-and-reinforcement",
+      "conditions": {
+        "filler_pct": 5.0,
+        "temperature_c": 25.0
+      },
+      "expected_outputs": [
+        "dispersion_index",
+        "coarse_grained_reinforcement_index",
+        "interface_binding_energy_mj_m2"
+      ],
+      "dependencies": [
+        "md-resin-pda-ceo2-interface"
+      ],
+      "engine": "LAMMPS",
+      "command": [
+        "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+        "-in",
+        "in.cg"
+      ],
+      "result_file": "log.lammps",
+      "metadata": {
+        "candidate_id": "CL-00116",
+        "campaign_run_id": "CL-00116-553a5ec1c5",
+        "campaign_task_id": "cg-pda-ceo2-dispersion",
+        "calculation_kind": "interface_md",
+        "result_file": "log.lammps",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.05,
+        "polar_fraction": 0.5895,
+        "compatibility_index": 0.43723924,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kcal/mol",
+        "filler_pct": 5.0,
+        "input_artifacts": {
+          "required": [
+            "interface.data",
+            "in.cg"
+          ],
+          "present": [
+            "in.cg",
+            "interface.data"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "interface.data": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+              "sha256": "0fa0a69fc93fdac0878b3ff64a53a4d536512fd749a717366f55edfce6d6b59e",
+              "bytes": 22163
+            },
+            "in.cg": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+              "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+              "bytes": 1207
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "interface.data",
+          "in.cg"
+        ],
+        "present": [
+          "in.cg",
+          "interface.data"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "interface.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+            "sha256": "0fa0a69fc93fdac0878b3ff64a53a4d536512fd749a717366f55edfce6d6b59e",
+            "bytes": 22163
+          },
+          "in.cg": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+            "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+            "bytes": 1207
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00116-553a5ec1c5\\package\\CL-00116-20260902015017\\tasks\\cg-pda-ceo2-dispersion",
+      "input_validation": null,
+      "status": "cancelled",
+      "blocker": "用户终止当前多尺度运行",
+      "job_id": null,
+      "error": null
+    }
+  ],
+  "result_payload": {
+    "dft": {},
+    "md": {},
+    "interface": {}
+  },
+  "updated_at": "2026-09-02T03:10:38.628606+00:00",
+  "terminated_at": "2026-09-02T03:10:38.626086+00:00",
+  "termination_error": null
+}

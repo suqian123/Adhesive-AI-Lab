@@ -1,0 +1,8 @@
+{
+  "method": "fix bond/react",
+  "reaction": "catechol-boronic-ester exchange",
+  "pre_template": "pending GAFF2/RESP atom typing",
+  "post_template": "pending GAFF2/RESP atom typing",
+  "mapping": "preserve B, catechol O/C, aromatic substituent, and local partial-charge total",
+  "approved": false
+}

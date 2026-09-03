@@ -15,8 +15,21 @@ from .mechanism import fuse_candidate_mechanism, mechanism_provenance_frame
 from .campaign_runner import (
     advance_campaign_run, available_engine_profiles, campaign_environment_frame, campaign_run_frame,
     engine_profiles_from_env, get_campaign_run, integrate_campaign_run,
-    list_campaign_runs, load_engine_profiles, save_engine_profiles, start_campaign_run,
+    list_campaign_runs, load_engine_profiles, resume_approved_vasp_tasks,
+    save_engine_profiles, start_campaign_run,
 )
+from .vasp_production import (
+    VaspBaseline, build_ceo2_model, dopamine_tetramer, prepare_campaign_dft_task,
+    validate_vasp_input_set, write_convergence_suite, write_neb_model, write_vasp_model,
+)
+from .md_production import (
+    DEFAULT_MD_BASELINE,
+    MDStructureBaseline,
+    prepare_md_structure_baseline,
+    provision_bulk_md_inputs,
+    provision_interface_md_inputs,
+)
+from .vasp_resources import install_vasp_resources, load_vasp_resource_config
 
 __all__ = [
     "run_screening", "build_candidate_library", "save_candidate_library",
@@ -35,5 +48,10 @@ __all__ = [
     "fuse_candidate_mechanism", "mechanism_provenance_frame",
     "advance_campaign_run", "available_engine_profiles", "campaign_environment_frame", "campaign_run_frame",
     "engine_profiles_from_env", "get_campaign_run", "integrate_campaign_run",
-    "list_campaign_runs", "load_engine_profiles", "save_engine_profiles", "start_campaign_run",
+    "list_campaign_runs", "load_engine_profiles", "resume_approved_vasp_tasks",
+    "save_engine_profiles", "start_campaign_run",
+    "VaspBaseline", "build_ceo2_model", "dopamine_tetramer", "prepare_campaign_dft_task",
+    "DEFAULT_MD_BASELINE", "MDStructureBaseline", "prepare_md_structure_baseline",
+    "validate_vasp_input_set", "write_convergence_suite", "write_neb_model", "write_vasp_model",
+    "install_vasp_resources", "load_vasp_resource_config",
 ]

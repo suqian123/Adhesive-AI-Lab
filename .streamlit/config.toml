@@ -1,0 +1,3 @@
+[client]
+# Hide Streamlit's developer toolbar, including Deploy and rerun controls.
+toolbarMode = "minimal"

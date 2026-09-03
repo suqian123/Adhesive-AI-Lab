@@ -1,0 +1,59 @@
+{
+  "baseline_id": "odpa-oda-catechol-pdba-v1",
+  "created_at": "2026-09-01T08:33:19.109721+00:00",
+  "resolution": "all-atom coordinates with incomplete interface force-field topology",
+  "model": "ODPA-ODA/DABA-dopamine DP8 resin plus CeO2(111)/dopamine-tetramer DFT baseline",
+  "counts": {
+    "resin_atoms": 2694,
+    "ceria_slab_atoms": 324,
+    "pda_atoms": 82
+  },
+  "surface_metadata": {
+    "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+    "scientific_status": "pending-convergence-validation",
+    "facet": "(111)",
+    "miller_indices": [
+      1,
+      1,
+      1
+    ],
+    "repeat": [
+      3,
+      3,
+      1
+    ],
+    "slab_layers": 3,
+    "vacuum_a": 18.0,
+    "surface_oxygen_sites": 36,
+    "requested_vacancy_fraction": 0.0,
+    "actual_vacancy_fraction": 0.0,
+    "requested_hydroxyl_fraction": 0.0,
+    "actual_hydroxyl_fraction": 0.0,
+    "vacancy_count": 0,
+    "hydroxyl_count": 0,
+    "adsorbate_index": null,
+    "atom_count": 406
+  },
+  "scientific_status": "static-readability-precursor; interface-parameterization-pending",
+  "production_approved": false,
+  "limitations": [
+    "PDA coordinates are present but PDA tetramer bonds and GAFF2/RESP terms are pending",
+    "CeO2 uses formal charges and LJ readability terms, not the required IP10a shell model",
+    "organic-CeO2 cross interactions await project VASP fitting",
+    "resin is the un-crosslinked Gasteiger-charge precursor rather than the target PDBA/RESP network"
+  ],
+  "artifacts": {
+    "interface.data": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\interface-cell\\interface.data",
+      "sha256": "4811b68369c5195b5bb71bbd354c8233cd1c42ab04a496bf6122fad9f7f80e5b"
+    },
+    "forcefield.production": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\interface-cell\\forcefield.production",
+      "sha256": "a9a2d068fe5b7c0b704a5418be50725acd9e5bc27adac36b529282cafb747a3b"
+    },
+    "static_validation.in": {
+      "path": "E:\\Adhesive-AI-Lab\\work\\md_baselines\\odpa-oda-catechol-pdba-v1\\interface-cell\\static_validation.in",
+      "sha256": "ebb3d120cbf8c26de28502e5246cc9c0a69d2a2d4c2ac1b50e964547bf56e97c"
+    }
+  }
+}

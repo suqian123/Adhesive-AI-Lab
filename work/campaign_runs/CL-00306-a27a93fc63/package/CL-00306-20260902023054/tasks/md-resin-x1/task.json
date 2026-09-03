@@ -1,0 +1,36 @@
+{
+  "task_id": "md-resin-x1",
+  "candidate_id": "CL-00306",
+  "scale": "atomistic-md",
+  "calculation_kind": "bulk_md",
+  "objective": "crosslinked-resin-temperature-sweep",
+  "engine_options": [
+    "LAMMPS",
+    "GROMACS"
+  ],
+  "conditions": {
+    "crosslink_density": 0.85,
+    "temperatures_c": [
+      -180.0,
+      -120.0,
+      -60.0,
+      25.0,
+      80.0,
+      150.0
+    ]
+  },
+  "expected_outputs": [
+    "glass_transition_c",
+    "free_volume_fraction",
+    "cohesive_energy_density_mj_m3",
+    "elastic_modulus_gpa",
+    "cte_ppm_k",
+    "chain_mobility"
+  ],
+  "readiness": "planned-requires-crosslinked-topology",
+  "blocking_requirements": [
+    "crosslinked atomistic topology",
+    "validated resin/dynamic-bond force field",
+    "equilibrated temperature replicas"
+  ]
+}

@@ -2,6 +2,7 @@ import sys
 import time
 
 import pandas as pd
+import pytest
 
 from adhesive_ai import build_candidate_library
 from adhesive_ai.jobs import JobRecord, get_job_status, submit_job
@@ -79,6 +80,8 @@ def test_completed_dft_job_is_persisted_retrained_and_marked_integrated(monkeypa
         root=root,
         metadata={
             "candidate_id": candidate_id,
+            "formulation_id": str(candidates.iloc[0].formulation_id),
+            "candidate_library_version": str(candidates.iloc[0].candidate_library_version),
             "calculation_kind": "dft",
             "surface_energy_ev": -5.0,
             "oxygen_energy_ev": -3.0,
@@ -87,7 +90,7 @@ def test_completed_dft_job_is_persisted_retrained_and_marked_integrated(monkeypa
     assert _wait(submitted.job_id, root).status == "completed"
 
     saved = {}
-    monkeypatch.setattr(workflow, "load_latest_simulation_results", lambda candidate_ids: {})
+    monkeypatch.setattr(workflow, "load_latest_simulation_results", lambda candidate_ids, **kwargs: {})
     monkeypatch.setattr(workflow, "save_simulation", lambda row, qchem, md, interface, version: saved.update(row=row, qchem=qchem, version=version))
     monkeypatch.setattr(workflow, "save_model_version", lambda model, artifact_path: saved.update(artifact_path=artifact_path))
 
@@ -107,3 +110,23 @@ def test_completed_dft_job_is_persisted_retrained_and_marked_integrated(monkeypa
     assert saved["row"]["candidate_id"] == candidate_id
     assert get_job_status(submitted.job_id, root=root).metadata["integrated_at"]
     assert workflow.integrate_completed_job(submitted.job_id, candidates, root=root) is None
+
+
+def test_completed_job_with_mismatched_formulation_is_not_integrated(tmp_path):
+    candidates = build_candidate_library(max_records=16, seed=2)
+    candidate_id = str(candidates.iloc[0].candidate_id)
+    submitted = submit_job(
+        "VASP",
+        [sys.executable, "-c", "print('free energy TOTEN = -10.0')"],
+        workdir=tmp_path / "calculation",
+        root=tmp_path / "jobs",
+        metadata={
+            "candidate_id": candidate_id,
+            "formulation_id": "FMT-mismatched",
+            "calculation_kind": "dft",
+        },
+    )
+    assert _wait(submitted.job_id, tmp_path / "jobs").status == "completed"
+
+    with pytest.raises(ValueError, match="配方指纹与当前候选不匹配"):
+        workflow.integrate_completed_job(submitted.job_id, candidates, root=tmp_path / "jobs")

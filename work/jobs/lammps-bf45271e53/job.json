@@ -1,0 +1,37 @@
+{
+  "job_id": "lammps-bf45271e53",
+  "engine": "LAMMPS",
+  "command": [
+    "D:\\LAMMPS 64-bit 4Jul2026-MSMPI\\bin\\lmp.EXE",
+    "-in",
+    "in.production"
+  ],
+  "workdir": "E:\\Adhesive-AI-Lab\\work\\external\\CL-00040\\FMT-ADC549921282F360\\bulk_md-lammps",
+  "status": "completed",
+  "submitted_at": "2026-09-02T08:29:55.980578+00:00",
+  "started_at": "2026-09-02T08:29:56.643499+00:00",
+  "finished_at": "2026-09-02T09:03:55.584289+00:00",
+  "return_code": 0,
+  "stdout_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\lammps-bf45271e53\\stdout.log",
+  "stderr_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\lammps-bf45271e53\\stderr.log",
+  "metadata": {
+    "candidate_id": "CL-00040",
+    "formulation_id": "FMT-ADC549921282F360",
+    "candidate_library_version": "candidate-library-v3",
+    "calculation_kind": "bulk_md",
+    "area_nm2": 100.0,
+    "filler_ratio": 0.0,
+    "polar_fraction": 0.6,
+    "compatibility_index": 0.44884024,
+    "temperature_c": 25.0,
+    "temperature_unit": "K",
+    "energy_unit": "kcal/mol",
+    "result_file": "log.lammps",
+    "submission_source": "standalone",
+    "input_validation": "static-valid; pending-md-production-approval",
+    "production_approved": false,
+    "integrated_at": "2026-09-02T09:03:59.716502+00:00",
+    "integrated_model_version": "external-v1"
+  },
+  "error": null
+}

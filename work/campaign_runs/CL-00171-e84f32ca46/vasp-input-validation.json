@@ -1,0 +1,481 @@
+{
+  "valid": true,
+  "task_count": 21,
+  "reports": [
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-100-v00-h00",
+      "valid": true,
+      "atom_count": 145,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-100-v00-h35",
+      "valid": true,
+      "atom_count": 151,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-100-v08-h00",
+      "valid": true,
+      "atom_count": 144,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-100-v08-h35",
+      "valid": true,
+      "atom_count": 149,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-100-v15-h00",
+      "valid": true,
+      "atom_count": 143,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-100-v15-h35",
+      "valid": true,
+      "atom_count": 148,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-110-v00-h00",
+      "valid": true,
+      "atom_count": 217,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-110-v00-h35",
+      "valid": true,
+      "atom_count": 221,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-110-v08-h00",
+      "valid": true,
+      "atom_count": 216,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-110-v08-h35",
+      "valid": true,
+      "atom_count": 220,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-110-v15-h00",
+      "valid": true,
+      "atom_count": 215,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-110-v15-h35",
+      "valid": true,
+      "atom_count": 219,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-111-v00-h00",
+      "valid": true,
+      "atom_count": 145,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-111-v00-h35",
+      "valid": true,
+      "atom_count": 151,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-111-v08-h00",
+      "valid": true,
+      "atom_count": 144,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-111-v08-h35",
+      "valid": true,
+      "atom_count": 149,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-111-v15-h00",
+      "valid": true,
+      "atom_count": 143,
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-o-111-v15-h35",
+      "valid": true,
+      "atom_count": 148,
+      "species": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true,
+        "neb_images_complete": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-pda-binding-100",
+      "valid": true,
+      "atom_count": 514,
+      "species": [
+        "Ce",
+        "O",
+        "C",
+        "N",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "C",
+        "N",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-pda-binding-110",
+      "valid": true,
+      "atom_count": 406,
+      "species": [
+        "Ce",
+        "O",
+        "C",
+        "N",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "C",
+        "N",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    },
+    {
+      "directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL-00171-e84f32ca46\\package\\CL-00171-20260901030820\\tasks\\dft-pda-binding-111",
+      "valid": true,
+      "atom_count": 406,
+      "species": [
+        "Ce",
+        "O",
+        "C",
+        "N",
+        "H"
+      ],
+      "potcar_titles": [
+        "Ce",
+        "O",
+        "C",
+        "N",
+        "H"
+      ],
+      "checks": {
+        "no_contacts_below_0_60_a": true,
+        "potcar_species_order": true,
+        "vdw_kernel_checksum": true,
+        "required_incar_tags": true
+      },
+      "scientific_status": "static-input-valid; pending-convergence-validation"
+    }
+  ],
+  "scientific_status": "static-input-valid; pending-convergence-validation"
+}

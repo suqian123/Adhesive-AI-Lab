@@ -1,0 +1,33 @@
+{
+  "baseline_id": "odpa-oda-catechol-pdba-v1",
+  "primary": {
+    "organic_force_field": "GAFF2 with custom boronate extension",
+    "charge_model": "RESP at HF/6-31G* electrostatic potential",
+    "required_tools": [
+      "AmberTools antechamber",
+      "parmchk2",
+      "tleap",
+      "Packmol",
+      "ParmEd"
+    ]
+  },
+  "sensitivity": "OPLS-AA with the same RESP charge targets",
+  "boronate_qm_targets": {
+    "geometry": "optimized reactant and cyclic ester structures",
+    "hessian": "bond and angle force constants",
+    "torsions": "B-O-C-C and O-B-O-C relaxed scans at 15 degree intervals"
+  },
+  "ceria": "CeO2 IP10a shell-model Buckingham baseline",
+  "interface_fit": "fit to project VASP adsorption and binding-energy surfaces",
+  "toolchain": {
+    "commands": {
+      "antechamber": null,
+      "parmchk2": null,
+      "tleap": null,
+      "packmol": null
+    },
+    "gaff2_ready": false,
+    "packing_ready": false
+  },
+  "production_gate": "blocked until parameter and property validation reports are approved"
+}
