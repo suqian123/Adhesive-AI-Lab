@@ -23,7 +23,7 @@ from adhesive_ai.campaign_runner import (
 from adhesive_ai.mechanism import fuse_candidate_mechanism
 from adhesive_ai.screening import OUTPUT_COLUMNS, load_model, predict_screening, recommend_next_experiments, save_model, screen_candidates
 from adhesive_ai.database import DatabaseError, load_candidates, load_experiments, save_candidates, save_experiment, save_experiments, save_model_version
-from adhesive_ai.jobs import JobRecord, cancel_job, list_jobs, read_job_output, split_job_command, submit_job
+from adhesive_ai.jobs import JobRecord, cancel_job, list_jobs, read_job_output, register_imported_job, split_job_command, submit_job
 from adhesive_ai.workflow import integrate_completed_job, load_connected_state
 
 PLOTLY_CONFIG = {
@@ -1728,6 +1728,182 @@ st.caption(
     "重训模型并更新；无需再点击单独的“回写”按钮。相同结果类型按生产批准、输入验证、"
     "未批准手动任务依次裁决；条件不同的结果会保留为历史记录，不会因完成顺序互相覆盖。"
 )
+with st.expander("导入外部计算结果", expanded=False):
+    st.caption(
+        "用于已在外部环境完成的多尺度任务。选择原任务包中的任务并上传结果文件；"
+        "系统会校验候选身份后立即解析、回写并更新模型。"
+    )
+    importable_runs = [
+        record for record in list_campaign_runs()
+        if isinstance(record.get("candidate_snapshot"), dict)
+        and str((record.get("candidate_snapshot") or {}).get("formulation_id") or "").strip()
+        and isinstance(record.get("tasks"), list)
+    ]
+    if not importable_runs:
+        st.info("尚未找到带候选身份信息的多尺度任务包。请先生成多尺度计算包。")
+    else:
+        runs_by_id = {str(record["run_id"]): record for record in importable_runs}
+        current_candidate_id = str(st.session_state.get("campaign_candidate_id") or "")
+        default_run_id = next(
+            (
+                run_id for run_id, record in runs_by_id.items()
+                if str(record.get("candidate_id")) == current_candidate_id
+            ),
+            next(iter(runs_by_id)),
+        )
+        selected_import_run_id = st.selectbox(
+            "来源多尺度运行",
+            list(runs_by_id),
+            index=list(runs_by_id).index(default_run_id),
+            format_func=lambda run_id: (
+                f"候选 {runs_by_id[run_id].get('candidate_id', '未知')} · {run_id}"
+            ),
+            key="external_result_import_run",
+        )
+        selected_import_run = runs_by_id[selected_import_run_id]
+        importable_tasks = [
+            task for task in selected_import_run.get("tasks", [])
+            if isinstance(task, dict)
+            and isinstance(task.get("metadata"), dict)
+            and str((task.get("metadata") or {}).get("calculation_kind") or "").strip()
+        ]
+        if not importable_tasks:
+            st.warning("该任务包没有可识别的 DFT 或 MD 任务清单，无法安全导入结果。")
+        else:
+            tasks_by_id = {str(task["task_id"]): task for task in importable_tasks}
+            selected_import_task_id = st.selectbox(
+                "来源任务",
+                list(tasks_by_id),
+                format_func=lambda task_id: (
+                    f"{task_id} · {tasks_by_id[task_id].get('calculation_kind', '未知类型')} · "
+                    f"{tasks_by_id[task_id].get('engine') or '请选择引擎'}"
+                ),
+                key="external_result_import_task",
+            )
+            selected_import_task = tasks_by_id[selected_import_task_id]
+            import_metadata = dict(selected_import_task.get("metadata") or {})
+            import_run_snapshot = dict(selected_import_run.get("candidate_snapshot") or {})
+            import_kind = str(import_metadata.get("calculation_kind") or "")
+            configured_engine = str(selected_import_task.get("engine") or "").strip()
+            engine_options = (
+                [configured_engine]
+                if configured_engine
+                else (
+                    ["VASP", "Quantum ESPRESSO", "CP2K"]
+                    if import_kind == "dft"
+                    else ["LAMMPS", "GROMACS"]
+                )
+            )
+            import_engine = st.selectbox(
+                "实际计算引擎",
+                engine_options,
+                key=f"external_result_import_engine_{selected_import_run_id}_{selected_import_task_id}",
+            )
+            default_result_file = str(
+                selected_import_task.get("result_file")
+                or import_metadata.get("result_file")
+                or JOB_RESULT_FILE_EXAMPLES[import_engine]
+            )
+            import_result_file = st.text_input(
+                "结果文件路径（相对于来源任务目录）",
+                value=default_result_file,
+                key=f"external_result_import_file_{selected_import_run_id}_{selected_import_task_id}_{import_engine}",
+                help="上传的文件会保存为此相对路径，不能使用绝对路径或 ..。",
+            )
+            uploaded_result = st.file_uploader(
+                "上传外部计算结果文件",
+                key=f"external_result_upload_{selected_import_run_id}_{selected_import_task_id}",
+                help="例如 VASP 的 OUTCAR、LAMMPS 的 log.lammps 或 GROMACS 的 .xvg 输出。",
+            )
+            expected_candidate_id = str(
+                import_metadata.get("candidate_id")
+                or import_run_snapshot.get("candidate_id")
+                or selected_import_run.get("candidate_id")
+                or ""
+            )
+            expected_formulation_id = str(
+                import_metadata.get("formulation_id")
+                or import_run_snapshot.get("formulation_id")
+                or ""
+            )
+            expected_library_version = str(
+                import_metadata.get("candidate_library_version")
+                or import_run_snapshot.get("candidate_library_version")
+                or ""
+            )
+            identity_errors = []
+            if not str(selected_import_task.get("workdir") or "").strip():
+                identity_errors.append("任务清单缺少原任务工作目录")
+            if expected_candidate_id not in candidate_formulations:
+                identity_errors.append("任务候选编号不在当前候选库")
+            elif candidate_formulations[expected_candidate_id] != expected_formulation_id:
+                identity_errors.append(
+                    "任务配方指纹与当前候选库不匹配"
+                    f"（任务包：{expected_formulation_id or '缺失'}；"
+                    f"当前：{candidate_formulations[expected_candidate_id]}）"
+                )
+            elif candidate_library_versions.get(expected_candidate_id) != expected_library_version:
+                identity_errors.append(
+                    "任务候选库版本与当前候选库不匹配"
+                    f"（任务包：{expected_library_version or '缺失'}；"
+                    f"当前：{candidate_library_versions.get(expected_candidate_id, '缺失')}）"
+                )
+            if identity_errors:
+                st.error("；".join(identity_errors) + "，已禁止导入回写。")
+            else:
+                st.caption(
+                    f"将回写到候选：{expected_candidate_id} · 配方指纹：{expected_formulation_id} · "
+                    f"候选库版本：{expected_library_version}"
+                )
+            import_and_integrate = st.button(
+                "导入结果并自动回写",
+                disabled=uploaded_result is None or bool(identity_errors),
+                width="stretch",
+                key="external_result_import_submit",
+            )
+            if import_and_integrate:
+                try:
+                    registered_metadata = dict(import_metadata)
+                    registered_metadata.pop("campaign_run_id", None)
+                    registered_metadata.pop("campaign_task_id", None)
+                    registered_metadata.update(
+                        candidate_id=expected_candidate_id,
+                        formulation_id=expected_formulation_id,
+                        candidate_library_version=expected_library_version,
+                        result_file=import_result_file.strip(),
+                        imported_from_campaign_run=selected_import_run_id,
+                        imported_from_campaign_task=selected_import_task_id,
+                        input_validation=selected_import_task.get("input_validation"),
+                        production_approved=(
+                            "approved" in str(selected_import_task.get("input_validation") or "").lower()
+                        ),
+                    )
+                    imported_job = register_imported_job(
+                        import_engine,
+                        workdir=str(selected_import_task.get("workdir") or ""),
+                        result_file=import_result_file.strip(),
+                        result_content=uploaded_result.getvalue(),
+                        metadata=registered_metadata,
+                        source_filename=uploaded_result.name,
+                    )
+                    integrated = integrate_completed_job(
+                        imported_job.job_id,
+                        candidate_frame,
+                        experiments=experiment_history,
+                        top_n=12,
+                    )
+                    if integrated is None:
+                        raise RuntimeError("导入记录未产生可回写的数据，请检查结果文件内容。")
+                    st.session_state["external_import_notice"] = (
+                        f"外部结果 {uploaded_result.name} 已导入并回写候选 {integrated.candidate_id}；"
+                        f"模型 {integrated.model.version} 已更新。"
+                    )
+                    st.rerun()
+                except Exception as exc:
+                    st.error(f"导入或回写失败：{exc}")
+import_notice = st.session_state.pop("external_import_notice", None)
+if import_notice:
+    st.success(import_notice)
 _watch_standalone_external_jobs()
 standalone_job_snapshot = [
     item for item in list_jobs()
@@ -2115,9 +2291,13 @@ if latest_screening and latest_screening.get("signature") == screening_input_sig
     ]
 
     st.markdown("#### 当前候选 AI 评估")
+    current_candidate_has_data = (
+        ai_candidate_id in candidate_ids
+        and str(ai_candidate_id) in bound_data_candidate_ids
+    )
     if ai_candidate_id not in candidate_ids:
         st.info("请先在“多尺度计算方案”选择候选编号；未选择当前候选时不显示校准后的候选评估。")
-    elif str(ai_candidate_id) not in bound_data_candidate_ids:
+    elif not current_candidate_has_data:
         st.info(f"候选 {ai_candidate_id} 暂无已回写的外部计算或实验数据，因此不显示校准后的候选评估。")
     else:
         current_prediction = predict_screening(closed_loop, candidate_frame).loc[
@@ -2129,58 +2309,59 @@ if latest_screening and latest_screening.get("signature") == screening_input_sig
                 current_display[column] = current_display[column].map(labels).fillna(current_display[column])
         st.dataframe(current_display.rename(columns=CANDIDATE_COLUMN_LABELS), width="stretch", hide_index=True)
 
-    st.markdown("#### 全局候选排序")
-    st.caption("仅在模型已由真实外部计算校准后显示。未验证候选会保留“待验证”数据层级，可作为下一轮计算或实验对象。")
-    shortlist = _shortlist_for_model(closed_loop, candidate_frame)
-    candidate_display = shortlist.reindex(columns=display_columns).copy()
-    for column, labels in CANDIDATE_VALUE_LABELS.items():
-        if column in candidate_display:
-            candidate_display[column] = candidate_display[column].map(labels).fillna(candidate_display[column])
-    candidate_display = candidate_display.rename(columns=CANDIDATE_COLUMN_LABELS)
-    st.dataframe(candidate_display, width="stretch", hide_index=True)
-    if closed_loop.experimental_rows:
-        tested_ids = experiment_history["candidate_id"].astype(str).tolist() if "candidate_id" in experiment_history else []
-        next_batch = recommend_next_experiments(closed_loop, candidate_frame, tested_ids=tested_ids, batch_size=8)
-        if not next_batch.empty:
-            st.markdown("#### 下一轮实验推荐")
-            next_batch_display = next_batch[["candidate_id", "formulation_id", "candidate_library_version", "acquisition_score", "predicted_multi_objective_score", "prediction_uncertainty"]].rename(columns=CANDIDATE_COLUMN_LABELS)
-            st.dataframe(next_batch_display, width="stretch", hide_index=True)
-    if st.button(
-        "重新训练 AI 筛选",
-        width="stretch",
-        help="仅在需要强制使用当前数据重新训练时使用；正常情况下，数据回写后会自动更新。",
-    ):
-        with st.spinner("正在使用当前数据重新训练 AI 筛选..."):
-            try:
-                refreshed_shortlist, refreshed_model = screen_candidates(
-                    candidate_frame,
-                    experiments=experiment_history if not experiment_history.empty else None,
-                    top_n=12,
-                    minimum_class="C",
-                    version="external-v1",
-                )
-                _archive_screening_result(
-                    refreshed_shortlist,
-                    refreshed_model,
-                    input_signature=screening_input_signature,
-                )
-            except ValueError as exc:
-                st.error(
-                    _training_error_message(
-                        exc,
-                        external_rows=external_candidate_count,
-                        experiment_rows=len(experiment_history),
+    if current_candidate_has_data:
+        st.markdown("#### 全局候选排序")
+        st.caption("仅在当前候选已有真实回写且模型已完成外部计算校准后显示。未验证候选会保留“待验证”数据层级。")
+        shortlist = _shortlist_for_model(closed_loop, candidate_frame)
+        candidate_display = shortlist.reindex(columns=display_columns).copy()
+        for column, labels in CANDIDATE_VALUE_LABELS.items():
+            if column in candidate_display:
+                candidate_display[column] = candidate_display[column].map(labels).fillna(candidate_display[column])
+        candidate_display = candidate_display.rename(columns=CANDIDATE_COLUMN_LABELS)
+        st.dataframe(candidate_display, width="stretch", hide_index=True)
+        if closed_loop.experimental_rows:
+            tested_ids = experiment_history["candidate_id"].astype(str).tolist() if "candidate_id" in experiment_history else []
+            next_batch = recommend_next_experiments(closed_loop, candidate_frame, tested_ids=tested_ids, batch_size=8)
+            if not next_batch.empty:
+                st.markdown("#### 下一轮实验推荐")
+                next_batch_display = next_batch[["candidate_id", "formulation_id", "candidate_library_version", "acquisition_score", "predicted_multi_objective_score", "prediction_uncertainty"]].rename(columns=CANDIDATE_COLUMN_LABELS)
+                st.dataframe(next_batch_display, width="stretch", hide_index=True)
+        if st.button(
+            "重新训练 AI 筛选",
+            width="stretch",
+            help="仅在需要强制使用当前数据重新训练时使用；正常情况下，数据回写后会自动更新。",
+        ):
+            with st.spinner("正在使用当前数据重新训练 AI 筛选..."):
+                try:
+                    refreshed_shortlist, refreshed_model = screen_candidates(
+                        candidate_frame,
+                        experiments=experiment_history if not experiment_history.empty else None,
+                        top_n=12,
+                        minimum_class="C",
+                        version="external-v1",
                     )
-                )
-            except Exception as exc:
-                st.error(f"重新训练失败：{exc}")
-            else:
-                st.session_state["latest_candidate_screening"] = {
-                    "signature": screening_input_signature,
-                    "shortlist": refreshed_shortlist,
-                    "model": refreshed_model,
-                }
-                st.rerun()
+                    _archive_screening_result(
+                        refreshed_shortlist,
+                        refreshed_model,
+                        input_signature=screening_input_signature,
+                    )
+                except ValueError as exc:
+                    st.error(
+                        _training_error_message(
+                            exc,
+                            external_rows=external_candidate_count,
+                            experiment_rows=len(experiment_history),
+                        )
+                    )
+                except Exception as exc:
+                    st.error(f"重新训练失败：{exc}")
+                else:
+                    st.session_state["latest_candidate_screening"] = {
+                        "signature": screening_input_signature,
+                        "shortlist": refreshed_shortlist,
+                        "model": refreshed_model,
+                    }
+                    st.rerun()
 
 st.divider()
 st.subheader("6. 实验回写与模型更新")

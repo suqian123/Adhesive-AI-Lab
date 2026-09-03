@@ -3,7 +3,7 @@ import time
 
 import pytest
 
-from adhesive_ai.jobs import get_job_status, list_jobs, read_job_output, read_job_result_text, split_job_command, submit_job, update_job_metadata
+from adhesive_ai.jobs import get_job_status, list_jobs, read_job_output, read_job_result_text, register_imported_job, split_job_command, submit_job, update_job_metadata
 
 
 def _wait_for_job(job_id, root, timeout=10):
@@ -61,6 +61,45 @@ def test_job_runner_marks_nonzero_exit_as_failed(tmp_path):
 
 def test_split_job_command_preserves_quoted_arguments():
     assert split_job_command('solver --label "production run"') == ("solver", "--label", "production run")
+
+
+def test_register_imported_job_preserves_result_contract(tmp_path):
+    workdir = tmp_path / "campaign" / "tasks" / "md-resin-x1"
+    imported = register_imported_job(
+        "LAMMPS",
+        workdir=workdir,
+        result_file="outputs/log.lammps",
+        result_content=b"Step Temp PotEng\n0 298.15 -10.0\n",
+        metadata={
+            "candidate_id": "candidate-01",
+            "formulation_id": "FMT-123",
+            "candidate_library_version": "candidate-db-v3",
+            "calculation_kind": "bulk_md",
+        },
+        source_filename="remote-log.lammps",
+        root=tmp_path / "jobs",
+    )
+
+    assert imported.status == "completed"
+    assert imported.return_code == 0
+    assert imported.metadata["submission_source"] == "external-import"
+    assert (workdir / "outputs" / "log.lammps").is_file()
+    assert read_job_result_text(imported.job_id, root=tmp_path / "jobs").startswith("Step Temp")
+
+    with pytest.raises(ValueError, match="相对路径"):
+        register_imported_job(
+            "LAMMPS",
+            workdir=workdir,
+            result_file="../outside.log",
+            result_content=b"x",
+            metadata={
+                "candidate_id": "candidate-01",
+                "formulation_id": "FMT-123",
+                "candidate_library_version": "candidate-db-v3",
+                "calculation_kind": "bulk_md",
+            },
+            root=tmp_path / "jobs",
+        )
 
 
 def test_invalid_job_id_cannot_escape_job_root(tmp_path):

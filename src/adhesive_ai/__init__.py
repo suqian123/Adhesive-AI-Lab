@@ -7,7 +7,7 @@ from .screening import closed_loop_screening, load_model, predict_screening, rec
 from .engines import compute_md_observables, generate_dft_inputs, generate_md_inputs, parse_dft_output, parse_lammps_thermo
 from .coarse_grained import build_cg_interface_model, build_pda_ceo2_force_field
 from .result_integration import apply_external_results, closed_loop_with_external_results, update_candidate_with_external_results
-from .jobs import JobRecord, get_job_status, list_jobs, parse_job_result, read_job_output, read_job_result_text, split_job_command, submit_job, update_job_metadata
+from .jobs import JobRecord, get_job_status, list_jobs, parse_job_result, read_job_output, read_job_result_text, register_imported_job, split_job_command, submit_job, update_job_metadata
 from .workflow import IntegrationResult, calculation_payload, integrate_completed_job, load_connected_state
 from .database import load_candidates
 from .campaign import CalculationTask, MultiscaleCampaign, build_multiscale_campaign, campaign_task_frame, requirement_coverage, validate_candidate_contract, write_multiscale_campaign
@@ -41,7 +41,7 @@ __all__ = [
     "generate_md_inputs", "parse_lammps_thermo", "compute_md_observables",
     "build_pda_ceo2_force_field", "build_cg_interface_model",
     "update_candidate_with_external_results", "apply_external_results", "closed_loop_with_external_results",
-    "JobRecord", "submit_job", "get_job_status", "read_job_output", "read_job_result_text", "parse_job_result", "list_jobs", "split_job_command", "update_job_metadata",
+    "JobRecord", "submit_job", "register_imported_job", "get_job_status", "read_job_output", "read_job_result_text", "parse_job_result", "list_jobs", "split_job_command", "update_job_metadata",
     "IntegrationResult", "calculation_payload", "integrate_completed_job", "load_connected_state", "load_candidates",
     "CalculationTask", "MultiscaleCampaign", "build_multiscale_campaign", "campaign_task_frame",
     "requirement_coverage", "validate_candidate_contract", "write_multiscale_campaign",

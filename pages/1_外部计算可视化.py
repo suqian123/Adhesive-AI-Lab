@@ -168,7 +168,8 @@ st.html(
         subtree: true, childList: true, attributes: true, characterData: true,
         attributeFilter: ["aria-label", "title", "data-title", "placeholder"],
     });
-    })();</script>"""
+    })();</script>""",
+    unsafe_allow_javascript=True,
 )
 
 

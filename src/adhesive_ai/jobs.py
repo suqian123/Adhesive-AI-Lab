@@ -137,6 +137,81 @@ def submit_job(
     return record
 
 
+def register_imported_job(
+    engine: str,
+    *,
+    workdir: str | Path,
+    result_file: str,
+    result_content: bytes | str,
+    metadata: dict[str, object],
+    source_filename: str = "",
+    root: str | Path = "work/jobs",
+) -> JobRecord:
+    """Register an externally completed result without launching a process.
+
+    The result is copied into the original task directory so existing parsers
+    and integration logic use the same result-file contract as local jobs.
+    """
+    if not str(engine).strip():
+        raise ValueError("外部计算引擎不能为空")
+    required_metadata = ("candidate_id", "formulation_id", "candidate_library_version", "calculation_kind")
+    missing_metadata = [name for name in required_metadata if not str(metadata.get(name) or "").strip()]
+    if missing_metadata:
+        raise ValueError("导入结果缺少任务身份字段：" + "、".join(missing_metadata))
+    relative_result = Path(str(result_file).strip())
+    if not relative_result.name or relative_result.is_absolute() or ".." in relative_result.parts:
+        raise ValueError("结果文件必须是任务工作目录内的相对路径")
+    directory = Path(workdir).expanduser().resolve()
+    directory.mkdir(parents=True, exist_ok=True)
+    target = (directory / relative_result).resolve()
+    try:
+        target.relative_to(directory)
+    except ValueError as exc:
+        raise ValueError("结果文件必须保存在任务工作目录内") from exc
+    if isinstance(result_content, bytes):
+        if not result_content:
+            raise ValueError("上传的结果文件为空")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(result_content)
+    else:
+        if not str(result_content):
+            raise ValueError("上传的结果文件为空")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(str(result_content), encoding="utf-8")
+
+    root_path = Path(root).expanduser().resolve()
+    job_id = f"{str(engine).lower().replace(' ', '-')}-import-{uuid.uuid4().hex[:10]}"
+    job_directory = _job_dir(root_path, job_id, create=True)
+    stdout_path, stderr_path = job_directory / "stdout.log", job_directory / "stderr.log"
+    source_note = f"Imported external result: {source_filename or target.name}\n"
+    stdout_path.write_text(source_note, encoding="utf-8")
+    stderr_path.write_text("", encoding="utf-8")
+    now = _now()
+    imported_metadata = dict(metadata)
+    imported_metadata.update(
+        result_file=str(relative_result.as_posix()),
+        submission_source="external-import",
+        imported_result_file=str(relative_result.as_posix()),
+        imported_source_filename=str(source_filename or target.name),
+    )
+    record = JobRecord(
+        job_id=job_id,
+        engine=str(engine),
+        command=(),
+        workdir=str(directory),
+        status="completed",
+        submitted_at=now,
+        started_at=now,
+        finished_at=now,
+        return_code=0,
+        stdout_path=str(stdout_path),
+        stderr_path=str(stderr_path),
+        metadata=imported_metadata,
+    )
+    _write_record(record, root_path)
+    return record
+
+
 def _run_job(root: str | Path, job_id: str) -> int:
     """Worker entry point that preserves the real exit status across UI reruns."""
     record = _read_record(root, job_id)
