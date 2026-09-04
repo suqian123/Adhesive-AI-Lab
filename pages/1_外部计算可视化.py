@@ -24,6 +24,21 @@ from adhesive_ai.jobs import JobRecord, list_jobs, parse_job_result, read_job_ou
 
 st.set_page_config(page_title="外部计算可视化", page_icon=":material/monitoring:", layout="wide")
 
+st.markdown(
+    """
+    <style>
+    header[data-testid="stHeader"] { background:transparent; }
+    [data-testid="stToolbarActions"],
+    [data-testid="stToolbarActionButton"],
+    [data-testid="stAppDeployButton"],
+    [data-testid="stMainMenu"],
+    [data-testid="stMainMenuButton"] { display:none !important; }
+    [data-testid="stDecoration"] { display:none; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 STATUS_LABELS = {
     "queued": "排队中",
     "running": "计算中",
@@ -33,6 +48,8 @@ STATUS_LABELS = {
     "failed": "失败",
     "cancelled": "已终止",
     "termination_failed": "终止未完成",
+    "external_pending": "等待外部结果导入",
+    "imported": "已导入并回写",
 }
 SCALE_LABELS = {
     "quantum": "量子化学",
@@ -119,9 +136,29 @@ UI_TRANSLATIONS = {
     "Choose options": "选择选项",
     "Choose an option": "选择一个选项",
     "Choose an option...": "选择一个选项",
+    "No options": "没有可选项",
+    "No options available": "没有可选项",
     "Select all": "全选",
     "Deselect all": "取消全选",
+    "Clear": "清除",
+    "Clear all": "全部清除",
+    "Apply": "应用",
+    "Cancel": "取消",
+    "Close": "关闭",
+    "Loading": "加载中",
+    "Loading...": "加载中...",
+    "Show more": "显示更多",
+    "Show less": "收起",
+    "Previous": "上一页",
+    "Next": "下一页",
+    "Rows per page": "每页行数",
+    "Page": "页",
+    "Search columns": "搜索列",
+    "Filter": "筛选",
+    "Filters": "筛选条件",
+    "Reset filters": "重置筛选",
     "Download as CSV": "下载为 CSV",
+    "Download": "下载",
     "Copy": "复制",
     "Copy to clipboard": "复制到剪贴板",
     "Reset columns": "重置列",
