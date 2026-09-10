@@ -1,0 +1,594 @@
+\n--- PAGE 1 ---\nContents lists available at ScienceDirect
+Materials Today Communications
+journal homepage: www.elsevier.com/locate/mtcomm
+Synthesis and characterization of self-healing cross-linked non-isocyanate
+polyurethanes based on Diels-Alder reaction with unsaturated polyester
+Dingwen Wang, Shuo Chen, Jingbo Zhao*, Zhiyuan Zhang
+Key Laboratory of Carbon Fiber and Functional Polymers (Beijing University of Chemical Technology), Ministry of Education, College of Materials Science and Engineering,
+Beijing University of Chemical Technology, Beijing 100029, China
+A R T I C L E I N F O
+Keywords:
+Self-healing polyurethanes
+Non-isocyanate route
+Unsaturated polyester
+A B S T R A C T
+A green method is established to prepare soft self-healing cross-linked non-isocyanate polyurethanes (SH-
+NIPUs). Three non-isocyanate polyurethane prepolymers with furan terminal groups (F-NIPUs) were synthesized
+through a ring-opening reaction of diglycerol bis(cyclic carbonate) with isophoronediamine and furfurylamine
+under mild reaction conditions. New SH-NIPUs were prepared via a Diels–Alder reaction between F-NIPUs and
+unsaturated polyester. The obtained SH-NIPUs were characterized by 1H NMR, ATI-FTIR, DSC, polarized optical
+microscope, and tensile strength after being damaged and healed. The SH-NIPUs exhibited a Tg between -4 and
+20 °C, and a relatively low reverse Diels–Alder temperature between 90 and 100 °C. Soft SH-NIPUs with high self-
+healing efficiency up to 100% were achieved successfully.
+1. Introduction
+Polymer materials are widely used in our daily life. In their appli-
+cations, micro-cracks or damages are inevitably generated when they
+suffer from heat, mechanical attack, or chemical erosion. The cracks are
+usually deep inside and difficult to be detected. They cause mechanical
+property reduced and service lifetime shortened. Inspired by the self-
+healing phenomenon of organism, scientists develop a series of poly-
+mers with self-healing property. Many methods have been adopted to
+prepare self-healing polymers [1]. The self-healing strategies used in-
+clude introducing reversible covalent bonds [2,3], hydrogen bonding
+[4], coordination [5], and reactive microcapsules [6].
+Polyurethane (PU) is one of important polymers. PUs are widely
+used as foams, elastomers, coatings, adhesives, and sealants due to their
+excellent mechanical property [7]. Self-healing PUs (SH-PUs) have also
+been investigated in recent decade. Furan-maleimide Diels-Alder (DA)
+reaction becomes an effective way to synthesize thermo-reversible PUs
+[8–10].
+Current DA SH-PUs are mainly synthesized through isocyanate
+route according to three major methods. The most used method is to
+introduce furan terminal or pendent groups into PU prepolymers, and
+then react on bismaleimides (BMIs) [10–13] or multi-maleimide com-
+pounds [8] to synthesize SH-PUs. The second method is to prepare PU
+prepolymers containing maleimide pendant groups, and react on di-
+functional furan compounds to form SH-PUs [14,15]. The third method
+is to synthesize SH-PUs directly by reacting the preformed HO-termi-
+nated DA adducts with diisocyanates [9]. In the literatures, BMIs or
+maleimide-containing compounds are usually synthesized through
+several steps of solution reactions, and the yield is commonly lower
+than 58% [8,9].
+The purpose of this paper is to establish a green and effective way to
+synthesize self-healing crosslinked non-isocyanate polyurethanes (SH-
+NIPUs). In this paper, three PU prepolymers containing furan terminal
+groups (F-NIPUs) were prepared through a non-isocyanate method. An
+unsaturated polyester (UP) was prepared from melt polycondensation
+of maleic anhydride (MA), adipic acid (AA) and butanediol (BD). Then,
+SH-NIPUs were prepared by reacting F-NIPUs with UP. UP replaces
+BMIs or maleimide-containing compounds to conduct DA addition with
+furan groups. The electron-withdrawing carbonyl groups in UP make
+C = C bonds reactive and easy to conduct DA reaction with furan
+groups.
+2. Experimental section
+2.1. Materials
+Isophoronediamine (IPDA, > 99%) and diglycerol (DG) (> 80%)
+were purchased from TCI, Japan. Dimethyl carbonate (DMC, > 98%)
+and furfurylamine (FA, > 98%) were purchased from Alfa Aesar Co.
+Ltd. MA (99%), AA (99%), and BD (99%) were purchased from Beijing
+https://doi.org/10.1016/j.mtcomm.2020.101138
+Received 16 October 2019; Received in revised form 8 April 2020; Accepted 9 April 2020
+⁎ Corresponding author.
+E-mail address: zhaojb@mail.buct.edu.cn (J. Zhao).
+Materials Today Communications xxx (xxxx) xxxx
+2352-4928/ © 2020 Elsevier Ltd. All rights reserved.
+Please cite this article as: Dingwen Wang, et al., Materials Today Communications, https://doi.org/10.1016/j.mtcomm.2020.101138
+\n--- PAGE 2 ---\nGreenherbs Com. p-Toluenesulfonic acid (P-TSA), 4-methoxyphenol
+(MEHQ), ethyl acetate, SnCl2, and K2CO3 were of analytic grade and
+were purchased from Energy-Chemical Com., Shanghai. These mate-
+rials were all used as received.
+2.2. Synthesis of diglycerol bis(cyclic carbonate) (DGDC)
+Transesterification reaction was carried out analogously to the lit-
+erature [16]. In a 250 mL three-neck flask equipped with a magnetic
+stirrer and a reflux condenser, the mixture of 50 g (0.30 mol) DG,
+160.5 g (1.78 mol) DMC, and 0.25 g (1.80 mmol) K2CO3 was heated
+under stirring at 70 °C for 24 h. After evaporation of the excessive DMC
+and the formed methanol, a liquid crude product was obtained. It was
+crystallized in ethyl acetate at 5 °C for 24 h. White solid DGDC with
+79% yield was obtained (Scheme 1). The structure of DGDC was con-
+firmed by FT-IR (Fig. S1) and 1H NMR (Fig. S2) spectra.
+2.3. Synthesis of F-NIPUs
+FA, IPDA and DGDC were placed at different n values (Table 1) in
+100 mL three-necked flasks. The bulk polymerization was conducted at
+70 °C for 8 h to obtain F-NIPUs (Scheme 2).
+2.4. Synthesis of UP
+MA (0.08 mol, 7.84 g), AA (0.02 mol, 2.92 g), BD (0.13 mol, 11.7 g),
+P-TSA (0.2 wt%, 0.045 g), SnCl2 (0.2 wt%, 0.045 g) and MEHQ (0.5 wt
+%, 0.112 g) were placed in a 100 mL three-necked flask. Under ni-
+trogen, the reaction temperature was gradually raised to 180 °C and
+held for 2 h under atmospheric pressure. The reaction was continued at
+1300 Pa for another 2 h. An UP liquid was obtained at a yield of 85%
+(Scheme 3). The acid value (Av) of UP was 3.2 mgKOH∙g-1, and the
+hydroxyl value (Qv) was 105.2 mgKOH∙g-1.
+2.5. Synthesis of SH-NIPUs
+UP and F-NIPU-1, F-NIPU-2, or F-NIPU-3 were added into different
+50 mL beakers at a 1:1 molar ratio of the MA units in UP to the furan
+groups in F-NIPUs. The mixtures were stirred at 150 °C for 3 min to
+uniformity, and were poured into dumbbell tetrafluoroethylene molds.
+The samples were transferred into a vacuum oven at 150 °C. Bubbles
+were removed under a pressure of 1300 Pa for 3 min. Then, the samples
+were cured at 60 °C for 24 h to solid state (Table 2).
+2.6. Characterization methods
+The Av and Qv of UP were detected according to the procedure
+described in the literature [17]. One gram of UP was dissolved in 15 ml
+DMF and titrated with 0.05 N NaOH ethanol solution to detect Av. The
+determining method of the H2N- content in F-NIPUs was the same as
+that of Qv. The Mn and dispersity (D) of F-NIPUs were characterized on
+Waters 150C size exclusion chromatography (SEC) at 25 °C with tetra-
+hydrofuran as eluent (1 mL/min). The 1H NMR spectra of samples were
+recorded on a Bruker NMR Spectrometer using DMSO-d6 as solvent. The
+chemical shifts were reported as parts per million downfield from tet-
+ramethylsilane. ATI-FTIR spectra were performed on a Paragon 1000
+spectrometer (Perkin-Elmer) in the range of 4000 to 400 cm-1. The
+differential scanning calorimetry (DSC) scans of SH-NIPUs were ex-
+amined on a TA Instruments Q2000 under nitrogen atmosphere at a
+heating rate of 10 °C min-1. About 5-10 mg samples were used for the
+measurements.
+After SH-NIPUs were prepared in Section 2.5, they were cooled and
+kept in a desiccator at room temperature. Then, the swelling property of
+them were determined soon. The swelling property of samples was
+characterized by swelling them in DMF at 50 °C for 12 h. The un-
+dissolved parts were filtrated, washed with ethanol, and dried in va-
+cuum oven at 50 °C for 24 h. The dissolution ratio was calculated from
+the dissolution portion of samples.
+The cracks on polymer films were observed on a polarizing optical
+microscopy (LEICA DM LP) equipped with a temperature programmed
+heating stage (TMS 94). Then, the self-healing property of SH-NIPUs
+was evaluated.
+The mechanical properties of the original and the healed samples
+were measured on an Instron 4465 testing machine. Elongation rate
+was
+set
+at
+30 mm
+min-1,
+and
+dumbbell
+samples
+(20 mm × 4 mm × 0.4 mm) were used in the detection. Healing effi-
+ciency was calculated by the recovery of breaking tensile strength.
+3. Results and discussion
+3.1. Synthesis of F-NIPUs
+Within the margin of error, complete conversion of DGDC, FA, and
+IPDA to F-NIPUs was confirmed by FTIR. The absorption peaks of vO-H
+(3325 cm-1), carbamate vC = O (1694 cm-1), and secondary amide δN-
+H (1533 cm-1) proved successful ring-opening reaction between DGDC
+and FA or IPDA (Scheme 2). The δC-H absorption of furan rings
+(740 cm-1) demonstrates the retention of furan groups in F-NIPUs
+(Fig. 1 and Fig. S3).
+According to the measurement of amine values (Table 1), the con-
+tent of the H2N- terminal groups in F-NIPUs was very low. It indicates
+that the reaction in Scheme 2 was nearly completed.
+3.2. Synthesis of UP
+FT-IR confirmed that MA, AA, and BD were completely converted to
+UP (Scheme 3). The vO-H peak (3200-3700 cm-1) of –COOH and –OH
+terminal groups became negligible. The ester vC = O peak (1717 cm-1)
+appeared, and the vC = C peak (1642 cm-1) remained (Fig. 2). They all
+prove successful esterification and polycondensation of MA, AA, and
+BA.
+The Av and Qv of UP are 3.2 and 105.2 mgKOH∙g-1, respectively. It’s
+Scheme 1. Synthesis of DGDC.
+Table 1
+Synthesis of F-NIPUs.
+F-NIPUs
+FA (mol)
+IPDA (mol)
+DGDC (mol)
+n
+Yield (%)
+Amine value (mgKOH g-1)
+IDU content(mol%)
+Mn
+(SEC)
+D
+(SEC)
+Tg
+(°C)
+F-NIPU-1
+0.06
+0
+0.03
+0
+95
+3.2
+0
+1390
+1.7
+−4
+F-NIPU-2
+0.03
+0.015
+0.03
+1
+95
+4.5
+33
+1450
+2.0
+−1
+F-NIPU-3
+0.02
+0.02
+0.03
+2
+93
+5.2
+67
+1660
+2.2
+9
+D. Wang, et al.
+Materials Today Communications xxx (xxxx) xxxx
+2
+\n--- PAGE 3 ---\nmolecular weight (M) calculated from Av and Qv is 1035 mol/g. UP was
+terminated mainly with HO- groups. The molar percentage of C = C
+groups in UP is 80 mol% based on the 4:1 MA/AA feed ratio (molar
+ratio).
+3.3. Synthesis of SH-NIPUs
+It was confirmed that F-NIPU-1 and UP were converted to SH-NIPU-
+1. First, a shoulder peak specific to the ester vC = O of DA adduct ap-
+peared at 1734 cm-1(Fig. 3). Second, the δC-H absorption peak of furan
+rings decreased at 740 cm-1, and an out-of-plane δC-H vibration peak in
+DA adducts appeared at 777 cm-1. These two characteristic peaks
+(1734 cm-1 and 777 cm-1) of DA adduct were assigned based on the
+reference [18], in which furan-dimethyl fumarate DA adduct was pre-
+pared and characterized by FT-IR spectrum. These peaks indicated that
+SH-NIPUs were successful synthesized from UP and F-NIPUs via the DA
+reaction. Fig. S4 shows the deconvolution curves of the δC-H vibration
+peaks in DA adducts and furan rings. The DA conversion of SH-NIPU-1
+was calculated according to the deconvolution analysis. It was about
+25%.
+The peaks at 6.85 and 6.25 ppm in Fig. 4c demonstrate that the
+C = C groups of UP are in trans- and cis- structure (hydrogens 1 and 4
+in Fig. 5), and the latter is the major structure. The peaks at 4.17, 6.21,
+6.38 and 7.64 ppm in Fig. 4b demonstrate the presence of the furan
+rings (hydrogens 12, 11, 10, and 9 in Fig. 5) in F-NIPU-1. The char-
+acteristic peaks of the DA bond at 2.80, 3.10 and 5.11 ppm in Fig. 4a
+demonstrate the occurrence of the DA addition (hydrogens 14, 15, and
+16 in Fig. 5). The peak at 6.77 ppm in Fig. 4a arises from the hydrogens
+17 in cis- and trans- DA adducts (Fig. 5), while the peak at 6.46 ppm
+corresponds to the hydrogen 18 in trans- DA adduct. These hydrogens
+from 14 to 18 were assigned based on the 1H NMR spectra of furan-
+dimethyl fumarate DA adduct and furan-dimethyl maleate DA adduct in
+the reference [18].
+3.4. Swelling property of SH-NIPUs
+To prove the prepared SH-NIPUs are crosslinked polyurethanes, we
+immersed them in DMF at 50 °C for 12 h, and recorded the mass of
+samples before and after soaking.
+In Fig. 6, the left and right pictures of each SH-NIPU correspond to
+the sample before and after soaking. After soaking, SH-NIPUs all
+swelled, but none of them was dissolved completely. Table 2 shows that
+the dissolution ratios of SH-NIPUs are relatively high after soaking. This
+indicates that SH-NIPUs are partially cross-linked polyurethanes. With
+the increase of n in F-NIPUs (Table 1), the dissolution ratio shows an
+upward trend, indicating that the crosslinking degree decreased. In-
+creasing n causes the molecular weight of F-NIPUs increased and the
+furan content decreased. Thus, the DA crosslinking density in SH-NIPUs
+decreased, with the dissolution ratio increased.
+3.5. Thermal reversibility of the DA bonds in SH-NIPUs
+SH-NIPU-1, 2, and 3 show an increasing Tg trend (Fig. 7 and
+Table 2). Their Tg is -6, -4, and 20 °C, respectively. Increasing n means
+the F-NIPUs have higher molecular weight and higher rigid IPDA
+Scheme 2. Synthesis of F-NIPUs.
+Scheme 3. Synthesis of UP.
+Fig. 1. FT-IR spectra of F-NIPUs.
+D. Wang, et al.
+Materials Today Communications xxx (xxxx) xxxx
+3
+\n--- PAGE 4 ---\ndiurethane (IDU) content (Table 1). They all lead to the increase of Tg.
+Meanwhile, an endothermic peak appears in the range from 90 to
+100 °C. It corresponds to the temperature of reverse DA (rDA) reaction.
+The peak intensity is related to the amount of heat absorption in rDA
+reaction. With the increase of the n in F-NIPUs, the endothermic peak
+becomes weak, because a high n in F-NIPUs lowers the DA crosslinking
+density in SH-NIPUs. The rDA temperature of SH-NIPUs is obviously
+lower than that of furan-maleimide DA systems, in which the rDA
+temperature is at about 130 °C [8]. The reason is that UP is a polymer
+with opening chains. The maleic and fumaric ester groups in UP have
+higher steric hindrance than the closed maleimide rings in BMIs or
+other maleimide-containing compounds, leading to the decrease of the
+rDA temperature in UP-derived SH-NIPUs. A similar DA adduct was
+reported by Wei et al. They studied a fulvene- dichloromaleate DA
+system, in which the fulvene group is similar to furan ring, while the
+dichloromaleate group has higher steric hindrance than maleate and
+furamate groups. Higher steric hindrance makes the rDA reaction of
+fulvene-dichloromaleate DA system takes place at merely 37 °C [19].
+3.6. Polarizing optical microscopy (POM) characterization of self-healing
+performance
+The self-healing property of SH-NIPU-1 was investigated by obser-
+ving crack evolution under POM equipped with a heating stage. On a
+0.8 × 0.8 mm SH-NIPU-1 splint, we drew a deep crack in the lateral
+direction and a shallow crack in the oblique direction. Fig. 8a was the
+starting state. When the splint was held at 120 °C for 1 min, the lateral
+crack was significantly narrowed (Fig. 8b), and most of it was repaired.
+At 2 min, two bubbles appeared at the intersection of the cracks
+(Fig. 8c). Maybe some air at the cutting edges was entangled when the
+molecular segments moved, and two bubbles were formed in repairing
+process. After 3 min, the oblique crack was basically completely re-
+paired (Fig. 8d). Only the surface part was not repaired. At 5 min, the
+oblique crack was completely repaired, and the lateral crack still re-
+mained at surface layer (Fig. 8e). After 8 min, the lateral and oblique
+cracks were all completely repaired (Fig. 8f). In a summary, SH-NIPUs
+achieve good self-repair of cracks at 120 °C in several minutes. Due to
+slightly rough surface, light reflection caused some irregular white
+areas were observed in some photos.
+During repairing at 120 °C, SH-NIPU-1 kept solid state at least in
+30 min. Dynamic mechanical analysis (DMA) (Fig. S5) shows that SH-
+NIPU-1 exhibits the storage modulus (E’) of 3.5 MPa at 85 °C. At this
+temperature, SH-NIPU-1 was solid with certain tensile strength. Beyond
+85 °C, the splints were pulled apart because they became more soft and
+weak. Then, the detection did not continue. Fig. S6 shows the repairing
+process of SH-NIPU-1 at 85 °C. At this temperature, most of the cutting
+edges were repaired in 1 h. However, cutting traces still remained until
+3 h. Repairing at 85 °C is much slower than that at 120 °C because of
+low repairing temperature and insufficient dissociation of DA adducts.
+On Fig. 8s and Fig. S6, some small or tiny black dots were found due
+to birefringence. In UP preparation, the fumarate or maleate content in
+UP was heavily influenced by the reaction temperature and time.
+Temperature fluctuation in melt polycondensation might result in some
+UP molecules with relatively high fumarate content. These UP mole-
+cules exhibited relatively high melting point and poor solubility. When
+UP was mixed with F-NIPUs, some tiny crystals were formed, and part
+of them were left in SH-NIPUs due to incomplete DA reaction. In the
+observation of SH-NIPU-1 under POM, the tiny crystals caused light
+extinction. Thus, some tiny black dots were observed.
+3.7. Mechanical properties and self-healing efficiency
+The self-healing efficiency of SH-NIPUs was obtained by tensile test.
+When a dumbbell-shaped splint was cut from middle, the cut portions
+were then placed in a dumbbell-shaped mold, heated at 120 °C for
+30 min, and placed in an oven at 60 °C for 24 h. A self-healed SH-NIPU
+splint was obtained. The tensile test of SH-NIPUs before and after self-
+healing was conducted.
+The tensile strength and the elongation at break of SH-NIPUs
+Fig. 2. FT-IR spectra of UP and the reactants.
+Fig. 3. FT-IR spectra of (a) SH-NIPU-1, (b) F-NIPU-1, (c) UP.
+Fig. 4. 1H NMR spectra of (a) SH-NIPU-1 (130 °C, 0.5 h and 60 °C, 24 h), (b) F-
+NIPU-1, (c) UP.
+D. Wang, et al.
+Materials Today Communications xxx (xxxx) xxxx
+4
+\n--- PAGE 5 ---\nincreased effectively with the increase of the n or IDU content in F-
+NIPUs (Table 1). However, the self-healing efficiency decreased (Fig. 9
+and Table 2). High n means high molecular weight of F-NIPUs, and
+more short and rigid IDU units were introduced. They all enhance the
+intermolecular interaction of SH-NIPUs, and lead to the increase of
+tensile strength and toughness. High n or high molecular weight of F-
+NIPUs increases the steric hindrance of SH-NIPUs. Thus, low self-
+healing efficiency was obtained.
+Fig. 10 shows the mechanical hysteresis behavior of SH-NIPU-2 in a
+three-cycle deformation mode with an elongation of up to 100% at
+room temperature. Mechanical hysteresis percentage (MH%) was de-
+termined by the corresponding load-unload cycle and calculated using
+Eq. 1 [20].
+=
+×
+MH%
+loading area - unloading area
+loading area
+100
+(1)
+From SH-NIPU-1 to SH-NIPU-3, as the IDU content increases, the
+MH%, permanent set (described as the elongation at zero stress in the
+unloading cycle), and the stress at 100% elongation all increase
+(Table 3). As the content of rigid IDU increases, the elastic properties of
+SH-NIPUs decreases. Even so, SH-NIPU-1 and SH-NIPU-2 have excellent
+elastic recovery due to their low MH% and permanent set in the 1st and
+subsequent loading-unloading cycles. The elastic property of SH-NIPU-
+3 is relatively poor because of its high IDU content and relatively high
+steric hindrance which makes SH-NIPU-3 slightly stiff.
+Fig. 5. Hydrogen assignments of the structures in SH-NIPU-1, F-NIPU-1, and UP.
+Fig. 6. Swelling photos of SH-NIPUs. before (a) and after (b) soaking of SH-NIPU-1, before (c) and after (d) soaking of SH-NIPU-2, before (e) and after (f) soaking of
+SH-NIPU-3.
+Table 2
+Properties of SH-NIPUs.
+SH-NIPUs
+F-NIPUs
+Component (g)
+Tg
+(°C)
+Dissolution ratio (%)
+Tensile strength (MPa)
+Self-healing efficiencyb (%)
+UP
+F-NIPU
+Original
+Self-healeda
+SH-NIPU-1
+F-NIPU-1
+4.8
+4
+−6
+39.1
+2.2
+2.2
+100
+SH-NIPU-2
+F-NIPU-2
+2.4
+4
+−4
+39.7
+3.7
+3.3
+91
+SH-NIPU-3
+F-NIPU-3
+1.6
+4
+20
+45.9
+6.6
+5.2
+78
+a 20 mm × 4 mm × 0.4 mm original dumbbell-shaped splints were cut from middle and put together in dumbbell-shaped molds. They were heated at 120 °C for
+30 min and then placed in an oven at 60 °C for 24 h. The self-healed SH-NIPU splints were obtained.
+b
+=
+×
+The self-healing effiency was calculated according to:Self-healing efficiency(%)
+100%
+Self-healed tensile strength
+Original tensile strength
+.
+D. Wang, et al.
+Materials Today Communications xxx (xxxx) xxxx
+5
+\n--- PAGE 6 ---\n4. Conclusions
+Self-healing partially cross-linked non-isocyanate polyurethanes, i.e.
+SH-NIPUs, were successfully synthesized via a DA addition reaction
+between F-NIPUs and UP. The cross-linking was verified by swelling
+analysis. DA bonds make SH-NIPUs show thermal reversibility. DSC and
+POM characterizations demonstrate the self-healing properties of SH-
+NIPUs. Cracks on SH-NIPU surface disappear within 8 min at 120 °C.
+During repairing at 120 °C, SH-NIPU-1 kept solid state at least in
+30 min. At 85 °C, SH-NIPU-1 was in solid state with certain tensile
+strength, and most of the cutting edges were repaired in 1 h. The me-
+chanical properties were affected by the molecular weight and the IDU
+content of F-NIPUs. Higher n and more IDU units introduced lead to the
+increase of tensile strength. SH-NIPUs show great self-healing efficiency
+and excellent elastic recovery. Increasing IDU units increases the steric
+hindrance of SH-NIPUs, leading to the self-healing efficiency and elastic
+recovery all decreased. SH-NIPUs are soft and rubbery non-isocyanate
+cross-linked
+polyurethanes
+prepared
+through
+a
+green
+method.
+Compared with traditional DA reaction from BMIs or maleimide-con-
+taining compounds, UP based DA reaction exhibits obviously lower rDA
+temperature. This advantage may improve the repairing speed and ef-
+ficiency, and make the applications of self-healing PUs more con-
+venient.
+Fig. 7. Heating DSC scans of SH-NIPUs.
+Fig. 8. Crack healing observation of SH-NIPU-1 under POM (×64) at 120 °C. (a) 0 min, (b) 1 min, (c) 2 min, (d) 3 min, (e) 5 min, and (f) 8 min.
+Fig. 9. Mechanical properties of original and self-healed SH-NIPUs.
+Fig. 10. 100% Hysteresis curves of SH-NIPU-2.
+D. Wang, et al.
+Materials Today Communications xxx (xxxx) xxxx
+6
+\n--- PAGE 7 ---\nDeclarations of competing interest
+There are no conflicts to declare.
+CRediT authorship contribution statement
+Dingwen Wang: Investigation. Shuo Chen: Investigation. Jingbo
+Zhao: Conceptualization, Funding acquisition, Supervision. Zhiyuan
+Zhang: Formal analysis, Methodology.
+Acknowledgments
+The authors gratefully acknowledge the financial supports from
+Beijing Natural Science Foundation (No. 2182056).
+Appendix A. Supplementary data
+Supplementary material related to this article can be found, in the
+online
+version,
+at
+doi:https://doi.org/10.1016/j.mtcomm.2020.
+101138.
+References
+[1] Y. Yang, M.W. Urban, Self-healing polymeric materials, Chem. Soc. Rev. 42 (2013)
+7446–7467.
+[2] K. Imato, M. Nishihara, T. Kanehara, Y. Amamoto, A. Takahara, H. Otsuka, Self-
+healing of chemical gels cross-linked by diarylbibenzofuranone-based trigger-free
+dynamic covalent bonds at room temperature, Angew. Chem. 51 (2012)
+1138–1142.
+[3] J.H. Li, G.P. Zhang, L.B. Deng, K. Jiang, S.F. Zhao, Y.J. Gao, R. Sun, C.P. Wong,
+Thermally reversible and self-healing novolac epoxy resins based on Diels–Alder
+chemistry, J. Appl. Polym. Sci. 132 (2015) 42167.
+[4] J.X. Cui, A. del Campo, Multivalent H-bonds for self-healing hydrogels, Chem.
+Commun. 48 (2012) 9302–9304.
+[5] Z.H. Wang, M.W. Urban, Facile UV-healable polyethylenimine–copper (C2H5N–Cu)
+supramolecular polymer networks, Polym. Chem. 4 (2013) 4897–4901.
+[6] W. Wang, L.K. Xu, H.Y. Sun, X.B. Li, S.H. Zhao, W.N. Zhang, Spatial resolution
+comparison of AC-SECM with SECM and their characterization of self-healing
+performance of hexamethylene diisocyanate trimer microcapsule coatings, J. Mater.
+Chem. A 3 (2015) 5599–5607.
+[7] E. Delebecq, J.-P. Pascault, B. Boutevin, F. Ganachaud, On the versatility of ur-
+ethane/urea bonds: Reversibility, blocked isocyanate, and non-isocyanate poly-
+urethane, Chem. Rev. 113 (2013) 80–118.
+[8] Y.T. Zhong, X.L. Wang, Z. Zheng, P.F. Du, Polyether–maleimide-based crosslinked
+self-healing polyurethane with Diels–Alder bonds, J. Appl. Polym. Sci. 132 (2015)
+41944.
+[9] Y. Heo, H.A. Sodano, Self-healing polyurethanes with shape recovery, Adv. Funct.
+Mater. 24 (2014) 5261–5268.
+[10] P.F. Du, X.X. Liu, Z. Zheng, X.L. Wang, T. Joncheray, Y.F. Zhang, Synthesis and
+characterization of linear self-healing polyurethane based on thermally reversible
+Diels–Alder reaction, RSC Adv. 3 (2013) 15475–15482.
+[11] P.F. Du, M.Y. Wu, X.X. Liu, Z. Zheng, X.L. Wang, T. Joncheray, Y.F. Zhang,
+Diels–Alder-based crosslinked self-healing polyurethane/urea from polymeric me-
+thylene diphenyl diisocyanate, J. Appl. Polym. Sci. 131 (2014) 40234.
+[12] P.F. Du, M.Y. Wu, X.X. Liu, Z. Zheng, X.L. Wang, P.Y. Sun, T. Joncheray, Y.F. Zhang,
+Synthesis of linear polyurethane bearing pendant furan and cross-linked healable
+polyurethane containing Diels–Alder bonds, New J. Chem. 38 (2014) 770–776.
+[13] P.F. Du, H.Y. Jia, Q.H. Chen, Z. Zheng, X.L. Wang, D.L. Chen, Slightly crosslinked
+polyurethane with Diels–Alder adducts from trimethylolpropane, J. Appl. Polym.
+Sci. 133 (2016) 43971.
+[14] S. Yu, R.C. Zhang, Q. Wu, T.H. Chen, P.C. Sun, Bio-inspired high-performance and
+recyclable crosslinked polymers, Adv. Mater. 25 (2013) 4912–4917.
+[15] C.-D. Varganici, O. Ursache, C. Gaina, V. Gaina, D. Rosu, B.C. Simionescu, Synthesis
+and characterization of a new thermoreversible polyurethane network, Ind. Eng.
+Chem. Res. 52 (2013) 5287–5295.
+[16] J.A. Stewart, B.M. Weckhuysen, P.C.A. Bruijnincx, Reusable Mg–Al hydrotalcites for
+the catalytic synthesis of diglycerol dicarbonate from diglycerol and dimethyl
+carbonate, Catalysis Today 257 (Pt 2) (2015) 274–280.
+[17] C.Q. Huang, S.Y. Luo, S.Y. Xu, J.B. Zhao, S.L. Jiang, W.T. Yang, Catalyzed chain
+extension of poly(butylene adipate) and poly(butylene succinate) with 2,2’-(1,4-
+phenylene)-bis(2-oxazoline), J. Appl. Polym. Sci. 115 (2010) 1555–1565.
+[18] N.K. Cokol, S. Kaya, M. Balci, A new synthon for the synthesis of aminoinositol
+derivatives, Tetrahedron Lett. 58 (2017) 2732–2735.
+[19] Z. Wei, J.H. Yang, X.J. Du, F. Xu, M. Zrinyi, Y. Osada, F. Li, Y.M. Chen, Dextran-
+based self-healing hydrogels formed by reversible Diels–Alder reaction under
+physiological conditions, Macromol. Rapid Commun. 34 (2013) 1464–1470.
+[20] Y.J. Xu, Z. Petrovic, S. Das, G.L. Wilkes, Morphology and properties of thermo-
+plastic polyurethanes with dangling chains in ricinoleate-based soft segments,
+Polymer 49 (2008) 4248–4258.
+Table 3
+The MH%, permanent set, and stress at 100% elongation of SH-NIPUs.
+SH-NIPUs
+1st cycle
+2nd cycle
+3rd cycle
+MH%a
+Permanent setb (%)
+Stressc (MPa)
+MH%a
+Permanent setb (%)
+Stressc (MPa)
+MH%a
+Permanent setb (%)
+Stressc (MPa)
+SH-NIPU-1
+4.9
+8
+2.2
+0.3
+8
+2.1
+0.3
+9
+2.0
+SH-NIPU-2
+7.6
+12
+3.0
+1.8
+14
+2.9
+1.6
+14
+2.8
+SH-NIPU-3
+89.0
+76
+6.9
+43.0
+76
+5.0
+21.0
+77
+3.7
+a The mechanical hysteresis percentage calculated by using Eq. (1).
+b The elongation at zero stress in the unloading cycle.
+c The stress at 100% elongation.
+D. Wang, et al.
+Materials Today Communications xxx (xxxx) xxxx
+7

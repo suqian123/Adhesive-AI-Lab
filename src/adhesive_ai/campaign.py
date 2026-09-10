@@ -34,6 +34,13 @@ OUTPUT_CONTRACT = (
     "wide_temp_adhesion_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct",
     "uv_retention_pct", "am_feasibility",
 )
+DEFAULT_ADHESION_CONTEXT = {
+    "substrate_material": "aluminum alloy",
+    "substrate_grade": "6061-T6",
+    "surface_condition": "solvent-degreased",
+    "adhesion_test_method": "lap shear",
+    "metric_scope": "adhesion_retention proxy; not an experimental lap-shear strength",
+}
 
 
 @dataclass(frozen=True)
@@ -100,11 +107,13 @@ def build_multiscale_campaign(
     facets: Sequence[str] = ("(111)", "(110)", "(100)"),
     vacancy_fractions: Sequence[float] = (0.0, 0.08, 0.15),
     hydroxyl_fractions: Sequence[float] = (0.0, 0.35),
-    temperatures_c: Sequence[float] = (-180.0, -120.0, -60.0, 25.0, 80.0, 150.0),
+    temperatures_c: Sequence[float] = (-180.0, -120.0, -60.0, 25.0, 80.0, 120.0, 150.0),
+    adhesion_context: Mapping[str, Any] | None = None,
 ) -> MultiscaleCampaign:
     """Build the complete DFT/MD/interface/CG task matrix for one candidate."""
     row = _candidate_record(candidate)
     candidate_id = str(row["candidate_id"])
+    resolved_adhesion_context = {**DEFAULT_ADHESION_CONTEXT, **dict(adhesion_context or {})}
     tasks: list[CalculationTask] = []
     for facet in facets:
         facet_id = facet.strip("()").replace("-", "m")
@@ -142,7 +151,11 @@ def build_multiscale_campaign(
     tasks.append(CalculationTask(
         "md-resin-pda-ceo2-interface", candidate_id, "atomistic-md", "interface_md", "resin-pda-ceo2-interface-binding",
         ("LAMMPS", "GROMACS"),
-        {"temperatures_c": tuple(float(value) for value in temperatures_c), "filler_pct": float(row.get("filler_pct", 0.0))},
+        {
+            "temperatures_c": tuple(float(value) for value in temperatures_c),
+            "filler_pct": float(row.get("filler_pct", 0.0)),
+            **resolved_adhesion_context,
+        },
         ("interface_binding_energy_mj_m2", "interface_covalent_bond_count", "adhesion_retention", "self_healing_efficiency"),
         "planned-requires-interface-topology",
         ("resin/PDA@CeO2 atomistic interface", "validated cross interactions", "interface area"),

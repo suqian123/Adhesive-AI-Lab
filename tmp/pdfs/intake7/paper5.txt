@@ -1,0 +1,450 @@
+\n--- PAGE 1 ---\nRESEARCH ARTICLE
+www.mcp-journal.de
+Synthesis of High Mechanical Strength and Thermally
+Recyclable and Reversible Polyurethane Adhesive by
+Diels–Alder Reaction
+Jian Xi and Niangui Wang*
+Recyclability of polyurethane materials is signiﬁcant to relieve environmental
+problems caused by damaged polymers. Inspired by plenty of self-healing
+properties based on dynamic covalent bonds. A high mechanical strength and
+thermally reversible polyurethane adhesive are acquired through
+co-polymerization of poly-1,4-butylene adipate glycol (PBA), soybean oil-based
+polyol (MESO), and toluene diisocyanate (TDI) whose linear polymer chains
+are constructed by Diels–Alder reaction between furfuryl alcohol (FA) and
+bismaleimide (BMI), named DAPU. Further, the obtained polyurethane
+adhesives show great recyclability, mechanical performance (Whose tensile
+strength can reach 91.7 MPa), and appropriate self-healing ability through the
+thermally reversible Diels–Alder covalent bonds and hydrogen bonds between
+urethane groups, which may pave a way for further development of recyclable
+materials.
+1. Introduction
+Polyurethane adhesives have excellent adhesion performance,
+simple operation, and no side reaction during curing, which thus
+have been widely used in the bonding of metal, wood, leather,
+plastic, and rubber.[1] However, with the generation of micro-
+cracks during the use of polyurethane adhesives, they could ef-
+fect even shorted the service life of polymer materials. If these
+cracks are not ﬁxed timely, they will lead to damage and even
+safety accidents.[2–4] Thus protective measures must be taken
+when cracks occur. Peculiar adhesives necessitate multiple func-
+tionalities to adjust to special environmental demands. Inspired
+by many natural materials that possess their own self-healing
+properties and could repair themselves after stimulation. A large
+plenty of self-healing polymers have been increased recently.
+Most importantly, these intelligent self-healing polymer materi-
+als could achieve multiple reversible repairs through reversible
+fracture recombination or dynamic exchange in their system
+then eliminating hazards and extending service life.[5–8] In addi-
+tion, due to the accumulation of polyurethane adhesive garbage,
+J. Xi, N. Wang
+Hubei University
+Wuhan 430062, China
+E-mail: nianguiwang@163.com
+The ORCID identiﬁcation number(s) for the author(s) of this article
+can be found under https://doi.org/10.1002/macp.202400199
+DOI: 10.1002/macp.202400199
+which is not treated correctly and has an
+adverse environmental inﬂuence, their end-
+of-life recovery and recycling are currently
+of extreme importance.[9] Further, to al-
+leviate the depletion of world reserves of
+petroleum fuels and increase the reuse
+value of polyurethane materials, it is vi-
+tal to improve the reprocessing capacity
+of polyurethane adhesives and to explore
+such latent green vegetable oils as soy-
+bean oil, which could partially replace fossil
+fuels.[10,11]
+With more and more attention the
+self-healing polymers have received, they
+could be divided into two categories: the
+healing process needs additional healing
+agents encapsulated in a polymer ma-
+trix and the healing process relies on
+incorporating covalent bond or non-covalent interaction into a
+polymer system without any other agents.[12] The reversible dy-
+namic covalent bonds including imide bonds, DA reactions,[13]
+boronate ester[14], and disulﬁde[15] which could form or break re-
+versibly through stimuli such as heat, light,[16] and thermal.[17]
+These properties allow dynamic polymer cross-linking groups to
+modify continuously through recombination and exchange. Nev-
+ertheless, the appropriate healing reaction temperature as well as
+the speed and eﬃciency of the healing process are still signiﬁcant
+challenges.[18]
+Up to the present, several eﬀorts have been prepared to in-
+vestigate recyclable polyurethane materials based on dynamic co-
+valent bonds. For example, Shan[19] obtained a novel hydropho-
+bic chain extender containing disulﬁde bonds into polymer
+backbones. Although this hydrophobic self-healing waterborne
+polyurethane (deﬁned as WPU) contributed to the scratch resis-
+tance, and reprocess ability, its tensile breaking strength could
+only reach 12.79 MPa which may further inﬂuence the feasibil-
+ity of practical applications. Sai[20] reported a thermal-driven self-
+healing waterborne polyurethane ﬁlms based on dynamic oxime-
+carbamate and DA bonds. The WPU ﬁlms showed strong self-
+healing capability and the self-healing eﬃciency of its mechani-
+cal properties could reach 92.9 ± 0.1% MPa after self-healing at
+120 °C for 4 h. In addition, its mechanical properties and thermal
+stability of the WPU ﬁlms were signiﬁcantly improved after the
+introduction of oxime-carbamate and DA bonds. Hence it is still
+a challenge to acquire high-performance polyurethane adhesives
+while maintaining excellent recyclability and self-healable ability.
+In this study, for the sake of improving the mechanical
+properties and further exploring the eﬀect of the dynamic
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (1 of 8)
+\n--- PAGE 2 ---\nwww.advancedsciencenews.com
+www.mcp-journal.de
+Figure 1. Design of the DA polyurethane adhesives. a) The molecular mechanism of DA reaction. b) Schematic structure of the DA polyurethane
+adhesives.
+cross-linked network of polyurethane adhesives based on Diels–
+Alder covalent bonds and hydrogen bonds. Soybean oil-based
+polyol (MESO) was synthesized by ring-opening epoxy soybean
+oil (ESO) with methanol, and poly-1,4-butylene adipate glycol
+(PBA) together as the soft segment of polyurethane adhesives,
+toluene diisocyanate (TDI) as the the isocyanate part. Then ther-
+mally reversible Diels–Alder covalent bonds were incorporated
+into traditional polyurethane materials by the furan group on
+furfuryl alcohol (FA) which could experience a Diels–Alder re-
+action with bismaleimide (BMI). Our functional polyurethane
+adhesives could achieve heat recovery in an environment of >
+135 °C and demonstrate greatly mechanical strength, and good
+recycling ability which in line with the concept of sustainability.
+2. Experimental Section
+2.1. Materials
+Self-made soybean oil-based polyol (MESO) (Supporting Infor-
+mation). Poly-1,4-butylene adipate glycol (PBA, Mn = 3000), the
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (2 of 8)
+\n--- PAGE 3 ---\nwww.advancedsciencenews.com
+www.mcp-journal.de
+Figure 2. a) FT-IR spectra of PBA (black), DAdiol (red), and DAPU-10 (blue). b) FT-IR spectra of FA (black), BMI (red), and DAdiol (blue). c) TGA curves
+of DAPU-0 (black), DAPU-10 (red) and DAPU-25 (blue) in N2 atmosphere. d) DTGA curves of DAPU-0 (black), DAPU-10 (red) and DAPU-25 (blue) in
+N2 atmosphere.
+PBA, and the MESO were dried at 140 °C for 3 h to get rid of
+excess water before use. Toluene-2,4-diisocyanate (TDI), Furfuryl
+alcohol (FA, AR), N,N-4,4-diphenylmethane-bismaleimide (BMI,
+98%), Butanediol (BDO, AR), Acetone (ACE, AR) Ethyl ether
+(Et2O, AR) and Dibutyltin dilaurate (DBTDL, AR), all the above
+were obtained from Macklin Biochemical Technology (Shanghai)
+Co., Ltd.
+2.2. Synthesis of DA-Diol
+First, FA(5.13 g, 48 mmol) was dissolved in anhydrous acetone
+in a 250 ml three-necked round-bottom ﬂask. The reaction was
+conducted at a reﬂux temperature(≈65 °C) under mechanical stir-
+ring. Then, a solution of BMI(7.17 g, 20 mmol) was added drop-
+wise to the above mixture. After stirring for 24 h, the obtained so-
+lution was cooled to room temperature and collected after remov-
+ing the solvent using a rotary evaporator. Subsequently, the con-
+centrated solution was added into ethyl ether to obtain buﬀpre-
+cipitates. Finally, the precipitates were washed three times with
+acetone and ethyl ether and dried in a vacuum.
+2.3. Synthesis of DAPU
+TDI, MESO, and PBA were added in a 100 ml three-necked
+round-bottom ﬂask with mechanical stirring and reﬂuxing, as il-
+lustrated in Figure 1b. After that two drops of DBTDL were added
+and the solution was kept stirring at 80 °C for 2.5 h. Then BDO
+was added and the solution was further stirred for 1 h. Afterward,
+DA-diol was added and the system was kept stirring for 4 h to ob-
+tain yellow DA polyurethane adhesive. Finally, the obtained prod-
+uct was spread on an iron plate and dried at room temperature
+overnight.
+2.4. Measurements
+1H-NMR spectra were carried out on a Varian Unity INOVA
+600 MHz instrument with CDCl3 as the solvent at room temper-
+ature. The mass spectrometer was equipped with an electrospray
+ionization (ESI) source. Analyses were carried out in positive
+mode, under the following working conditions: sheath gas pres-
+sure 40.53 bar, auxiliary gas pressure 8.106 bar, ion spray voltage
+3.2 kV, heated capillary temperature 300 °C. Data were acquired
+using thermo scientiﬁc Q Exactive. FTIR spectra were charac-
+terized by PE-Spectrum One spectrometer. The dried potassium
+bromide tablet was used as the scanning background, and each
+substance was mixed with potassium bromide, and the infrared
+test was carried out after tableting them. Diﬀerential scanning
+calorimetry (DSC) analysis was carried out by using a DSC200F3
+instrument. Samples were conducted in a nitrogen atmosphere
+at a heating rate of 10 °C min−1 and the heating range was
+−50–800 °C. Thermogravimetry analysis was carried out by us-
+ing Perkin Elmer TGA-2. Samples were conducted in a nitrogen
+atmosphere, the N2 ﬂow rate was 50 ml min−1, the heating range
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (3 of 8)
+\n--- PAGE 4 ---\nwww.advancedsciencenews.com
+www.mcp-journal.de
+Figure 3. a) The DSC curves of DAPU-0 (black), DAPU-5 (red), DAPU-10 (blue), DAPU-15 (green) and DAPU-25 (purple). b) The stress-strain curves of
+the original DAPUs. c) The stress-strain curves of the healed DAPUs. d) The breaking strength of the DAPUs before and after self-healing.
+was 30–800 °C, and the heating rate was 20 °C min−1. The stress-
+strain curves were recorded at room temperature on a CMT4000
+universal testing machine. A 10 KN load cell was used, and ten-
+sile speed was contant at 10 mm min−1. The microscopic mor-
+phologies of polyurethane materials were observed by a Jeol Jsm-
+6510 scanning electron microscope (SEM). Typically, the solid ad-
+hesive samples were cut in ≈0.5 cm2 slices and mounted onto
+metal stubs with double-sided carbon tape. The samples were
+then coated with a thin layer of gold using an automated sput-
+ter coater.
+3. Results and Discussion
+3.1. Characterization of DAdiol and DAPU
+As shown in Figure 2, DAdiol was ﬁrst prepared by Diels–Alder
+clicks reaction of FA with BMI. From the FT-IR spectra of DA-
+diol (Figure 2a), the characteristic absorption peaks of the furan
+ring of FA at 630 and 810 cm−1 disappeared while the charac-
+teristic absorption peak of BMI of C─H connected with C═C at
+686 cm−1 and the characteristic absorption peak of C─N─C at
+1146 cm−1 disappeared, while the vibration peak of C═C at 1176
+cm−1and the absorption peak of C─C at 1193 cm−1 of DA adducts
+emerged.[21–24] These results conﬁrmed the successful prepara-
+tion of the functional chain extender that contains Diels–Alder
+dynamic covalent bonds. In the second stage, a series of new
+polyurethane adhesives were synthesized through the chemical
+reaction of MESO, PBA, and TDI in diﬀerent ratios. (Table S1,
+Supporting Information) As depicted in Figure 2b, there were no
+obvious characteristic vibration peaks of -NCO at 2270 cm−1 and
+-OH at 3453 cm−1. The vibration peaks of the urethane group at
+3343 and 1533 cm−1 emerged which suggested that the copoly-
+merization of the three monomers was completed. In addition,
+with the appearance of the C─C vibration peak of DA adducts at
+1183 cm−1 and the C─N─C vibration peak of DA adducts at 1538
+cm−1,[25,26] it can be conﬁrmed that the cross-linked polyurethane
+that containing DA characteristic groups have obtained success-
+fully.
+3.2. Thermal Properties of DAPU
+To further investigate the eﬀect of dynamic DA bonds on the
+properties of polyurethane materials. DAdiol containing 0%, 5%,
+10%, 15% and 25%, respectively was introduced into the poly-
+mer chains and deﬁned as DAPU-0, DAPU-5, DAPU-10, DAPU-
+15 and DAPU-25. Diﬀerential scanning calorimetry (DSC) anal-
+ysis (Figure 3a) of the DAPU suggested that with the incorpo-
+ration of the DA covalent bonds, the DAPU adhesives showed
+only one obvious glass transition temperature (Tg), suggesting
+that DAdiol was evenly distributed in polyurethane materials and
+there was no apparent phase separation phenomenon. In addi-
+tion, from the ﬁgure 3a, it can be discovered that compared with
+the polyurethane adhesives without any DA groups, DAPU-25
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (4 of 8)
+\n--- PAGE 5 ---\nwww.advancedsciencenews.com
+www.mcp-journal.de
+Figure 4. a) Schematic illustration of the DAPU self-healing process. b) Schematic diagram of the bonding of DAPU to steel and the lap shear strength
+experiment procedure.
+showed an endothermic peak ranging from 95 to 123 °C (center-
+ing at 110 °C) indicating the occurrence of retro-DA reaction and
+laterally proving the successful incorporation of DA bonds.[27,28]
+According to the results of the Thermal Gravimetric Analyzer
+(TGA), the 5 wt% loss temperature (Td5%, deﬁned as the initial
+decomposition temperature) of DAPU-10 and PU were 271 and
+287 °C respectively, indicating that the addition of DAdiol deteri-
+orated the thermal stability of corresponding PU adhesives. From
+the DTGA curves in Figure 2d, the decomposition of traditional
+polyurethane adhesives includes three phases: urethane group
+degradation, chain scission in polyol, and further degradation to
+small molecules. However, with the incorporation of DA groups,
+the polyurethane adhesive materials almost showed one degrada-
+tion phase and with the increasing of DA bonds, only one degra-
+dation phase shifted to a higher temperature (from 335 to 395 °C).
+These results suggested that the higher content of the DA groups
+comes greater crosslinking density and thermal stability then giv-
+ing materials higher mechanical strength and better thermal re-
+sistance.
+3.3. Mechanical and Self-Healing Properties of DAPU
+The mechanical properties of the polyurethane adhesives with
+diﬀerent ratios of DAdiol were measured on a universal testing
+machine, and each sample was tested three times. As shown
+in Figure 3b, the stress-strain curves of the polyurethane adhe-
+sives at room temperature exhibited an increasing trend of ten-
+sile strength with the addition of DAdiol. Compared with the
+polyurethane adhesives without DAdiol, by modifying the ratio of
+DAdiol, the polyurethane adhesives showed remarkably tunable
+mechanical properties. When the DAdiol content was 10 mol%,
+the tensile strength increased from 43.38 to 91.74 MPa, the elon-
+gation of which could reach 2.04%. However, the tensile strength
+of DAPU-15 was higher than DAPU-10, but its elongation was
+lower than DAPU-10, which might relate to the fact that the ex-
+cessive addition of DAdiol may bring a disadvantageous eﬀect
+on polyurethane adhesives. To conclude, the formation of an ap-
+propriate amount of Diels–Alder covalent bonds would increase
+the cross-linking density of polyurethane adhesives and increase
+the rigid structure then improve the mechanical strength of
+polyurethane adhesives.[29–33] The self-healing behavior of DAPU
+might be caused by the dissociation and the recombination of hy-
+drogen bonds and the properties of Diels–Alder covalent bonds
+of coupling at the low temperature and recombining at the high
+temperature. In order to gain insight into the self-healing be-
+havior, the mechanical properties of the polyurethane adhesives
+with diﬀerent ratios of DAdiol were measured. To quantify the
+changes in performances before and after self-healing. The dam-
+aged samples were placed in the oven at 130 °C for 2 h to
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (5 of 8)
+\n--- PAGE 6 ---\nwww.advancedsciencenews.com
+www.mcp-journal.de
+Figure 5. SEM images of adhesive DAPU-25. a) The ﬁber-like structure of DAPU-25. Images of scratches before b) and after healing via a process
+including ﬁrst heating at 130 °C for 0.5 h c) and second at room temperature (30 °C) for 0.5 h d,e) Stress–strain curves of DAPU-10 strips. The broken
+strips were heated and repaired for mechanical testing. f) Tensile strength histogram for the DAPU-10.
+obtain the healed samples, and the bonding strength was mea-
+sured by the stress-strain curves of the iron sheets when they
+were pulled apart (as illustrated in Figure 4). The tensile curves of
+original and recycled samples were compared in Figure 3d and
+the self-healing eﬃciency (SHE) was calculated by the ratio of
+the maximum stress after healing and the maximum stress be-
+fore healing. The results showed identical mechanical properties
+(a maximum tensile strength at 93.29 MPa) before recycled. The
+mechanical properties of DAPU-15 were notably superior than
+those without any DA groups after recovery. It was interesting
+that the SHE of DAPUs showed a trend of increasing then de-
+creasing with the addition of DAdiol, and when the DAdiol con-
+tent was 10%, the SHE of polyurethane adhesives could reach
+49%. This phenomenon may contribute to the rigid structure of
+DA groups which gives materials high strength but its rigidity
+may bring a disadvantageous eﬀect in turn and reduce the eﬃ-
+ciency of material healing. The adhesive microstructure was in-
+vestigated by SEM to better understand the structure-property
+relationships. Figure 5 shows the microstructure of DAPU-25.
+With the increase of the amount of the functional chain extender
+(DAdiol), polyurethane adhesive exhibits a more dense intercon-
+nected ﬁber-like structure. In addition, Figure 4c shows that fol-
+lowing the healing step at 130 °C for 0.5 h, the width of the scratch
+was reduced signiﬁcantly and was healed almost completely after
+0.5 h at room temperature (Figure 5d). Through these pictures, it
+can be proved that the successful introduction of DAdiol endows
+polyurethane adhesives with certain thermal healing properties.
+3.4. Thermal Recyclability of DAPU
+The introduction of DAdiol enabled polyurethane adhesives
+the ability to coupling at low temperatures and decoupling at
+high temperatures through DA bonds. Taking DAPU-10 as an
+example, the tensile curves of original and recycled samples
+were compared in Figure 5e. The polyurethane materials were
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (6 of 8)
+\n--- PAGE 7 ---\nwww.advancedsciencenews.com
+www.mcp-journal.de
+dissolved in Butyl Acetate and cut to rectangle shapes (size:
+133.0 mm × 12.0 mm × 2 mm). The broken strips were heated
+and repaired for the subsequent mechanical testing and were
+deﬁned as Recycle-1 to Recycle-3. The results showed identical
+tensile strength (91.95 MPa) and breaking elongation (16.53%)
+as the before recycled. However, the samples after recovery were
+signiﬁcantly worse and its tensile strength could only reach half
+the original level. When the sample was recovered for the second
+time, the mechanical strength of the Recycle-2 polyurethane ma-
+terials could only reaching 42.59% of the initial tensile strength.
+It is interesting that the results of the Recycle-3 were similar to
+the Recycle-2. Although, the dynamic DA bonds and no-covalent
+hydrogen bonds introduced into traditional polyurethane chains
+can endow materials with certain recyclability and reprocessing
+properties. The reason for this unideal phenomenon may be be-
+cause the rigid structure of the introduced DAdiol has little dis-
+advantaged eﬀect on the healing eﬃciency of materials. Hence,
+how to maintain its original performance while continuously im-
+proving the eﬃciency of its reuse is still a major challenge.
+Our study shows that the molar ratio of the Diels–Alder cova-
+lent bonds has a large eﬀect on the reprocessing of the DAPU.
+Under thermal stimulation, the dynamic covalent bonds and no-
+covalent bonds introduced in this material could form the ther-
+mally reversible dynamic networks and could break and recon-
+struct that bringing the polyurethane adhesives excellent recycla-
+bility, reprocessing ability and largely improving their mechani-
+cal properties.
+4. Conclusion
+In this work, A thermally recyclable and reversible polyurethane
+adhesive was designed and synthesized. This polyurethane has
+a cross-linked network structure which consists of reversible
+dynamic covalent bonds formed by Diels–Alder reaction. The
+reversible dynamic cross-linked structure increased the cross-
+linking density of the material hence improving the mechanical
+strength of the polyurethane adhesives. As a result, the tensile
+strength of DAPU-10 could reach 91 MPa. Due to the Diels–Alder
+covalent bond, the DAPU shows thermal stimulus properties and
+appropriate self-healing function. This work provides a method
+to enable polyurethane adhesives with high strength and ther-
+mally structure recycling ability which may pave the way for fur-
+ther applications of sustainable thermally-responsive self-healing
+adhesives.
+Supporting Information
+Supporting Information is available from the Wiley Online Library or from
+the author.
+Acknowledgements
+The authors are grateful to the Faculty of Science, Hubei University, for
+ﬁnancial and instrument support.
+Conﬂict of Interest
+The authors declare no conﬂict of interest.
+Data Availability Statement
+The data that support the ﬁndings of this study are available from the cor-
+responding author upon reasonable request.
+Keywords
+Diels–Alder reaction, high strength, polyurethane adhesive, reversibility,
+thermally recyclable
+Received: July 1, 2024
+Published online: July 9, 2024
+[1] Y. Ma, X. Zhu, Y. Zhang, X. Li, L. S. X. Chang, S. Lv, Y. Zhang, Ind.
+Crops Prod. 2023, 209, 117924.
+[2] Y. Wei, X. Jin, Q. Luo, Q. Li, G. Sun, Composites, Part B 2024, 276,
+111225.
+[3] L. Wang, X. Wang, T. Liu, F. Sun, S. Li, Y. Geng, B. Yao, J. Xu, J. Fu, npj
+Mater. Degrad. 2023, 7, 96.
+[4] K. Sullivan, K. D. Peterman, J. Constr. Steel Res. 2023, 213, 108405.
+[5] S. Kadam, S. Chavan, N. Jee kanu, Mater. Res. Express. 2021, 8,
+052001.
+[6] R. Ikura, J. Park, M. Osaki, H. Yamaguchi, A. Harada, Y. Takashima,
+NPG Asia Mater. 2022, 14, 10.
+[7] Y. Paez-Amieva, J. Carpena-Montesinos, J. M. Martín-Martínez, Poly-
+mers 2023, 15, 2152.
+[8] Y. Hou, X. H., Y. Peng, H. Xiong, M. Cai, Y. Wen, Q. Wu, J. Wu, Polymers
+2022, 264, 125574.
+[9] G. Rossignolo, G. Malucelli, A. Lovenzetti, Green Chem. 2023, 26,
+1132.
+[10] J. Goodenough, A. Fitzgerald, K. Bean, J. Hatcliﬀe, A. Slark, I.
+Hamerton, I. Bond, Mater. Chem. Phys. 2023, 299, 127464.
+[11] A. Delavarde, G. Savin, P. Derkenne, M. Boursier, R. Mavales-Cerrada,
+B. Nottelet, J. Pinaud, S. Caillol, Prog. Polym. Sci. 2024, 151, 101805.
+[12] N. Wen, T. Song, Z. Ji, D. Jiang, Z. Wu, Y. Wang, Z. Guo, React. Funct.
+Polym. 2021, 168, 105041.
+[13] T. T. Truong, H. T. Nguyen, M. N. Phan, L.-T. T. Nguyen, J. Polym. Sci.,
+Part A: Polym. Chem. 2018, 56, 1806.
+[14] C. He, J. Dong, C. Xu, X. Pan, ACS Polym. Au 2022, 3, 5.
+[15] X. Zheng, H. Yang, Y. Sun, Y. Zhang, Y. Guo, Polymers 2020, 212,
+123111.
+[16] Z. Wu, J. Ma, R. Xu, S. Zhong, M. Gong, G. Wang, Macromol. Rapid
+Commun. 2023, 44, 2300360.
+[17] W. Wu, H. Yang, J. Liu, Y. Luo, G. Mo, Z. Hu, L. Zhang, K. Huang,
+Macromol. Rapid Commun. 2023, 44, 2300252.
+[18] R. Avshalomov, N. Jarach, H. Dodiuk, Eur. Polym. J. 2024, 209,
+112920.
+[19] B. Shan, Y. Wu, X. Cao, B. Tang, K. Wei, Polymer 2023, 285, 126385.
+[20] F. Sai, H. Zhang, J. Qu, J. Wang, X. Zhu, P. Ye, Z. Zhang, Prog. Org.
+Coat. 2023, 178, 107460.
+[21] L. Zhao, X. Xu, W. Xiao, H. Li, H. Feng, C. Liu, Y. Qiao, X. Bai, D. Wang,
+C. Qu, Polymer 2023, 15, 1436.
+[22] V. S. B. D. Yuan, A. Petel, I. Manas-Zloczower, Polymer 2018, 147, 196.
+[23] M. Xu, N. Liu, H. Mo, X. Lu, J. Dou, B. Tan, Polymer 2022, 14, 3334.
+[24] Y. Wei, X. Ma, Adv. Polym. Technol. 2017, 37, 1987.
+[25] X. Li, R. Yu, Y. He, Y. Zhang, X. Yang, X. Zhao, W. Huang, Polymer
+2020, 200, 122532.
+[26] Y. J. Kim, P. H. Huh, B. K. Kim, J. Polym. Sci. 2014, 53, 468.
+[27] J. Dong, W. Shi, J. Liu, S. Lu, H. Zhou, S. Cui, M. Zhang, G. Su, Fibers
+Polym. 2023, 24, 3061.
+[28] Z. Dong, Y. Sun, S. Guan, A. Chen, Macromol. Rapid Commun. 2023,
+44, 2300361.
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (7 of 8)
+\n--- PAGE 8 ---\nwww.advancedsciencenews.com
+www.mcp-journal.de
+[29] K. Zhao, L. V. C., J. Zheng, Sci. China Technol. Sci. 2020, 63, 740.
+[30] Y. Yang, X. Lu, W. Wang, Mater. Des. 2017, 127, 30.
+[31] S. Ding, G. Zhu, S. Zhao, W. Wu, P. Jin, Y. Jiao, W. Zhai, L. Zhou, Y.
+Luo, Polymer 2022, 251, 124711.
+[32] J. Zhang, C. Zhang, Q. Shang, Y. Hu, F. Song, P. Jia, G. Zhu, J. Huang,
+C. Liu, Y. Zhou, Eur. Polym. J. 2022, 169, 111133.
+[33] J. Tu, H. Xu, J. Tian, H. Li, L. Li, P. Li, X. Guo, Polymer 2022, 265,
+125590.
+Macromol. Chem. Phys. 2024, 225, 2400199
+© 2024 Wiley-VCH GmbH
+2400199 (8 of 8)

@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 import os
 import sqlite3
+import hashlib
+from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 from dataclasses import asdict, is_dataclass
@@ -36,6 +38,14 @@ SCHEMA = (
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS experimental_results ("
     "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, formulation_id VARCHAR(80) NULL, candidate_library_version VARCHAR(64) NULL, test_batch VARCHAR(64) NOT NULL, test_temperature_c DECIMAL(7,2) NULL, properties JSON NOT NULL, source VARCHAR(128) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_experiment_candidate (candidate_id), INDEX ix_experiment_formulation (formulation_id)"
+    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+    "CREATE TABLE IF NOT EXISTS literature_results ("
+    "id BIGINT AUTO_INCREMENT PRIMARY KEY, candidate_id VARCHAR(32) NOT NULL, formulation_id VARCHAR(80) NULL, candidate_library_version VARCHAR(64) NULL, "
+    "doi VARCHAR(256) NOT NULL, source_location VARCHAR(256) NOT NULL, data_license VARCHAR(256) NOT NULL, conditions JSON NOT NULL, properties JSON NOT NULL, "
+    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_literature_candidate (candidate_id), INDEX ix_literature_doi (doi)"
+    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+    "CREATE TABLE IF NOT EXISTS literature_candidates ("
+    "candidate_id VARCHAR(32) PRIMARY KEY, formulation_id VARCHAR(80) NOT NULL, candidate_library_version VARCHAR(64) NOT NULL, doi VARCHAR(256) NOT NULL, sample_label VARCHAR(128) NOT NULL, descriptors JSON NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX ix_literature_candidate_doi (doi)"
     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
     "CREATE TABLE IF NOT EXISTS model_versions ("
     "model_version VARCHAR(96) PRIMARY KEY, metadata JSON NOT NULL, artifact_path VARCHAR(512) NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
@@ -87,6 +97,10 @@ def _ensure_mysql_identity_columns(conn: Any) -> None:
             ("formulation_id", "VARCHAR(80) NULL"),
             ("candidate_library_version", "VARCHAR(64) NULL"),
         ),
+        "literature_results": (
+            ("formulation_id", "VARCHAR(80) NULL"),
+            ("candidate_library_version", "VARCHAR(64) NULL"),
+        ),
     }
     cursor = conn.cursor()
     try:
@@ -119,6 +133,8 @@ def sqlite_connection() -> Iterator[sqlite3.Connection]:
     conn = sqlite3.connect(path)
     try:
         conn.execute("CREATE TABLE IF NOT EXISTS experimental_results (id INTEGER PRIMARY KEY AUTOINCREMENT, candidate_id TEXT NOT NULL, formulation_id TEXT, candidate_library_version TEXT, test_batch TEXT NOT NULL, test_temperature_c REAL, properties TEXT NOT NULL, source TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
+        conn.execute("CREATE TABLE IF NOT EXISTS literature_results (id INTEGER PRIMARY KEY AUTOINCREMENT, candidate_id TEXT NOT NULL, formulation_id TEXT, candidate_library_version TEXT, doi TEXT NOT NULL, source_location TEXT NOT NULL, data_license TEXT NOT NULL, conditions TEXT NOT NULL, properties TEXT NOT NULL, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
+        conn.execute("CREATE TABLE IF NOT EXISTS literature_candidates (candidate_id TEXT PRIMARY KEY, formulation_id TEXT NOT NULL, candidate_library_version TEXT NOT NULL, doi TEXT NOT NULL, sample_label TEXT NOT NULL, descriptors TEXT NOT NULL, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
         existing_columns = {row[1] for row in conn.execute("PRAGMA table_info(experimental_results)")}
         if "formulation_id" not in existing_columns:
             conn.execute("ALTER TABLE experimental_results ADD COLUMN formulation_id TEXT")
@@ -389,10 +405,23 @@ def load_candidate_results(limit: int = 300) -> pd.DataFrame:
         return pd.read_sql(query, conn, params=(limit,))
 
 
+def default_test_batch(value: Any = None) -> str:
+    """Return a traceable batch label for an omitted manual experiment batch."""
+    if value is None or pd.isna(value):
+        return f"manual-{datetime.now(timezone.utc):%Y%m%d}"
+    normalized = str(value).strip()
+    return normalized or f"manual-{datetime.now(timezone.utc):%Y%m%d}"
+
+
+def _text(value: Any) -> str:
+    """Normalize an optional scalar CSV value without turning NaN into text."""
+    return "" if value is None or pd.isna(value) else str(value).strip()
+
+
 def save_experiment(
     candidate_id: str,
     properties: dict[str, Any],
-    test_batch: str = "manual",
+    test_batch: str | None = None,
     temperature_c: float | None = None,
     source: str | None = None,
     *,
@@ -451,8 +480,7 @@ def save_experiments(
             raise ValueError(f"实验记录缺少候选库版本：{candidate_id}")
         if candidate_library_versions is not None and library_version != candidate_library_versions.get(candidate_id):
             raise ValueError(f"实验记录的候选库版本与当前候选不匹配：{candidate_id}")
-        raw_batch = row.get("test_batch")
-        test_batch = "manual" if raw_batch is None or pd.isna(raw_batch) else str(raw_batch).strip() or "manual"
+        test_batch = default_test_batch(row.get("test_batch"))
         temperature_c = row.get("test_temperature_c")
         if temperature_c is not None and pd.isna(temperature_c):
             temperature_c = None
@@ -521,11 +549,166 @@ def load_experiments(
     return pd.concat([frame.drop(columns=["properties"]), expanded], axis=1)
 
 
+def save_literature_results(
+    frame: pd.DataFrame,
+    *,
+    candidate_formulations: Mapping[str, str],
+    candidate_library_versions: Mapping[str, str],
+) -> int:
+    """Append traceable literature measurements after identity and provenance checks."""
+    if frame is None or frame.empty:
+        return 0
+    required = {"candidate_id", "formulation_id", "candidate_library_version", "doi", "source_location", "data_license"}
+    missing = required - set(frame.columns)
+    if missing:
+        raise ValueError(f"文献数据缺少字段：{', '.join(sorted(missing))}")
+    metadata = required | {"test_temperature_c", "conditions", "created_at"}
+    records = []
+    for row in frame.to_dict("records"):
+        candidate_id = _text(row.get("candidate_id"))
+        formulation_id = _text(row.get("formulation_id"))
+        library_version = _text(row.get("candidate_library_version"))
+        if not candidate_id or candidate_formulations.get(candidate_id) != formulation_id:
+            raise ValueError(f"文献记录的候选编号或配方指纹不匹配：{candidate_id}")
+        if candidate_library_versions.get(candidate_id) != library_version:
+            raise ValueError(f"文献记录的候选库版本不匹配：{candidate_id}")
+        doi = _text(row.get("doi"))
+        location = _text(row.get("source_location"))
+        license_name = _text(row.get("data_license"))
+        if not doi or not location or not license_name:
+            raise ValueError(f"文献记录必须提供 DOI、表/图定位和数据许可：{candidate_id}")
+        raw_conditions = row.get("conditions")
+        conditions = {} if raw_conditions is None or pd.isna(raw_conditions) else raw_conditions
+        if isinstance(conditions, str):
+            try:
+                conditions = json.loads(conditions)
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"文献记录的 conditions 必须为 JSON：{candidate_id}") from exc
+        if not isinstance(conditions, Mapping):
+            raise ValueError(f"文献记录的 conditions 必须为对象：{candidate_id}")
+        temperature = row.get("test_temperature_c")
+        if temperature is not None and not pd.isna(temperature):
+            conditions = {**conditions, "test_temperature_c": float(temperature)}
+        properties = {key: value for key, value in row.items() if key not in metadata and not (isinstance(value, float) and pd.isna(value))}
+        if not properties:
+            raise ValueError(f"文献记录不包含任何性质数据：{candidate_id}")
+        records.append((candidate_id, formulation_id, library_version, doi, location, license_name, _json(conditions), _json(properties)))
+    try:
+        with connection() as conn:
+            cursor = conn.cursor()
+            try:
+                cursor.executemany(
+                    "INSERT INTO literature_results (candidate_id,formulation_id,candidate_library_version,doi,source_location,data_license,conditions,properties) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+                    records,
+                )
+            finally:
+                cursor.close()
+    except DatabaseError:
+        with sqlite_connection() as conn:
+            conn.executemany(
+                "INSERT INTO literature_results (candidate_id,formulation_id,candidate_library_version,doi,source_location,data_license,conditions,properties) VALUES (?,?,?,?,?,?,?,?)",
+                records,
+            )
+    return len(records)
+
+
+def register_literature_candidates(frame: pd.DataFrame) -> pd.DataFrame:
+    """Create stable, separate candidate identities for published formulations."""
+    if frame is None or frame.empty or not {"doi", "sample_label"}.issubset(frame.columns):
+        raise ValueError("文献候选必须包含 doi 和 sample_label")
+    excluded = {
+        "candidate_id", "formulation_id", "candidate_library_version", "doi", "sample_label", "source_location", "data_license",
+        "conditions", "test_temperature_c", "created_at",
+        "wide_temp_adhesion_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct", "uv_retention_pct", "am_feasibility",
+    }
+    prepared = []
+    for row in frame.to_dict("records"):
+        doi, label = _text(row.get("doi")), _text(row.get("sample_label"))
+        if not doi or not label:
+            raise ValueError("文献候选必须提供 DOI 和样品标签")
+        descriptors = {key: value for key, value in row.items() if key not in excluded and not (isinstance(value, float) and pd.isna(value))}
+        signature = hashlib.sha256(_json({"doi": doi.lower(), "sample_label": label, "descriptors": descriptors}).encode("utf-8")).hexdigest().upper()
+        prepared.append({
+            "candidate_id": f"LIT-{signature[:12]}", "formulation_id": f"LITFMT-{signature[:16]}",
+            "candidate_library_version": "literature-library-v1", "doi": doi, "sample_label": label, "descriptors": descriptors,
+        })
+    params = [(row["candidate_id"], row["formulation_id"], row["candidate_library_version"], row["doi"], row["sample_label"], _json(row["descriptors"])) for row in prepared]
+    try:
+        with connection() as conn:
+            cursor = conn.cursor()
+            try:
+                cursor.executemany("INSERT INTO literature_candidates (candidate_id,formulation_id,candidate_library_version,doi,sample_label,descriptors) VALUES (%s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE descriptors=VALUES(descriptors)", params)
+            finally:
+                cursor.close()
+    except DatabaseError:
+        with sqlite_connection() as conn:
+            conn.executemany("INSERT INTO literature_candidates (candidate_id,formulation_id,candidate_library_version,doi,sample_label,descriptors) VALUES (?,?,?,?,?,?) ON CONFLICT(candidate_id) DO UPDATE SET descriptors=excluded.descriptors", params)
+    return pd.DataFrame(prepared).drop(columns=["descriptors"])
+
+
+def load_literature_candidates() -> pd.DataFrame:
+    """Load published formulations as descriptor rows for literature calibration."""
+    try:
+        with connection() as conn:
+            cursor = conn.cursor(dictionary=True)
+            try:
+                cursor.execute("SELECT candidate_id,formulation_id,candidate_library_version,doi,sample_label,descriptors FROM literature_candidates")
+                frame = pd.DataFrame(cursor.fetchall())
+            finally:
+                cursor.close()
+    except DatabaseError:
+        with sqlite_connection() as conn:
+            frame = pd.read_sql_query("SELECT candidate_id,formulation_id,candidate_library_version,doi,sample_label,descriptors FROM literature_candidates", conn)
+    if frame.empty:
+        return frame
+    descriptors = frame["descriptors"].apply(lambda value: json.loads(value) if isinstance(value, str) else dict(value or {})).apply(pd.Series)
+    return pd.concat([frame.drop(columns=["descriptors"]), descriptors], axis=1)
+
+
+def load_literature_results(
+    candidate_ids: list[str] | None = None,
+    *,
+    formulation_ids: Mapping[str, str] | None = None,
+) -> pd.DataFrame:
+    """Load literature measurements, retaining provenance alongside expanded values."""
+    try:
+        with connection() as conn:
+            query = "SELECT candidate_id,formulation_id,candidate_library_version,doi,source_location,data_license,conditions,properties,created_at FROM literature_results"
+            params: tuple[Any, ...] = ()
+            if candidate_ids:
+                query += " WHERE candidate_id IN (" + ",".join(["%s"] * len(candidate_ids)) + ")"
+                params = tuple(candidate_ids)
+            cursor = conn.cursor(dictionary=True)
+            try:
+                cursor.execute(query, params)
+                frame = pd.DataFrame(cursor.fetchall())
+            finally:
+                cursor.close()
+    except DatabaseError:
+        with sqlite_connection() as conn:
+            query = "SELECT candidate_id,formulation_id,candidate_library_version,doi,source_location,data_license,conditions,properties,created_at FROM literature_results"
+            params: list[str] = []
+            if candidate_ids:
+                query += " WHERE candidate_id IN (" + ",".join(["?"] * len(candidate_ids)) + ")"
+                params = candidate_ids
+            frame = pd.read_sql_query(query, conn, params=params)
+    if frame.empty:
+        return frame
+    if formulation_ids:
+        frame = frame.loc[frame["candidate_id"].astype(str).map(formulation_ids).eq(frame["formulation_id"])].copy()
+    if frame.empty:
+        return frame.drop(columns=["properties"])
+    values = frame["properties"].apply(lambda value: json.loads(value) if isinstance(value, str) else dict(value or {})).apply(pd.Series)
+    conditions = frame["conditions"].apply(lambda value: json.loads(value) if isinstance(value, str) else dict(value or {})).apply(pd.Series)
+    return pd.concat([frame.drop(columns=["properties", "conditions"]), conditions, values], axis=1)
+
+
 def save_model_version(model: Any, artifact_path: str | None = None) -> None:
     """Persist model metadata so predictions can be traced to a training version."""
     metadata = {
         "feature_names": getattr(model, "feature_names", ()), "target_names": getattr(model, "target_names", ()),
         "training_rows": getattr(model, "training_rows", 0), "experimental_rows": getattr(model, "experimental_rows", 0),
+        "literature_rows": getattr(model, "literature_rows", 0),
         "validation_metrics": getattr(model, "validation_metrics", {}), "created_at": getattr(model, "created_at", ""),
         "data_provenance": getattr(model, "data_provenance", {}),
     }

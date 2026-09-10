@@ -1,6 +1,7 @@
 import pytest
 import numpy as np
 import pandas as pd
+import re
 from contextlib import contextmanager
 
 import adhesive_ai.database as database
@@ -60,6 +61,19 @@ def test_experiment_and_model_persistence_fall_back_to_sqlite(monkeypatch, tmp_p
     assert len(stored) == 1 and stored.iloc[0].wide_temp_adhesion_mpa == 28.5
 
 
+def test_blank_experiment_batch_receives_a_daily_manual_label(monkeypatch, tmp_path):
+    monkeypatch.setattr(database, "mysql_connector", None)
+    monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
+
+    database.save_experiment(
+        "CL-00001", {"wide_temp_adhesion_mpa": 28.5}, test_batch="",
+        formulation_id="FMT-001", candidate_library_version="candidate-library-v3",
+    )
+
+    stored = database.load_experiments(["CL-00001"], formulation_ids={"CL-00001": "FMT-001"})
+    assert re.fullmatch(r"manual-\d{8}", stored.iloc[0].test_batch)
+
+
 def test_batch_experiment_persistence_falls_back_to_sqlite(monkeypatch, tmp_path):
     monkeypatch.setattr(database, "mysql_connector", None)
     monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
@@ -83,6 +97,52 @@ def test_batch_experiment_persistence_falls_back_to_sqlite(monkeypatch, tmp_path
     assert set(stored.candidate_id) == {"CL-00001", "CL-00002"}
     assert stored.loc[stored.candidate_id == "CL-00001", "source"].iloc[0] == "lab-a"
     assert stored.loc[stored.candidate_id == "CL-00002", "source"].iloc[0] == "csv-upload"
+
+
+def test_conditioned_adhesion_metadata_is_preserved_in_experiment_history(monkeypatch, tmp_path):
+    monkeypatch.setattr(database, "mysql_connector", None)
+    monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
+    database.save_experiment(
+        "CL-00001",
+        {
+            "wide_temp_adhesion_mpa": 18.4,
+            "substrate_material": "铝合金",
+            "substrate_grade": "6061-T6",
+            "surface_condition": "阳极氧化",
+            "adhesion_condition_record": True,
+            "screening_reference_condition": False,
+        },
+        test_batch="matrix-1",
+        temperature_c=150,
+        formulation_id="FMT-001",
+        candidate_library_version="candidate-library-v3",
+    )
+
+    stored = database.load_experiments(["CL-00001"], formulation_ids={"CL-00001": "FMT-001"})
+
+    assert stored.iloc[0].test_temperature_c == 150
+    assert stored.iloc[0].substrate_grade == "6061-T6"
+    assert bool(stored.iloc[0].adhesion_condition_record) is True
+
+
+def test_literature_persistence_requires_provenance_and_preserves_conditions(monkeypatch, tmp_path):
+    monkeypatch.setattr(database, "mysql_connector", None)
+    monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(tmp_path / "lab.sqlite3"))
+    frame = pd.DataFrame([{
+        "candidate_id": "CL-00001", "formulation_id": "FMT-001", "candidate_library_version": "candidate-library-v3",
+        "doi": "10.1000/example", "source_location": "Table 2", "data_license": "CC BY 4.0",
+        "conditions": '{"humidity_pct": 50}', "test_temperature_c": 25,
+        "wide_temp_adhesion_mpa": 28.5,
+    }])
+    saved = database.save_literature_results(
+        frame, candidate_formulations={"CL-00001": "FMT-001"},
+        candidate_library_versions={"CL-00001": "candidate-library-v3"},
+    )
+    stored = database.load_literature_results(["CL-00001"], formulation_ids={"CL-00001": "FMT-001"})
+    assert saved == 1
+    assert stored.iloc[0].doi == "10.1000/example"
+    assert stored.iloc[0].humidity_pct == 50
+    assert stored.iloc[0].test_temperature_c == 25
 
 
 def test_experiments_reject_mismatched_formulation_and_filter_legacy_rows(monkeypatch, tmp_path):

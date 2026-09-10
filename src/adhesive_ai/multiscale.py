@@ -86,7 +86,7 @@ def calculate_resin_md(
     filler_pct: float, temperatures_c: np.ndarray | None = None,
 ) -> ResinMDResult:
     """Generate temperature-dependent all-atom MD screening observables."""
-    temperature = np.asarray(temperatures_c if temperatures_c is not None else np.array([-180., -120., -60., 25., 80., 150.]))
+    temperature = np.asarray(temperatures_c if temperatures_c is not None else np.array([-180., -120., -60., 25., 80., 120., 150.]))
     xlink = _clip(crosslink_density, 0.15, 1.0)
     filler = _clip(filler_pct / 100.0, 0.0, 0.20)
     tg = 38 + 238 * _clip(resin_thermal, 0, 1) + 82 * xlink - 38 * dynamic_mobility + 16 * filler

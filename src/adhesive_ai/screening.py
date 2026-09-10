@@ -59,6 +59,7 @@ class ScreeningModel:
     validation_metrics: dict[str, float] = field(default_factory=dict)
     created_at: str = ""
     data_provenance: dict[str, int] = field(default_factory=dict)
+    literature_rows: int = 0
 
 
 def save_model(model: ScreeningModel, path: str | Path) -> Path:
@@ -72,7 +73,7 @@ def save_model(model: ScreeningModel, path: str | Path) -> Path:
         classes=np.asarray(model.classes), training_rows=model.training_rows, experimental_rows=model.experimental_rows,
         version=model.version, correction_bias=np.asarray(model.correction_bias if model.correction_bias is not None else []),
         validation_metrics=json.dumps(model.validation_metrics), created_at=model.created_at,
-        data_provenance=json.dumps(model.data_provenance),
+        data_provenance=json.dumps(model.data_provenance), literature_rows=model.literature_rows,
     )
     return target
 
@@ -88,6 +89,7 @@ def load_model(path: str | Path) -> ScreeningModel:
             int(payload["training_rows"]), int(payload["experimental_rows"]), str(payload["version"]),
             bias if len(bias) else None, json.loads(str(payload["validation_metrics"])), str(payload["created_at"]),
             json.loads(str(payload["data_provenance"])) if "data_provenance" in payload.files else {},
+            int(payload["literature_rows"]) if "literature_rows" in payload.files else 0,
         )
 
 
@@ -120,11 +122,22 @@ def _multi_objective_score(predictions: pd.DataFrame) -> np.ndarray:
     return 100 * scaled @ np.array([0.30, 0.18, 0.22, 0.18, 0.12])
 
 
-def _with_experiments(candidates: pd.DataFrame, experiments: pd.DataFrame | None) -> tuple[pd.DataFrame, int]:
+def _with_experiments(
+    candidates: pd.DataFrame, experiments: pd.DataFrame | None, literature: pd.DataFrame | None = None,
+) -> tuple[pd.DataFrame, int, int]:
     frame = candidates.copy()
-    if experiments is None or experiments.empty:
-        return frame, 0
-    exp = experiments.copy()
+    usable = []
+    if literature is not None and not literature.empty:
+        literature_frame = literature.copy()
+        literature_frame["_measurement_kind"] = "literature"
+        usable.append(literature_frame)
+    if experiments is not None and not experiments.empty:
+        experiment_frame = experiments.copy()
+        experiment_frame["_measurement_kind"] = "experiment"
+        usable.append(experiment_frame)
+    if not usable:
+        return frame, 0, 0
+    exp = pd.concat(usable, ignore_index=True, sort=False)
     if "properties" in exp.columns:
         expanded = exp["properties"].apply(lambda value: json.loads(value) if isinstance(value, str) else (value or {})).apply(pd.Series)
         exp = pd.concat([exp.drop(columns=["properties"]), expanded], axis=1)
@@ -133,6 +146,18 @@ def _with_experiments(candidates: pd.DataFrame, experiments: pd.DataFrame | None
             exp[target] = exp[source]
     if "candidate_id" not in exp.columns:
         raise ValueError("实验数据必须包含 candidate_id")
+    # A strength measured at an extreme temperature or a non-reference surface
+    # is not interchangeable with the candidate-level wide-temperature proxy.
+    # Keep it in history for the condition matrix, but calibrate the legacy
+    # candidate ranking only when the operator explicitly marks it as a
+    # reference condition.
+    if "adhesion_condition_record" in exp.columns:
+        conditioned = exp["adhesion_condition_record"].fillna(False).astype(bool)
+        reference = exp.get("screening_reference_condition", pd.Series(False, index=exp.index)).fillna(False).astype(bool)
+        if "wide_temp_adhesion_mpa" in exp.columns:
+            exp.loc[conditioned & ~reference, "wide_temp_adhesion_mpa"] = np.nan
+        exp["_candidate_level_preferred"] = (~conditioned | reference).astype(int)
+        exp = exp.sort_values("_candidate_level_preferred", kind="stable")
     exp = exp.drop_duplicates("candidate_id", keep="last").set_index("candidate_id")
     frame = frame.set_index("candidate_id")
     matched = frame.index.intersection(exp.index)
@@ -142,11 +167,12 @@ def _with_experiments(candidates: pd.DataFrame, experiments: pd.DataFrame | None
         if name in exp.columns:
             values = pd.to_numeric(exp.loc[matched, name], errors="coerce")
             frame.loc[matched, name] = values.combine_first(frame.loc[matched, name])
-    return frame.reset_index(), len(matched)
+    kinds = exp.loc[matched, "_measurement_kind"]
+    return frame.reset_index(), int(kinds.eq("experiment").sum()), int(kinds.eq("literature").sum())
 
 
 def train_screening_models(
-    candidates: pd.DataFrame, experiments: pd.DataFrame | None = None,
+    candidates: pd.DataFrame, experiments: pd.DataFrame | None = None, literature: pd.DataFrame | None = None,
     *, alpha: float = 0.15, version: str = "proxy-v1",
 ) -> ScreeningModel:
     """Train multi-target regression and one-vs-rest classification models."""
@@ -156,43 +182,57 @@ def train_screening_models(
         raise ValueError("候选库不能为空")
     if experiments is not None and not isinstance(experiments, pd.DataFrame):
         experiments = pd.DataFrame(experiments)
-    frame, experimental_rows = _with_experiments(candidates, experiments)
+    frame, experimental_rows, literature_rows = _with_experiments(candidates, experiments, literature)
     x = _numeric(frame, FEATURE_COLUMNS)
-    y_frame = frame.reindex(columns=OUTPUT_COLUMNS, fill_value=0).apply(pd.to_numeric, errors="coerce").fillna(0.0)
+    y_frame = frame.reindex(columns=OUTPUT_COLUMNS).apply(pd.to_numeric, errors="coerce")
     y = y_frame.to_numpy(dtype=float)
     x_means, x_scales = x.mean(axis=0), x.std(axis=0)
     x_scales[x_scales < 1e-8] = 1.0
-    y_means, y_scales = y.mean(axis=0), y.std(axis=0)
+    y_means, y_scales = np.nanmean(y, axis=0), np.nanstd(y, axis=0)
+    y_means[~np.isfinite(y_means)] = 0.0
     y_scales[y_scales < 1e-8] = 1.0
     xs, ys = (x - x_means) / x_scales, (y - y_means) / y_scales
     design = np.column_stack([np.ones(len(xs)), xs])
     ridge = np.eye(design.shape[1]) * float(alpha)
     ridge[0, 0] = 0.0
-    regression = np.linalg.solve(design.T @ design + ridge, design.T @ ys)
-    score = _multi_objective_score(y_frame)
-    labels = frame["screening_class"].astype(str).to_numpy() if "screening_class" in frame else _class_from_score(score)
+    regression = np.zeros((design.shape[1], len(OUTPUT_COLUMNS)), dtype=float)
+    target_masks = np.isfinite(ys)
+    for index in range(len(OUTPUT_COLUMNS)):
+        mask = target_masks[:, index]
+        if not mask.any():
+            continue
+        target_design = design[mask]
+        regression[:, index] = np.linalg.solve(target_design.T @ target_design + ridge, target_design.T @ ys[mask, index])
+    complete_labels = y_frame.notna().all(axis=1).to_numpy()
+    if not complete_labels.any():
+        raise ValueError("训练数据缺少可用于筛选分类的完整目标标签")
+    label_frame = y_frame.loc[complete_labels]
+    score = _multi_objective_score(label_frame)
+    labels = frame.loc[complete_labels, "screening_class"].astype(str).to_numpy() if "screening_class" in frame else _class_from_score(score)
     classes = tuple(name for name in CLASS_ORDER if name in set(labels)) or CLASS_ORDER
     class_targets = np.column_stack([(labels == name).astype(float) for name in classes])
-    classifier = np.linalg.solve(design.T @ design + ridge, design.T @ class_targets)
+    class_design = design[complete_labels]
+    classifier = np.linalg.solve(class_design.T @ class_design + ridge, class_design.T @ class_targets)
     validation_metrics: dict[str, float] = {}
     if len(xs) >= 8:
-        validation = np.arange(len(xs)) % 5 == 0
-        training = ~validation
-        train_design = design[training]
-        train_ridge = np.eye(train_design.shape[1]) * float(alpha)
-        train_ridge[0, 0] = 0.0
-        validation_weights = np.linalg.solve(train_design.T @ train_design + train_ridge, train_design.T @ ys[training])
-        validation_prediction = train_design if not validation.any() else design[validation] @ validation_weights
-        actual = ys[validation]
         for index, name in enumerate(OUTPUT_COLUMNS):
-            residual = validation_prediction[:, index] - actual[:, index]
+            valid = target_masks[:, index]
+            validation = valid & (np.arange(len(xs)) % 5 == 0)
+            training = valid & ~validation
+            if not validation.any() or not training.any():
+                continue
+            train_design = design[training]
+            weights = np.linalg.solve(train_design.T @ train_design + ridge, train_design.T @ ys[training, index])
+            residual = design[validation] @ weights - ys[validation, index]
             validation_metrics[f"{name}_rmse_scaled"] = float(np.sqrt(np.mean(residual ** 2)))
-            denominator = float(np.sum((actual[:, index] - np.mean(actual[:, index])) ** 2))
+            actual = ys[validation, index]
+            denominator = float(np.sum((actual - np.mean(actual)) ** 2))
             validation_metrics[f"{name}_r2"] = float(1 - np.sum(residual ** 2) / denominator) if denominator > 1e-12 else 0.0
+        validation = complete_labels & (np.arange(len(xs)) % 5 == 0)
         validation_logits = design[validation] @ classifier
         validation_labels = np.asarray(classes)[np.argmax(validation_logits, axis=1)]
-        actual_labels = labels[validation]
-        validation_metrics["classification_accuracy"] = float(np.mean(validation_labels == actual_labels))
+        actual_labels = labels[validation[complete_labels]]
+        validation_metrics["classification_accuracy"] = float(np.mean(validation_labels == actual_labels)) if len(actual_labels) else 0.0
         recalls = []
         for label in classes:
             positives = actual_labels == label
@@ -206,11 +246,13 @@ def train_screening_models(
         "proxy_rows": int(len(frame) - frame.get("simulation_source", pd.Series(index=frame.index, dtype=str)).eq("external").sum()),
         "external_rows": int(frame.get("simulation_source", pd.Series(index=frame.index, dtype=str)).eq("external").sum()),
         "experimental_rows": experimental_rows,
+        "literature_rows": literature_rows,
     }
     return ScreeningModel(
         FEATURE_COLUMNS, OUTPUT_COLUMNS, x_means, x_scales, y_means, y_scales,
         regression, classifier, classes, len(frame), experimental_rows, version,
         None, validation_metrics, datetime.now(timezone.utc).isoformat(), source_counts,
+        literature_rows,
     )
 
 
@@ -226,6 +268,10 @@ def predict_screening(model: ScreeningModel, candidates: pd.DataFrame) -> pd.Dat
     result = candidates.copy().reset_index(drop=True)
     for index, name in enumerate(model.target_names):
         result[f"predicted_{name}"] = pred[:, index]
+    if "predicted_wide_temp_adhesion_mpa" in result:
+        # The legacy target name is retained in serialized model artifacts,
+        # while UI consumers receive its explicit reference-condition name.
+        result["predicted_adhesion_reference_strength_mpa"] = result["predicted_wide_temp_adhesion_mpa"]
     predicted = result[[f"predicted_{name}" for name in model.target_names]].rename(columns=lambda name: name.removeprefix("predicted_"))
     result["predicted_multi_objective_score"] = _multi_objective_score(predicted)
     distance = np.sqrt(np.mean(((x) ** 2), axis=1))

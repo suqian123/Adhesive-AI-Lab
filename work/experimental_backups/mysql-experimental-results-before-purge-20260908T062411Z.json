@@ -1,0 +1,55 @@
+{
+  "database": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "name": "adhesive_ai",
+    "user": "adhesive_ai"
+  },
+  "row_count": 4,
+  "rows": [
+    {
+      "id": 1,
+      "candidate_id": "CL-00041",
+      "formulation_id": null,
+      "candidate_library_version": null,
+      "test_batch": "manual-01",
+      "test_temperature_c": "25.00",
+      "properties": "{\"measured_tg_c\": 180.0, \"am_feasibility\": 70.0, \"uv_retention_pct\": 85.0, \"measured_cte_ppm_k\": 55.0, \"measured_free_volume\": 0.08, \"measured_modulus_gpa\": 2.5, \"healing_efficiency_pct\": 70.0, \"wide_temp_adhesion_mpa\": 25.0, \"measured_chain_mobility\": 0.25, \"atomic_oxygen_retention_pct\": 85.0, \"measured_cohesive_energy_density\": 350.0}",
+      "source": "streamlit-form",
+      "created_at": "2026-08-26 15:35:49"
+    },
+    {
+      "id": 2,
+      "candidate_id": "CL-00041",
+      "formulation_id": null,
+      "candidate_library_version": null,
+      "test_batch": "manual-01",
+      "test_temperature_c": "25.00",
+      "properties": "{\"am_feasibility\": 70.0, \"uv_retention_pct\": 85.0, \"healing_efficiency_pct\": 70.0, \"wide_temp_adhesion_mpa\": 25.0, \"atomic_oxygen_retention_pct\": 85.0}",
+      "source": "streamlit-form",
+      "created_at": "2026-08-26 15:53:38"
+    },
+    {
+      "id": 3,
+      "candidate_id": "CL-00041",
+      "formulation_id": null,
+      "candidate_library_version": null,
+      "test_batch": "manual-01",
+      "test_temperature_c": "25.00",
+      "properties": "{\"measured_tg_c\": 180.0, \"am_feasibility\": 70.0, \"uv_retention_pct\": 85.0, \"measured_cte_ppm_k\": 55.0, \"measured_free_volume\": 0.08, \"measured_modulus_gpa\": 2.5, \"healing_efficiency_pct\": 70.0, \"wide_temp_adhesion_mpa\": 25.0, \"measured_chain_mobility\": 0.25, \"atomic_oxygen_retention_pct\": 85.0, \"measured_cohesive_energy_density\": 350.0}",
+      "source": "streamlit-form",
+      "created_at": "2026-08-26 16:00:37"
+    },
+    {
+      "id": 4,
+      "candidate_id": "CL-00041",
+      "formulation_id": null,
+      "candidate_library_version": null,
+      "test_batch": "manual-01",
+      "test_temperature_c": "25.00",
+      "properties": "{\"am_feasibility\": 70.0, \"uv_retention_pct\": 85.0, \"healing_efficiency_pct\": 70.0, \"wide_temp_adhesion_mpa\": 25.0, \"atomic_oxygen_retention_pct\": 85.0}",
+      "source": "streamlit-form",
+      "created_at": "2026-08-29 15:10:15"
+    }
+  ]
+}

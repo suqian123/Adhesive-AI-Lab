@@ -1,0 +1,549 @@
+\n--- PAGE 1 ---\n2000089  (1 of 8)
+© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+www.mme-journal.de
+Full Paper
+Super-Tough, Self-Healing Polyurethane Based on 
+Diels-Alder Bonds and Dynamic Zinc–Ligand Interactions
+Chunfa Ouyang,* Chao Zhao, Wei Li, Xiuchun Wu, Xiaoxia Le,* Tao Chen, Wei Huang, 
+Qun Gao, Xiaoqian Shan, Lei Zhang, and Weiping Zhang
+Prof. C. Ouyang, C. Zhao, W. Li, X. Wu, Prof. Q. Gao, Prof. X. Shan
+Shanghai Institute of Technology
+100 Haiquan Road, Fengxian District, Shanghai 201499, China
+E-mail: ouyoung_0916@163.com
+Dr. X. Le, Prof. T. Chen
+Ningbo Institute of Materials
+Chinese Academy of Sciences
+Ningbo 315000, China
+E-mail: lexiaoxia@nimte.ac.cn
+Prof. W. Huang
+East China Normal University
+Shanghai 200000, China
+Prof. L. Zhang
+Tongji University
+Shanghai 200000, China
+Prof. W. Zhang
+Shanghai Jiaotong University
+Shanghai 200000, China
+The ORCID identification number(s) for the author(s) of this article 
+can be found under https://doi.org/10.1002/mame.202000089.
+DOI: 10.1002/mame.202000089
+rials and reduce maintenance. Self-healing 
+polymer is an intelligent material that can 
+automatically recover some or all functions 
+after suffering from external mechanical 
+damage or harsh conditions (such as high 
+temperature or radiation).[2] By introducing 
+self-healing property into synthetic mate-
+rials, the life span and stability of mate-
+rials can be greatly improved, leading to 
+cost reduction as well as new applications. 
+So far, various materials with self-healing 
+property have been successfully applied 
+in field effect transistors,[3] solar cells,[4] 
+electronic skin,[5] electrochemical sensor,[6] 
+supercapacitors,[7] coatings etc.[8]
+At present, materials can achieve the 
+ability of self-healing in two ways: external 
+and internal self-healing. The first and 
+most studied method for preparing exog-
+enous self-healing polymer materials is 
+microencapsulation, in which reactive con-
+solidants are first embedded in microcapsules and then added 
+to the polymer matrix.[9] Fractures can be healed by the polymer-
+ization of healing agents released during the process of fracture 
+formation and vessel rupture. The disadvantages of this external 
+self-healing approach are nonrepeatable healing and the obvious 
+complexity of the operation. Meanwhile, another approach is to 
+construct a network of microvessels to the polymer.[10] Despite 
+exhibiting recyclable self-healing capabilities, microvascular self-
+healing materials typically have impaired initial properties, lim-
+ited by embedding techniques. In addition, different chemical 
+and physical properties between the polymer matrix and the 
+healing zone may lead to poor compatibility and compromise 
+healing properties. In contrast, the inherent self-healing system 
+based on reversible interactions can achieve repetitive self-
+healing performance, extending the service life of the material.
+Supramolecular chemistry and dynamic covalent chemistry 
+are two main strategies for manufacturing self-healing mate-
+rials.[11] Separately, for supramolecular systems, noncovalent 
+interactions, including hydrogen bonds,[12] host–guest interac-
+tions,[13]  π–π stacking, and metal ion binding interactions,[14,15] 
+have been used to synthesize self-healing body materials.[16] In 
+addition, a variety of self-healing polymers have been developed 
+based on reversible dynamic covalent bonds, including imine 
+bonds,[17] disulfide bonds,[18] Diels–Alder reactions,[19] and revers-
+ible free radical reactions.[20] In contrast, covalent self-healing 
+materials have attracted more and more attention due to their 
+excellent functional properties. In general, the healing process 
+Self-healing polymer materials have attracted extensive attention and have 
+been explored due to their ability of crack repairing in materials. This paper 
+aims to develop a novel polyurethane-based material with high self-healing 
+efficiency and excellent mechanical properties under 80 °C on the basis of 
+reversible Diels–Alder bonds as well as zinc–ligand structure (DA-ZN-PU). 
+By integrating DA bonds and zinc–ligand structure, as-prepared DA-ZN-PU 
+samples reach the maximum tensile strength as much as 28.45 MPa. After 
+self-healing, the tensile strength is 25.85 MPa, leading to the high self-healing 
+efficiency of 90.8%. In addition, by introducing carbonyl iron powder (CIP), a 
+new polyurethane containing carbonyl iron powder (DA-ZN-CIP-PU) can be 
+achieved, exhibiting microwave-assisted self-healing property. And the self-
+healing efficiency can be reached to 92.6% in 3 min. Due to high self-healing 
+efficiency and excellent mechanical properties of the prepared novel polyu-
+rethane, it has application attributes in crack repair of functional composite 
+materials.
+1. Research Purposes and Methods
+Self-healing is a beneficial feature of biological tissues, enabling 
+them to effectively repair themselves after mechanical damage.[1] 
+Inspired by nature, there is a growing interest in the design of 
+self-healing materials, which can extend the life of polymer mate-
+Macromol. Mater. Eng. 2020, 2000089
+\n--- PAGE 2 ---\n© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+2000089  (2 of 8)
+www.advancedsciencenews.com
+www.mme-journal.de
+of covalent self-healing materials can be accomplished through 
+reversible fracture and recombination of covalent bonds, most 
+of which require external conditions to initiate, such as pH,[21] 
+heating,[22] ultrasonic,[23] light, and magnetic field.[24,25]
+In general, the self-healing ability and mechanical properties 
+of materials are mutually exclusive in nature, in other words, 
+achieving high mechanical strength and the healing efficiency 
+remain a formidable challenge, especially under environmental 
+conditions, as their requirements for molecular structure are 
+often contradictory. Nevertheless, due to the poor mechanical 
+properties, engineering applications of self-healing polymers 
+are extremely narrow. Therefore, self-healing polymers with 
+high efficiency of healing and high mechanical properties must 
+be developed for certain fields such as military and construc-
+tion industries.[26]
+Polyurethane holds great promise to extend its application 
+fields, such as building insulation, traffic vehicles, medical 
+materials, repairable super capacitors, due to its excellent acid 
+resistance, low temperature resistance, and interesting mechan-
+ical properties. Polyurethane materials will endure for a long 
+time in the chemical, external force in the use process, such 
+as thermal effect inevitably damage, which leading to fracture, 
+the production of micro cracks. As a consequence, the cracks 
+not only decreased the basic performance of material, but also 
+provided a channel to accelerate the chemical corrosion, which 
+had a serious influence the service life of the material. To solve 
+this problem, making polyurethane materials have self-healing 
+ability is one of the most effective methods. Yubin synthesized 
+a new polyurethane by cross-linking Diels–Alder reaction with 
+bismaleimide from isocyanate-terminated prepolymer and 
+furamide.[27] The initial tensile strength of self-healing was 
+13.5  MPa and the tensile strength of healing was 12.2  MPa 
+under heating at about 125 °C. Luzhi developed a new type of 
+copper(ii)-dimethylglyoxime-polyurethane composite polyure-
+thane elastomer with synergistic triple dynamic bond.[28,29] The 
+maximum initial tensile strength of the self-healing elastomer 
+at room temperature was 14.8  MPa and the healing tensile 
+strength was 13.8 MPa.
+Here, we presented a super-tough polyurethane with self-
+healing behavior, which is on the basis of Diels–Alder bonds 
+and dynamic zinc–ligand interactions. Specifically, 4,4-diphenyl 
+methane diisocyanate (MDI), polytetrahydrofuran (PTFEG), 
+and 2,2-dimethylolpropionic acid (DMPA) were mingled under 
+the chain extender, and subsequently reacted with furanmeth-
+anol and isophorone diisocyanate (IPDI) by Diels–Alder reac-
+tion. PTFEG was used to be the soft segment to magnify the 
+flexibility of the chain segment, which can increase the chain 
+mobility for better self-healing. MDI was used to be the hard 
+segment, and IPDI was used to decrease the crystallization 
+performance of the entire system relied on its bulky structure. 
+The polyurethane had a good performance about intensity for 
+the addition of IPDI, MDI, and’ the anhydride ring. DA bond 
+reversible reaction and zinc–ligand interaction were used to 
+form a crosslinking structure, and healing materials were pre-
+pared with excellent mechanical properties.
+As shown in Figure 1, the hybrid dynamic network that con-
+stituted by DA bonds, hydrogen bonds and zinc–ligand makes 
+the polyurethane become a self-healing material. The key is 
+N-2,3-dihydroxypropyl maleimide in the design of DA-ZN-PU, 
+which acts as the chain extender to introduce reversible DA 
+bonds. Its bulky structure restrains the crystallization of the 
+hard segment and accelerates the chain motion. Besides, The 
+dissociation of the weaker hydrogen bonds introduced by the 
+DA reaction can absorb energy immensely during mechanical 
+deformation result in high toughness, which plays the same 
+function of zinc–ligand interactions in the system. Moreover, 
+those weaker bonds promote the reconfiguration of DA bonds 
+to facilitate the self-healing process. At the beginning of the 
+fracture, the DA bond on the chain segment was decomposed 
+into maleimide and furan groups through rDA reaction. Fur-
+thermore, the DA reaction occurred again between maleimide 
+on the one chain segment and furan group on the other chain 
+segment with the attraction of zinc–ligand and hydrogen bond, 
+which will form a stable DA bond, make the material healing 
+at the macro level. The composite effect of hybrid dynamic 
+network ensures our materials possess both good mechanical 
+properties and self-healing properties.
+2. Results and Discussions
+2.1. Preparation of FA-ID and DA-ZN-PU
+The reaction formula for the preparation of DA-ZN-PU is 
+shown in Figure S1 in the Supporting Information. Whether 
+the product is the expected product has been verified by com-
+paring the peaks of various groups in 1H NMR spectrum. The 
+result shows we get the expected product, N-dihydroxypropyl 
+maleimide (Figure S2, Supporting Information).
+Additionally, the formation of zinc–ligand structure is veri-
+fied by observing the absorption peaks of C─N─C and C═O 
+in the Fourier transform infrared spectroscopy, which means 
+the DA-ZN-PU was synthesized successfully (Figure S3, Sup-
+porting Information).
+As shown in Figure S4 (Supporting Information), the intro-
+duction of zinc ions not only plays a role of dynamic cross-
+linking, but also leads to a better degree of microphase sepa-
+ration between the hard segment and the soft segment of pol-
+yurethane by comparing the AFM picture of DA-ZN-PU and 
+DA-PU, thus leading to a better tensile strength.
+2.2. Thermal Reversibility of Polyurethane
+In order to study the potential reversibility and self-healing ability 
+of synthetic polymers, Differential scanning calorimetry (DSC) 
+has been used for measurement. As shown in Figure  2b, the 
+second heating cycle curve of DA-ZN-PU, DA-PU, and ZN-PU 
+in the DSC test of 40180 °C. The glass transition temperature 
+was observed at about 72 °C from the DSC curve of the DA-ZN-
+PU (Figure S5a, Supporting Information). Compared with Li’s 
+work,[27] the glass transition temperature of our polyurethane 
+was about 95 °C and that of DA-ZN-PU was 72 °C, which should 
+be caused by the joint action of the added FA-ID prepolymer and 
+zinc ion bond (the process of analysis was shown in Figure S5 
+in the Supporting Information). The heating–cooling cycle curve 
+in DSC clearly shows that the DA-ZN-PU polymer is thermally 
+reversible, enabling self-healing behavior.
+Macromol. Mater. Eng. 2020, 2000089
+\n--- PAGE 3 ---\n© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+2000089  (3 of 8)
+www.advancedsciencenews.com
+www.mme-journal.de
+The TG and DTG curves of DA-ZN-PU, DA-PU, and ZN-PU 
+from 25 to 600 °C was shown in Figure 2c,d, which exhibited 
+that the polymer had three thermal decomposition stages. 
+The first decomposition stage at about 200  °C, which has 
+shown lower thermal stability, likely due to the presence of 
+ligand structure formed by zinc acetate. In the second stage, 
+the increase of decomposition rate was observed from 300 
+to 350  °C. At temperatures above 400  °C, the third stage of 
+decomposition is based on the breaking of the chain which was 
+formed in above stages of decomposition, as well as secondary 
+reactions in the dehydrogenation and gasification processes. 
+The complete decomposition of ZN-PU polymer was observed 
+at 588 °C. The temperatures of DA-ZN-PU, DA-PU, and ZN-PU 
+polymers were respectively 220, 249, and 197 °C when they lost 
+10% mass, indicated the addition of furan ring  improved the 
+thermal stability of polyurethane. The mass fractions of the 
+remaining samples in the crucible were 9.35%, 6.27%, and 
+0.10% after DA-ZN-PU, DA-PU, and ZN-PU samples were 
+heated to 600  °C. The synthesized polyurethane had better 
+thermal stability based on the large number of furan-benzene 
+ring structures produced by the DA reaction, which made the 
+DA-ZN-PU and DA-PU samples significantly less decomposed 
+than the ZN-PU samples after the final heated to 600  °C. In 
+addition, the cross-linked network system constructed by var-
+ious active functional groups DA-ZN-PU samples enhanced the 
+thermal stability of the samples to some extent.
+2.3. Mechanical Properties of Polyurethane
+As different amounts of DA-rDA units can have great influ-
+ence in mechanical properties of DA-ZN-PU polymers. The 
+mechanical properties of DA-ZN-PU samples with different 
+FA-ID addition amounts were prepared by changing FA-ID 
+Figure 1.  a) Chemical structure of the novel polyurethane. b) The hybrid dynamic network contains of triple dynamic bonds, including reversible cova-
+lent bonds, zinc–ligand and hydrogen bonds.
+Macromol. Mater. Eng. 2020, 2000089
+\n--- PAGE 4 ---\n© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+2000089  (4 of 8)
+www.advancedsciencenews.com
+www.mme-journal.de
+content of furan methanol and IPDI products (Table S1, Sup-
+porting Information). As shown in Figure  3, the hardness of 
+DA-ZN-PU samples decreased first and then increased within 
+the increasing of FA-ID content. While the tensile strength, 
+elongation at break as well as toughness went the opposite 
+trend. Initially, a large number of DA bonds generated based 
+on the DA reaction increased with the content of FA-ID, which 
+makes a significant increase in the cross-linking degree of 
+the polymer, resulting in an increase in the toughness of the 
+poly­mer. With the further increase of FA-ID content, the exces-
+sive amount of FA-ID could not fully react with polyurethane, 
+which formed a similar island structure in the system as an 
+impurity in the system reduced the toughness of polyurethane. 
+At the same time, the contrary trend of polyurethane hard-
+ness test also proves the above conjecture. As samples with 7% 
+FA-ID have best tensile strength of 28.45 MPa, proper tough-
+ness of 106.42  MPa m1/2 and hardness of 16 SH, they were 
+chosen for the following tests.
+2.4. Self-Healing Behavior of Polyurethane
+Due to the DA bond from the DA reaction, the cross-linking 
+degree of polyurethane was increased after the addition of 
+FA-ID. Some FA-ID in the polyurethane system could not par-
+ticipate in the DA reaction, may disperse in the polyurethane 
+system as the island structure to enhance and toughened with 
+the increasing amount of FA-ID.  And then those FA-ID par-
+ticipated in the DA reaction faster in the self-healing process, 
+which improved the self-healing efficiency of polyurethane. 
+The self-healing efficiency was characterized by measuring the 
+recovery rate of tensile strength as well as fracture elongation. 
+As shown in Figure  4b, the self-healing efficiency of the DA-
+ZN-PU samples decreased at first and then remained basically 
+unchanged with the increase of FA-ID. One possible reason 
+is that polyurethane system became a continuous phase and 
+turned into the main structure gradually with the increasing of 
+FA-ID.
+The self-healing behavior of polyurethane samples was 
+firstly analyzed by hot-table microscope by taking self-healing 
+test for 40 min at 80  °C, and the optical microscope images 
+was shown in Figure 4c, during which the sample was inten-
+tionally damaged by the blade. The result indicates that this 
+furan-maleimide polymer requires critical heat (80 °C) to carry 
+out self-healing ability. As shown in Figure  4d, the tensile 
+strength of the pristine polyurethane sample was 28.45 MPa, 
+the elongation at break was 640  °C, and the fracture tough-
+ness obtained by integral was 106.70 MPa m1/2. After heating 
+at 80  °C for 40 min, the tensile strength of DA-ZN-PU was 
+about 25.85 MPa, elongation at break was 509% and the frac-
+ture toughness was 78.64 MPa m1/2. The tensile strength was 
+90.86% of the pristine polyurethane sample, the elongation at 
+break was 79.53% of the pristine polyurethane sample, and the 
+fracture toughness was 73.70% of the pristine polyurethane 
+sample. It should be pointed out that the tensile strength does 
+not reach 100% healing efficiency due to the lack of force to 
+Figure 2.  a) Proposed mechanism of bonds break and formation during thermal treatment, b) DSC, c) TG, and d) DTG Characterization of DA-ZN-
+PU, DA-PU, and ZN-PU.
+Macromol. Mater. Eng. 2020, 2000089
+\n--- PAGE 5 ---\n© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+2000089  (5 of 8)
+www.advancedsciencenews.com
+www.mme-journal.de
+promote fracture surface to contact closely during the repair 
+process. Therefore, the degree of DA reversible reaction and 
+the dissociation of zinc ions at the interface were insufficient. 
+The better recovery of elongation at break may be caused by 
+the entanglement between the DA-ZN-PU chain and zinc–
+ligand at 80 °C.
+Additionally, we introduced CIP into DA-ZN-PU that 
+contains 7% FA-ID to form a novel polyurethane mate-
+rial (DA-ZN-CIP-PU), which could be healed more effective 
+under microwave. The DA-ZN-CIP-PU sample scratched 
+for 0.25  mm in deeps was shown in Figure  4e, which was 
+bended into 30° after being heated in microwave with 600 W 
+for 3 min, showing that the crack has been basically healed. 
+As shown in Figure  4f, DA-ZN-CIP-PU made up of 2% CIP 
+exhibited pristine (15.98 MPa) and healed (14.79 MPa) tensile 
+strength, which means the recovery efficiency of tensile is 
+92.6%, both of which exceed other additive amounts of CIP. 
+Similarly, it showed a  pristine (82.17  MPa m1/2) and healed 
+(69.66  MPa m1/2) toughness, indicated that DA-ZN-CIP-PU 
+could be healed and restore physical properties basically after 
+heating under microwave for 3 min.
+2.5. Application of Polyurethane
+As a preliminary demonstration, we used our novel polyu-
+rethane as a stretchable and self-healable substrate for con-
+structing flexible electronics. As shown in Figure 5, the sample 
+of DA-ZN-PU was symmetrically coated with Galinstan alloy 
+on the surface and introduced into the circuit to verify whether 
+the surface crack has healed completely or not. As shown in 
+Figure 5b, the LED emitted light at first. The blade was used 
+to cut a crack about 0.25 mm in the polyurethane, also cutting 
+off the Galinstan alloy coating, leading the breakage of the cir-
+cuit and the extinguishment of LED. The scratched sample was 
+heated in an oven at 80 °C for 36 h. The DA-ZN-PU has healed, 
+and the surface of DA-ZN-PU has reconnected to the circuit. 
+Gleamy LED indicates that the healing in the surface of DA-
+ZN-PU promotes the motion of Galinstan alloy.
+In a conductive circuit containing LED, a sample of DA-
+ZN-PU coated with Galinstan alloy on the surface was tensile 
+tested, and the LED emitted light initially as shown in Figure 
+S6a in the Support information. Later, the 2 cm area which had 
+healed early in the sample was stretched unidirectional, and 
+Figure 3.  a) Images of hardness test and tensile test, b) hardness, c) stress–strain curves, and d) toughness of DA-ZN-PU polymers with different 
+content of FA-ID.
+Macromol. Mater. Eng. 2020, 2000089
+\n--- PAGE 6 ---\n© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+2000089  (6 of 8)
+www.advancedsciencenews.com
+www.mme-journal.de
+when the stretch area was stretched to 8 cm (elongation reached 
+400%), the circuit was broken due to the absence of Galinstan 
+alloy on the polyurethane surface, which making the LED not 
+emit light, as shown in Figure S6b in the Support information. 
+At that time, the polyurethane sample did not break and still 
+had good ductility.
+Figure 4.  a) Schematic images of dynamic network during stretching and releasing, b) Self-efficiency of DA-ZN-PU with different content of FA-ID 
+after annealing for 40 min at 80 °C, c) Microscope photos of films before and after annealing for 40 min at 80 °C, d) Tensile test of pristine, scratched, 
+and healed DA-ZN-PU, e) photos of damaged DA-ZN-CIP-PU before and after microwave treating for 3 min, f) the toughness of pristine and healed 
+DA-ZN-CIP-PU with different content of CIP.
+Macromol. Mater. Eng. 2020, 2000089
+\n--- PAGE 7 ---\n© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+2000089  (7 of 8)
+www.advancedsciencenews.com
+www.mme-journal.de
+3. Conclusion
+In conclusion, a new self-healing polyurethane was prepared 
+through the Diels–Alder reaction between FA-ID and dihy-
+droxy propyl maleimide and the ligand interaction of zinc ace-
+tate. The self-healing property of polyurethane is proved by  a 
+series of tests. At the same time, the tensile test showed that 
+DA-ZN-PU had excellent mechanical properties, the best ten-
+sile strength of the DA-ZN-PU sample was 28.45 MPa, the self-
+healing tensile strength was 25.85  MPa, and the self-healing 
+efficiency of the tensile strength was 90.8%. The scratched 
+DA-ZN-CIP-PU restores its mechanical properties more effec-
+tive under microwave for 3 min. These new polyurethanes have 
+high self-healing efficiency and remarkable mechanical proper-
+ties, which have great potential as functional material for var-
+ious military and civil applications.
+4. Experimental Section
+Materials: 
+Polytetrahydrofuran 
+(PTMEG), 
+with 
+a 
+number-
+average molecular weight of 2000, (Jining baiyichemical limited-
+liability company) was vacuum dried at 110  °C for 3 h before using. 
+DMPA, (Jining hongming chemical reagent) vacuum dried at 110  °C 
+for 3 h before using; MDI, (Tokyo chemical industry co. LTD). 
+N-methylpyrrolidone (NMP), (Shanghai Titan technology co. LTD) 
+analytically pure; N-2,3-dihydroxypropyl maleimide, self-made; IPDI, 
+Bayer, Germany; Furanmethanol, (Shanghai Titan technology co. LTD) 
+analytically pure; zinc acetate dihydrate, (Shanghai Titan technology co. 
+LTD) analytically pure; carbonyl iron powder (CIP), (Xinxiang sanyi metal 
+material company).
+Preparation of N-2,3-Dihydroxypropyl Maleimide: 60  mL ethanol was 
+added to a 500  mL round bottom flask, followed by 45  g furan and 
+50  g maleic anhydride. After stirring at room temperature for 24  h, 
+white crystals were obtained by vacuum filtration and transferred to 
+the watch glass. After drying at room temperature for at least 24  h, 
+4,10-dioxytricyclic 
+[5.2.1.02.6]-decy-8-ene-3,5-diketone 
+(furan-A) 
+was 
+obtained. Then, furan-A 30  g was dissolved in 40  mL anhydrous 
+ethanol and added into a 250 mL round bottom flask as a solution 1. 
+16.4  g 3-amino-1,2-propanediol, 10  mL anhydrous ethanol and 25  mL 
+triethylamine were prepared as solution 2. The temperature was 
+maintained at 0–2  °C in the ice bath, solution 2 was slowly dropped 
+into solution 1, and the mixed solution was stirred for 2 h, then the 
+solution was gradually heated up to 80–85 °C with nitrogen protection. 
+After reacted for 3 h, the solution began to turn into white liquid and 
+turned into yellow oily liquid as the reaction went on. The filtered solids 
+were washed with a small amount of anhydrous ethanol and dried to 
+obtain a white crystal of furan N-dihydroxypropyl maleimide. Finally, the 
+new preparation of 5 g furan N-2 hydroxypropyl maleimide, 60 mL dry 
+xylene, and trace antioxidant AO-80 to join with the agitator, the round 
+bottom flask of spherical condenser pipe, reflux reaction 5 h under 
+125  °C, reaction in the process of continuously bubbled into nitrogen 
+to prevent the oxidation reaction occur, at the same time take away 
+the furan product. N-2,3-dihydroxypropyl maleimide was obtained by 
+vacuum filtration.
+Preparation of Furfuryl Alcohol and IPDI Reaction Product (FA-ID): 25 g 
+furanmethanol and 100  mL dried dichloromethane were added into a 
+four-mouth round-bottom flask with agitator and condensing tube, after 
+which 1.2 g dibutyltin dilaurates as catalyst. Stirring the flask rapidly for 
+10 min under N2, 28.3 g IPDI was added and reacted for another 2 h at 
+room temperature, afterward reflux for 2 h at 40 °C to obtain the reaction 
+product.
+Preparation of DA-ZN-PU and DA-ZN-CIP-PU: PTMEG (20  g), 
+DMPA (2.3  g), MDI (8.025  g), and NMP (50  mL) were added into 
+250 mL round bottom flask, and reacted for 1 h under 85 °C with N2. 
+N-2,3-dihydroxypropyl maleimide was added as chain  extender under 
+60  °C for 1 h, PU solution was prepared by the introduction of FA-ID 
+after reacted for 1 h. Zinc acetate dihydrate with equal molar ratio was 
+added into PU solution, and the reaction was conducted at 100 °C for 
+0.5 h with a neutralization degree of 100%. The product was poured 
+into polytetrafluoroethylene board and vacuum dried at 70 °C to obtain 
+DA-ZN-PU. The different additive amounts of CIP with 2%, 3%, and 7% 
+was added to the DA-ZN-PU solution which contain 7% FA-ID, and the 
+reaction was conducted at 100  °C for another 0.5 h, vacuum dried at 
+70 °C to obtain DA-ZN-CIP-PU. All PU were prepared into 10 × 4 mm 
+dumbbell tensile samples, and there have been at least five specimens 
+for each sample. The maximum and minimum values in the data are 
+discarded and then the average value of the remaining data is used in 
+the paper.
+Supporting Information
+Supporting Information is available from the Wiley Online Library or 
+from the author.
+Figure 5.  a) Schematic illustration of simple electronic circuit, b) the healing of Galinstan alloy loop was promoted by the self-healing of polyurethane.
+Macromol. Mater. Eng. 2020, 2000089
+\n--- PAGE 8 ---\n© 2020 WILEY-VCH Verlag GmbH & Co. KGaA, Weinheim
+2000089  (8 of 8)
+www.advancedsciencenews.com
+www.mme-journal.de
+Acknowledgements
+This work is supported by the National Key R&D Program of China 
+(No. 2018YFE0101000), East China Normal University (Grant No. 
+2019MIP001), Research and Demonstration on Key Technologies of 
+Ecological Road Construction (No. 19DZ1204205), Shanghai Engineering 
+Research Center of Building Waterproof Materials (No. 18DZ2253200).
+Conflict of Interest
+The authors declare no conflict of interest.
+Keywords
+Diels–Alder reactions, polyurethane, self-healing, zinc–ligand interactions
+Received: February 11, 2020
+Revised: April 3, 2020
+Published online: 
+[1]	 C. E. Diesendruck, N. R. Sottos, J. S. Moore, S. R. White, Angew. 
+Chem., Int. Ed. 2015, 54, 10428.
+[2]	 a) Y. S.  Zhang, A.  Khademhosseini, Science 2017, 356, eaaf3627; 
+b) Q. Zhang, L. Liu, C. Pan, D. Li, Science 2018, 53, 27.
+[3]	 C. C. Lu, Y. C. Lin, C. H. Yeh, J. C. Huang, P. W. Chiu, ACS Nano 
+2012, 6, 4469.
+[4]	 K. Chu, B. G. Song, H. I. Yang, D. M. Kim, Adv. Funct. Mater. 2018, 
+28, 1800110.
+[5]	 J. Kang, D. Son, G. J. N. Wang, Y. Liu, Adv. Mater. 2018, 30, 1706846.
+[6]	 J.  Kim, R.  Kumar, A. J.  Bandodkar, J.  Wang, Adv. Electron. Mater. 
+2017, 3, 1600260,.
+[7]	 F. Wang, X. Wu, X. Yuan, Z. Liu, Chem. Soc. Rev. 2017, 46, 6816,.
+[8]	 A. M. Atta, A. El-Faham, H. A. Al-Lohedan, Z. A. Al Othman, Prog. 
+Org. Coat. 2018, 121, 247.
+[9]	 a) S. R.  White, N. R.  Sottos, P. H.  Geubelle, J. S.  Moore, 
+M. R. Kessler, S. R. Sriram, E. N. Brown, S. Viswanathan, Nature 
+2001, 409, 794; b) R. E.  Neisiany, J. K. Y.  Lee, S. N.  Khorasani, 
+S.  Ramakrishna, Polym. Test. 2017, 62, 79; c) F.  Ahangaran, 
+M.  Hayaty, A. H.  Navarchian, F.  Picchioni, Polym. Test. 2017, 64, 
+330.
+[10]	 a) A. P. Esser-Kahn, P. R. Thakre, H. Dong, J. F. Patrick, V. K. Vlasko-
+Vlasov, N. R. Sottos, J. S. Moore, S. R. White, Adv. Mater. 2011, 23, 
+3654; b) A. Cuvellier, A. Torre-Muruzabal, N. Kizildag, L. Daelemans, 
+Y. Ba, K. D. Clerck, H. Rahier, Polym. Test. 2018, 69, 146.
+[11]	 a) N. Roy, Ž. Tomović, E. Buhler, J. M. Lehn, Chem. - Eur. J. 2016, 22, 
+13513; b) N. Roy, E. Buhler, J. M. Lehn, Polym. Int. 2014, 63, 1400.
+[12]	 P. Cordier, F. Tournilhac, C. Soulie-Ziakovic, L. Leibler, Nature 2008, 
+451, 977.
+[13]	 a) A.  Harada, R.  Kobayashi, Y.  Takashima, A.  Hashidzume, 
+H. Yamaguchi, Nat. Chem. 2011, 3, 34; b) H. Xuan, J. Ren, J. Zhang, 
+L. Ge, Appl. Surf. Sci. 2017,411, 303.
+[14]	 S.  Burattini, H. M.  Colquhoun, J. D.  Fox, D.  Friedmann, 
+B. W. Greenland, P. J. Harris, W. Hayes, M. E. Mackay, S. J. Rowan, 
+Chem. Commun. 2009, 44, 6717.
+[15]	 M.  Burnworth, L.  Tang, J. R.  Kumpfer, A. J.  Duncan, F. L.  Beyer, 
+G. L. Fiore, S. J. Rowan, C. Weder, Nature 2011, 472, 334.
+[16]	 a) S.  Sivakova, D. A.  Bohnsack, M. E.  Mackay, P.  Suwanmala, 
+S. J.  Rowan, J. Am. Chem. Soc. 2005, 127, 18202; b) S. J.  Rowan, 
+P.  Suwanmala, S.  Sivakova, J. Polym. Sci., Part A: Polym. Chem. 
+2003, 41, 3589.
+[17]	 P. Tyagi, A. Deratani, D. Quemener, Chem 2013, 53, 53.
+[18]	 a) J. Canadell, H. Goossens, B. Klumperman, Macromolecules 2011, 
+44, 2536; b) Y. Xu, D. Chen, Macromol. Chem. Phys. 2016, 217, 1191.
+[19]	 a) P. A.  Pratama, M.  Sharifi, A. M.  Peterson, G. R.  Palmese, ACS 
+Appl. Mater. Interfaces 2013, 5, 12425; b) P. J. Boul, A. Philippe Reu-
+tenauer, J. M. Lehn, Org. Lett. 2005, 7, 15.
+[20]	 K.  Imato, M.  Nishihara, T.  Kanehara, Y.  Amamoto, A.  Takahara, 
+H. Otsuka, Angew. Chem., Int. Ed. 2012, 51, 1138.
+[21]	 G. Li, G. Zhang, R. Sun, C. - P. Wong, Polymer 2016, 107, 332.
+[22]	 a) X. Wu, J. Li, G. Li, L. Ling, J. Appl. Polym. Sci. 2018, 135, 46532; 
+b) J. Li, G. Zhang, R. Sun, C. - P. Wong, Mater. Chem. 2017, C5, 220; 
+c) L. Feng, Z. Yu, Y. Bian, J. Lu, Polymer 2017, 124, 48.
+[23]	 X. Yu, L. Chen, M. Zhang, T. Yi, Chem. Soc. Rev. 2014, 43, 5346.
+[24]	 a) Y. Fang, X. Du, Z. Du, H. Wang, J. Mater. Chem. A 2017, 5, 8010; 
+b) P. Christogianni, M. Moniruzzaman, G. Kister, Polymer 2015, 77, 272.
+[25]	 A. S. Ahmed, R. V. Ramanujan, Sci. Rep. 2015, 5, 13773.
+[26]	 J. Lai, J. Mei, X. Jia, C. Li, X. You, Z. Bao, Adv. Mater. 2016, 28, 8277.
+[27]	 L. Yubin, Y. Zhijian, Polym. Test. 2019, 76, 82.
+[28]	 Z.  Luzhi, L.  Zenghe, W.  Xueli, G.  Qingbao, Adv. Mater. 2019, 29, 
+1901402.
+[29]	 L.  Zenghe, Z.  Luzhi, G.  Qingbao, G.  Yifan, L.  Jiaming, L.  Dong, 
+W.  Shuliang, C.  Shuo, S.  Lijie, X.  Huixia, J.  Eric Meade, 
+H. Chuangong, Q. FengLing, Y. Zhengwei, Adv. Funct. Mater. 2019, 
+29, 1901058.
+Macromol. Mater. Eng. 2020, 2000089

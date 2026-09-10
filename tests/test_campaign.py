@@ -29,7 +29,12 @@ def test_candidate_contract_and_multiscale_task_matrix_are_complete():
     assert tasks.candidate_id.eq(campaign.candidate_id).all()
     assert tasks.run_id.eq("待启动").all()
     assert set(tasks.scale) == {"quantum", "atomistic-md", "coarse-grained"}
-    assert any(task.conditions.get("temperatures_c", ())[0] == -180 for task in campaign.tasks if task.scale == "atomistic-md")
+    temperature_tasks = [task for task in campaign.tasks if task.scale == "atomistic-md" and "temperatures_c" in task.conditions]
+    assert any(task.conditions["temperatures_c"][0] == -180 for task in temperature_tasks)
+    assert all(120.0 in task.conditions["temperatures_c"] for task in temperature_tasks)
+    interface_task = next(task for task in campaign.tasks if task.task_id == "md-resin-pda-ceo2-interface")
+    assert interface_task.conditions["substrate_grade"] == "6061-T6"
+    assert "not an experimental lap-shear strength" in interface_task.conditions["metric_scope"]
     assert candidates.iloc[0].data_source == "physics-informed-proxy"
 
 

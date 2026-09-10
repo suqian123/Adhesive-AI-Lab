@@ -2,6 +2,8 @@ import gzip
 import io
 import json
 import tarfile
+import numpy as np
+import pytest
 
 from ase.neighborlist import neighbor_list
 
@@ -11,6 +13,7 @@ from adhesive_ai.vasp_production import (
     prepare_campaign_dft_task,
     validate_vasp_input_set,
     write_convergence_suite,
+    VaspBaseline,
 )
 from adhesive_ai.vasp_resources import sha256_file
 
@@ -90,3 +93,36 @@ def test_convergence_suite_records_the_requested_surface_facet(tmp_path):
     assert plan["job_count"] == 12
     first_manifest = json.loads((tmp_path / "ceo2-110" / "encut" / "450" / "input_manifest.json").read_text(encoding="utf-8"))
     assert first_manifest["facet"] == "(110)"
+
+
+@pytest.mark.parametrize("layers", [2, 3, 4])
+def test_111_clean_slab_has_neutral_oxygen_terminated_trilayers(layers):
+    atoms, metadata = build_ceo2_model(
+        "(111)", objective="surface-convergence", repeat_override=(1, 1, 1),
+        settings=VaspBaseline(slab_layers=layers),
+    )
+    symbols = np.array(atoms.get_chemical_symbols())
+    z = atoms.positions[:, 2]
+    assert len(atoms) == layers * 12
+    assert set(symbols[np.isclose(z, z.min())]) == {"O"}
+    assert set(symbols[np.isclose(z, z.max())]) == {"O"}
+    assert abs(np.dot(np.where(symbols == "Ce", 4, -2), z)) < 1e-8
+    distances = atoms.get_all_distances(mic=True)
+    np.fill_diagonal(distances, np.inf)
+    assert distances.min() > 2.3
+    assert metadata["surface_termination"] == "O-Ce-O-trilayers-v2"
+
+
+def test_legacy_111_inputs_cannot_be_released_by_new_approval(tmp_path):
+    resources = _resource_config(tmp_path)
+    write_convergence_suite(tmp_path / "validation", resources=resources)
+    directory = tmp_path / "validation" / "encut" / "450"
+    assert (tmp_path / "validation" / "clean_baseline.json").is_file()
+    incar = (directory / "INCAR").read_text()
+    assert "ICHARG = 2" in incar and "LWAVE = .TRUE." in incar
+    assert "EDIFF = 1E-6" in incar and "LDAUU = 4.5 0" in incar
+    manifest_path = directory / "input_manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest.pop("surface_termination")
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    assert validate_vasp_input_set(directory, resources=resources)["valid"] is False

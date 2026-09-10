@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-set -u
+set -eu
+set -o pipefail
+
+script_dir="${ADHESIVE_VASP_SCRIPT_DIR:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)}"
+export PYTHONPATH="$script_dir/../src${PYTHONPATH:+:$PYTHONPATH}"
 
 root="${ADHESIVE_VASP_VALIDATION_ROOT:-/mnt/e/Adhesive-AI-Lab/work/vasp_validation/ceo2-111-baseline-v1}"
 status_file="$root/status.tsv"
@@ -13,6 +17,19 @@ jobs=(
   "slab-layers/2" "slab-layers/3" "slab-layers/4"
   "vacuum/15A" "vacuum/18A" "vacuum/22A"
 )
+
+# Repeated page refreshes must never resubmit a failed SCF automatically.
+for relative in "${jobs[@]}"; do
+  if [[ -f "$root/$relative/run_status.json" ]] \
+      && grep -Eq '"status"[[:space:]]*:[[:space:]]*"failed"' "$root/$relative/run_status.json"; then
+    recovery_marker="$root/$relative/scf_recovery.json"
+    if [[ ! -f "$recovery_marker" ]] \
+        || ! grep -Eq '"state"[[:space:]]*:[[:space:]]*"(prepared-fresh-atomic|prepared-model-preconvergence)"' "$recovery_marker"; then
+      echo "Review/archive the failed task before restarting: $relative" >&2
+      exit 1
+    fi
+  fi
+done
 
 if ! mkdir "$lock_dir" 2>/dev/null; then
   stale_pid=""
@@ -32,6 +49,10 @@ fi
 
 runner_exit_state="finished"
 cleanup_runner() {
+  local result=$?
+  if [[ $result -ne 0 ]] && [[ "$runner_exit_state" == "finished" ]]; then
+    runner_exit_state="failed"
+  fi
   rm -f "$runner_pid_file" "$runner_pgid_file" "$runner_control_file"
   rmdir "$lock_dir" 2>/dev/null || true
   printf '{"state":"%s","updated_at":"%s"}\n' \
@@ -52,24 +73,7 @@ if [[ ! -f "$status_file" ]]; then
 fi
 
 enable_charge_restart() {
-  local incar="$1/INCAR"
-  if grep -q '^ICHARG[[:space:]]*=' "$incar"; then
-    sed -i 's/^ICHARG[[:space:]]*=.*/ICHARG = 1/' "$incar"
-  else
-    printf '\nICHARG = 1\n' >> "$incar"
-  fi
-  if grep -q '^NELMDL[[:space:]]*=' "$incar"; then
-    sed -i 's/^NELMDL[[:space:]]*=.*/NELMDL = -1/' "$incar"
-  else
-    printf 'NELMDL = -1\n' >> "$incar"
-  fi
-  if [[ -s "$1/WAVECAR" ]]; then
-    if grep -q '^ISTART[[:space:]]*=' "$incar"; then
-      sed -i 's/^ISTART[[:space:]]*=.*/ISTART = 1/' "$incar"
-    else
-      printf 'ISTART = 1\n' >> "$incar"
-    fi
-  fi
+  python3 "$script_dir/../src/adhesive_ai/vasp_checkpoint.py" --enable-charge-restart "$1"
 }
 
 stage_converged() {
@@ -77,6 +81,10 @@ stage_converged() {
   [[ -s "$stage/CHGCAR" ]] && [[ -s "$stage/WAVECAR" ]] \
     && grep -q 'General timing and accounting' "$stage/OUTCAR" \
     && grep -q 'aborting loop because EDIFF is reached' "$stage/OUTCAR"
+}
+
+job_converged() {
+  python3 "$script_dir/../src/adhesive_ai/vasp_checkpoint.py" "$1"
 }
 
 stage_complete() {
@@ -120,7 +128,7 @@ preconverge_charge() {
   OMP_NUM_THREADS=1 OMP_STACKSIZE=512m mpirun --bind-to none -np 4 /usr/local/bin/vasp_std \
     > preconverge.stdout.log 2> preconverge.stderr.log
   local exit_code=$?
-  if [[ $exit_code -ne 0 ]] || [[ ! -s CHGCAR ]] || ! grep -q 'General timing and accounting' OUTCAR; then
+  if [[ $exit_code -ne 0 ]] || [[ ! -s CHGCAR ]] || ! job_converged "$pre"; then
     return 1
   fi
   cp CHGCAR "$directory/CHGCAR"
@@ -134,7 +142,7 @@ preconverge_model() {
   mkdir -p "$stage"
   if [[ -f "$marker" ]] && grep -Eq '"complete"[[:space:]]*:[[:space:]]*true' "$marker" \
       && [[ -s "$stage/step3-dftu/CHGCAR" ]] && [[ -s "$stage/step3-dftu/WAVECAR" ]] \
-      && grep -q 'General timing and accounting' "$stage/step3-dftu/OUTCAR"; then
+      && job_converged "$stage/step3-dftu"; then
     cp "$stage/step3-dftu/CHGCAR" "$stage/step3-dftu/WAVECAR" "$directory/"
     enable_charge_restart "$directory"
     return 0
@@ -285,25 +293,57 @@ preconverge_model() {
 for relative in "${jobs[@]}"; do
   directory="$root/$relative"
   marker="$directory/run_status.json"
-  if [[ -f "$marker" ]] && grep -Eq '"complete"[[:space:]]*:[[:space:]]*true' "$marker" && grep -q 'General timing and accounting' "$directory/OUTCAR"; then
+  if [[ -f "$marker" ]] && grep -Eq '"complete"[[:space:]]*:[[:space:]]*true' "$marker" && job_converged "$directory"; then
     printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "$relative" "skipped-complete" "0" >> "$status_file"
     continue
   fi
 
-  # Reuse a converged charge density only when atom ordering and the real-space
-  # cell are identical.  This accelerates cutoff/k-point refinements without
-  # carrying charge densities across different slab or vacuum geometries.
+  # Reuse a converged charge density only when atom ordering, real-space grid
+  # and cutoff are identical. A different ENCUT changes the FFT grid, so its
+  # CHGCAR/WAVECAR must never seed another ENCUT point.
   seed=""
   reuse_converged_dftu=false
+  charge_source="reused-converged-dftu-charge"
+  recovery_marker="$directory/scf_recovery.json"
   case "$relative" in
-    "encut/520") seed="encut/450" ;;
-    "encut/600") seed="encut/520" ;;
     "kpoints/1x1x1") seed="encut/520" ;;
     "kpoints/2x2x1") seed="kpoints/1x1x1" ;;
     "kpoints/3x3x1") seed="kpoints/2x2x1" ;;
   esac
-  if [[ -n "$seed" ]] && [[ -f "$root/$seed/CHGCAR" ]] \
-      && grep -Eq '"complete"[[:space:]]*:[[:space:]]*true' "$root/$seed/run_status.json"; then
+  # A prepared SCF recovery must retain the stalled job's own charge density.
+  # In particular, do not overwrite it with the lower k-point seed.
+  if [[ -s "$recovery_marker" ]] \
+      && grep -Eq '"state"[[:space:]]*:[[:space:]]*"prepared"' "$recovery_marker"; then
+    if [[ ! -s "$directory/CHGCAR" ]] || ! job_converged "$directory"; then
+      printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "$relative" "recovery-checkpoint-missing" "1" >> "$status_file"
+      exit 1
+    fi
+    enable_charge_restart "$directory"
+    reuse_converged_dftu=true
+    printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "$relative" "reusing-stalled-scf-checkpoint" "0" >> "$status_file"
+  elif [[ -s "$recovery_marker" ]] \
+      && grep -Eq '"state"[[:space:]]*:[[:space:]]*"prepared-fresh-atomic"' "$recovery_marker"; then
+    if [[ -s "$directory/CHGCAR" ]] || [[ -s "$directory/WAVECAR" ]]; then
+      echo "Fresh recovery must not retain CHGCAR or WAVECAR: $directory" >&2
+      exit 1
+    fi
+    reuse_converged_dftu=true
+    charge_source="fresh-atomic-charge"
+  elif [[ -s "$recovery_marker" ]] \
+      && grep -Eq '"state"[[:space:]]*:[[:space:]]*"prepared-model-preconvergence"' "$recovery_marker"; then
+    # A second recovery is deliberately clean: the driver archived every
+    # unverified output, so regenerate the DFT+U seed through the fixed-charge,
+    # PBE, and DFT+U bridge stages before the final calculation.
+    if [[ -s "$directory/CHGCAR" ]] || [[ -s "$directory/WAVECAR" ]]; then
+      echo "Second recovery must not retain CHGCAR or WAVECAR: $directory" >&2
+      exit 1
+    fi
+    reuse_converged_dftu=false
+    charge_source="forced-three-stage-preconvergence"
+  elif [[ -n "$seed" ]] && [[ -s "$root/$seed/CHGCAR" ]] \
+      && job_converged "$root/$seed" \
+      && cmp -s "$root/$seed/POSCAR" "$directory/POSCAR" \
+      && cmp -s "$root/$seed/POTCAR" "$directory/POTCAR"; then
     cp "$root/$seed/CHGCAR" "$directory/CHGCAR"
     rm -f "$directory/WAVECAR"
     if [[ -s "$root/$seed/WAVECAR" ]] \
@@ -316,14 +356,23 @@ for relative in "${jobs[@]}"; do
     reuse_converged_dftu=true
   elif [[ "$relative" == "encut/450" ]] \
       && [[ -s "$root/preconverge/base/CHGCAR" ]] \
-      && grep -q 'General timing and accounting' "$root/preconverge/base/OUTCAR" \
+      && job_converged "$root/preconverge/base" \
       && cmp -s "$root/preconverge/base/POSCAR" "$directory/POSCAR" \
       && cmp -s "$root/preconverge/base/KPOINTS" "$directory/KPOINTS" \
       && cmp -s "$root/preconverge/base/POTCAR" "$directory/POTCAR"; then
     cp "$root/preconverge/base/CHGCAR" "$directory/CHGCAR"
     enable_charge_restart "$directory"
-  elif [[ -s "$directory/CHGCAR" ]]; then
+  elif [[ -s "$directory/CHGCAR" ]] && job_converged "$directory"; then
     enable_charge_restart "$directory"
+  elif [[ -f "$root/clean_baseline.json" ]]; then
+    # A freshly generated, reviewed structure uses atomic charge initially.
+    # Do not load any surviving charge/wavefunction from an unsuccessful run.
+    if [[ -s "$directory/CHGCAR" ]] || [[ -s "$directory/WAVECAR" ]]; then
+      echo "Unverified checkpoint present; archive before restarting: $directory" >&2
+      exit 1
+    fi
+    reuse_converged_dftu=true
+    charge_source="fresh-atomic-charge"
   else
     preconverge_charge "$directory" || {
       printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "$relative" "preconvergence-failed" "1" >> "$status_file"
@@ -337,20 +386,20 @@ for relative in "${jobs[@]}"; do
       exit 1
     }
   else
-    printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "$relative" "reused-converged-dftu-charge" "0" >> "$status_file"
+    printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "$relative" "$charge_source" "0" >> "$status_file"
   fi
 
   printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "$relative" "running" "" >> "$status_file"
   printf '{"job":"%s","status":"running","started_at":"%s","complete":false}\n' \
     "$relative" "$(date --iso-8601=seconds)" > "$marker"
   cd "$directory" || exit 3
+  exit_code=0
   OMP_NUM_THREADS=1 OMP_STACKSIZE=512m /usr/bin/time -v \
     mpirun --bind-to none -np 4 /usr/local/bin/vasp_std \
-    > vasp.stdout.log 2> vasp.stderr.log
-  exit_code=$?
+    > vasp.stdout.log 2> vasp.stderr.log || exit_code=$?
   complete=false
   status="failed"
-  if [[ $exit_code -eq 0 ]] && grep -q 'General timing and accounting' OUTCAR && grep -q 'free  energy   TOTEN' OUTCAR; then
+  if [[ $exit_code -eq 0 ]] && job_converged "$directory"; then
     complete=true
     status="completed"
   fi
@@ -358,15 +407,16 @@ for relative in "${jobs[@]}"; do
     "$relative" "$status" "$exit_code" "$(date --iso-8601=seconds)" "$complete" > "$marker"
   printf '%s\t%s\t%s\t%d\n' "$(date --iso-8601=seconds)" "$relative" "$status" "$exit_code" >> "$status_file"
   if [[ "$complete" != true ]]; then
-    exit "$exit_code"
+    runner_exit_state="failed"
+    exit 1
   fi
 done
 
-python3 /mnt/e/Adhesive-AI-Lab/scripts/analyze_vasp_convergence.py \
+analysis_exit=0
+python3 "$script_dir/analyze_vasp_convergence.py" \
   --plan "$root/validation_plan.json" \
   --report "$root/convergence_report.json" \
-  --approval "$root/approved.json"
-analysis_exit=$?
+  --approval "$root/approved.json" || analysis_exit=$?
 if [[ $analysis_exit -eq 0 ]]; then
   printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" "convergence-matrix" "approved" "0" >> "$status_file"
 else

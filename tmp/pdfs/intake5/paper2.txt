@@ -1,0 +1,692 @@
+--- PAGE 1 ---\nThis is an Accepted Manuscript, which has been through the 
+Royal Society of Chemistry peer review process and has been 
+accepted for publication.
+Accepted Manuscripts are published online shortly after 
+acceptance, before technical editing, formatting and proof reading. 
+Using this free service, authors can make their results available 
+to the community, in citable form, before we publish the edited 
+article. We will replace this Accepted Manuscript with the edited 
+and formatted Advance Article as soon as it is available.
+You can find more information about Accepted Manuscripts in the 
+Information for Authors.
+Please note that technical editing may introduce minor changes 
+to the text and/or graphics, which may alter content. The journal’s 
+standard Terms & Conditions and the Ethical guidelines still 
+apply. In no event shall the Royal Society of Chemistry be held 
+responsible for any errors or omissions in this Accepted Manuscript 
+or any consequences arising from the use of any information it 
+contains. 
+Accepted Manuscript
+Journal of
+ Materials Chemistry A
+www.rsc.org/materialsA
+View Article Online
+View Journal
+This article can be cited before page numbers have been issued, to do this please use:  J. Li, G. Zhang, L.
+Deng, S. Zhao, Y. Gao, J. Kun, R. Sun and C. Wong, J. Mater. Chem. A, 2014, DOI: 10.1039/C4TA04941A.\n--- PAGE 2 ---\nJournal of 
+Materials Chemistry A RSCPublishing 
+ARTICLE 
+This journal is © The Royal Society of Chemistry 20 13 J. Name ., 2013, 00 , 1-3 | 1 
+Cite this: DOI: 10.1039/x0xx00000x 
+Received 00th January 2012, 
+Accepted 00th January 2012 
+DOI: 10.1039/x0xx00000x 
+www.rsc.org/ 
+In situ polymerization and mechanical reinforced, 
+thermal healable graphene oxide/polyurethane 
+composites based on Diels-Alder chemistry 
+Jinhui Lia, Guoping Zhang*a,b, Libo Denga, Songfang Zhaoa, Yongju Gaoa, Kun Jianga, 
+Rong Sun*a, Chingping Wonga,b,c 
+Abstract: The covalent bonding graphene oxide/polyu rethane (GO/PU) composites with 
+significant reinforcement and thermal healable prop erty were developed via in situ  
+polymerization based on DielsUAlder (DA) chemistry.  The PU prepolymer was prepared with 
+GO, 4,4Udiphenylmethane diisocyanate, poly(tetramet hylene glycol) and blocked by furfuryl 
+alcohol firstly. Then the prepolymer was crossUlink ed by bifunctional maleimide via DA 
+chemistry. SEM shows that the GO was dispersed unif ormly in the PU matrix. The DA and 
+retroUDA reactions were characterized by Fourier tr ansform infrared spectra and differential 
+scanning calorimetry separately. Tensile tests show ed that with the incorporation of 0.1 wt% of 
+GO, the tensile modulus of GO/PU composites increas ed from 9.80 MPa to 21.95 MPa, and the 
+tensile strength and elongation at break of the GO/ PU composites increased by more than 
+367% and 210%, respectively. Furthermore, the compo sites possessed thermal healable ability 
+which was inspected by atomic force microscope and strainUstress test. The healing efficiency 
+of 78% in average was achieved which was determined  by recovery of breaking stress and the 
+healing mechanism was tentatively proposed. Therefo re, the covalent bonding selfUhealing 
+GO/PU composites could be used for smart materials and structural material.  
+ 
+ 
+Introduction 
+Polymeric materials have been used in a variety of fields, including 
+sporting goods, biomedical, microelectronics, trans portation, and 
+aerospace, etc. In order to reinforce polymers and enlarge their  
+application scope, inorganic materials such as carb on nanotube 
+(CNT),1, 2  graphene,3, 4 glass fiber,5 ceramic oxide6, 7 and nanosilica8U
+10 were incorporated as fillers into polymer matrices . With no doubt, 
+once the inorganic fillers were overloaded, microcr acks would occur 
+especially around the interface of inorganic filler s or processed 
+structures. The propagation and coalescence of the microcracks 
+might lead to the failure of the materials. Consequently, development 
+of smart materials with selfUhealing property has r eceived mass 
+research attention in the past decades. 11 In general, selfUhealing 
+materials could be classified into “autonomous” systems and  
+ 
+ 
+aShenzhen Institutes of Advanced Technology, Chinese Academy of 
+Sciences, Shenzhen 518055, China. EUmail: gp.zhang@siat.ac.cn or 
+rong.sun@siat.ac.cn; Fax: +86U755U86392199; Tel: +86U755U
+86392104 
+bSchool of Materials Science and Engineering, Georgia Institute of 
+Technology, 771 Ferst Drive, Atlanta, Georgia, 30332, United States 
+c Department of Electronic Engineering, Faculty of Engineering, The 
+Chinese University of Hong Kong 999077, Hong Kong, China 
+ 
+“stimuliUresponsive” systems. 12 “Autonomous” systems heal 
+themselves spontaneously and timely, but they can b e healed only 
+once at the same location because of exhaustion of the healing 
+agents. “StimuliUresponsive” systems involve extern al factors to 
+trigger the healing process, which is most accompli shed by a bondU
+breaking and bondUrebuilding process.13 Stimulus such as thermal, 14U
+20 electrical21, 22 and photo 23U25 have been reported by scientists. The 
+temperatureUdependent reversible covalent crossUlinking of polymers 
+or block copolymers, such as DielsUAlder (DA) chemi stry (the 
+schematic representation is shown in Fig. 1), which  can be healed 
+without any catalysts or healing agents has attaine d significant 
+achievements recently.12  
+Graphene, the twoUdimensional sp 2Uhybridized carbon, is the 
+world’s thinnest, strongest, and stiffest material,  as well as being an 
+excellent conductor of both heat and electricity. I t is attractive to 
+apply graphene into the polymer matrix. Yet, pristi ne graphene 
+materials are unsuitable for direct intercalation b ecause of the 
+pronounced tendency to agglomerate in polymer matrix.26 In contrast 
+to pristine graphene, there are plenty of oxygenUcontaining groups on 
+the graphene oxide (GO) sheets surface, such as hyd roxyl and epoxy 
+groups on their basal planes, as well as carbonyl and carboxyl groups 
+located at the sheet edges, which not only allow th e good dispersion 
+of GO in matrix, but also provide active sites to f orm chemical 
+bonds, acting as an ideal interface between the gra phene nanosheets 
+and polymers.27, 28 
+Page 1 of 8 Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A\n--- PAGE 3 ---\nARTICLE Journal Name 
+2 | J. Name ., 2012, 00 , 1-3 This journal is © The Royal Society of Chemistry 20 12 
+Very recently, some works have been reported concer ning the 
+construction of chemical bonding between GO sheets and polymer 
+matrices to get the selfUhealing materials. 29U32 However, the healing 
+mechanism in these systems were usually nonUcovalen t bond i.e. 
+hydrogenUbond29, 31  or metalUligand coordination 32 and the 
+mechanical properties are poor. To our best knowled ge, covalent 
+bonding selfUhealing GO and polymer composites base d on DA 
+chemistry haven’t been reported before. 
+In this work, the polyurethane (PU) preploymer was prepared in 
+situ on to the surface of GO to obtain GO/PU composites  with 
+furfuryl alcohol as end group. The asUprepared GO/P U was then 
+covalent crossUlinked by bifunctionalmaleimide via DA reaction. The 
+structure, morphology, thermal stability and mechanic strength of the 
+resultant composites were comprehensively investiga ted. At last, the 
+thermal healing property was also studied.  
+ 
+ 
+Fig. 1 The schematic representation of thermally re versible DielsU
+Alder reaction. 
+ 
+Experimental 
+Materials 
+Graphite powder, 4,4Udiphenylmethane diisocyanate, (MDI, 99%), 
+furfuryl alcohol (FA) and N,N’U(4,4’Udiphenylmethane)bismaleimide 
+(BMI) were supplied by Aladdin and used as received , 
+poly(tetramethylene glycol) (PTMG ，M̅ n = 2000 g/mol) was 
+purchased from Aladdin and used after 2 hours drying under vacuum 
+at 110 oC . Dimethyl formamide (DMF) was dried with the 
+molecular sieves for 24 h and freshly distillated b efore use. The 
+chemicals included potassium permanganate (KMnO 4), sodium 
+nitrate (NaNO 3), concentrated sulfuric acid (98%) and hydrochlori c 
+acid were all reagent grade purchased from Sinophar m Chemical 
+Reagent Beijing Co., Ltd. 
+ 
+Preparation of iGO-PU-DA composites 
+The procedure for preparing GO nanosheets functiona lized 
+polyurethane is presented in Scheme 1. The specific  synthesis routes 
+are described as follows: first of all, the graphen e oxide is produced 
+following Hummers’ method 33. Second, in situ  polymerization of 
+MDI, PTMG and FA in the presence of GO nanosheets  is in turn 
+completed. Briefly, the preparation of the sample containing 0.1 wt% 
+GO is as follows: 6.1 mg of GO is dispersed in 50.0  g of DMF with 
+the assistance of ultraUsonication at room temperature. Then, 1.5 g of 
+MDI was added into the above GO suspension at 80  oC for 2 h in N 2 
+atmosphere (denoted as iGO). Afterwards, 4.0 g of P TMG was 
+added into the flask and the mixture was stirred at  80 oC for another 
+2 h. The 0.8 g FA was added into the system and sti rred at 80 oC for 
+another 2 h to in situ  prepare polyurethane prepolymer on the 
+graphene oxide nanosheets (denoted as iGOUPUUFA). Third, 2.86 g 
+BMI was introduced into the homogeneous mixture whi ch was 
+stirred under N2 at 60 oC for 24 h. Then, the mixture was poured into 
+preUheated molds made from Teflon. Finally, covalen t cross linked 
+composites based on DA chemistry (denoted as iGOUPU UDA) were 
+obtained via in situ  polymerization. Other samples containing 0.5 
+wt% and 1.0 wt% GO were synthesized by the same pro cedure. All 
+the final composites with different GO contents wer e labeled iGOU
+PUUDAU1, iGOUPUUDAU2 and iGOUPUUDAU3, respectively. As a 
+comparison, the thermal healable crosslinked polyur ethane was 
+prepared with the same process but without the addi tion of GO and 
+named as PUUDA. The compositions of various GO/PU are shown in 
+Table 1. 
+ 
+Measurements 
+Fourier transform infrared (FTIR) spectra were recorded with Bruker 
+Vertex 70 spectrometer (Bruker Optik GmbH, Ettlinge n, Germany) 
+in the range of 4000–400 cm –1. Differential scanning calorimetry 
+(DSC) was performed on Q20U1173 DSC thermal system (TA 
+instruments, New Castle, USA) with a heating rate o f 10 °C min U1 
+and ranging from 30 °C to 180 °C. Nitrogen gas was purged at a 
+flow rate of about 50 mL minU1. Thermal gravity analysis (TGA) was 
+made on a TA SDTQ600 thermoUgravimetric analyzer; t he 
+microbalance has a precision of ±0.1 µg. Samples of  about 10 mg 
+were placed into 70 µL alumina pans. The samples were heated from 
+30 oC to 800 oC under a nitrogen flow of 100 mL min U1. Scanning 
+electronic micrographs (SEM) were recorded with a Nova NanoSEM 
+450. The Raman spectra were measured by LabRAM HR R aman 
+Spectrometer (HORIBA JobinUYvon, France) with a las er at the 
+excitation wavelength of 632.8 nm and 15.7 mW power  irradiation. 
+The collection time for each spectrum was 60 s. The  scattered light 
+was detected with a thermoelectric cooled (U70 oC) charge coupled 
+device detector (CCD). All the measurements were ca rried out 
+directly over the sample. Powder XUray diffraction (XRD) patterns 
+were recorded on an XUray diffractometer (Rigaku D/ Max 2500) 
+with monochromated Cu Kα radiation (λ=1.54 Å) at a scanning rate 
+of 2 o min U1. Tensile tests experiments were conducted on a RGM U
+4100 (Reger Instrument co., LTD, China) at room temperature with a 
+crossUhead speed of 5 mm minU1. The specimens were dumbbellUlike 
+(35 mm × 6mm × 0.1U0.5 mm). Atomic Force Microscope s (AFM) 
+were recorded with MFPU3D TM (Asylum Research, USA) and 
+operated in air in AC mode.  
+ 
+Table 1 
+Recipes for the preparation of the composites with different contents 
+of GO. 
+Samples Polyurethane (g) GO 
+(mg) 
+MDI PTMEG2000 FA BMI 
+PUUDA 1.00 4.00 0.392 0.716 0 
+iGOUPUUDAU1 1.00 4.00 0.392 0.716 6.11 
+iGOUPUUDAU2 1.00 4.00 0.392 0.716 30.54 
+iGOUPUUDAU3 1.00 4.00 0.392 0.716 61.08 
+ 
+ Results and discussion 
+Characterization of GO, iGO, iGO-PU-FA and iGO-PU-DA  
+Firstly, GO was characterized by SEM, XRD and Raman . The SEM 
+image in Fig.2a shows paperUlike wrinkles and the ( 002) reflection 
+of GO appears at 2 θ= 10.68 o as can be seen in Fig. 2b, suggesting 
+that the interlayer distance increased to 0.83 nm, which is the typical 
+separation of the layered GO. It indicated that the  graphite had been 
+successfully exfoliated during the chemical modific ation process. As 
+shown in Fig. 2c, the Raman spectrum of graphite sh ows a 
+prominent G peak at 1575 cm U1 while the spectrum of GO displays 
+an obvious D band at 1325 cm U1 indicates the reduction in size of the 
+in plane sp2 domains, possibly due to the extensive oxidation. 
+The distribution of GO sheets in the composites aff ect the 
+properties of the polymer composites especially the  mechanical 
+Page 2 of 8Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A\n--- PAGE 4 ---\nJournal Name ARTICLE 
+This journal is © The Royal Society of Chemistry 20 12 J. Name ., 2012, 00 , 1-3 | 3 
+property.34, 35 So the investigation of the distribution is carrie d out 
+using by SEM on the cryogenically surface. It is se en that primary 
+GO sheets are well dispersed in the polymer matrix at low content 
+(0.1 wt%). However, particles were slightly agglome rated at high 
+contents (0.5 wt%, 1.0 wt%). 
+ 
+ 
+Fig. 2 (a) SEM image of GO; (b) XRD pattern of the GO; (c) Raman 
+spectra of the GO and the pristine graphite and the  SEM images of 
+the cryogenically fracture surfaces of films for (d ) iGOUPUUDAU1, (e) 
+iGOUPUUDAU2 and (f) iGOUPUUDAU3. 
+ 
+COOH OH
+HO COOH
+Hummers' method
+O
+H2
+C NCO
+NH
+O
+PTMEG N2
+MDI N2
+80oC 2h
+80oC 2h
+OHO
+CNO
+N2 80oC2h
+H2
+C NN
+O
+O
+O
+O
+60oC 24h
+O
+COOH
+COOH
+O
+O
+H2
+C NCO
+HNO
+O
+H2
+CNH
+O
+COOH
+COOH
+O
+O
+H2
+CHNO
+NCO
+O
+H2
+CNH
+O
+COOH
+COOH
+O
+O
+H2
+CHNO
+O
+O
+OO
+O
+H2
+CNH
+O
+COOH
+COOH
+O
+O
+H2
+CHNO
+OO
+NO O
+OO
+NO O
+COOH
+COOH
+O
+CH2
+O
+O N
+O
+O
+H2C
+O
+O
+N
+O
+O
+COOH
+COOH
+O
+ 
+Scheme 1 The synthetic procedures of iGOUPUUDA. 
+ 
+The procedure for preparing GO nanosheets functiona lized 
+polyurethane is presented in Scheme 1. Basically, t he GO obtained 
+by Hummers’ method was modified by MDI at first and  iGO was 
+then reacted with PTMG resulting in the NCOUterminated PU. Then 
+FA was added into the system to get iGOUPUUFA. Fina lly after 
+reacting with BMI by DA reaction, iGOUPUUDA was obtained. 
+ After GO was modified by functional molecule and p olymer, 
+obvious variation of characteristic peaks can be id entified in the 
+FTIR spectra. Fig. 3a shows the FTIR spectra of GO and iGO. In 
+order to remove the unreacted MDI, iGO was filtered  and washed 
+twice by additional methylene chloride after the pr eparation, and 
+dried under vacuum. Upon treatment with MDI, the C= O stretching 
+vibration at 1733 cm U1 in GO becomes obscured by the appearance 
+of a stronger absorption at 1708 cm U1 that can be attributed to the 
+carbonyl stretching vibration of the carbamate este rs of the surface 
+hydroxyls in iGO. The new band at 1549 cm U1 originates from 
+carbamate esters and corresponds to the coupling of  the C–N 
+stretching vibration with the CNH deformation. Besi des, the 
+characteristic absorption peak of UNCO group and pUphenylene at 
+2270 cm U1 and 815 cm U1 were clearly shown in the spectrum 
+separately which indicated the successful modificat ion of MDI on 
+GO. Meanwhile, there are abundant oxygenUcontaining groups such 
+as OUH (3310 cmU1), carboxyl C=O groups (1708 cm U1), CUO (1057 
+cmU1) and so on in the FTIR spectrum of iGO, so GO was not 
+reduced obviously during the modification. 
+ 
+ 
+Fig. 3 FTIR spectra of (a) GO and iGO; (b) iGOUPU UFA and iGOU
+PUU DA.  
+ 
+The FTIR spectra of iGOUPUUFA and iGOUPUUDA are shown in 
+Fig. 3b. The characteristic absorption peak of –NCO  group at 2270 
+cmU1 appeared in the spectra of iGO was completely disa ppeared in 
+spectrum of iGOUPUUFA and iGOUPUUDA. The result indicated that 
+all the UNCO groups were completely consumed in the  following 
+synthesis of iGOUPUUFA and iGOUPUUDA. The peak at 812 cm U1 
+confirmed that the furan ring was successfully graf ted in the iGOU
+PUUFA composites.36 Furthermore, in the spectrum of iGOUPUUDA, 
+around 1715 cm U1 ascribing to C=O band of BMI was observed. 
+Meanwhile, the peaks at  1774 cmU1 in the spectrum of iGOUPUUDA 
+can be ascribed to C=C which was specific to the DA  adduct. 37 
+Page 3 of 8 Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A\n--- PAGE 5 ---\nARTICLE Journal Name 
+4 | J. Name ., 2012, 00 , 1-3 This journal is © The Royal Society of Chemistry 20 12 
+Simultaneously, the intensity of 812 cm U1 peak in the spectrum of 
+iGOUPUUDA decreased compared with that of iGOUPUUFA, which 
+can be ascribed to that the furan ring was reacted by BMI. Therefore, 
+the novel PU/GA composites based on DA chemistry wa s 
+successfully developed as expected. 
+ 
+Fig. 4 DSC curves of PUUDA and iGOUPUUDAs. 
+ 
+The DA chemistry was successfully applied in the no vel 
+composite which is verified by the characteristic p eak of retroUDA 
+(rDA) reaction as shown in Fig. 4. The DSC curves o f PUUDA and 
+iGOUPUUDAs exhibit significant endothermic peaks at 130U150 oC 
+which was predominately attributed to the rDA react ion. And it 
+should be noticed that introducing GO into the comp osites doesn’t 
+have significant effect on the endothermic peak whi ch might be due 
+to the nature of the DielsUAlder chemistry of furan –maleimide 
+system12. The significant endothermic peak at 130U150 oC indicates 
+the successfully synthesis of the GO/PU composites by DielsUAlder 
+reaction and provides the thermal healing property of all the 
+composites because of the thermal reversibility of the DielsUAlder 
+chemistry. 38, 39  
+ 
+Fig. 5 TGA curves of PUUDA and iGOUPUUDAs. 
+ 
+Besides, the thermal stability of PUUDA and iGOUPUUDAs 
+were assessed by TGA under a nitrogen atmosphere be tween 
+30 °C and 800 °C as shown in Fig. 5. It can be seen  that the 
+decomposition of pure PU and iGOUPUUDAs took place in a 
+single step and it started at around 300 oC. From the inset figure 
+we can see that the temperature at 5% weight loss ( T5) 
+decreased slightly with increasing GO compared with  that of 
+pure PU. However, all these composites possess exce llent 
+thermal stability and keep the T5 higher than 300 oC. In short, 
+the thermal stability showed no significant change with the 
+addition of GO in PU matrix which is consistent wit h the result 
+reported  by Li et al. 40 Also, It can be seen that with the addition 
+of GO the char yields at 800 °C increased slightly.   
+ 
+Mechanical properties of the iGO-PU-DA composites 
+It was expected that the mechanical properties of t he polymer would 
+be enhanced due to the large aspect ratio of GO, co valent bonding 
+between GO and PU matrix and good dispersion of GO in the matrix. 
+The mechanical properties of GO/PU composites are shown in Fig. 6 
+and summarized in Table 2. From the typical stressU stain curves 
+shown in Fig. 6 we can see that with the addition of GO, the Young’s 
+modulus (21.95±2.56 MPa) and breaking strain (449±1 6%) 
+increased twice and the breaking stress (8.01±0.71 MPa) even 
+increased nearly 4 times at a GO loading of only 0.1wt%. The reason 
+should be that the good dispersion and covalent lin king of GO sheets 
+promote the transfer of load in the composites. 35 The films of iGOU
+PUUDAU2 and iGOUPUUDAU3 showed higher Young’ modulus but the 
+breaking stress and breaking strain decreased sligh tly. Specially, the 
+Young’s modulus increased by ca. one order of magni tude when the 
+weight percentage of GO changed from 0.1% to 1.0%, while the 
+breaking strain decreased from 449% to 54% and the breaking stress 
+decreased from 8.01 MPa to 7.09 MPa. This can be as cribed that the 
+composite with higher GO loading brings about the c oncentration of 
+stress at GO sheets and lead to the break of the films at the stretching 
+process. On the other hand, the GO sheets in the co mposites disturb 
+the orientations of polymer chain at high elongatio ns at the same 
+time.41 
+ 
+ 
+Fig. 6 StressUstain curves of PUUDA and iGOUPUUDAs films (25 oC). 
+ 
+Table 2 Summary of the mechanical properties of the  composite 
+samples at different GO content. The average values  were obtained 
+from more than 3 samples. 
+Sample Young’s modulus 
+(MPa) 
+StrainUatU
+break 
+(%) 
+StressUatU
+break 
+(MPa) 
+PUUDA 9.80±1.30 213±33 2.16±0.29 
+iGOUPUU
+DAU1 
+21.95±2.56 449±16 8.01±0.71 
+iGOUPUU
+DAU2 
+28.61±4.22 282±81 7.19±1.22 
+iGOUPUU
+DA U3 
+209.01±34.61 54±30 7.09±0.58 
+Page 4 of 8Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A\n--- PAGE 6 ---\nJournal Name ARTICLE 
+This journal is © The Royal Society of Chemistry 20 12 J. Name ., 2012, 00 , 1-3 | 5 
+The healing test 
+In order to introduce surface defects, the respecti ve films were 
+treated with a spatula and the typical healing beha vior of iGOUPUU
+DAU2 is shown in Fig. 7. After being scratched with  a spatula, the 
+film surface was analyzed using AFM (Fig. 7a). As c an be seen, 
+defined scratches (Scratch (a): 1.55 µm depth, 15 u m width.) were 
+created. Afterwards, iGOUPUUDAU2 film was heated fo r 4 h at 
+150 °C, allowed to cool down slowly to 65 °C, and r eUcrosslinked 
+for 24 h at 65 °C. After the rDA reaction at 150 °C  (Fig. 7b), the 
+scratch decrease to 0.98 µm depth. With the subsequent crosslinking 
+at 65 °C (Fig. 7c), profilometry revealed that the scratch almost 
+disappeared completely and the depth was 0.05 um. The result shows 
+that the GO/PU composites could be healed by the thermal reversible 
+DA reaction.  
+Fig. 7 Profilometry measurements by AFM of (a) scra tching with a spatula , (b) after heating for 4 h a t 150 °C, (c) subsequent heating for 24 
+h at 65 °C. 
+ 
+ 
+Fig. 8 Stress–strain curves of PUUDA and iGOUPUUDAs films before and after thermal healing: (a) PUUDA, (b) iGOUPUUDAU1, (c) iGOUPUU
+DAU2, and (d) iGOUPUUDAU3. 
+Page 5 of 8 Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A\n--- PAGE 7 ---\nARTICLE Journal Name 
+6 | J. Name ., 2012, 00 , 1-3 This journal is © The Royal Society of Chemistry 20 12 
+ 
+The healable behaviors of PUUDA and iGOUPUUDAs films were 
+subsequently investigated by measuring the healing efficiency which 
+is defined as the ratio of the recovered breaking ( tensile) strength to 
+the original strength. The original samples were fi rst torn by the 
+tensile test machine with a head speed of 5 mm min U1. Then the two 
+broken surfaces were immediately reunited, subjecte d to a gentle 
+pressure and stored at 150 oC for 4 hours followed by 24 h at 65 oC 
+without any continuous pressure. The detailed data of the mechanical 
+properties of the healed films at different GO cont ents are shown in 
+Table 3. After the thermal healing process the Youn g’s Modulus, 
+breaking strain and breaking stress of the healed s amples recovered 
+significantly. The recovery of the mechanical prope rties should be 
+ascribed to recombination of the 3D network formed by the DielsU
+Alder of the free furan–maleimide groups which were  generated by 
+the stretch process before as the interaction of th e DA bond is much 
+weaker than the other covalent bond.12 
+ 
+Table 3 Summary of the mechanical properties of the  composite 
+samples after the healing test. The average values were obtained 
+from more than 3 samples. 
+Sample Young’ Modulus 
+(MPa) 
+StrainUatU 
+break 
+(%) 
+StressUatU
+break 
+(MPa) 
+PUUDA 11.15±1.02 103±17 2.14±0.19 
+iGOUPUU
+DAU1 
+15.59±5.18 275±97 5.70±1.96 
+iGOUPUU
+DAU2 
+37.33±11.22 132±34 5.00±1.65 
+iGOUPUU
+DAU3 
+111.33±16.54 30±13 5.21±0.61 
+ 
+ 
+Fig. 9 Healing efficiency of PUUDA and iGOUPUUDAs f ilms 
+determined by recovery of breaking stress. 
+ 
+Fig. 8 shows the typical stressUstrain curves befor e and after the 
+healing tests of PUUDA and iGOUPUUDAs films. Here, healing 
+efficiency is represented by the ratio of the break ing (tensile) 
+strength of the healed sample to that of the origin al sample. And the 
+healing efficiencies estimated from the experiments  are presented in 
+Fig. 9 which is 98.16%, 71.12%, 69.54% and 73.48% r espectively. 
+Comparing with other samples, the pure PUUDA showed the highest 
+healing efficiency. The reason should be that witho ut the addition of 
+GO, the polymer chain motion of the pure PUUDA is much easier to 
+take place which will promote the DielsUAlder reaction of the furan–
+maleimide groups. With the addition of GO, the heal ing efficiency 
+dropped distinctly which were around 70% for all th e iGOUPUUDAs. 
+The main reason could be that the addition of GO di sturb the 
+molecular motion and recombination of the furan–maleimide groups. 
+GO sheets that are covalently linked with the polymer matrix usually 
+increase the crossUlink density of the matrix and r esult in decreased 
+mobilities of GO sheets and polymer segments. In ad dition, the 
+defect formed during the first stretch process acce lerated the fracture 
+of the films as well which is shown in inset digita l photo of Fig. 8b. 
+Therefore, in situ  polymerization of GO/PU and introducing DA 
+chemistry into the composites not only improve the mechanical 
+properties but also decorate the thermalUhealing ab ility to the novel 
+composite material. 
+ 
+Conclusion 
+In summary, a novel covalent bonding graphene oxide /polyurethane 
+composite was successfully developed by in situ polymerization and 
+DielsUAlder chemistry for the first time. All these  composites with 
+different GO contents show significant mechanical r einforcement 
+and thermal healable property. Owing to the well di spersion and 
+strong covalent bonding interactions with the polym er matrix great 
+improvements in mechanical properties have been ach ieved for 
+GO/PU composites. The result showed that with the i ncorporation of 
+0.1 wt% of GO, the tensile modulus of GO/PU composi tes increased 
+from 9.80 MPa to 21.95 MPa, the tensile strength an d elongation at 
+the break of the GO/PU composites increased by more  than 367% 
+and 210%, respectively. Additionally, the composite s showed 
+excellent thermal healable ability with efficiency of 78% in view of 
+breaking stress. Therefore, the ingeniously archite cture design can 
+widen the application of conventional composites. 
+ 
+Acknowledgements 
+This work was financially supported by National Nat ural Science 
+Foundation of China (Grant No. 21201175), Guangdong  and 
+Shenzhen Innovative Research Team Program (No.2011D 052, 
+KYPT20121228160843692), and R&D Funds for basic Res earch 
+Program of Shenzhen (Grant No. JCYJ20120615140007998). 
+ 
+Notes and references 
+  
+1. F. M. Blighe, K. Young, J. J. Vilatela, A. H. Win dle, I. A. Kinloch, L. 
+Deng, R. J. Young and J. N. Coleman, Adv. Funct. Mater., 2011, 21, 
+364U371. 
+2. H. Qi, J. Liu, S. Gao and E. Mäder, J. Mater. Chem. A, 2013, 1, 
+2161U2168. 
+3. X. Huang, X. Qi, F. Boey and H. Zhang, Chem. Soc. Rev., 2012, 41, 
+666U686. 
+4. J. R. Potts, D. R. Dreyer, C. W. Bielawski and R. S.  Ruoff, Polymer, 
+2011, 52, 5U25. 
+5. A. M. Peterson, R. E. Jensen and G. R. Palmese, Compos. Sci. 
+Technol., 2011, 71, 586U592. 
+6. E. Ionescu, H.UJ. Kleebe and R. Riedel, Chem. Soc. Rev., 2012, 41, 
+5032U5052. 
+7. G. Mera, A. Navrotsky, S. Sen, H.UJ. Kleebe and R. Ri edel, J. Mater. 
+Chem. A, 2013, 1, 3826U3836. 
+Page 6 of 8Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A\n--- PAGE 8 ---\nJournal Name ARTICLE 
+This journal is © The Royal Society of Chemistry 20 12 J. Name ., 2012, 00 , 1-3 | 7 
+8. H. Yang, Y. Cheng and F. Xiao, Appl. Surf. Sci., 2011, 258, 1572U
+1580. 
+9. T. Engel and G. Kickelbick, Chem. Mater., 2013, 25, 149U157. 
+10. T. Engel and G. Kickelbick, Polym. Int., 2014, 63, 915U923. 
+11. E. B. Murphy and F. Wudl, Prog. Polym. Sci., 2010, 35, 223U251. 
+12. Y.UL. Liu and T.UW. Chuo, Polym. Chem., 2013, 4, 2194U2205. 
+13. S. Billiet, X. K. Hillewaere, R. F. Teixeira and F. E. Du Prez, 
+Macromol. Rapid Commun., 2013, 34, 290U309. 
+14. X. Chen, M. A. Dam, K. Ono, A. Mal, H. Shen, S. R. Nutt, K. Sheran 
+and F. Wudl, Science, 2002, 295, 1698U1702. 
+15. S. Billiet, W. Van Camp, X. K. Hillewaere, H. Rahier an d F. E. Du 
+Prez, Polymer, 2012, 53, 2320U2326. 
+16. Y. L. Liu and C. Y. Hsieh, Journal of Polymer Science, Part A: 
+Polymer Chemistry, 2006, 44, 905U913. 
+17. A. M. Peterson, R. E. Jensen and G. R. Palmese, Acs Appl. Mater. 
+Interfaces, 2009, 1, 992U995. 
+18. A. M. Peterson, R. E. Jensen and G. R. Palmese, Acs Appl. Mater. 
+Interfaces, 2010, 2, 1141U1149. 
+19. P. A. Pratama, A. M. Peterson and G. R. Palmese, Polym. Chem., 
+2013, 4, 5000U5006. 
+20. Q. Tian, Y. C. Yuan, M. Z. Rong and M. Q. Zhang, J. Mater. Chem., 
+2009, 19, 1289U1296. 
+21. L. Huang, N. Yi, Y. Wu, Y. Zhang, Q. Zhang, Y. Huan g, Y. Ma and 
+Y. Chen, Adv. Mater., 2013, 25, 2224U2228. 
+22. E. L. Kirkby, J. D. Rule, V. J. Michaud, N. R. Sot tos, S. R. White and 
+J. A. E. Månson, Adv. Funct. Mater., 2008, 18, 2253U2260. 
+23. J. Ling, M. Z. Rong and M. Q. Zhang, J. Mater. Chem., 2011, 21, 
+18373U18380. 
+24. J. Ling, M. Z. Rong and M. Q. Zhang, Polymer, 2012, 53, 2691U2698. 
+25. N. Oya, P. Sukarsaatmadja, K. Ishida and N. Yoshie, Polym. J., 2012, 
+44, 724U729. 
+26. T. Kuilla, S. Bhadra, D. Yao, N. H. Kim, S. Bose and  J. H. Lee, Prog. 
+Polym. Sci., 2010, 35, 1350U1375. 
+27. V. Georgakilas, M. Otyepka, A. B. Bourlinos, V. Chandra, N. Kim, K. 
+C. Kemp, P. Hobza, R. Zboril and K. S. Kim, Chemical reviews, 
+2012, 112, 6156U6214. 
+28. D. R. Dreyer, S. Park, C. W. Bielawski and R. S. Ru off, Chem. Soc. 
+Rev., 2010, 39, 228U240. 
+29. C. Wang, N. Liu, R. Allen, J. B. H. Tok, Y. Wu, F . Zhang, Y. Chen 
+and Z. Bao, Adv. Mater., 2013, 25, 5785U5790. 
+30. C. Hou, Y. Duan, Q. Zhang, H. Wang and Y. Li, J. Mater. Chem., 
+2012, 22, 14991U14996. 
+31. J. Liu, G. Song, C. He and H. Wang, Macromol. Rapid Commun., 
+2013, 34, 1002U1007. 
+32. H.UP. Cong, P. Wang and S.UH. Yu, Chem. Mater., 2013, 25, 3357U
+3362. 
+33. W. S. Hummers Jr and R. E. Offeman, J. Am. Chem. Soc., 1958, 80, 
+1339U1339. 
+34. N. Wu, X. She, D. Yang, X. Wu, F. Su and Y. Chen, J. Mater. Chem., 
+2012, 22, 17254U17261. 
+35. Z. Chen and H. Lu, J. Mater. Chem., 2012, 22, 12479U12490. 
+36. P. Du, X. Liu, Z. Zheng, X. Wang, T. Joncheray and Y.  Zhang, RSC 
+Advances, 2013, 3, 15475U15482. 
+37. Z. Xu, Y. Zhao, X. Wang and T. Lin, Chem. Commun., 2013, 49, 
+6755U6757. 
+38. M. J. Barthel, T. Rudolph, A. Teichler, R. M. Paulus , J. Vitz, S. 
+Hoeppener, M. D. Hager, F. H. Schacher and U. S. Schubert, Adv. 
+Funct. Mater., 2013, 23, 4921U4932. 
+39. S. Yu, R. Zhang, Q. Wu, T. Chen and P. Sun, Adv. Mater., 2013, 25, 
+4912U4917. 
+40. Y. Li, D. Pan, S. Chen, Q. Wang, G. Pan and T. Wang, Mater. 
+Design, 2013, 47, 850U856. 
+41. J. T. Kim, B. K. Kim, E. Y. Kim, S. H. Kwon and H. M. Jeong, Eur. 
+Polym. J., 2013, 49, 3889U3896. 
+ 
+ 
+Page 7 of 8 Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A\n--- PAGE 9 ---\n 
+ 
+Table of contents entry 
+ 
+ 
+ 
+ 
+The covalent bonding graphene oxide/polyurethane composites with 
+significant mechanical reinforcement and thermal healable capability 
+were developed via in situ polymerization based on Diels-Alder 
+chemistry. 
+Page 8 of 8Journal of Materials Chemistry A
+Journal of Materials Chemistry A Accepted Manuscript
+View Article Online
+DOI: 10.1039/C4TA04941A

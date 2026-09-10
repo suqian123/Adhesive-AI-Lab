@@ -13,7 +13,7 @@ import pandas as pd
 from .features import Formulation, CURING_SYSTEMS, DYNAMIC_UNITS, RESIN_SYSTEMS, formulation_features
 
 
-CANDIDATE_LIBRARY_VERSION = "candidate-library-v3"
+CANDIDATE_LIBRARY_VERSION = "candidate-library-v4"
 
 
 def _formulation_id(contract: dict[str, object]) -> str:
@@ -174,8 +174,10 @@ def _compose_candidate(
     low_temp_toughness = float(np.clip(0.32 * resin_toughness + 0.22 * features["dynamic_healing"] + 0.18 * chain_mobility + 0.14 * (1 - free_volume) + 0.14 * toughener_factor, 0.0, 1.0))
     adhesion_strength = float(np.clip(2.8 + 0.55 * interface_binding + 5.4 * effective_crosslink + 0.12 * filler_pct - 0.42 * toughener_pct, 0.5, 45.0))
     self_healing = float(np.clip(12 + 62 * features["dynamic_healing"] + 10 * features["dynamic_mobility"] + 6 * variant.space_bias + 3.5 * cure_factor - 0.4 * filler_pct, 5, 100))
-    # Multi-objective outputs used by the regression/classification loop.
-    wide_temp_adhesion = float(np.clip(
+    # Reference-condition proxy used by the regression/classification loop.
+    # It is deliberately not a claim of an experimentally resolved
+    # temperature/substrate adhesion curve.
+    adhesion_reference_strength = float(np.clip(
         2.2 + 11.5 * thermal_resistance + 8.0 * low_temp_toughness
         + 0.32 * interface_binding + 0.10 * filler_pct - 0.11 * abs(cte_ppm_k - 55),
         0.5, 42.0,
@@ -282,6 +284,14 @@ def _compose_candidate(
             "thermal_resistance_index": thermal_resistance,
             "low_temp_toughness_index": low_temp_toughness,
             "adhesion_strength_mpa": adhesion_strength,
+            "adhesion_reference_strength_mpa": adhesion_reference_strength,
+            "adhesion_reference_conditions": {
+                "test_temperature_c": 25.0,
+                "substrate_material": "aluminum alloy",
+                "substrate_grade": "6061-T6",
+                "surface_condition": "solvent-degreased",
+                "adhesion_test_method": "lap shear",
+            },
             "self_healing_efficiency_pct": self_healing,
             "space_environment_stability_index": space_stability,
             "multi_objective_score": overall,
@@ -315,7 +325,18 @@ def _compose_candidate(
     row["interface_binding_energy_mj_m2"] = interface_binding
     row["interface_binding_energy"] = interface_binding
     row["interface_covalent_bond_count"] = interface_bonds
-    row["wide_temp_adhesion_mpa"] = wide_temp_adhesion
+    row["adhesion_reference_strength_mpa"] = adhesion_reference_strength
+    row["adhesion_reference_conditions"] = {
+        "test_temperature_c": 25.0,
+        "substrate_material": "aluminum alloy",
+        "substrate_grade": "6061-T6",
+        "surface_condition": "solvent-degreased",
+        "adhesion_test_method": "lap shear",
+    }
+    row["adhesion_prediction_scope"] = "25C 6061-T6 solvent-degreased lap-shear physics-informed proxy"
+    # Retained for old model artifacts and historical result readers. New UI
+    # and exports use adhesion_reference_strength_mpa instead.
+    row["wide_temp_adhesion_mpa"] = adhesion_reference_strength
     row["healing_efficiency_pct"] = self_healing
     row["atomic_oxygen_retention_pct"] = atomic_oxygen_retention
     row["uv_retention_pct"] = uv_retention
@@ -335,7 +356,7 @@ def _compose_candidate(
     row["target_provenance"] = {
         name: "physics-informed-proxy"
         for name in (
-            "wide_temp_adhesion_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct",
+            "wide_temp_adhesion_mpa", "adhesion_reference_strength_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct",
             "uv_retention_pct", "am_feasibility",
         )
     }
@@ -380,8 +401,9 @@ def build_candidate_library(max_records: int = 720, seed: int = 7) -> pd.DataFra
         "toughener_type", "toughener_pct", "filler_type", "filler_surface", "filler_pct",
         "curing_temperature_c", "curing_time_h", "post_cure_temperature_c", "post_cure_time_h",
         "mixing_temperature_c", "vacuum_degassing_min", "crosslink_density", "thermal_resistance_index",
-        "low_temp_toughness_index", "adhesion_strength_mpa", "self_healing_efficiency_pct",
-        "space_environment_stability_index", "wide_temp_adhesion_mpa", "healing_efficiency_pct",
+        "low_temp_toughness_index", "adhesion_strength_mpa", "adhesion_reference_strength_mpa", "adhesion_reference_conditions",
+        "adhesion_prediction_scope", "self_healing_efficiency_pct",
+        "space_environment_stability_index", "healing_efficiency_pct",
         "atomic_oxygen_retention_pct", "uv_retention_pct", "am_feasibility",
         "multi_objective_score", "screening_class",
     ]

@@ -1,0 +1,688 @@
+--- PAGE 1 ---\nCitation: Platonova, E.; Ponomareva,
+P .; Lokiaeva, Z.; Pavlov, A.; Nelyub,
+V .; Polezhaev, A. New Building
+Blocks for Self-Healing Polymers.
+Polymers 2022, 14, 5394. https://
+doi.org/10.3390/polym14245394
+Academic Editor: José Miguel Martín
+Martínez
+Received: 17 November 2022
+Accepted: 7 December 2022
+Published: 9 December 2022
+Publisher’s Note:MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁl-
+iations.
+Copyright: © 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+polymers 
+Communication
+New Building Blocks for Self-Healing Polymers
+Elena Platonova 1,2, *, Polina Ponomareva 1, Zalina Lokiaeva 1, Alexander Pavlov 3, Vladimir Nelyub 1
+and Alexander Polezhaev 1,2, *
+1 Center NTI “Digital Materials Science: New Materials and Substances”, Bauman Moscow State Technical
+University, 2nd Baumanskaya Str., 5/1, 105005 Moscow, Russia
+2 Physics Department, Lomonosov Moscow State University, Leninskie Gory 1-2, 119991 Moscow, Russia
+3 Center for the Study of Molecular Structure, A.N. Nesmeyanov Institute of Organoelement Compounds,
+Vavilova Str., 28, 119334 Moscow, Russia
+* Correspondence: eplatonova@emtc.ru (E.P .); aleksandr.polejaev@gmail.com (A.P .)
+Abstract: The healing efﬁciency in self-healing materials is bound by the ability to form blends
+between the prepolymer and curing agent. One of the problems in the development of self-healing
+polymers is the reduced afﬁnity of the bismaleimide curing agent for the elastomeric furan-containing
+matrix. Even when stoichiometric amounts of both components are applied, incompatibility of
+components can signiﬁcantly reduce the effectiveness of self-healing, and lead to undesirable side
+effects, such as crystallization of the curing agent, in the thickness and on the surface. This is exactly
+what we have seen in the development of linear and cross-linked PUs using BMI as a hardener. In
+this work, we present a new series of the di- and tetrafuranic isocyanate-related ureas—promising
+curing agents for the development of polyurethanes-like self-healing materials via the Diels–Alder
+reaction. The commonly used isocyanates (4,4′-Methylene diphenyl diisocyanate, MDI; 2,4-Tolylene
+diisocyanate, TDI; and Hexamethylene diisocyanate, HDI) and furfurylamine, difurfurylamine, and
+furfuryl alcohol (derived from biorenewables) as furanic compounds were utilized for synthesis. The
+remendable polyurethane for testing was synthesized from a maleimide-terminated prepolymer and
+one of the T-series urea. Self-healing properties were investigated by thermal analysis. Molecular
+mass was determined by gel permeation chromatography. The properties of the new polymer were
+compared with polyurethane from a furan-terminated analog. Visual tests showed that the obtained
+material has thermally induced self-healing abilities. Resulting polyurethane (PU) has a rather low
+fusing point and thus may be used as potential material for Fused Deposition Modeling (FDM)
+3D printing.
+Keywords: mechanical properties; Diels–Alder reaction; polyurethane; self-healing; thermal
+properties
+1. Introduction
+Polyurethanes (PU) are a class of widely used polymers, which are widely applied,
+from shoemaking to constructional and composite materials [1–3]. Their share is almost
+8% of the world’s plastic production and they are in the 6th place among the most utilized
+polymers. The versatility of polyurethanes, which have a wide range of possible mechanical
+properties, from hard plastics to highly elastic rubber-like materials, allows them to replace
+both synthetic (polyvinyl chloride, rubber, polystyrene) and natural (leather) materials [4,5].
+The majority of commercially produced PUs are not recyclable and are commonly not
+recyclable and are incinerated or landﬁlled. Almost 50% of post-consumer or postproduc-
+tion PU wastes are utilized that way [6]. Mechanical treatment (regrinding into powder
+and using as ﬁller) [ 7] or burning [ 8,9] are most commonly used as recycling methods.
+In some cases, PUs can be recycled by catalytic glycolysis. Recycled glycols, available
+for reuse in polymer preparation, are formed during that process [10]. However, chemi-
+cal recycling requires more resources in terms of energy costs and additional chemicals
+Polymers 2022, 14, 5394. https://doi.org/10.3390/polym14245394 https://www.mdpi.com/journal/polymers\n--- PAGE 2 ---\nPolymers 2022, 14, 5394 2 of 11
+compared to mechanical ones [ 11]. Fused deposition modeling (FDM) 3D printing is a
+powerful tool that enables the fabrication of ﬂexible details of intricate shapes from different
+materials—metals , thermoplastics, and composites [12]. Thermoplastic polyurethanes are
+promising materials in 3D printing applications, but unfortunately thermoreactive ones are
+not suitable for the method. Cross-linked polymers with dynamic cross-links (for example,
+the ones based on the thermoreversible Diels–Alder reaction (DA reaction)) are suitable for
+FDM 3D printing [12,13].
+As all materials, polyurethanes suffer from damage and microcracks that may dra-
+matically affect the product lifespan and eventually result in polymer degradation and
+failure [14]. Scientiﬁc research in that area was focused on the development of materials
+with enhanced reliability or non-destructive analytical methods. Self-healing polymers,
+which can cure occasional damage as living tissue, opened a new way to create more
+long-lasting and environmentally friendly materials [15].
+At ﬁrst, so-called extrinsic self-healing polymer systems were developed. Curing in
+this type of material was achieved by the introduction of microcapsules or microcapillar-
+ies with liquid monomer and particles of a catalyst into the polymer matrix. Upon the
+occurrence of a microcrack, monomer from the capsule releases, and the polymerization
+reaction proceeds and the damage is healed [ 16,17]. The most obvious disadvantage of
+such polymer systems is a limited number of curing efforts. Such composites lose their
+self-healing properties when resources of the monomer and catalyst are exhausted [18].
+The other large class of remendable polymers is intrinsic systems. They do not require
+the introduction of additional material, and self-healing in such systems occurs due to the
+speciﬁc properties of the polymer matrix, such as thermoplasticity or reversible interactions
+(formation of disulﬁde bridges, hydrogen bonds, metal complexes, or covalent bonds via
+the Diels–Alder reaction), but at the same time requires triggers (heat, for example) to
+initiate the healing process. [ 19]. The intrinsic self-healing approach is widely used for
+the design of novel self-healing PUs. The most common reversible Diels–Alder reaction
+between furanic and maleimide groups applied for the design of thermally remeandable PU
+with self-healing properties due to predictable formation and breaking of strong covalent
+C-C bonds resulted in robust materials with good mechanical properties [20]. Furans and
+maleimides may be incorporated in the polymer chain (in the backbone or as the side
+groups) or commercially available maleimides could act as a reversible curing agent for
+furan-containing oligomers. Self-healing usually requires thermocycling to ﬁrst partially
+cleave Diels–Alder adducts (DA adducts) and let a crack shrink and disappear due to
+plasticity at elevated temperature; after cooling, the DA reaction takes place and restores
+the hardiness of the material.
+However, the majority of known PUs based on the DA reaction suffer from the
+incomplete restoration of mechanical properties that could be the result of either the rather
+low efﬁciency of the mass-transfer process or furanic groups scavenging in hard domains
+of the PU, so the DA reaction with the maleimide may be challenging [ 21]. It is well
+known that PUs are biphasic materials, where urethane-containing fragments form hard
+domains and aliphatic ethers or esters soft and elastic ones. To facilitate the DA reaction, it
+is important to concentrate maleimide and furanic groups in the same domains. We faced a
+similar problem in one of our previous works on the synthesis of the linear remendable
+PU [22].
+The principle “like dissolves like” may appear as a possible resolution for that problem.
+To enhance the prepolymer-to-curing agent afﬁnity, it is worthwhile to use isocyanate-
+derived curing agents, which can be easily mixed with PU prepolymers and promote acces-
+sibility of the furanic and maleimide groups for the DA reaction. This method may enlarge
+the self-healing efﬁciency and additionally reinforce the resulting material (via hydrogen
+bond formation between prepolymer hard segments and urea fragments of the curing
+agent) as well. A rather large number of papers on the topic of self-healing polyurethanes
+based on the DA reaction commonly used commercially available bismaleimide ((1,10-
+(methylenedi-1,4-phenylene)bismaleimide, BMI) as a reversible curing agent for a variety\n--- PAGE 3 ---\nPolymers 2022, 14, 5394 3 of 11
+of furan-derived elastomers or oligomers [23–25]. To the best of our knowledge, we ﬁnd
+few reports that explore a backward possibility to apply relatively small di- or oligofuranic
+molecules to maleimide-derived thermoplastics [26–28]. To conclude, we present here a se-
+ries of small furan-based curing agents for self-healing PUs derived from the most common
+isocyanates (MDI, TD, and HDI). We explore the self-healing performance of compositions
+based on a reversed approach and compare them with classical ones. We intend to increase
+the efﬁciency of the DA process by incorporating furans and maleimides into the same
+domain of the polymer. HEMI (N-(2-hydroxyethyl)-maleimide)-terminated PU prepolymer
+(PU-HEMI) and difuranic curing agent, derived from TDI and furfurylamine, were used
+for preliminary hypothesis testing (Figure 1).
+Polymers 2022, 14, x FOR PEER REVIEW 3 of 11 
+ 
+ 
+((1,10-(methylenedi-1,4-phenylene)bismaleimide, BMI) as a reversible curing agent for a 
+variety of furan-derived elastomers or oligomers [2 3–25]. To the best of our knowledge, 
+we find few reports that explore a backward possibility to apply relatively small di - or 
+oligofuranic molecules to maleimide -derived thermoplastics [2 6–28]. To conclude, we 
+present here a series of small furan-based curing agents for self-healing PUs derived from 
+the most common isocyanates (MDI, TD, and HDI). We explore the self -healing perfor-
+mance of compositions based on a reversed approach and compare them with classical 
+ones. We intend to increase the efficiency of the DA process by incorporating furans and 
+maleimides into the same domain of the polymer. HEMI (N -(2-hydroxyethyl)-malei-
+mide)-terminated PU prepolymer (PU -HEMI) and difuranic curing agent, derived from 
+TDI and furfurylamine, were used for preliminary hypothesis testing (Figure 1). 
+ 
+Figure 1. Schematic representation of the strategy used for the synthesis of self -healing polyure-
+thanes. 
+The structure and properties as well as the self-healing ability of the resulting mate-
+rial were investigated. A complete study describing the synthesis and properties of the 
+materials based on all furan-based curing agents synthesized will follow. 
+2. Materials and Methods 
+2.1. Materials 
+DFA (difurfurylamine) was prepared by a modified literature method [29]. N-(2-Hy-
+droxyethyl)-maleimide (HEMI) was synthesized via reported procedure [30]. MDI (meth-
+ylene diphenyl diisocyanate, 98%), HDI (hexamethylene diisocyanate, 99%), BMI ( 1,10-
+(methylenedi-1,4-phenylene)bismaleimide, 95%), and Tin(II) 2 -ethylhexanoate (Sn(Oct)2) 
+were purchased from Sigma-Aldrich (Steinheim, Germany) and used as received. TDI 
+(toluene-2,4-diisocyanate, 80% of 2,4-isomer) was purchased from Sigma-Aldrich (Stein-
+heim, Germany) distilled in a vacuum, and frozen out to separate the 2,6 -isomer. FOH 
+(furfuryl alcohol, 98%) was purchased from Sigma-Aldrich (Steinheim, Germany) and dis-
+tilled under reduced pressure to remove tarry material. FA (furfurylamine, 99%) was pur-
+chased from Acros (Geel, Belgium) dried over NaOH, and distilled in a vacuum prior to 
+use. PPG2000 (polypropylene glycol, Mn = 2000) was purchased from Sigma-Aldrich 
+(Steinheim, Germany) and dried under vacuum at 110 ° C prior to use. DMF (N,N-dime-
+thylformamide) was purchased from Acros (Geel, Belgium) dried over CaH2, and distilled 
+Figure 1. Schematic representation of the strategy used for the synthesis of self-healing polyurethanes.
+The structure and properties as well as the self-healing ability of the resulting mate-
+rial were investigated. A complete study describing the synthesis and properties of the
+materials based on all furan-based curing agents synthesized will follow.
+2. Materials and Methods
+2.1. Materials
+DFA (difurfurylamine) was prepared by a modiﬁed literature method [ 29]. N-(2-
+Hydroxyethyl)-maleimide (HEMI) was synthesized via reported procedure [ 30]. MDI
+(methylene diphenyl diisocyanate, 98%), HDI (hexamethylene diisocyanate, 99%), BMI
+(1,10-(methylenedi-1,4-phenylene)bismaleimide, 95%), and Tin(II) 2-ethylhexanoate (Sn(Oct)2)
+were purchased from Sigma-Aldrich (Steinheim, Germany) and used as received. TDI
+(toluene-2,4-diisocyanate, 80% of 2,4-isomer) was purchased from Sigma-Aldrich (Stein-
+heim, Germany) distilled in a vacuum, and frozen out to separate the 2,6-isomer. FOH
+(furfuryl alcohol, 98%) was purchased from Sigma-Aldrich (Steinheim, Germany) and dis-
+tilled under reduced pressure to remove tarry material. FA (furfurylamine, 99%) was pur-
+chased from Acros (Geel, Belgium) dried over NaOH, and distilled in a vacuum prior to use.
+PPG2000 (polypropylene glycol, Mn = 2000) was purchased from Sigma-Aldrich (Steinheim,
+Germany) and dried under vacuum at 110◦C prior to use. DMF (N,N-dimethylformamide)
+was purchased from Acros (Geel, Belgium) dried over CaH2, and distilled in vacuum prior
+to use. Methylene chloride (CH2Cl2) was purchased from Acros (Geel, Belgium) dried over
+P2O5, and distilled.\n--- PAGE 4 ---\nPolymers 2022, 14, 5394 4 of 11
+Detailed instructions on the preparation of furanic curing agents and remendable
+polyurethanes and further characterizations can be found in the “Supplementary Information”.
+2.2. Characterization and Measurement
+NMR spectra were recorded by a Bruker Avance 600 NMR Spectrometer (Billerica, MA,
+USA) (600.1 MHz); using the residual proton signal of a deuterated solvent as a reference,
+chemical shifts were reported as parts per million downﬁeld from tetramethylsilane (TMS).
+ATI-FTIR was performed on a Nicolet iS10 spectrometer (Waltham, MA, USA) in the range
+of 4000 to 650 cm−1 on a germanium crystal. The thermal behavior was examined by DSC,
+with a NETZSCH DSC 204 F1 Phoenix (Selb, Germany) within a temperature range of
+−80 to 180◦C at a heating/cooling rates of 10 K min−1 in argon atmosphere. A sample
+weight of about 18 mg was used for measurement. Thermogravimetric analysis (TGA) was
+performed on NETZSCH TG 209 F1 Libra (Selb, Germany) within a temperature range
+of 30 to 550◦C at a heating/cooling rate of 10 K min−1 in an argon atmosphere. Gel per-
+meation chromatography (GPC) analyses were performed using a Shimadzu Prominence
+LC-20 (Kyoto, Japan) apparatus equipped with a RID 20A refractive index detector and
+three PSS GRAM analytical columns 100 Å (8.0× 300 mm2) linked in series, thermostat-
+ted at 40◦C, and using N,N-dimethylformamide (DMF) containing 0.5 g/L LiBr as the
+mobile phase at a ﬂow rate of 1.0 mL min−1. Molecular weights were estimated against
+polymethylmethacrylate (PMMA) standards. Mechanical properties (σt, E,ε,σt (ε)) were
+determined from the uniaxial tensile strength test. Dogbone-shaped samples were cut from
+ﬁlm using a special blade (length 15 mm, width 2 mm, see Figure S30 and Table S2 in the
+Supplementary Materials) and hand press. Film thickness was from 1.5 to 2.0 mm. The
+samples were stretched on a Zwick Roell Z2.5 universal testing machine (Ulm, Germany)
+at a 150 mm/min loading speed. An applied load P and a strainε were recorded as loading
+diagrams. Further, the stress at breakσt, the elongationε, and the elastic modulus E were
+calculated from the diagrams.
+3. Results
+3.1. Preparation Process for Furanic Curing Agents
+Isocyanates react cleanly and completely with alcohols, primary and secondary amines.
+Furyl alcohol and furfurylamine are the large-scale available and inexpensive source of
+furan moieties, with an advantage of being bioderived [31]. Our synthetic approach shown
+in Scheme 1, based on a robust reaction, resulted in almost quantitative yields of desired
+products of a high purity without additional puriﬁcation. Difurylamine, furfurylamine,
+and furanic alcohol reacted with most common industrial isocyanates (HDI, TDI and MDI)
+with formation of compounds of the H, T, and M series, respectively. The structures of the
+furanic curing agents were established by NMR and IR spectroscopy. The characteristic
+band of the isocyanate (2270 cm−1) in the reaction mixture disappears and a new band of
+the carbonyl group at ~1630 cm−1 emerges. In the NMR spectra of the reaction products, the
+chemical shifts of furanic protons shifted in a weak ﬁeld (from 7.36 ppm in furylamines and
+furyl alcohol to ~7.60 ppm in furan-containing ureas). Resulting curing agents are colorless
+or light-yellow powders, soluble in polar solvents (DMF and DMSO) and insoluble in
+dichloromethane, hexane, and acetone. Melting points for all furan-ureas were measured
+in a vacuum in a sealed capillary and via the DSC method (see Table S1 in Supplementary
+Materials). It is interesting to note that the melting points of difurylamine and furyl alcohol
+derivatives in the series are rather close, while furylamine derivatives have substantially
+higher melting points (in the case of curing agents of the T and H series, the difference is
+almost 100◦C). We presume that such an unusual thermal behavior could be associated
+with higher content of hydrogen bonds between urethane fragments in curing agents:
+alcohol and diamine derivatives have two secondary amino groups per molecule, and
+amine derivatives have four secondary amino groups per molecule.\n--- PAGE 5 ---\nPolymers 2022, 14, 5394 5 of 11
+Polymers 2022, 14, x FOR PEER REVIEW 5 of 11 
+ 
+ 
+fragments in curing agents: alcohol and diamine derivatives have two secondary amino 
+groups per molecule, and amine derivatives have four secondary amino groups per mol-
+ecule. 
+ 
+Scheme 1. Synthesis of the Fu-containing curing agents. 
+3.2. Structures, Properties, and Thermal Remendability of Self-Healing Polyurethanes 
+Previously, we and other research groups obtained linear polymers from BMI and 
+furan-terminated prepolymers via a general two -step method. In the first stage, NCO -
+terminated prepolymer was synthesized by the interaction of polyol and isocyanate ; at 
+the second step, this prepolymer was functionalized with furylamine or furfuryl alcohol 
+[22,32–36]. In this work, we used a similar approach, but with reversed functionality of 
+reagents. Linear prepolymer PU -HEMI was synthesized by a modified method [22] 
+(Scheme 2). The general two-step method was used: at the first stage, we obtained prepol-
+ymer with terminal isocyanate groups from glycol PPG-2000 (soft segment) and TDI (hard 
+segment); at the second stage, it reacted with HEMI. PU-HEMI was characterized by NMR 
+and IR (see Supporting Information). For the proof of the concept, we chose the FA-T cur-
+ing agent of the T series. The choice of the curing agent is guided by a goal to compare the 
+properties of the PUs synthesized by standard and modified methods. 
+  
+(a) (b) 
+Scheme 2. (a) Synthesis of recyclable polymer (PU -DA); (b) Schematic view of reversible covalent 
+network formed by DA reaction between H -bonding hard segments and Fu -containing urethane 
+derivative. 
+A visual investigation of the thermal remendability of remendable polyurethane (PU-
+DA) is shown in Figure 2. 
+Scheme 1. Synthesis of the Fu-containing curing agents.
+3.2. Structures, Properties, and Thermal Remendability of Self-Healing Polyurethanes
+Previously, we and other research groups obtained linear polymers from BMI and
+furan-terminated prepolymers via a general two-step method. In the ﬁrst stage, NCO-
+terminated prepolymer was synthesized by the interaction of polyol and isocyanate; at
+the second step, this prepolymer was functionalized with furylamine or furfuryl alco-
+hol [22,32–36]. In this work, we used a similar approach, but with reversed functionality
+of reagents. Linear prepolymer PU-HEMI was synthesized by a modiﬁed method [ 22]
+(Scheme 2). The general two-step method was used: at the ﬁrst stage, we obtained pre-
+polymer with terminal isocyanate groups from glycol PPG-2000 (soft segment) and TDI
+(hard segment); at the second stage, it reacted with HEMI. PU-HEMI was characterized by
+NMR and IR (see Supporting Information). For the proof of the concept, we chose the FA-T
+curing agent of the T series. The choice of the curing agent is guided by a goal to compare
+the properties of the PUs synthesized by standard and modiﬁed methods.
+Polymers 2022, 14, x FOR PEER REVIEW 5 of 11 
+ 
+ 
+fragments in curing agents: alcohol and diamine derivatives have two secondary amino 
+groups per molecule, and amine derivatives have four secondary amino groups per mol-
+ecule. 
+ 
+Scheme 1. Synthesis of the Fu-containing curing agents. 
+3.2. Structures, Properties, and Thermal Remendability of Self-Healing Polyurethanes 
+Previously, we and other research groups obtained linear polymers from BMI and 
+furan-terminated prepolymers via a general two -step method. In the first stage, NCO -
+terminated prepolymer was synthesized by the interaction of polyol and isocyanate ; at 
+the second step, this prepolymer was functionalized with furylamine or furfuryl alcohol 
+[22,32–36]. In this work, we used a similar approach, but with reversed functionality of 
+reagents. Linear prepolymer PU -HEMI was synthesized by a modified method [22] 
+(Scheme 2). The general two-step method was used: at the first stage, we obtained prepol-
+ymer with terminal isocyanate groups from glycol PPG-2000 (soft segment) and TDI (hard 
+segment); at the second stage, it reacted with HEMI. PU-HEMI was characterized by NMR 
+and IR (see Supporting Information). For the proof of the concept, we chose the FA-T cur-
+ing agent of the T series. The choice of the curing agent is guided by a goal to compare the 
+properties of the PUs synthesized by standard and modified methods. 
+  
+(a) (b) 
+Scheme 2. (a) Synthesis of recyclable polymer (PU -DA); (b) Schematic view of reversible covalent 
+network formed by DA reaction between H -bonding hard segments and Fu -containing urethane 
+derivative. 
+A visual investigation of the thermal remendability of remendable polyurethane (PU-
+DA) is shown in Figure 2. 
+Scheme 2. (a) Synthesis of recyclable polymer (PU-DA); ( b) Schematic view of reversible co-
+valent network formed by DA reaction between H-bonding hard segments and Fu-containing
+urethane derivative.
+A visual investigation of the thermal remendability of remendable polyurethane
+(PU-DA) is shown in Figure 2.\n--- PAGE 6 ---\nPolymers 2022, 14, 5394 6 of 11
+Polymers 2022, 14, x FOR PEER REVIEW 6 of 11 
+ 
+ 
+ 
+Figure 2. Self-healing properties of PU-DA sample demonstrated by two-stage thermal cycle. 
+The resulting polymer PU-DA was also characterized by NMR and IR spectroscopy 
+(for detailed NMR spectra , see Supporting information). Identification and comparative 
+analysis of structure for prepolymer and remendable PU are given below. 
+In the 1H spectra of the PU -HEMI (Figure 3), signals of aromatic protons of TDI are 
+overlaid with signals of double -bond protons of the maleimide cycle: intensity of those 
+signals at 7.04–7.05 ppm decreased during the curing process, and this fact suggests suc-
+cessful DA adducts formation. Additionally, a notable decrease in the signals of unbound 
+furanic groups at 7.59, 6.40, and 6.27 was detected, which furthermore indicates the inter-
+action between furans of the curing agent and maleimides of the prepolymer. 
+   
+(a) (b) 
+Figure 3. NMR (a) and IR (b) spectra of prepolymer, PU-DA, and FA-T. 
+A comparison of the IR spectra was more illustrative. Bands of the asymmetric vibra-
+tion of C=O groups conjugated with the maleimide cycle in prepolymer (1716 cm −1) and 
+PU-DA (1703 cm−1) spectra were preserved. A small red shift of the band may be caused 
+by the breaking of the C=O and maleimide heterocycle conjugation via the DA reaction 
+occurring [37]. On the other hand, bands of the double bond (829 cm−1) and deformational 
+vibration of the cycle (696 cm −1) in maleimide completely disappeared , which indicates 
+DA reaction occurrence [38]. The disappearance of the bands at 884 and 739 cm −1 associ-
+ated with the furanic ring also proves the cross-linked via DA reaction PU formation [39]. 
+The thermal properties of the PU-DA polymer were investigated with the TGA 
+method (Figure 4). Thermal stability of the material was a little bit lower than for the linear 
+PUs synthesized previously: T5%, T10%, and Tmax were 251, 280, and 370 ° C, respectively (for 
+linear PU cured with BMI, those were 288, 312, and 380 ° C, respectively) [25]. We assume 
+that DA adducts decompose to initial components via the rDA reaction and that the ther-
+mal stability of furylurethanes used for curing in this work is lower than that of BMI. 
+Figure 2. Self-healing properties of PU-DA sample demonstrated by two-stage thermal cycle.
+The resulting polymer PU-DA was also characterized by NMR and IR spectroscopy
+(for detailed NMR spectra, see Supporting information). Identiﬁcation and comparative
+analysis of structure for prepolymer and remendable PU are given below.
+In the 1H spectra of the PU-HEMI (Figure 3), signals of aromatic protons of TDI are
+overlaid with signals of double-bond protons of the maleimide cycle: intensity of those sig-
+nals at 7.04–7.05 ppm decreased during the curing process, and this fact suggests successful
+DA adducts formation. Additionally, a notable decrease in the signals of unbound furanic
+groups at 7.59, 6.40, and 6.27 was detected, which furthermore indicates the interaction
+between furans of the curing agent and maleimides of the prepolymer.
+Polymers 2022, 14, x FOR PEER REVIEW 6 of 11 
+ 
+ 
+ 
+Figure 2. Self-healing properties of PU-DA sample demonstrated by two-stage thermal cycle. 
+The resulting polymer PU-DA was also characterized by NMR and IR spectroscopy 
+(for detailed NMR spectra , see Supporting information). Identification and comparative 
+analysis of structure for prepolymer and remendable PU are given below. 
+In the 1H spectra of the PU -HEMI (Figure 3), signals of aromatic protons of TDI are 
+overlaid with signals of double -bond protons of the maleimide cycle: intensity of those 
+signals at 7.04–7.05 ppm decreased during the curing process, and this fact suggests suc-
+cessful DA adducts formation. Additionally, a notable decrease in the signals of unbound 
+furanic groups at 7.59, 6.40, and 6.27 was detected, which furthermore indicates the inter-
+action between furans of the curing agent and maleimides of the prepolymer. 
+   
+(a) (b) 
+Figure 3. NMR (a) and IR (b) spectra of prepolymer, PU-DA, and FA-T. 
+A comparison of the IR spectra was more illustrative. Bands of the asymmetric vibra-
+tion of C=O groups conjugated with the maleimide cycle in prepolymer (1716 cm −1) and 
+PU-DA (1703 cm−1) spectra were preserved. A small red shift of the band may be caused 
+by the breaking of the C=O and maleimide heterocycle conjugation via the DA reaction 
+occurring [37]. On the other hand, bands of the double bond (829 cm−1) and deformational 
+vibration of the cycle (696 cm −1) in maleimide completely disappeared , which indicates 
+DA reaction occurrence [38]. The disappearance of the bands at 884 and 739 cm −1 associ-
+ated with the furanic ring also proves the cross-linked via DA reaction PU formation [39]. 
+The thermal properties of the PU-DA polymer were investigated with the TGA 
+method (Figure 4). Thermal stability of the material was a little bit lower than for the linear 
+PUs synthesized previously: T5%, T10%, and Tmax were 251, 280, and 370 ° C, respectively (for 
+linear PU cured with BMI, those were 288, 312, and 380 ° C, respectively) [25]. We assume 
+that DA adducts decompose to initial components via the rDA reaction and that the ther-
+mal stability of furylurethanes used for curing in this work is lower than that of BMI. 
+Figure 3. NMR (a) and IR (b) spectra of prepolymer, PU-DA, and FA-T.
+A comparison of the IR spectra was more illustrative. Bands of the asymmetric
+vibration of C=O groups conjugated with the maleimide cycle in prepolymer (1716 cm−1)
+and PU-DA (1703 cm−1) spectra were preserved. A small red shift of the band may be
+caused by the breaking of the C=O and maleimide heterocycle conjugation via the DA
+reaction occurring [ 37]. On the other hand, bands of the double bond (829 cm −1) and
+deformational vibration of the cycle (696 cm −1) in maleimide completely disappeared,
+which indicates DA reaction occurrence [38]. The disappearance of the bands at 884 and
+739 cm−1 associated with the furanic ring also proves the cross-linked via DA reaction PU
+formation [39].
+The thermal properties of the PU-DA polymer were investigated with the TGA method
+(Figure 4). Thermal stability of the material was a little bit lower than for the linear PUs
+synthesized previously: T5%, T10%, and Tmax were 251, 280, and 370◦C, respectively (for
+linear PU cured with BMI, those were 288, 312, and 380◦C, respectively) [25]. We assume
+that DA adducts decompose to initial components via the rDA reaction and that the thermal
+stability of furylurethanes used for curing in this work is lower than that of BMI.\n--- PAGE 7 ---\nPolymers 2022, 14, 5394 7 of 11
+Polymers 2022, 14, x FOR PEER REVIEW 7 of 11 
+ 
+ 
+  
+(a) (b) 
+Figure 4. TGA and DTG (a) curves, DSC curves (b) of PU-DA. 
+Additionally, thermal properties and DA-bond reversibility were investigated by the 
+DSC method. The first heating curve of PU-DA (Figure 4) demonstrated a broadened en-
+dothermal peak at 120 °С corresponding to the decomposition of DA adducts. The absence 
+of such a signal on the second heat curve showed the completeness of the rDA-reaction in 
+the polymer sample. Both thermograms of the prepolymer and PU-DA demonstrated the 
+glass transition process only for the soft segment of polyurethane; Tg for prepolymer was 
+−45.3 ° C and for PU-DA it was −48.4 ° C (see Figures S26–S27 in the Supplementary Mate-
+rials). Those results were consistent with the glass transition of the PPG-2000-derived PUs 
+[22,36]. 
+There were a few reports on linear self-healing PU that reported a molecular weight 
+of Mn = 27,000 and PDI = 1.88 (soft segment—PPG2000, measured in THF) [36], and Mn = 
+18,557 and PDI = 2.48 (soft segment —PBA1000, measured in DMF) [40]. However, the 
+difference in column, solvents, and standards used makes comparisons of Mw of the ma-
+terial impossible. To make a valid comparison of classical approaches and our approaches 
+to linear self-healing PU (to perform polymerization with the same polyol and isocyanate 
+(PPG-2000 and TDI), under the same conditions and evaluate Mw and Mn by the same 
+protocol), we synthesized the linear PU (PU-DA-FA) from furylamine-functionalized pre-
+polymer cured by BMI using a known protocol (Scheme 3). The results (Table 1) show that 
+the proposed reversed approach resulted in a four-times-higher Mw of the PU-DA com-
+pared to PU -DA-FA under the sam e reaction conditions. This makes the reversible ap-
+proach more promising compared to the classical one, and the more detailed investigation 
+of it is ongoing. 
+ 
+Figure 4. TGA and DTG (a) curves, DSC curves (b) of PU-DA.
+Additionally, thermal properties and DA-bond reversibility were investigated by the
+DSC method. The ﬁrst heating curve of PU-DA (Figure 4) demonstrated a broadened en-
+dothermal peak at 120◦C corresponding to the decomposition of DA adducts. The absence
+of such a signal on the second heat curve showed the completeness of the rDA-reaction in
+the polymer sample. Both thermograms of the prepolymer and PU-DA demonstrated the
+glass transition process only for the soft segment of polyurethane; Tg for prepolymer was
+−45.3◦C and for PU-DA it was−48.4◦C (see Figures S26 and S27 in the Supplementary
+Materials). Those results were consistent with the glass transition of the PPG-2000-derived
+PUs [22,36].
+There were a few reports on linear self-healing PU that reported a molecular weight
+of Mn = 27,000 and PDI = 1.88 (soft segment—PPG2000, measured in THF) [ 36], and
+Mn = 18,557 and PDI = 2.48 (soft segment—PBA1000, measured in DMF) [ 40]. However,
+the difference in column, solvents, and standards used makes comparisons of Mw of
+the material impossible. To make a valid comparison of classical approaches and our
+approaches to linear self-healing PU (to perform polymerization with the same polyol
+and isocyanate (PPG-2000 and TDI), under the same conditions and evaluate Mw and
+Mn by the same protocol), we synthesized the linear PU (PU-DA-FA) from furylamine-
+functionalized prepolymer cured by BMI using a known protocol (Scheme 3). The results
+(Table 1) show that the proposed reversed approach resulted in a four-times-higher Mw of
+the PU-DA compared to PU-DA-FA under the same reaction conditions. This makes the
+reversible approach more promising compared to the classical one, and the more detailed
+investigation of it is ongoing.
+Table 1. Molecular mass characteristics of PU-DA and PU, derived from furan-terminated prepolymer.
+Characteristic PU-DA PU-DA-FA
+Mn 5300 2900
+Mw 19,200 5000
+PDI 3.6 1.7
+We also performed a preliminary evaluation of the self-healing efﬁciency of PU-DA.
+For quantiﬁcation of self-healing process efﬁciency, the measurement of elastic modulus
+and tensile strength was performed. As a control measurement, ﬁve samples from the
+ﬁrst group were tested for tension. The samples from the second group were damaged
+with a blade in the middle. Damaged samples were subjected to thermal treatment: 2 h
+at 120◦C and 4 days at 60◦C. After completion of the healing process, the samples from
+the second group were tested for tension in the same way as the ﬁrst (control) group. For
+quantiﬁcation of elastic modulus in each group of samples, the mean load curve was used
+(average curve for all samples of the group). Representative loading diagrams for pristine\n--- PAGE 8 ---\nPolymers 2022, 14, 5394 8 of 11
+and healed specimens of PU-DA are shown in Figure 5 (details of the experiment and
+calculations are provided in the Supplementary Materials). Tensile properties are listed
+in Table 2.
+Polymers 2022, 14, x FOR PEER REVIEW 7 of 11 
+ 
+ 
+  
+(a) (b) 
+Figure 4. TGA and DTG (a) curves, DSC curves (b) of PU-DA. 
+Additionally, thermal properties and DA-bond reversibility were investigated by the 
+DSC method. The first heating curve of PU-DA (Figure 4) demonstrated a broadened en-
+dothermal peak at 120 °С corresponding to the decomposition of DA adducts. The absence 
+of such a signal on the second heat curve showed the completeness of the rDA-reaction in 
+the polymer sample. Both thermograms of the prepolymer and PU-DA demonstrated the 
+glass transition process only for the soft segment of polyurethane; Tg for prepolymer was 
+−45.3 ° C and for PU-DA it was −48.4 ° C (see Figures S26–S27 in the Supplementary Mate-
+rials). Those results were consistent with the glass transition of the PPG-2000-derived PUs 
+[22,36]. 
+There were a few reports on linear self-healing PU that reported a molecular weight 
+of Mn = 27,000 and PDI = 1.88 (soft segment—PPG2000, measured in THF) [36], and Mn = 
+18,557 and PDI = 2.48 (soft segment —PBA1000, measured in DMF) [40]. However, the 
+difference in column, solvents, and standards used makes comparisons of Mw of the ma-
+terial impossible. To make a valid comparison of classical approaches and our approaches 
+to linear self-healing PU (to perform polymerization with the same polyol and isocyanate 
+(PPG-2000 and TDI), under the same conditions and evaluate Mw and Mn by the same 
+protocol), we synthesized the linear PU (PU-DA-FA) from furylamine-functionalized pre-
+polymer cured by BMI using a known protocol (Scheme 3). The results (Table 1) show that 
+the proposed reversed approach resulted in a four-times-higher Mw of the PU-DA com-
+pared to PU -DA-FA under the sam e reaction conditions. This makes the reversible ap-
+proach more promising compared to the classical one, and the more detailed investigation 
+of it is ongoing. 
+ 
+Scheme 3. Classic and modiﬁed synthetic approach for remendable PUs.
+Polymers 2022, 14, x FOR PEER REVIEW 8 of 11 
+ 
+ 
+Scheme 3. Classic and modified synthetic approach for remendable PUs. 
+Table 1. Molecular mass characteristics of PU-DA and PU, derived from furan-terminated prepoly-
+mer. 
+Characteristic PU-DA PU-DA-FA 
+Mn 5300 2900 
+Mw 19,200 5000 
+PDI 3.6 1.7 
+We also performed a preliminary evaluation of the self-healing efficiency of PU-DA. 
+For quantification of self-healing process efficiency, the measurement of elastic modulus 
+and tensile strength was performed. As a control measurement, five samples from the first 
+group were tested for tension. The samples from the second group were damaged with a 
+blade in the middle. Damaged samples were subjected to thermal treatment: 2 h at 120 °C 
+and 4 days at 60 ° C. After completion of the healing process, the samples from the second 
+group were tested for tension in the same way as the first (control) group. For quantifica-
+tion of elastic modulus in each group of samples, the mean load curve was used (average 
+curve for all samples of the group). Representative loading diagrams for pristin e and 
+healed specimens of PU-DA are shown in Figure 5 (details of the experiment and calcula-
+tions are provided in the Supplementary Materials). Tensile properties are listed in Table 
+2. 
+ 
+Figure 5. Representative loading diagrams for pristine and healed samples of PU-DA. 
+Table 2. Tensile Results of PU-DA. 
+Sample E (MPa) ηE (%) σt (MPa) ησ (%)  (%) 
+Pristine PU-DA 32.9 100 9.8 93 334 
+Healed PU-DA 32.8 9.1 280 
+Upon loading, the PU-DA sample reacted similarly to the linear remendable PU we 
+obtained via the classic approach previously [22]. PU synthesized via the modified 
+method was inferior in tensile properties to classic PU (values of E and σ t for classic PU 
+were 40.0 and 25.8 MPa correspondingly), but it exceed ed classic PU in self-healing effi-
+ciency: the value of ηE was 100%, and ησ was 93 % (for classic PU , the same values were 
+95 and 54%, correspondingly). 
+Figure 5. Representative loading diagrams for pristine and healed samples of PU-DA.
+Table 2. Tensile Results of PU-DA.
+Sample E (MPa) ηE (%) σt (MPa) ησ (%) ε (%)
+Pristine PU-DA 32.9 100 9.8 93 334
+Healed PU-DA 32.8 9.1 280
+Upon loading, the PU-DA sample reacted similarly to the linear remendable PU we
+obtained via the classic approach previously [22]. PU synthesized via the modiﬁed method
+was inferior in tensile properties to classic PU (values of E and σt for classic PU were
+40.0 and 25.8 MPa correspondingly), but it exceeded classic PU in self-healing efﬁciency:
+the value ofηE was 100%, andησ was 93 % (for classic PU, the same values were 95 and
+54%, correspondingly).\n--- PAGE 9 ---\nPolymers 2022, 14, 5394 9 of 11
+4. Conclusions
+A series of the new tetra- and difuranic compounds derived from commonly used
+isocyanates were synthesized, and their ability to act as a curing agent in self-healing
+compositions with HEMI-PU was investigated. PU specimens showed thermal-induced
+self-healing ability based on the DA reaction, which was conﬁrmed by DSC, IR, and NMR.
+Further work is being undertaken to investigate PU properties, optimal composition, and
+determination of the self-healing efﬁciency. Furanurethanes obtained could be used as
+curing agents for PU elastomers as well as comonomers in combination with corresponding
+bismaleimides for the synthesis of new polymeric materials via the Diels–Alder reaction.
+The reversed approach was shown to be more promising than the classical one in the
+formation of high Mw polymers with faster self-healing.
+Later, we are planning to obtain PUs from other urea-derived curing agents, to investi-
+gate their properties and self-healing efﬁciency.
+We suppose that obtained remendable polyurethane could melt due to thermally
+reversible bonds in DA adducts at approximately 80 ◦C, and we plan to apply it for
+development of recyclable FDM 3D printing material.
+Supplementary Materials: The following supporting information can be downloaded at: https:
+//www.mdpi.com/article/10.3390/polym14245394/s1, Figure S1: 1H NMR spectrum of DFA-T in
+DMSO-d6, Figure S2: 13C NMR spectrum of DFA-T in DMSO-d6, Figure S3: 1H NMR spectrum of
+FA-T in DMSO-d6, Figure S4: 13C NMR spectrum of FA-T in DMSO-d6, Figure S5: 1H NMR spectrum
+of FOH-T in DMSO-d6, Figure S6: 13C NMR spectrum of FOH-T in DMSO-d6, Figure S7: 1H NMR
+spectrum of DFA-M in DMSO-d6, Figure S8: 13C NMR spectrum of DFA-M in DMSO-d6, Figure S9:
+1H NMR spectrum of FA-M in DMSO-d 6, Figure S10: 13C NMR spectrum of FA-M in DMSO-d 6,
+Figure S11: 1H NMR spectrum of FOH-M in DMSO-d6, Figure S12: 13C NMR spectrum of FOH-M in
+DMSO-d6, Figure S13: 1H NMR spectrum of DFA-H in DMSO-d6, Figure S14: 13C NMR spectrum
+of DFA-H in DMSO-d6, Figure S15: 1H NMR spectrum of FA-H in DMSO-d6, Figure S16: 13C NMR
+spectrum of FA-H in DMSO-d6, Figure S17: 1H NMR spectrum of FOH-H in DMSO-d6, Figure S18:
+13C NMR spectrum of FOH-H in DMSO-d 6, Figure S19: 1H NMR spectrum of PU prepolymer in
+DMSO-d6, Figure S20: 13C NMR spectrum of PU prepolymer in DMSO-d 6, Figure S21: 1H NMR
+spectrum of PU-DA in DMSO-d6, Figure S22: 13C NMR spectrum of PU-DA in DMSO-d6, Figure S23:
+DSC curves of the T-series ureas, Figure S24: DSC curves of the M-series ureas, Figure S25: DSC
+curves of the H-series ureas, Figure S26: DSC curves of the PU prepolymer, Figure S27: DSC curves
+of PU-DA. Figure S28: TGA and DTG curves of PU-DA, Figure S29: GPC chromatograms of PU-
+DA and PU-DA-FA; Figure S30: Shape of tensile strength samples of PU-DA; Table S1: Melting
+points of furan-containing ureas; Table S2. Tensile test parameters. Reference [ 41] is cited in the
+supplementary materials.
+Author Contributions: E.P . and A.P . (Alexander Polezhaev)—design of the experiments; E.P ., P .P .
+and Z.L.—synthesis; A.P . (Alexander Pavlov)—NMR investigations and data analysis; E.P ., A.P .
+(Alexander Polezhaev), P .P ., V .N. and Z.L.—data analysis; and E.P ., A.P . (Alexander Polezhaev),
+P .P ., V .N., and Z.L. wrote the paper. All authors have read and agreed to the published version of
+the manuscript.
+Funding: This research was funded by Russian Science Foundation (109992, Russian Federation,
+Moscow, Solyanka str., 14/3), grant number 21-73-30013.
+Institutional Review Board Statement: Not applicable.
+Informed Consent Statement: Not applicable.
+Data Availability Statement: The data presented in this study are available on request from the
+corresponding author.\n--- PAGE 10 ---\nPolymers 2022, 14, 5394 10 of 11
+Acknowledgments: This work was carried out within the framework of the program of state support
+for the centers of the National Technology Initiative (NTI) on the basis of educational institutions of
+higher education and scientiﬁc organizations (Center NTI “Digital Materials Science: New Materials
+and Substances” on the basis of the Bauman Moscow State Technical University). All monomers and
+polymers were characterized with the support of the Ministry of Science and higher education of the
+Russian Federation using scientiﬁc equipment of the Center for the Study of Molecular Structure of
+INEOS RAS (NMR Spectroscopy).
+Conﬂicts of Interest: The authors declare no conﬂict of interest.
+References
+1. Magnin, A.; Pollet, E.; Phalip, V .; Avérous, L. Evaluation of biological degradation of polyurethanes. Biotechnol. Adv. 2020, 39,
+107457. [CrossRef] [PubMed]
+2. Akindoyo, J.O.; Beg, M.D.H.; Ghazali, S.; Islam, M.R.; Jeyaratnam, N.; Yuvaraj, A.R. Polyurethane types, synthesis and
+applications—A review. RSC Adv. 2016, 6, 114453–114482. [CrossRef]
+3. Elsheikh, A. Bistable Morphing Composites for Energy-Harvesting Applications. Polymers 2022, 14, 1893. [CrossRef]
+4. Kura ´ nska, M.; Prociak, A.; Cabulis, U.; Kirpluks, M.; Ryszkowska, J.; Augu´ scik, M. Innovative porous polyurethane-
+polyisocyanurate foams based on rapeseed oil and modiﬁed with expandable graphite. Ind. Crop. Prod. 2017, 95, 316–323.
+[CrossRef]
+5. Connolly, M.; King, J.; Shidaker, T.; Duncan, A. Pultruding Polyurethane Composite Proﬁles: Practical Guidelines for Injection
+Box Design, Component Metering Equipment and Processing. In Proceedings of the 2005 Convention and Trade Show American
+Composites Manufacturers Association, Columbus, OH, USA, 28–30 September 2005.
+6. Babaarslan, O.; Sarıo˘ glu, E.; Avcı, M.E. A comparative study on performance characteristics of multicomponent core-spun yarns
+containing cotton/PET/elastane. J. T ext. Inst. 2020, 111, 775–784. [CrossRef]
+7. Datta, J.; Kopczy ´ nska, P .; Simón, D.; Rodríguez, J.F. Thermo-Chemical Decomposition Study of Polyurethane Elastomer Through
+Glycerolysis Route with Using Crude and Reﬁned Glycerine as a Transesteriﬁcation Agent. J. Polym. Environ. 2018, 26, 166–174.
+[CrossRef]
+8. Anuar Sharuddin, S.D.; Abnisa, F.; Wan Daud, W.M.A.; Aroua, M.K. A review on pyrolysis of plastic wastes. Energy Convers.
+Manag. 2016, 115, 308–326. [CrossRef]
+9. Kemona, A.; Piotrowska, M. Polyurethane Recycling and Disposal: Methods and Prospects. Polymers 2020, 12, 1752. [CrossRef]
+10. Gerlock, J.L.; Braslaw, J.; Mahoney, L.R.; Ferris, F.C. Reaction of polyurethane foam with dry steam: Kinetics and mechanism of
+reactions. J. Polym. Sci. Polym. Chem. Ed. 1980, 18, 541–557. [CrossRef]
+11. Zia, K.M.; Bhatti, H.N.; Bhatti, I.A. Methods for polyurethane and polyurethane composites, recycling and recovery: A review.
+React. Funct. Polym. 2007, 67, 675–692. [CrossRef]
+12. Yang, K.; Grant, J.C.; Lamey, P .; Joshi-Imre, A.; Lund, B.R.; Smaldone, R.A.; Voit, W. Diels–Alder Reversible Thermoset 3D
+Printing: Isotropic Thermoset Polymers via Fused Filament Fabrication. Adv. Funct. Mater. 2017, 27, 1700318. [CrossRef]
+13. Yuan, T.; Zhang, L.; Li, T.; Tu, R.; Sodano, H.A. 3D Printing of a self-healing, high strength, and reprocessable thermoset.Polym.
+Chem. 2020, 11, 6441–6452. [CrossRef]
+14. Blaiszik, B.J.; Kramer, S.L.B.; Olugebefola, S.C.; Moore, J.S.; Sottos, N.R.; White, S.R. Self-Healing Polymers and Composites.
+Annu. Rev. Mater. Res. 2010, 40, 179–211. [CrossRef]
+15. Varghese, S.; Lele, A.; Mashelkar, R. Metal-ion-mediated healing of gels. J. Polym. Sci. Part A Polym. Chem. 2006, 44, 666–670.
+[CrossRef]
+16. Meure, S.; Wu, D. The Biomimetic Approach to Self Healing Polymer Composite Development in the Aerospace Industry. In Pro-
+ceedings of the First International Conference on Self Healing Materials, Noordwijk aan Zee, The Netherlands, 18–20 April 2007.
+17. White, S.R.; Sottos, N.R.; Geubelle, P .H.; Moore, J.S.; Kessler, M.R.; Sriram, S.R.; Brown, E.N.; Viswanathan, S. Autonomic healing
+of polymer composites. Nature 2001, 409, 794–797. [CrossRef]
+18. Toohey, K.S.; Sottos, N.R.; Lewis, J.A.; Moore, J.S.; White, S.R. Self-healing materials with microvascular networks.Nat. Mater.
+2007, 6, 581–585. [CrossRef]
+19. Wool, R.P . Self-healing materials: A review. Soft Matter 2008, 4, 400–418. [CrossRef]
+20. Chen, X.; Dam, M.A.; Ono, K.; Mal, A.; Shen, H.; Nutt, S.R.; Sheran, K.; Wudl, F. A Thermally Re-mendable Cross-Linked
+Polymeric Material. Science 2002, 295, 1698–1702. [CrossRef]
+21. Chen, X.; Wudl, F.; Mal, A.K.; Shen, H.; Nutt, S.R. New Thermally Remendable Highly Cross-Linked Polymeric Materials.
+Macromolecules 2003, 36, 1802–1807. [CrossRef]
+22. Platonova, E.O.; Vlasov, E.; Pavlov, A.A.; Kireynov, A.; Nelyub, V .A.; Polezhaev, A.V . Self-healing polyurethane based on a
+difuranic monomer from biorenewable source. J. Appl. Polym. Sci. 2019, 136, 47869. [CrossRef]
+23. Plaisted, T.A.; Nemat-Nasser, S. Quantitative evaluation of fracture, healing and re-healing of a reversibly cross-linked polymer.
+Acta Mater. 2007, 55, 5684–5696. [CrossRef]\n--- PAGE 11 ---\nPolymers 2022, 14, 5394 11 of 11
+24. Murphy, E.B.; Bolanos, E.; Schaffner-Hamann, C.; Wudl, F.; Nutt, S.R.; Auad, M.L. Synthesis and Characterization of a Single-
+Component Thermally Remendable Polymer Network: Staudinger and Stille Revisited. Macromolecules 2008, 41, 5203–5209.
+[CrossRef]
+25. Platonova, E.; Chechenov, I.; Pavlov, A.; Solodilov, V .; Afanasyev, E.; Shapagin, A.; Polezhaev, A. Thermally Remendable
+Polyurethane Network Cross-Linked via Reversible Diels–Alder Reaction. Polymers 2021, 13, 1935. [CrossRef] [PubMed]
+26. Varganici, C.-D.; Ursache, O.; Gaina, C.; Gaina, V .; Rosu, D.; Simionescu, B.C. Synthesis and Characterization of a New
+Thermoreversible Polyurethane Network. Ind. Eng. Chem. Res. 2013, 52, 5287–5295. [CrossRef]
+27. Ursache, O.; Gaina, C.; Gaina, V . Polyurethanes based on thermoreversible networks designed by Diels-Alder reaction.Express
+Polym. Lett. 2017, 11, 467–478. [CrossRef]
+28. Yang, S.; Du, X.; Deng, S.; Qiu, J.; Du, Z.; Cheng, X.; Wang, H. Recyclable and self-healing polyurethane composites based on
+Diels-Alder reaction for efﬁcient solar-to-thermal energy storage. Chem. Eng. J. 2020, 398, 125654. [CrossRef]
+29. Gol’dfarb, Y.L.; Ostapenko,é.G.; Vinogradova, V .G.; Zverev, A.N.; Polyakov, A.V .; Yanovskii, A.I.; Yuﬁt, D.S.; Struchkov, Y.T.
+Synthesis, structures, and redox properties of some new dithiocarbamates that include a heteroaromatic ring. Chem. Heterocycl.
+Compd. 1987, 23, 740–747. [CrossRef]
+30. Salewska, N.; Milewska, M.J. Efﬁcient Method for the Synthesis of Functionalized Basic Maleimides. J. Heterocycl. Chem. 2014, 51,
+999–1003. [CrossRef]
+31. Celli, A.; Colonna, M.; Gandini, A.; Gioia, C.; Lacerda, T.M.; Vannini, M. Polymers from Monomers Derived from Biomass. In
+Chemicals and Fuels from Bio-Based Building Blocks ; Wiley-VCH Verlag GmbH & Co. KGaA: Weinheim, Germany, 2016; pp. 315–350.
+32. Raquez, J.-M.; Vanderstappen, S.; Meyer, F.; Verge, P .; Alexandre, M.; Thomassin, J.-M.; Jérôme, C.; Dubois, P . Design of Cross-
+Linked Semicrystalline Poly(ε-caprolactone)-Based Networks with One-Way and Two-Way Shape-Memory Properties through
+Diels-Alder Reactions. Chem.-A Eur. J. 2011, 17, 10135–10143. [CrossRef]
+33. Liu, X.; Du, P .; Liu, L.; Zheng, Z.; Wang, X.; Joncheray, T.; Zhang, Y. Kinetic study of Diels–Alder reaction involving in
+maleimide–furan compounds and linear polyurethane. Polym. Bull. 2013, 70, 2319–2335. [CrossRef]
+34. Lakatos, C.; Katalin, C.; Papp, R.; Karger-Kocsis, J.; Zsuga, M.; Keki, S. Segmented linear shape memory polyurethanes with
+thermoreversible Diels-Alder coupling: Effects of polycaprolactone molecular weight and diisocyanate type. Express Polym. Lett.
+2016, 10, 324–336. [CrossRef]
+35. Lakatos, C.; Czifrák, K.; Karger-Kocsis, J.; Daróczi, L.; Zsuga, M.; Kéki, S. Shape memory crosslinked polyurethanes containing
+thermoreversible Diels-Alder couplings. J. Appl. Polym. Sci. 2016, 133, 44145. [CrossRef]
+36. Feng, L.; Yu, Z.; Bian, Y.; Lu, J.; Shi, X.; Chai, C. Self-healing behavior of polyurethanes based on dual actions of thermo-reversible
+Diels-Alder reaction and thermal movement of molecular chains. Polymer 2017, 124, 48–59. [CrossRef]
+37. Engel, T.; Kickelbick, G. Thermoreversible Reactions on Inorganic Nanoparticle Surfaces: Diels-Alder Reactions on Sterically
+Crowded Surfaces. Chem. Mater. 2013, 25, 149–157. [CrossRef]
+38. Ramesh, S.; Sivasamy, A.; Kim, J.-H. Synthesis and characterization of maleimide-functionalized polystyrene-SiO2/TiO2 hybrid
+nanocomposites by sol–gel process. Nanoscale Res. Lett. 2012, 7, 350. [CrossRef]
+39. Gaina, C.; Ursache, O.; Gaina, V . Re-Mendable Polyurethanes. Polym.-Plast. T echnol. Eng. 2011, 50, 712–718. [CrossRef]
+40. Du, P .; Liu, X.; Zheng, Z.; Wang, X.; Joncheray, T.; Zhang, Y. Synthesis and characterization of linear self-healing polyurethane
+based on thermally reversible Diels–Alder reaction. RSC Adv. 2013, 3, 15475–15482. [CrossRef]
+41. Yu, S.; Zhang, R.; Wu, Q.; Chen, T.; Sun, P . Bio-Inspired High-Performance and Recyclable Cross-Linked Polymers.Adv. Mater.
+2013, 25, 4912–4917. [CrossRef]

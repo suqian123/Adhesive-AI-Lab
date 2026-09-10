@@ -1,0 +1,646 @@
+\n--- PAGE 1 ---\nProgress in Organic Coatings 149 (2020) 105943
+Available online 17 September 2020
+0300-9440/© 2020 Elsevier B.V. All rights reserved.
+A novel polyurethane elastomer with super mechanical strength and 
+excellent self-healing performance of wide scratches 
+Zhengyue Wang a, Jianping Zhou a,b,*, Hongbo Liang a,b,*, Shiqi Ye a, Junhui Zou a, 
+Haitao Yang a,b 
+a School of Material Science and Engineering, Nanchang Hangkong University, Nanchang 330063, China 
+b Jiangxi Provincial Engineering Research Center for Surface Technology of Aeronautical Materials, Nanchang Hangkong University, Nanchang 330063, China   
+A R T I C L E I N F O  
+Keywords: 
+Polyurethane 
+Elastomer 
+DA adducts 
+Self-healing 
+Scratch 
+Mechanical property 
+A B S T R A C T  
+Great progress has been made in the research of self-healing materials in recent decades, however, there are still 
+great challenges in achieving high mechanical strength and wide scratch healing simultaneously. Herein, a novel 
+polyurethane elastomer (PUDA) containing polycaprolactone (PCL) soft segments and Diels-Alder (DA) 
+adducting structure was specially designed and synthesized. The experimental results show that the PUDA 
+elastomer after being trained not only had ultrahigh mechanical strength, but also had satisfactory ability in 
+healing of wide scratches. It was found that the elastomer displayed a high tensile strength up to 32.88 MPa, 
+which is unprecedented when compared to those reported self-healing elastomers. The PUDA elastomer material 
+also had excellent healing ability towards wide scratches: an 80-μm-wide scratch could be completely healed 
+after heating at 110◦C for 6 min. Furthermore, the elastomer material could also attain more than 100 % re­
+covery of mechanical strength, with its recovered tensile strength reaching up to 34.58 MPa. The developed 
+PUDA elastomer demonstrates quite promising perspective in material science and engineering field, especially 
+for the protection of surface coating.   
+1. Introduction 
+As one of the most important smart materials, self-healing materials 
+have been developed very rapidly in the past few decades [1–11]. 
+Generally, self-healing materials can be classified into two main groups: 
+extrinsic type and intrinsic type. Although the former has been studied 
+for a long period of time, the irreversibility still remains as an 
+outstanding issue and greatly hinders its practical application. For this 
+reason, the latter — intrinsic self-healing materials — has attracted more 
+and more concerns from both academia and industries in recent years. 
+Particularly, self-healing materials based on dynamic reversible bonds, 
+such as hydrogen bonds [12–16], disulfide bonds [17–20] and 
+Diels-Alder (DA) bonds [21–24], have become the focus of research. 
+So far, tremendous efforts have been devoted to reduce the healing 
+temperature and increase the healing effect of the materials. It is now 
+widely acknowledged that low healing temperature can make such 
+materials more convenient and practical, and that high mechanical 
+strength after healing is desired for their application. However, better 
+healing effect usually requires the presence of soft chains in the material, 
+which in turn weakens its mechanical properties. Incorporation of DA 
+adducting structure has been proved capable of achieving higher me­
+chanical strength for the self-healing material. In this aspect, our group 
+had previously reported the successful synthesis of a series of self- 
+healing coatings with DA adducts [25,26]. Another outstanding chal­
+lenge existing in the self-healing technology is the healing of wide 
+scratches. Currently, the healing of scratch is usually limited to cracks 
+with narrow width (<50 μm), not those with large sizes [21,24,27,28]. 
+However, the occurrence of different sizes of damage is unavoidable in 
+practical situation. Therefore, how to achieve self-healing of a wide 
+scratch has become one of the key considerations in designation and 
+optimization of the repairing approach. 
+Shape memory polymer (SMP) has attracted numerous interests due 
+to its ability to memorize its original shape after certain stimulus, such as 
+heat, humidity, light, pH, electricity, etc., was applied. Conceptually, 
+SMP can be divided into two types: one-way and two-way SMP [29–34]. 
+Owing to its appealing reversibility, the two-way SMP appears as 
+overwhelming alternative for the one-way SMP. However, traditional 
+two-way SMP (also known as quasi two-way SMP) needs an additional 
+* Corresponding author at: School of Material Science and Engineering, Nanchang Hangkong University, Nanchang 330063, China. 
+E-mail addresses: zf161162@163.com (J. Zhou), liahongbo@163.com (H. Liang).  
+Contents lists available at ScienceDirect 
+Progress in Organic Coatings 
+journal homepage: www.elsevier.com/locate/porgcoat 
+https://doi.org/10.1016/j.porgcoat.2020.105943 
+Received 20 May 2020; Received in revised form 24 July 2020; Accepted 25 August 2020   
+\n--- PAGE 2 ---\nProgress in Organic Coatings 149 (2020) 105943
+2
+external force to achieve the shape-memory effect, which has limited its 
+wide application in stress sensors, electronic devices, artificial skins, 
+smart robots and medical materials. Therefore, many methods have 
+been explored to solve this problem, making the production of shape 
+memory more convenient and reliable. For example, Zhang and col­
+leagues [35–37] have recently proposed a facile approach to prepare 
+external stress-free two-way SMP and verified its shape-memory effect at 
+both micro and macro levels. In their work, a self-healing elastomer was 
+prepared and further used for healing of wide cracks, with an excellent 
+healing effect and high strength of about 27.5 MPa achieved. It can be 
+seen that, by introducing special shape memory effect to the self-healing 
+polymer, the elastomer material with an artificial wide scratch was 
+found to shrink at a proper temperature and then healed automatically 
+at a higher temperature due to the reversibility of dynamic bonds, which 
+finally led to the self-healing of wide scratch. 
+Herein, we designed and synthesized a novel self-healing poly­
+urethane elastomer (denoted as PUDA) containing DA bonds and poly­
+caprolactone (PCL) soft segments. The developed elastomer exhibited 
+not only excellent healing ability of wide scratch (80−100 μm), but also 
+super mechanical strength (up to 32.88 MPa). The elastomer also 
+exhibited an excellent healing efficiency of mechanical properties. It 
+demonstrated a more than 100 % recovery of mechanical strength after 
+healing, with its tensile strength reaching up to 34.58 MPa, which out­
+performed most currently available self-healing elastomers. 
+2. Materials and methods 
+2.1. Materials 
+Furfuryl alcohol (FA; 98 %), bismaleimide (BMI; 99 %), hexam­
+ethylene diisocyanate (HDI; 99 %), polycaprolactone diol (PCL; Mn =
+2000; 99 %), 1, 4-butanediol (BDO; 99 %), trimethylolpropane tris(3- 
+mercaptopropionate) (TMPMP; 95 %), dibutyltin dilaurate (DBTDL; 95 
+%), acetone, dimethylformamide (DMF), diethyl ether, were purchased 
+from Heowns. FA was distilled at 78◦C under reduced pressure. PCL2000 
+was dehydrated in oven at 60◦C for 6 h prior to use. Other reagents and 
+solvents were used as received. 
+2.2. Synthesis of diols containing DA bonds (DA-diol) 
+0.024 mol BMI and 0.01 mol FA were first dissolved in 100 mL DMF. 
+Then the mixture was stirred at 60◦C until the absorption of BMI at 696 
+cm−1 on the Fourier transform infrared spectra (FTIR) disappeared. The 
+resultant was finally precipitated with diethyl ether, and filtered to 
+obtain a pale yellow solid. The synthesis route was shown in Scheme 1. 
+2.3. Synthesis of PUDA and the control PUBDO 
+Typically, 0.01 mol PCL and 0.022 mol HDI was mixed with 3‰ 
+DBTDL and dissolved in acetone. The solution was then heated up to 
+60◦C and stirred for 1 h to yield prepolymer 1. After that, 0.0048 mol 
+DA-diol was added in as a chain extender and stirred for 1 h to yield 
+prepolymer 2. Afterwards, 0.0048 mol TMPMP was added in as a 
+crosslinking agent until the FTIR absorption peak at 2270 cm−1 dis­
+appeared, indicating that the -NCO group was completely consumed. 
+The resultant was poured into a PTFE (polytetrafluoroethylene) mold 
+with different shapes (dumbbell, circle, and strip) at room temperature 
+for 24 h to remove the solvent, and crosslinked PUDA samples were 
+finally obtained. The average molecular weight between crosslinks (Mc) 
+for the crosslinked polymers is calculated to be 3915.6. 
+To demonstrate the critical role of DA bonds, control sample without 
+DA bonds (denoted as PUBDO) was prepared following similar steps, 
+except that BDO was used as the diol instead of DA-diol. The monomer 
+ratio used during the synthesis of PUDA and PUBDO was shown in 
+Table 1. 
+2.4. Processing program adopted for attainment of stress-free two-way 
+shape memory effect 
+To endow the synthesized PUDA elastomer stress-free two-way shape 
+memory effect, a special designed treatment procedure was adopted in 
+our experiments according to literature [35] with a little modification. 
+To be specific, the dumbbell-shaped sample of crosslinked PUDA elas­
+tomer was first heated at 60◦C for 10 min to ensure the melting of the 
+PCL soft segments. The sample was then stretched to two times its 
+original length and kept at room temperature for 30 min, followed by 
+cooling down under constant strain in a refrigerator for 10 min until it 
+was no longer shrink under the applied force. Finally, the sample was 
+heated at 60◦C for 10 min and then cooled down to room temperature 
+again. It was found that the obtained sample that denoted as pro­
+grammed PUDA or programmed PUBDO could realize stress-free two-­
+way shape memory effect and automatically shrink under heating. 
+2.5. Characterization 
+2.5.1. Fourier transform infrared spectroscopy (FTIR) 
+FTIR measurements were used to monitor the reaction process and 
+characterize the chemical structure of the obtained products. Depending 
+on the physical state of the synthetic products, two methods were 
+adopted for sample preparation for FTIR testing. For solid resultant, it 
+was first crushed and grinded with KBr powder, and then pressed into 
+circular sheet. As for liquid resultant, it was evenly dropped onto KBr 
+salt slice. The spectra were collected using a Bruker Vector 70 FTIR 
+spectrometer. Each sample was run for 24 scans with a scanning range of 
+400−4000 cm−1 and a resolution of 4 cm−1. 
+2.5.2. Proton nuclear magnetic resonance (1H NMR) 
+The 1H NMR spectroscopy were recorded on Bruker UAVANCE III 
+400 MHz spectrometer with DMSO-d6 (2.50 ppm) as solvents and tet­
+ramethylsilane as the internal standard at room temperature. 
+2.5.3. Differential scanning calorimetry (DSC) 
+The melting and crystallization of PCL soft segment and the thermal 
+Scheme 1. Synthesis route of diol containing Diels-Alder bonds.  
+Table 1 
+Monomer ratio in synthesis of PUDA and PUBDO.  
+Polymer 
+PCL 
+HDI 
+DA-diol 
+BDO 
+TMPMP 
+PUDA 
+0.01 
+0.022 
+0.0048 
+– 
+0.0048 
+PUBDO 
+0.01 
+0.022 
+– 
+0.0048 
+0.0048  
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 3 ---\nProgress in Organic Coatings 149 (2020) 105943
+3
+reversibility of DA bonds were measured using a DSC-Q200 differential 
+scanning calorimeter (DSC, TA Instruments) under nitrogen. The heat­
+ing/cooling rate used in each testing was 10◦C/min. 
+2.5.4. Rheological measurement 
+Rheology testing were carried out using a Discovery HR-2 rheometer 
+in an oscillatory shear mode. The rheology behavior under different 
+temperatures was tested at a constant strain of 0.5 %, a frequency of 1 
+Hz, and a heating rate of 3◦C/min. The frequency sweep was tested at a 
+strain of 0.2 % and a frequency range of 0.1–10 rad/s. 
+2.5.5. Optical microscopy (OM) testing 
+Observation of the healing process of wide scratch was carried out 
+using an optical microscope (OM). 
+2.5.6. Tensile strength testing 
+The tensile strength of original and healed samples was measured 
+according to ISO527−2 using a H50KS tensile tester. The test was per­
+formed at a speed of 50 mm/min using dumbbell-shaped samples. The 
+size of sample is 50 × 10 × 1 mm. 
+3. Results and discussion 
+3.1. Synthesis and characterization of PUDA and PUBDO 
+To synthesize PUDA, DA-diols were first synthesized via reaction 
+between BMI and FA at 60◦C for 24 h (Scheme 1). The reaction progress 
+was monitored by FTIR method and the structure of product was char­
+acterized by 1H NMR. As shown in Fig. 1(a), (b), two new absorption 
+bands at 1774 cm−1 and 1188 cm−1 that assigned to the DA adducting 
+structure occurred, with its intensity increasing with the extension of the 
+reaction time. Additionally, the characteristic peak at 696 cm−1 of BMI 
+disappeared, indicating that the raw materials had fully converted into 
+product as the reaction proceeded. The 1H NMR spectrum with nine 
+groups of characteristic peaks verifies well the structure of product, and 
+the correspondence between the peak and the chemical group was 
+marked in Fig. 1(c). According to above analysis, it could be concluded 
+that the DA adducts (DA-diols) were successfully synthesized. 
+Afterwards, HDI was reacted with PCL 2000 to obtain PU prepolymer 
+1, followed by addition of DA-diols to generate PUDA elastomer, which 
+was finally crosslinked by TMPMP to obtain crosslinked PUDA elastomer 
+[37] (Scheme 2). The reactions were also monitored and the structure of 
+the products was examined via FTIR method. As shown in Fig. 2, after 
+HDI reacted with PCL and DA-diols for 1 h successively, the absorption 
+band at 2270 cm−1 corresponding to the -NCO bonds significantly 
+decreased stepwise, indicating that HDI had reacted with PCL and 
+DA-diols. In addition, after crosslinked by TMPMP for 1 h, the absorp­
+tion peak of -NCO at 2270 cm−1 disappeared completely, implying the 
+-NCO groups had been consumed entirely by the thiol monomers. The 
+PUBDO system behaved in a similar way as shown in Fig. 3. The dif­
+ference between PUDA and PUBDO is the diol monomers, one is DA-diol 
+while the other is BDO diol. According to the published work [25,26], 
+the peak at 3067 cm−1 indicates the DA structure and this peak is not 
+obvious due to the adjacent strong peak of N–H at 3355 cm−1. How­
+ever, the spectrum of PUDA after the reaction has obvious peak at 3067 
+cm−1 while the peak of PUBDO is weak. 
+3.2. Shape memory effect of PU elastomers 
+The self-healing of PU elastomers towards wide scratches depends on 
+the material shrinkage that derived from the shape memory effect and 
+the flow (diffusion) of polymer chains that caused by the breakage of DA 
+bonds. Therefore, shrinkage behavior of the PUDA elastomer was first 
+measured to probe its shape-memory ability and confirm whether it 
+could exhibit stress-free two-way shape memory. 
+Firstly, one-way shape-memory effect [38] was examined with the 
+PUDA elastomer. The specimens were heated at 60◦C for 10 min, after 
+which they were molded into different shapes (Deform 1 and Deform 2, 
+as shown in Fig. 4). Subsequently, the deformed specimens were cooled 
+down to 5◦C until their shapes were fixed. After that, the specimens were 
+heated up to 60◦C again and kept at that temperature for a period of 
+time. As expected, the shape of the specimens converted quickly back to 
+their original shape-a flat strip, indicating that the elastomer specimens 
+could exhibit one-way shape memory effect after PCL soft blocks 
+Scheme 2. Synthesis route of crosslinked PUDA.  
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 4 ---\nProgress in Organic Coatings 149 (2020) 105943
+4
+introduced. 
+It has been reported that PU elastomers containing PCL soft segments 
+could be trained to acquire two-way shape-memory effect when they 
+were subjected to a certain programming procedure [35]. Therefore, a 
+similar treating procedure with a little modification (as shown in Fig. 5) 
+was adopted to train the PUDA strip sample in our experiments. As 
+shown in Fig. 6, it was observed that autonomous shortening or 
+lengthening by 1 mm could take place repeatedly when the programmed 
+specimen was heated to 60◦C or cooled down to 5◦C recurrently, indi­
+cating the PUDA elastomers after being trained had attained stress-free 
+two-way shape-memory ability. By contrast, no reversible change of 
+length was observed in the un-programmed specimen, confirming that 
+programmed training was indispensable to realize the stress-free two-­
+way shape-memory effect with PUDA elastomer materials. 
+3.3. Thermal reversibility of DA bonds 
+The melting of PCL soft segments and the existence of DA bonds were 
+investigated using DSC measurement. As depicted in the curve of the 
+heating thermal programs (Fig. 7(a)), the endothermic peak that 
+appeared at 45◦C was due to the melting of PCL crystallite, while the 
+exothermic peak that appeared at lower temperature range (-10◦C and 
+3◦C, respectively) was assigned to the recrystallization of PCL segments 
+in PUDA and PUBDO respectively. Meanwhile, in Fig. 7(b), the PUDA 
+curve displayed another exothermic peak at 127◦C (as clearly shown in 
+Fig. 1. FTIR (a, b) spectra and 1H NMR (c) of DA diol. (a) is full spectra of FTIR and (b) is partial enlarged spectra of FTIR.  
+Fig. 2. FTIR spectra of PUDA obtained under different reaction conditions. a) 
+HDI + PCL, 1 h; b) PU prepolymer + DA-diol, 1 h; c) PUDA + TMPMP, 1 h. 
+Fig. 3. FTIR spectra of the control sample PUBDO obtained under different reaction conditions. a) HDI + PCL, 1 h; b) PU prepolymer + BDO, 1 h; c) PU prepolymer 2 
++ TMPMP, 1 h. 
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 5 ---\nProgress in Organic Coatings 149 (2020) 105943
+5
+the inset photograph). By contrast, only one endothermic peak at around 
+45◦C could be observed in the PUBDO curve. This suggests that the 
+occurrence of the new peak at 127◦C in PUDA must be resulted from the 
+retro-DA reaction [25,26], which confirms the existence of DA bonds. 
+However, it should be noted that the peak related to the retro-DA re­
+action was very weak, presumably because the content of incorporated 
+DA-diols in the PUDA network was significantly less than that of PCL soft 
+blocks. 
+The distinctive advantage of intrinsic self-healing is the repeatability 
+of the healing that derived from the reversibility of the dynamic bonds. 
+Therefore, the study of thermal reversibility of DA bonds can facilitate 
+the understanding of the healing mechanism. A series of PUDA samples 
+obtained after different treatments (DA1:original Diels-Alder bond;r- 
+DA1:broken Diels-Alder bond;DA2:rebuilt Diels-Alder bond;r-DA2: 
+broken again) were evaluated by DSC measurements at the same heating 
+rate. As shown in Fig. 8, in the temperature range of 25◦C ~ 55◦C, a 
+distinct transition peak assigned to the melting of PCL crystallites can be 
+clearly noticed for each sample. However, the transition peak of DA1 is 
+much higher than other samples, this is because there are much more 
+PCL crystallites in DA1 sample. As the other three samples (r-DA1, DA2 
+Fig. 4. The one-way shape memory effect of PU elastomer (the length of original sample is 3 cm).  
+Fig. 5. The programming procedure adopted for crosslinked PUDA elastomers to realize the two-way shape-memory effect.  
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 6 ---\nProgress in Organic Coatings 149 (2020) 105943
+6
+and r-DA2) were actually obtained by further processing on the basis of 
+DA1 sample, the melted PCL crystallites has no enough time to recrys­
+tallize completely in these samples. Therefore, a weaker melting peak 
+were observed in these samples. Fig. 8 also showed that, in the high 
+temperature range of 120~150◦C, only in DA1 and DA2 curves can we 
+see a weak transition peak, and no transition peak could be noticed in r- 
+DA1 and r-DA2 curves. The difference between the thermal behavior of 
+DA and r-DA samples could be ascribed to the reconstruction of DA 
+bonds in DA adducts caused by heating the sample at 60◦C for 48 h. This 
+result strongly confirms that the DA bonds have high thermal revers­
+ibility and the prepared PUDA elastomer can be healed repeatedly due to 
+the reversibility of the DA bonds. 
+3.4. Self-healing mechanism 
+The rheological properties were evaluated to gain insight into the 
+healing mechanism of the trained PUDA through temperature sweep and 
+frequency sweep. As shown in Fig. 9a, the storage modulus (G’) 
+decreased in four stages corresponding to the motions of (i) micro- 
+molecules, (ii) soft segments (PCL2000), (iii) free segments, and (iv) 
+the breakage of DA bonds. The order of decreasing speed of G’ is : soft 
+segments (PCL) > Diels-Alder bonds > micro-molecules ≈free seg­
+ments. As the content of free segments and micro-molecules is less and 
+the motion of them has little effect on the decrease of G’. That is why the 
+decreasing speeds of them are both lowest. The motion of soft segments 
+(PCL) means the melting and flowing and this will cause an obvious 
+decrease of G’. The motion of Diels-Alder bonds means the breakage of 
+Fig. 6. Stress-free two-way shape memory effect of PUDA. 
+(Top: programmed PUDA; Bottom: un-programed PUDA) 
+Fig. 7. DSC curves of PUDA and the control sample PUBDO in (a) low temperature range and (b) higher temperature range.  
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 7 ---\nProgress in Organic Coatings 149 (2020) 105943
+7
+DA bonds which will open the cross-linked network and then G’ will 
+decrease severely. The difference in the decreasing speed of PCL and DA 
+bonds comes from that PCL (0.01 mol) has larger proportion in the 
+formulation while the proportion of DA bonds (0.0048 mol) is less. 
+Accordingly, the decreasing speed of PCL is slightly faster than DA 
+bonds. Moreover, the storage modulus increased with increasing tem­
+perature from 125◦C to 170◦C, which could be attributed to the 
+Fig. 8. Preparation of different PUDA samples (a) and the corresponding DSC 
+heating curves (b). 
+(DA1：original DA bond；r-DA1：broken DA bond；DA2：rebuilt DA bond； 
+r-DA2：broken again) 
+Fig. 9. Rheological property of PUDA. (a) The storage modulus (G’) of PUDA at different temperatures (from -20◦C to 200◦C). (b) the storage modulus (G’) and loss 
+modulus (G’’) of PUDA at different frequency at 25◦C；(c) the storage modulus (G’) and loss modulus (G’’) of PUDA at different frequency at 130◦C. (The table is the 
+modulus value of different temperatures). 
+Fig. 10. Dynamic thermal behaviors of PUDA elastomers demonstrated by 
+reversible solution (the solvent is DMF). 
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 8 ---\nProgress in Organic Coatings 149 (2020) 105943
+8
+breakage of DA bonds [26] and the curing of BMI (the product of 
+retro-DA reaction). 
+In order to study the rheological behavior in high temperature, fre­
+quency sweeps at 25◦C (room temperature) and 130◦C were tested. 
+According to the previous analysis of DSC, 127◦C is the most violent 
+period of DA bonds’ breakage, most of DA bonds has been fully broken at 
+130◦C and the corresponding rheological behavior is similar to that of 
+healing. And sample at 25◦C worked as a reference of original sample 
+which has full DA bonds. Therefore the influence of DA bonds’ breakage 
+on the rheological behavior and healing mechanism at high temperature 
+can be studied through the frequency sweep tests at 25◦C and 130◦C. 
+The frequency sweep at 25◦C (Fig. 9b) showed that the storage modulus 
+was much higher than the loss modulus, implying that the PUDA 
+structure is a crosslinked network. By contrast, the frequency sweep at 
+130◦C (Fig. 9c) displayed that the storage modulus was nearly the same 
+as the loss modulus at a frequency of around 0. Moreover, the storage 
+modulus at 130◦C was decreased by one order of magnitude compared 
+with that at 25◦C, which could be resulted from the breakage of DA 
+bonds during the retro-DA reaction. The table in Fig. 9 was the sum­
+marized data of storage modulus (G’) at 25◦C and 130◦C which showed 
+that the great gaps between the two modulus. These data indicate that 
+the trained PUDA exhibits the behavior of elastomer at 25◦C, and dis­
+plays the behavior of liquid at 130◦C, which were due to the thermal 
+reversibility of DA reactions. 
+The healing mechanism, which mainly depends on the polymer flow 
+caused by retro-DA reaction, was further confirmed by reversible solu­
+tion experiments (Fig. 10). During the experiment, a piece of PUDA 
+elastomer was first soaked in DMF at room temperature (25◦C) for 30 
+min, and the sample was observed to be just slightly swollen, indicating 
+there must be crosslinked network existing in the PUDA sample. When 
+the swollen sample was continued to be heated up to 120◦C for another 
+30 min, it was dissolved into a transparent solution, implying the 
+crosslinked network in PUDA had been broken due to the retro-DA re­
+action. However, when the transparent solution was cooled down and 
+kept at 60◦C for 7 d, the solvent was completely removed and the so­
+lution turned into a solid, which could not be dissolved again after being 
+immersed in the solvent at room temperature, confirming that DA bonds 
+were rebuilt and the solid had converted back to a crosslinked state 
+again. 
+The mechanism for self-healing of wider scratch was further illus­
+trated and the schematic diagram were shown in Fig. 11. Firstly, heating 
+at 60◦C (which is higher than the melting temperature of PCL but lower 
+than the temperature required for retro-DA reaction) caused the melting 
+of PCL crystallites and the shrinking of the materials in a millimeter 
+scale, similar to that shown in Fig. 6. Therefore, the scratch width 
+became narrower, which is favorable for the subsequent healing. When 
+the material was heated at 120◦C for a period of time, the retro-DA re­
+action took place and the DA bonds began to break, causing the flow of 
+polymer chains to become more accessible. Afterwards, the soft seg­
+ments of broken PUDA began to flow into the narrow scratch and 
+enabled the self-healing of the shrunken scratch. In the end, when the 
+material was cooled down to room temperature, the PCL soft segments 
+were recrystallized and the DA bonds were rebuilt, leading to the rees­
+tablishment of the crosslinked network. 
+3.5. Self-healing performance and tensile strength properties 
+The healing behavior of crosslinked PUDA and PUBDO samples was 
+conducted to evaluate the role of DA bonds and the tow-way shape- 
+memory effect in the self-healing process. 
+Fig. 11. The healing mechanism of wider scratch in programmed PU through 
+DA bonds aided by two-way shape-memory effect. 
+Fig. 12. Photographs of self-healing process of programmed PUDA and PUBDO 
+(control) under heating. 
+Fig. 13. Optimal microscopic images illustrating the healing process of wide 
+scratch on programmed PUDA samples (left) and un-programmed PUDA (right). 
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 9 ---\nProgress in Organic Coatings 149 (2020) 105943
+9
+As shown in Fig. 12, PUDA or PUBDO sample was first cut into two 
+pieces, which were brought into contact and heated at 60◦C for 1 h to 
+allow the rejoining of the two broken pieces and the closure of the 
+scratch. Subsequently, the temperature was increased to 120◦C for 3 h, 
+and the sample was re-stretched after being cooled down to room tem­
+perature. It was observed that PUDA sample exhibited excellent self- 
+healing effect as it could be re-stretched after healing. However, the 
+PUBDO sample showed poor tensile property and broken immediately 
+once stretched, implying the scratch in PUBDO sample was not healed. 
+The results of the comparative experiments demonstrate that the two- 
+way shape-memory effect allows the scratch to close but the healing is 
+caused by DA bonds. 
+To further confirm the role of two-way shape-memory effect in the 
+healing of wide scratch, a scratch with sizes of 80−100 μm was gener­
+ated in situ on the programmed or unprogrammed PUDA film surface 
+using a razor blade. The specimen was then placed on a heating stage, 
+and the temperature was gradually increased from 30◦C to 110◦C to 
+allow healing. The changes of scratch at different temperatures were 
+monitored [39] using an optical microscope (Fig. 13). It could be easily 
+seen that, when the temperature increased, the wide scratch on the 
+programmed PUDA sample became narrower and finally disappeared 
+after heated at 110◦C for 6 min. However, the scratch width in the un­
+programmed specimen didn’t change much and only slightly healed 
+under heating. The results reveal that the stress-free two-way 
+shape-memory effect derived from programmed treatment is crucial and 
+indispensable for the healing of wide scratch. 
+The mechanical properties of the original PUDA elastomer material 
+and the healed PUDA specimen was studied by tensile testing. As shown 
+in Fig. 14, the tensile strength of the original trained PUDA sample is 
+measured to be as high as 32.88 MPa, which is super high than those 
+self-healing elastomers previously reported. The excellent mechanical 
+strength is believed to mainly result from the introduced DA adducting 
+structure. In fact, it was found in our experiments that the tensile 
+strength of the PUDA elastomer increased with the increase of the 
+content of DA adducting structure in the PU network. Fig. 15 visually 
+demonstrated the high strength of our synthesized PUDA specimen. 
+With a piece of rectangular PUDA film specimen (8 cm in length, 4 cm in 
+width and 1 mm in thickness), a steel weighting up to 5 Kg can be easily 
+lifted, and the film was not damaged after the lifting test. 
+To investigate the recovery of mechanical property, a dumbbell- 
+shaped PUDA specimen was cut into two pieces, which was brought 
+into contact and subsequently placed in an oven at 110◦C for 1 ~ 4 h. 
+The specimen was further cooled down to 60◦C and kept for 3 h to allow 
+the regeneration of the DA bands. Eventually, the broken specimen was 
+observed to be completely rejoined. Moreover, the tensile strength of the 
+healed specimen was observed to increase with the healing time at 
+110◦C (as shown in Fig. 14), and it was recorded to climb to 34.58 MPa 
+after 4 h’s heating, which is even beyond its original value. 
+4. Conclusions 
+In summary, a novel self-healing polyurethane elastomer containing 
+PCL soft blocks and dynamic AD adducting structure was synthesized. 
+The two-way shape-memory effect of the PUDA elastomer and the 
+thermal reversibility of DA adducting structure were confirmed. Also, 
+the healing mechanism was explored. The results show that the elas­
+tomer displayed unprecedented tensile strength and excellent healing 
+performance towards wide scratches. The tensile strength of original 
+crosslinked PUDA reached up to 32.88 MPa, which is super high 
+compared to that of self-healing elastomers previously reported. More­
+over, it could be recovered by up to 113 % of the initial strength after 
+healing. The trained PUDA elastomer also exhibited excellent healing 
+performance towards wide scratches: a scratch with width of 80−100 
+μm could be completely recovered after heating at 110◦C for just 6 min. 
+Benefiting from its outstanding self-healing ability and superior tensile 
+strength, the developed PUDA elastomer demonstrates quite promising 
+perspective in material science and engineering field, especially for the 
+protection of surface coating. 
+Data availability 
+The raw/processed data required to reproduce these findings cannot 
+be shared at this time due to technical or time limitations. 
+CRediT authorship contribution statement 
+Zhengyue Wang: Investigation, Writing - original draft. Jianping 
+Zhou: Conceptualization, Writing - review & editing, Supervision. 
+Hongbo Liang: Conceptualization, Methodology, Supervision. Shiqi 
+Ye: Investigation. Junhui Zou: Investigation. Haitao Yang: Method­
+ology, Investigation. 
+Declaration of Competing Interest 
+The authors declare no conflict of interest. 
+Acknowledgments 
+The authors gratefully acknowledge the financial support from the 
+National Natural Science Foundation of China (Grant No. 51363017, 
+Fig. 14. Tensile stress-strain curves of original and healed programmed PUDA 
+for different times. 
+Fig. 15. Tensile testing of the trained PUDA sample under loading.  
+Z. Wang et al.                                                                                                                                                                                                                                   
+\n--- PAGE 10 ---\nProgress in Organic Coatings 149 (2020) 105943
+10
+51862025), Key research and development plan of Jiangxi Province 
+(20181BBE58003), Natural Science Foundation of Jiangxi Province 
+(20192BAB206012), and Department of Education fund of Jiangxi 
+Province (GJJ170611). 
+References 
+[1] K.R. Reddy, A. El-Zein, D.W. Airey, F.A. Marroquin, P. Schubel, A. Manalo, Self- 
+healing polymers: synthesis methods and applications[J], Nano-Structure & Nano- 
+Objects 23 (2020), 100500. 
+[2] J. Hu, R. Mo, X.X. Sheng, X.Y. Zhang, A self-healing polyurethane elastomer with 
+excellent mechanical properties based on phase-locked dynamic imine bonds[J], 
+Polym. Chem. 11 (2020). 
+[3] C.P. JE, M.T. Sultan, C.P. Selvan, S. Irulappasamy, F. Mustapha, A.A. Basri, S.N. 
+A. Safri, Manufacturing challenges in self-healing technology for polymer 
+composites-a review[J], J. Mater. Res. Technol. 9 (2020) 7370–7379. 
+[4] H. Pulikkalparambil, S. Siengchin, J. Parameswaranpillai, Corrosion protective 
+self-healing epoxy resin coatings based on inhibitor and polymeric healing agents 
+encapsulated in organic and inorganic micro and nanocontainers[J], Nano- 
+Structures & Nano-Objects 16 (2018) 381–395. 
+[5] S.W. Yang, S. Wang, X.S. Du, C. Xu, Mechanically and thermo-driven self-healing 
+polyurethane elastomeric composites using inorganic-organic hybrid material as 
+crosslinker[J], Polym. Chem. 11 (2019). 
+[6] E.B. Stukalin, L.H. Cai, N.A. Kumar, L. Ludwik, M. Rubinstein, Self-healing of 
+unentangled polymer networks with reversible bonds[J], Macromolecules 46 
+(2013) 7525–7541. 
+[7] J.M. Winne, L. Leibler, F.D. Prez, Dynamic covalent chemistry in polymer 
+networks: a mechanistic perspective[J], Polym. Chem. 10 (2019). 
+[8] X.Y. He, L.Q. Liu, H.M. Han, W.Y. Shi, Bioinspired and microgel-tackified adhesive 
+hydrogel with rapid self-healing and high stretchability[J], Macromolecules 52 
+(2018) 72–80. 
+[9] Y. Deng, M. Huang, D. Sun, Y.B. Li, T.S. Dong, X.H. Wang, L. Zhang, W.Z. Yang, 
+Dual physically cross-linked kappa-carrageenan-based double network hydrogels 
+with superior self-healing performance for biomedical application[J], ACS Appl. 
+Mater. Interfaces 10 (2018) 37544–37554. 
+[10] T. Yuan, X.M. Cui, X.K. Liu, X.X. Qu, Highly tough, stretchable, self-healing, and 
+recyclable hydrogels reinforced by in situ-formed polyelectrolyte complex 
+nanoparticles[J], Macromolecules 52 (2019) 3141–3149. 
+[11] H.X. Lei, S.N. Wang, D.J. Liaw, Y.L. Cheng, Tunable and processable shape- 
+memory materials based on solvent-free, catalyst-free polycondensation between 
+formaldehyde and diamine at room temperature[J], ACS Macro Lett. 8 (2019) 
+582–587. 
+[12] Huang C.J. Fan, Z.C. Li, B. Xiao, W.X. Zheng, E. Yang, K.K. Wang, Y. Zhong, 
+A robust self-healing polyurethane elastomer: from H-bonds and stacking 
+interactions to well-defined microphase morphology [J], Sci. China Mater. (2019). 
+[13] F. Gao, J.C. Cao, Q.B. Wang, R. Liu, S.W. Zhang, J.C. Liu, X.Y. Liu, Properties of 
+UV-cured self-healing coatings prepared with PCDL-based polyurethane containing 
+multiple H-bonds[J], Prog. Org. Coat. 113 (2017) 160–167. 
+[14] X.Z. Yan, Z.Y. Liu, Q.H. Zhang, J. Lopez, H.C. Wu, S.M. Niu, H.P. Yan, S.H. Wang, 
+T. Lei, J.H. Li, D.P. Qi, P.G. Huang, et al., Quadruple H-bonding cross-linked 
+supramolecular polymeric materials as substrates for stretchable, antitearing, and 
+self-healable thin film electrodes[J], J. Am. Chem. Soc. 140 (2018) 5280–5289. 
+[15] Z.Y. Li, F. Zhou, Z.Y. Li, S.Y. Lin, L. Chen, L.X. Liu, Y.M. Chen, Hydrogel cross- 
+linked with dynamic covalent bonding and micellization for promoting burn 
+wound healing[J], ACS Appl. Mater. Interfaces 10 (2018) 25194–25202. 
+[16] Y. Song, Y. Liu, T. Qi, G.L. Li, Towards dynamic but supertough healable polymers 
+through biomimetic hierarchical hydrogen-bonding interactions[J], Angew. Chem. 
+Int. Ed. Engl. 57 (2018) 13838–13842. 
+[17] X.P. Li, R. Yu, Y.Y. He, Y. Zhang, X. Yang, X.J. Zhao, W. Huang, Self-healing 
+polyurethane elastomers based on a disulfide bond by digital light processing 3D 
+printing[J]. ACS macro letters, Li X, Yu R, He Y, et ameil. Self-healing polyurethane 
+elastomers based on a disulfide bond by digital light processing 3D printing[J], 
+ACS Macro Lett. 8 (2019) 1511–1516. 
+[18] S.M. Kim, H. Jeon, S.H. Shin, S.A. Park, J. Jegal, S.Y. Hwang, Oh dx, J. Park, 
+Superior toughness and fast self-healing at room temperature engineered by 
+transparent elastomers[J], Adv. Mater. 30 (2018), 1705145. 
+[19] Y. Lai, X. Kuang, P. Zhu, M.M. Huang, X. Dong, D.J. Wang, Colorless, transparent, 
+robust, and fast scratch-self-healing elastomers via a phase-locked dynamic bonds 
+design[J], Adv. Mater. 30 (2018), 1802556. 
+[20] D.J. Fortman, R.L. Snyder, D.T. Sheppard, W.R. Dichtel, Rapidly reprocessable 
+cross-linked polyhydroxyurethanes based on disulfide exchange[J], ACS Macro 
+Lett. 7 (2018) 1226–1231. 
+[21] Q. Tian, Y.C. Yuan, M.Z. Rong, M.Q. Zhang, A thermally remendable epoxy resin 
+[J], J. Mater. Chem. 19 (2009) 1289–1296. 
+[22] X.X. Chen, M.A. Dan, K.J. Ono, A. Mal, H.B. Shen, S.R. Nutt, K. Sheran, F. Wudl, 
+A thermally re-mendable cross-linked polymeric material[J], Science 295 (2002) 
+1698–1702. 
+[23] P.K. Behera, P. Mondal, Singha N. Singha, Self-healable and ultrahydrophobic 
+polyurethane-POSS hybrids by Diels–Alder “Click” reaction: a new class of coating 
+material[J], Macromolecules 51 (2018) 4770–4781. 
+[24] L.B. Feng, Z.Y. Yu, Y.H. Bian, Y.P. Wang, Effect of failure modes on healing 
+behavior and multiple healing capability of self-healing polyurethanes[J], Constr. 
+Build. Mater. 186 (2018) 1212–1219. 
+[25] Z.Z. Wang, H.T. Yang, B.D. Fairbanks, H.B. Liang, Fast self-healing engineered by 
+UV-curable polyurethane contained diels-alder structure[J], Prog. Org. Coat. 131 
+(2019) 131–136. 
+[26] Z.Z. Wang, H.B. Liang, H.T. Yang, L. Xiong, UV-curable self-healing polyurethane 
+coating based on thiol-ene and diels-alder double click reactions[J], Prog. Org. 
+Coat. 137 (2019), 105282. 
+[27] W.M. Xu, M.Z. Rong, M.Q. Zhang, Sunlight driven self-healing, reshaping and 
+recycling of a robust, transparent and yellowing-resistant polymer[J], J. Mater. 
+Chem. A 4 (2016) 10683–10690. 
+[28] N.V. Herck, F.E. DuPrez, Fast healing of polyurethane thermosets using reversible 
+triazolinedione chemistry and shape-memory[J], Macromolecules 51 (2018) 
+3405–3414. 
+[29] S.J. Hong, W.R. Yu, J.H. Youk, Two-way shape memory behavior of shape memory 
+polyurethanes with a bias load[J], Smart Mater. Struct. 19 (2010), 035022. 
+[30] M. Behl, K. Kratz, J. Zotzmann, U. Nichel, A. Lendlein, Reversible bidirectional 
+shape-memory polymers[J], Adv. Mater. 25 (2013) 4466–4469. 
+[31] Y. Wu, J.L. Hu, J.P. Han, Y. Zhu, Two-way shape memory polymer with 
+“switch–spring” composition by interpenetrating polymer network[J], J. Mater. 
+Chem. A 2 (2014) 18816–18822. 
+[32] J.K. Park, J.D. Eisenhaure, S. Kin, Reversible underwater dry adhesion of a shape 
+memory polymer[J], Adv. Mater. Interfaces 6 (2019) 1801542. 
+[33] B. Zhang, W. Zhang, Z.Q. Zhang, Y.F. Zhang, Self-healing four-dimensional printing 
+with an ultraviolet curable double-network shape memory polymer system[J], ACS 
+Appl. Mater. Interfaces 11 (2019) 10328–10336. 
+[34] T.Q. Li, Y. Li, X.H. Wang, X. Li, Thermally and near-infrared light-induced shape 
+memory polymers capable of healing mechanical damage and fatigued shape 
+memory function[J], ACS Appl. Mater. Interfaces 11 (2019) 9470–9477. 
+[35] L.F. Fan, M.Z. Rong, M.Q. Zhang, X.D. Chen, A facile approach toward scalable 
+fabrication of reversible shape-memory polymers with bonded elastomer 
+microphases as internal stress provider[J], Macromol. Rapid Commun. 38 (2017) 
+1700124. 
+[36] L.F. Fan, M.Z. Rong, M.Q. Zhang, X.D. Chen, A very simple strategy for preparing 
+external stress-free two-way shape memory polymers bymaking use of hydrogen 
+bonds[J], Macromol. Rapid Commun. 39 (2018), 1700714. 
+[37] L.F. Fan, M.Z. Rong, M.Q. Zhang, X.D. Chen, Dynamic reversible bonds enable 
+external stress-free two-way shape memory effect of a polymer network and the 
+interrelated intrinsic self-healability of wider crack and recyclability[J], J. Mater. 
+Chem. A 6 (2018) 16053–16063. 
+[38] X.X. Ke, H.B. Liang, L. Xiong, S.M. Huang, M. Zhu, X.X. Ke, H.B. Liang, L. Xiong, et 
+al., Synthesis, curing process and thermal reversible mechanism of UV curable 
+polyurethane based on diels-alder structure[J], Prog. Org. Coat. 100 (2016) 63–69. 
+[39] L.F. Fan, M.Z. Rong, M.Q. Zhang, X.D. Chen, Repeated intrinsic self-healing of 
+wider cracks in polymer via dynamic reversible covalent bonding molecularly 
+combined with two-way shape memory effect[J], ACS Appl. Mater. & Interfaces 10 
+(2018) 44. 
+Z. Wang et al.                                                                                                                                                                                                                                   

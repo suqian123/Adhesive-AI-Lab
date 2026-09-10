@@ -23,6 +23,7 @@ from adhesive_ai.campaign_runner import (
     load_engine_profiles,
     mark_external_campaign_task_imported,
     match_external_result_archive,
+    prepare_stalled_vasp_scf_recovery,
     prepare_standalone_external_task,
     register_external_campaign_package,
     resume_approved_vasp_tasks,
@@ -586,6 +587,31 @@ def test_vasp_convergence_progress_reads_nested_running_stage(tmp_path):
     assert progress["total"] == 1
 
 
+def test_vasp_convergence_progress_reads_damped_iteration(tmp_path):
+    validation_root = tmp_path / "validation"
+    job_path = validation_root / "kpoints" / "3x3x1"
+    job_path.mkdir(parents=True)
+    (validation_root / "validation_plan.json").write_text(
+        json.dumps({"facet": "(111)", "job_count": 1, "jobs": [{"path": str(job_path)}]}),
+        encoding="utf-8",
+    )
+    (job_path / "run_status.json").write_text(
+        json.dumps({"status": "running", "complete": False}), encoding="utf-8",
+    )
+    (job_path / "vasp.stdout.log").write_text("DMP: 218  1.0\n", encoding="utf-8")
+    (validation_root / "runner.pid").write_text("321\n", encoding="utf-8")
+    (validation_root / "runner.pgid").write_text("321\n", encoding="utf-8")
+    (validation_root / "runner_control.json").write_text(
+        json.dumps({"state": "running", "pid": 321, "pgid": 321}), encoding="utf-8",
+    )
+    (job_path / "scf_recovery.json").write_text(json.dumps({"attempt": 1}), encoding="utf-8")
+
+    progress = vasp_convergence_progress(validation_root, approval=tmp_path / "missing-approved.json")
+
+    assert progress["electronic_step"] == 218
+    assert progress["recovery_attempt"] == 1
+
+
 def test_vasp_convergence_progress_marks_stale_or_paused_stage_inactive(tmp_path):
     validation_root = tmp_path / "validation"
     job_path = validation_root / "encut" / "450"
@@ -633,6 +659,55 @@ def test_vasp_convergence_progress_marks_stale_or_paused_stage_inactive(tmp_path
     assert cancelled["active"] is False
     assert cancelled["paused"] is False
     assert cancelled["cancelled"] is True
+
+
+def test_prepare_stalled_vasp_scf_recovery_preserves_checkpoint_and_backups(tmp_path, monkeypatch):
+    monkeypatch.setattr("adhesive_ai.campaign_runner._ensure_no_vasp_process_is_running", lambda: None)
+    validation_root = tmp_path / "validation"
+    job_path = validation_root / "kpoints" / "3x3x1"
+    job_path.mkdir(parents=True)
+    (validation_root / "validation_plan.json").write_text(
+        json.dumps({"facet": "(111)", "job_count": 1, "jobs": [{"path": str(job_path)}]}),
+        encoding="utf-8",
+    )
+    (job_path / "run_status.json").write_text(
+        json.dumps({"status": "running", "complete": False}), encoding="utf-8",
+    )
+    (job_path / "vasp.stdout.log").write_text("DAV: 158 -1.0\n", encoding="utf-8")
+    old_timestamp = time.time() - VASP_LOG_STALE_SECONDS - 1
+    os.utime(job_path / "vasp.stdout.log", (old_timestamp, old_timestamp))
+    (job_path / "CHGCAR").write_bytes(b"checkpoint")
+    (job_path / "OUTCAR").write_text(
+        "Iteration 1(12)\naborting loop because EDIFF is reached\n"
+        "free energy TOTEN = -123.0\nGeneral timing and accounting\n", encoding="utf-8",
+    )
+    (job_path / "INCAR").write_text(
+        "ALGO = Normal\nNELM = 160\nICHARG = 1\nLREAL = Auto\nGGA = PE\n",
+        encoding="utf-8",
+    )
+    (validation_root / "runner.pid").write_text("123\n", encoding="utf-8")
+    (validation_root / "runner.pgid").write_text("123\n", encoding="utf-8")
+    (validation_root / "runner_control.json").write_text(
+        json.dumps({"state": "running", "pid": 123, "pgid": 123}), encoding="utf-8",
+    )
+
+    result = prepare_stalled_vasp_scf_recovery(
+        validation_root, approval=tmp_path / "missing-approved.json",
+    )
+
+    assert result["prepared"] is True
+    assert result["job"] == "kpoints/3x3x1"
+    assert (job_path / "CHGCAR").read_bytes() == b"checkpoint"
+    assert (job_path / "scf_recovery.json").is_file()
+    assert (result["backup_directory"] / "INCAR").is_file()
+    assert (result["backup_directory"] / "vasp.stdout.log").is_file()
+    incar = (job_path / "INCAR").read_text(encoding="utf-8")
+    assert "ALGO = Damped" in incar
+    assert "NELM = 240" in incar
+    assert "LREAL = .FALSE." in incar
+    assert "GGA = PE" in incar
+    assert not (validation_root / "runner.pid").exists()
+    assert json.loads((validation_root / "runner_control.json").read_text(encoding="utf-8"))["state"] == "recovery-prepared"
 
 
 def test_vasp_convergence_progress_marks_untracked_live_log_uncontrolled(tmp_path):
@@ -709,9 +784,12 @@ def test_page_selected_profiles_are_persisted_over_environment_defaults(tmp_path
     loaded = load_engine_profiles(path, environ={"ADHESIVE_DFT_COMMAND": "vasp_std"})
 
     assert saved_path == path.resolve()
-    assert loaded["dft"]["engine"] == "CP2K"
-    assert loaded["dft"]["command"] == "cp2k.psmp -i cp2k.inp"
-    assert loaded["interface_md"]["engine"] == "GROMACS"
+    assert loaded["dft"]["engine"] == "VASP"
+    assert loaded["dft"]["command"] == ""
+    assert loaded["dft"]["result_file"] == "OUTCAR"
+    assert loaded["interface_md"]["engine"] == "LAMMPS"
+    assert loaded["interface_md"]["command"] == ""
+    assert loaded["interface_md"]["result_file"] == "log.lammps"
 
 
 def test_profile_check_reports_a_real_executable():

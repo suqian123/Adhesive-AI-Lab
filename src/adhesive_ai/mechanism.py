@@ -89,6 +89,14 @@ def _latest_values(experiments: pd.DataFrame, candidate_id: str) -> tuple[dict[s
         if name not in rows:
             continue
         available = rows.loc[pd.to_numeric(rows[name], errors="coerce").notna()]
+        if name == "wide_temp_adhesion_mpa" and not available.empty and "adhesion_condition_record" in available:
+            conditioned = available["adhesion_condition_record"].fillna(False).astype(bool)
+            reference = available.get(
+                "screening_reference_condition", pd.Series(False, index=available.index),
+            ).fillna(False).astype(bool)
+            # A non-reference temperature/substrate result belongs to the
+            # condition matrix and must not replace the candidate baseline.
+            available = available.loc[~conditioned | reference]
         if not available.empty:
             record = available.iloc[-1]
             latest[name] = {
@@ -118,7 +126,7 @@ def fuse_candidate_mechanism(
     oxygen_vacancy_fraction: float = 0.08,
     hydroxyl_fraction: float = 0.35,
     particle_size_nm: float = 35.0,
-    temperatures_c: Sequence[float] = (-180.0, -120.0, -60.0, 25.0, 80.0, 150.0),
+    temperatures_c: Sequence[float] = (-180.0, -120.0, -60.0, 25.0, 80.0, 120.0, 150.0),
 ) -> dict[str, Any]:
     """Fuse one candidate using experiment > external calculation > proxy priority."""
     row = _record(candidate)

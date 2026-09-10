@@ -53,3 +53,24 @@ def test_candidate_mechanism_fuses_experiment_external_and_hybrid_profiles():
     assert result["provenance"]["performance.uv_retention_pct"] == "model:external-v1"
     assert result["trajectory"]["available"] is True
     assert {"section", "metric", "value", "source"}.issubset(provenance.columns)
+
+
+def test_conditioned_non_reference_adhesion_remains_visible_but_does_not_replace_baseline():
+    candidate = build_candidate_library(max_records=1, seed=6).iloc[0]
+    experiments = pd.DataFrame([{
+        "candidate_id": candidate.candidate_id,
+        "test_temperature_c": 150.0,
+        "substrate_material": "铝合金",
+        "substrate_grade": "6061-T6",
+        "surface_condition": "阳极氧化",
+        "adhesion_test_method": "搭接剪切",
+        "adhesion_condition_record": True,
+        "screening_reference_condition": False,
+        "wide_temp_adhesion_mpa": 1.0,
+    }])
+
+    result = fuse_candidate_mechanism(candidate, experiments=experiments)
+
+    assert result["performance"]["wide_temp_adhesion_mpa"] == candidate.wide_temp_adhesion_mpa
+    assert result["provenance"]["performance.wide_temp_adhesion_mpa"] == "physics-informed-proxy"
+    assert result["experiment_records"][0]["surface_condition"] == "阳极氧化"

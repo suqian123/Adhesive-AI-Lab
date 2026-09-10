@@ -28,6 +28,12 @@ FACET_INDICES = {"(111)": (1, 1, 1), "(110)": (1, 1, 0), "(100)": (1, 0, 0)}
 BASE_REPEATS = {"(111)": (2, 2, 1), "(110)": (3, 2, 1), "(100)": (2, 2, 1)}
 PDA_REPEATS = {"(111)": (3, 3, 1), "(110)": (3, 3, 1), "(100)": (4, 3, 1)}
 ELEMENT_ORDER = {name: index for index, name in enumerate(("Ce", "O", "C", "N", "H", "B"))}
+CLEAN_111_SCF_SETTINGS = {
+    "ALGO": "Normal", "NELM": "120", "ISTART": "0", "ICHARG": "2",
+    "NELMDL": "-5", "AMIX": "0.05", "BMIX": "0.0001",
+    "AMIX_MAG": "0.2", "BMIX_MAG": "0.0001", "AMIN": "0.01",
+    "LREAL": ".FALSE.", "LWAVE": ".TRUE.", "DIPOL": "0.5 0.5 0.5",
+}
 
 
 @dataclass(frozen=True)
@@ -143,6 +149,13 @@ def build_ceo2_model(
     if objective == "pda-resin-and-surface-binding" and repeat_override is None:
         repeat = PDA_REPEATS[facet]
     crystal = bulk("CeO2", "fluorite", a=settings.lattice_constant_a, cubic=True)
+    if facet == "(111)":
+        # Move the cleavage plane into the gap between neutral O-Ce-O
+        # trilayers. The unshifted conventional cell exposes Ce at the bottom
+        # and O at the top, creating an artificial polar slab. Avoid placing
+        # an atomic plane exactly on the wrapping boundary.
+        crystal.positions += settings.lattice_constant_a / 10.0
+        crystal.wrap()
     slab = surface(crystal, FACET_INDICES[facet], settings.slab_layers, vacuum=settings.vacuum_a, periodic=True)
     slab = slab.repeat(repeat)
     slab.set_tags(np.ones(len(slab), dtype=int))
@@ -202,6 +215,7 @@ def build_ceo2_model(
         "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
         "scientific_status": "pending-convergence-validation",
         "facet": facet,
+        "surface_termination": "O-Ce-O-trilayers-v2" if facet == "(111)" else "legacy-v1",
         "miller_indices": FACET_INDICES[facet],
         "repeat": repeat,
         "slab_layers": settings.slab_layers,
@@ -251,6 +265,7 @@ def _incar(
     settings: VaspBaseline,
     neb: bool = False,
     static: bool = False,
+    clean_111: bool = False,
 ) -> str:
     ldau_l = [3 if symbol == "Ce" else -1 for symbol in species]
     ldau_u = [settings.ce_u_eff_ev if symbol == "Ce" else 0.0 for symbol in species]
@@ -279,6 +294,9 @@ def _incar(
     ]
     if neb:
         values.extend((("IMAGES", settings.neb_images), ("SPRING", -5), ("LCLIMB", ".TRUE."), ("IOPT", 3)))
+    if clean_111:
+        values = [(key, value) for key, value in values if key not in CLEAN_111_SCF_SETTINGS]
+        values.extend(CLEAN_111_SCF_SETTINGS.items())
     return "\n".join(f"{key} = {value}" for key, value in values) + "\n"
 
 
@@ -299,7 +317,11 @@ def write_vasp_model(
     species, counts = _species_and_counts(ordered)
     selected_settings = VaspBaseline(**{**settings.__dict__, **({"cutoff_ev": cutoff_ev} if cutoff_ev else {})})
     write(directory / "POSCAR", ordered, format="vasp", direct=True, vasp5=True, ignore_constraints=False)
-    (directory / "INCAR").write_text(_incar(ordered, species, settings=selected_settings, static=static), encoding="utf-8")
+    (directory / "INCAR").write_text(
+        _incar(ordered, species, settings=selected_settings, static=static,
+               clean_111=static and metadata.get("facet") == "(111)" and bool(metadata.get("validation_axis"))),
+        encoding="utf-8",
+    )
     mesh = kpoints or _kpoint_mesh(ordered)
     (directory / "KPOINTS").write_text(
         f"Gamma mesh\n0\nGamma\n{mesh[0]} {mesh[1]} {mesh[2]}\n0 0 0\n", encoding="utf-8",
@@ -470,6 +492,12 @@ def write_convergence_suite(
     (root / "validation_plan.json").write_text(
         json.dumps(plan, indent=2, ensure_ascii=False) + "\n", encoding="utf-8",
     )
+    if facet == "(111)":
+        (root / "clean_baseline.json").write_text(json.dumps({
+            "surface_termination": "O-Ce-O-trilayers-v2",
+            "settings": CLEAN_111_SCF_SETTINGS,
+            "reuse_policy": "Electronically converged and matching geometry/pseudopotentials only",
+        }, indent=2) + "\n", encoding="utf-8")
     return plan
 
 
@@ -501,6 +529,9 @@ def validate_vasp_input_set(
         "vdw_kernel_checksum": sha256_file(root / "vdw_kernel.bindat") == resource_config["vdw_kernel_sha256"],
         "required_incar_tags": all(tag in incar for tag in required_tags),
     }
+    manifest = json.loads((root / "input_manifest.json").read_text(encoding="utf-8"))
+    if manifest.get("facet") == "(111)":
+        checks["corrected_111_termination"] = manifest.get("surface_termination") == "O-Ce-O-trilayers-v2"
     neb = root / "neb"
     if neb.is_dir():
         image_dirs = sorted(path for path in neb.iterdir() if path.is_dir() and path.name.isdigit())

@@ -23,7 +23,7 @@ from adhesive_ai.campaign_runner import (
 )
 from adhesive_ai.mechanism import fuse_candidate_mechanism
 from adhesive_ai.screening import OUTPUT_COLUMNS, load_model, predict_screening, recommend_next_experiments, save_model, screen_candidates
-from adhesive_ai.database import DatabaseError, load_candidates, load_experiments, save_candidates, save_experiment, save_experiments, save_model_version
+from adhesive_ai.database import DatabaseError, default_test_batch, load_candidates, load_experiments, save_candidates, save_experiment, save_experiments, save_model_version
 from adhesive_ai.jobs import JobRecord, cancel_job, list_jobs, read_job_output, register_imported_job, split_job_command, submit_job
 from adhesive_ai.workflow import integrate_completed_job, load_connected_state
 
@@ -70,7 +70,8 @@ CANDIDATE_COLUMN_LABELS = {
     "filler_pct": "PDA@CeO₂ 含量 (%)",
     "crosslink_density": "交联密度",
     "simulation_source": "计算数据来源",
-    "predicted_wide_temp_adhesion_mpa": "预测宽温域黏附强度 (MPa)",
+    "predicted_wide_temp_adhesion_mpa": "旧版兼容：预测 25 °C 基准黏附强度 (MPa)",
+    "predicted_adhesion_reference_strength_mpa": "预测 25 °C 基准黏附强度 (MPa)",
     "predicted_healing_efficiency_pct": "预测自修复效率 (%)",
     "predicted_atomic_oxygen_retention_pct": "预测抗原子氧保持率 (%)",
     "predicted_uv_retention_pct": "预测紫外保持率 (%)",
@@ -96,7 +97,11 @@ CANDIDATE_COLUMN_LABELS = {
     "free_volume_fraction": "自由体积分数",
     "elastic_modulus_gpa": "弹性模量 (GPa)",
     "cte_ppm_k": "热膨胀系数 (ppm/K)",
-    "wide_temp_adhesion_mpa": "宽温域黏附强度 (MPa)",
+    "wide_temp_adhesion_mpa": "旧版兼容：25 °C 基准黏附强度 (MPa)",
+    "adhesion_reference_strength_mpa": "25 °C 基准黏附强度 (MPa)",
+    "adhesion_reference_conditions": "基准黏附条件",
+    "adhesion_prediction_scope": "预测适用范围",
+    "adhesion_reference_summary": "25 °C 基准黏附强度 (MPa)｜适用范围",
     "healing_efficiency_pct": "自修复效率 (%)",
     "atomic_oxygen_retention_pct": "抗原子氧保持率 (%)",
     "uv_retention_pct": "紫外保持率 (%)",
@@ -113,6 +118,9 @@ CANDIDATE_VALUE_LABELS = {
         "rigid_imide": "刚性酰亚胺型", "flexible_imide": "柔性酰亚胺型", "fluorinated": "含氟改性型",
         "methyl_silicone": "甲基硅橡胶型", "phenyl_silicone": "苯基硅橡胶型", "hybrid_siloxane": "杂化硅氧烷型",
         "polyether_pu": "聚醚型", "polyester_pu": "聚酯型", "hard_segment": "高硬段型",
+    },
+    "adhesion_prediction_scope": {
+        "25C 6061-T6 solvent-degreased lap-shear physics-informed proxy": "铝合金 6061-T6 · 溶剂脱脂 · 搭接剪切",
     },
     "dynamic_unit": {"None": "无动态修复单元", "Disulfide": "二硫键", "DielsAlder": "Diels-Alder 可逆键", "Boronic": "硼酸酯动态键", "Ionic": "离子/氢键簇"},
     "predicted_screening_class": {"A": "甲级", "B": "乙级", "C": "丙级", "D": "丁级"},
@@ -168,40 +176,32 @@ JOB_COMMAND_EXAMPLES = {
     "Quantum ESPRESSO": "pw.x -in scf.in",
     "CP2K": "cp2k.psmp -i cp2k.inp -o cp2k.out",
     "LAMMPS": "lmp -in in.production",
-    "GROMACS": "gmx mdrun -deffnm production",
 }
-SINGLE_JOB_ENGINE_ORDER = ("VASP", "Quantum ESPRESSO", "CP2K", "LAMMPS", "GROMACS")
+SINGLE_JOB_ENGINE_ORDER = ("VASP", "LAMMPS")
 JOB_RESULT_FILE_EXAMPLES = {
     "VASP": "OUTCAR",
     "Quantum ESPRESSO": "scf.out",
     "CP2K": "cp2k.out",
     "LAMMPS": "log.lammps",
-    "GROMACS": "potential.xvg",
 }
 CAMPAIGN_PROFILE_PRESETS = {
     "dft": {
         "VASP（直接调用）": {"engine": "VASP", "command": "vasp_std", "result_file": "OUTCAR"},
-        "Quantum ESPRESSO（直接调用）": {
-            "engine": "Quantum ESPRESSO", "command": "pw.x -in scf.in", "result_file": "scf.out",
-        },
-        "CP2K（直接调用）": {"engine": "CP2K", "command": "cp2k.psmp -i cp2k.inp -o cp2k.out", "result_file": "cp2k.out"},
     },
     "bulk_md": {
         "LAMMPS（直接调用）": {"engine": "LAMMPS", "command": "lmp -in in.production", "result_file": "log.lammps"},
-        "GROMACS（直接调用）": {"engine": "GROMACS", "command": "gmx mdrun -deffnm production", "result_file": "potential.xvg"},
     },
     "interface_md": {
         "LAMMPS（直接调用）": {"engine": "LAMMPS", "command": "lmp -in in.production", "result_file": "log.lammps"},
-        "GROMACS（直接调用）": {"engine": "GROMACS", "command": "gmx mdrun -deffnm production", "result_file": "potential.xvg"},
     },
     "coarse_grained": {
         "LAMMPS（直接调用）": {"engine": "LAMMPS", "command": "lmp -in in.cg", "result_file": "log.lammps"},
     },
 }
 CAMPAIGN_PROFILE_ENGINES = {
-    "dft": ["VASP", "Quantum ESPRESSO", "CP2K"],
-    "bulk_md": ["LAMMPS", "GROMACS"],
-    "interface_md": ["LAMMPS", "GROMACS"],
+    "dft": ["VASP"],
+    "bulk_md": ["LAMMPS"],
+    "interface_md": ["LAMMPS"],
     "coarse_grained": ["LAMMPS"],
 }
 
@@ -572,9 +572,21 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
                 "暂停和终止已禁用。下次创建需要 VASP 的多尺度运行时会再次确认 WSL 中没有运行中的 VASP 进程。"
             )
         elif live_vasp_text and vasp_progress.get("stalled"):
+            recovery_attempt = int(vasp_progress.get("recovery_attempt") or 0)
+            recovery_note = (
+                "该任务存在一次受控恢复记录；需结合 OUTCAR 核实是否收敛。"
+                if recovery_attempt
+                else "请先检查 VASP 输出并完成受控恢复。"
+            )
             st.error(
-                f"{live_vasp_text}。日志超过 15 分钟没有更新，已判定为中断；"
-                "下次创建需要 VASP 的多尺度运行时会自动续跑，并保留已完成检查点。"
+                f"{live_vasp_text}。日志超过 15 分钟没有更新，需核实进程状态；"
+                "输出文件会保留，只有通过电子收敛检查的结果才计为完成；系统不会自动重启；"
+                + recovery_note
+            )
+        elif vasp_progress.get("failed"):
+            st.error(
+                f"共享 VASP 验证有 {vasp_progress['failed']} 项未通过电子收敛检查。"
+                "已停止自动推进；旧输出不能作为收敛检查点或生产批准依据。"
             )
         elif live_vasp_text:
             st.warning(f"{live_vasp_text}，但当前未检测到运行中的收敛进程。请检查 VASP 验证日志。")
@@ -649,7 +661,17 @@ EXPERIMENT_COLUMN_LABELS = {
     "candidate_id": "候选编号",
     "formulation_id": "配方指纹",
     "candidate_library_version": "候选库版本",
-    "wide_temp_adhesion_mpa": "宽温域黏附强度 (MPa)",
+    "wide_temp_adhesion_mpa": "该测试条件下黏附强度 (MPa)",
+    "substrate_material": "基材类别",
+    "substrate_grade": "基材牌号",
+    "surface_condition": "表面状态",
+    "surface_roughness_ra_um": "表面粗糙度 Ra (μm)",
+    "surface_cleaning": "清洗/预处理",
+    "adhesion_test_method": "黏附测试方法",
+    "bondline_thickness_mm": "胶层厚度 (mm)",
+    "test_environment": "测试环境",
+    "adhesion_condition_record": "条件化黏附记录",
+    "screening_reference_condition": "候选库基准校准点",
     "healing_efficiency_pct": "自修复效率 (%)",
     "atomic_oxygen_retention_pct": "抗原子氧保持率 (%)",
     "uv_retention_pct": "紫外保持率 (%)",
@@ -678,6 +700,16 @@ EXPERIMENT_OPTIONAL_COLUMNS = (
     "measured_tg_c", "measured_free_volume", "measured_chain_mobility",
     "measured_cohesive_energy_density", "measured_modulus_gpa", "measured_cte_ppm_k",
 )
+ADHESION_CONDITION_COLUMNS = (
+    "substrate_material", "substrate_grade", "surface_condition", "surface_roughness_ra_um",
+    "surface_cleaning", "adhesion_test_method", "bondline_thickness_mm", "test_environment",
+    "adhesion_condition_record", "screening_reference_condition",
+)
+WIDE_TEMPERATURE_POINTS_C = (-180.0, -120.0, -60.0, 25.0, 80.0, 120.0, 150.0)
+STANDARD_SUBSTRATES = ("铝合金", "不锈钢", "钛合金", "CFRP")
+STANDARD_SURFACE_CONDITIONS = ("溶剂脱脂", "喷砂", "阳极氧化", "微弧氧化")
+STANDARD_SURFACE_CLEANING = ("溶剂脱脂后测试", "喷砂后清洁", "阳极氧化后清洗", "微弧氧化后清洗", "等离子处理", "其他")
+STANDARD_TEST_ENVIRONMENTS = ("干燥空气", "标准实验室环境", "高湿环境", "低压/真空", "盐雾/腐蚀环境", "其他")
 
 EXPERIMENT_METADATA_LABELS = {
     "test_batch": "实验批次", "test_temperature_c": "测试温度 (°C)",
@@ -691,8 +723,18 @@ EXPERIMENT_COLUMN_ALIASES.update({
 EXPERIMENT_REQUIRED_COLUMNS = ("candidate_id", "formulation_id", "candidate_library_version") + OUTPUT_COLUMNS
 EXPERIMENT_TEMPLATE_COLUMNS = (
     "candidate_id", "formulation_id", "candidate_library_version", *OUTPUT_COLUMNS,
-    "test_batch", "test_temperature_c",
+    "test_temperature_c",
+    *ADHESION_CONDITION_COLUMNS,
     *EXPERIMENT_OPTIONAL_COLUMNS,
+)
+ADHESION_MATRIX_REQUIRED_COLUMNS = (
+    "candidate_id", "formulation_id", "candidate_library_version", "test_temperature_c",
+    "substrate_material", "substrate_grade", "surface_condition",
+    "adhesion_test_method", "wide_temp_adhesion_mpa",
+)
+ADHESION_MATRIX_OPTIONAL_COLUMNS = (
+    "test_batch", "surface_roughness_ra_um", "surface_cleaning",
+    "bondline_thickness_mm", "test_environment", "screening_reference_condition",
 )
 CAMPAIGN_COLUMN_LABELS = {
     "candidate_id": "候选编号", "run_id": "运行编号", "task_id": "任务编号", "scale": "计算尺度", "objective": "计算目标",
@@ -749,6 +791,47 @@ def _source_label(value: object) -> object:
     return text
 
 
+def _adhesion_condition_summary(record: dict[str, object] | pd.Series) -> str:
+    """Format stored condition metadata into a readable, comparable label."""
+    values = record.to_dict() if isinstance(record, pd.Series) else dict(record)
+    labels = {
+        "aluminum alloy": "铝合金",
+        "stainless steel": "不锈钢",
+        "titanium alloy": "钛合金",
+        "solvent-degreased": "溶剂脱脂",
+        "lap shear": "搭接剪切",
+    }
+    def display(value: object) -> str:
+        text = str(value).strip()
+        return labels.get(text, text)
+
+    parts: list[str] = []
+    temperature = values.get("test_temperature_c")
+    if temperature is not None and pd.notna(temperature):
+        try:
+            parts.append(f"{float(temperature):g} °C")
+        except (TypeError, ValueError):
+            pass
+    substrate = " ".join(
+        display(value)
+        for value in (values.get("substrate_material"), values.get("substrate_grade"))
+        if value is not None and pd.notna(value) and str(value).strip()
+    )
+    if substrate:
+        parts.append(substrate)
+    for name in ("surface_condition", "surface_cleaning", "adhesion_test_method", "test_environment"):
+        value = values.get(name)
+        if value is not None and pd.notna(value) and str(value).strip():
+            parts.append(display(value))
+    roughness = values.get("surface_roughness_ra_um")
+    if roughness is not None and pd.notna(roughness) and float(roughness) > 0:
+        parts.append(f"Ra {float(roughness):g} μm")
+    bondline = values.get("bondline_thickness_mm")
+    if bondline is not None and pd.notna(bondline) and float(bondline) > 0:
+        parts.append(f"胶层 {float(bondline):g} mm")
+    return "｜".join(parts) if parts else "条件未记录"
+
+
 def _localized_candidate_table(frame: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     display = frame.reindex(columns=columns).copy()
     for column, labels in CANDIDATE_VALUE_LABELS.items():
@@ -772,6 +855,13 @@ def _experiment_csv_template() -> bytes:
         **EXPERIMENT_METADATA_LABELS,
     }
     columns = [labels.get(name, name) for name in EXPERIMENT_TEMPLATE_COLUMNS]
+    return pd.DataFrame(columns=columns).to_csv(index=False).encode("utf-8-sig")
+
+
+def _adhesion_matrix_csv_template() -> bytes:
+    """Return the minimal, condition-resolved adhesion-matrix CSV template."""
+    labels = {**EXPERIMENT_COLUMN_LABELS, **EXPERIMENT_METADATA_LABELS}
+    columns = [labels.get(name, name) for name in (*ADHESION_MATRIX_REQUIRED_COLUMNS, *ADHESION_MATRIX_OPTIONAL_COLUMNS)]
     return pd.DataFrame(columns=columns).to_csv(index=False).encode("utf-8-sig")
 
 
@@ -811,9 +901,10 @@ def _read_experiment_csv(uploaded_file: object) -> tuple[pd.DataFrame | None, li
             errors.append("配方指纹不能有空值。")
         frame["formulation_id"] = formulation_ids
     warnings: list[str] = []
-    if "candidate_id" in frame.columns and frame["candidate_id"].duplicated().any():
-        warnings.append("存在重复候选编号，训练时将保留最后一条记录。")
-    for column in OUTPUT_COLUMNS + EXPERIMENT_OPTIONAL_COLUMNS:
+    duplicate_keys = [name for name in ("candidate_id", "test_temperature_c", "substrate_material", "substrate_grade", "surface_condition") if name in frame]
+    if duplicate_keys and frame.duplicated(duplicate_keys).any():
+        warnings.append("存在相同候选、温度、基材和表面状态的重复记录；条件矩阵中会保留最后一条。")
+    for column in OUTPUT_COLUMNS + EXPERIMENT_OPTIONAL_COLUMNS + ("surface_roughness_ra_um", "bondline_thickness_mm"):
         if column not in frame.columns:
             continue
         values = pd.to_numeric(frame[column], errors="coerce")
@@ -832,7 +923,81 @@ def _read_experiment_csv(uploaded_file: object) -> tuple[pd.DataFrame | None, li
         invalid = frame["wide_temp_adhesion_mpa"].notna() & (frame["wide_temp_adhesion_mpa"] < 0)
         if invalid.any():
             errors.append("宽温域黏附强度不能为负值。")
+    if "test_temperature_c" in frame.columns:
+        temperatures = pd.to_numeric(frame["test_temperature_c"], errors="coerce")
+        if temperatures.notna().any() and not temperatures.dropna().between(-180, 150).all():
+            errors.append("测试温度必须在 -180 至 150 °C 之间。")
+        frame["test_temperature_c"] = temperatures
+    for column in ("adhesion_condition_record", "screening_reference_condition"):
+        if column in frame.columns:
+            frame[column] = frame[column].astype("string").str.strip().str.lower().isin({"1", "true", "yes", "是"})
+    condition_identity = [name for name in ("test_temperature_c", "substrate_material", "substrate_grade", "surface_condition") if name in frame]
+    if condition_identity:
+        populated = frame[condition_identity].notna().all(axis=1)
+        if "adhesion_condition_record" not in frame:
+            frame["adhesion_condition_record"] = populated
+        else:
+            frame["adhesion_condition_record"] = frame["adhesion_condition_record"] | populated
     return frame, errors, warnings
+
+
+def _read_adhesion_matrix_csv(uploaded_file: object) -> tuple[pd.DataFrame | None, list[str]]:
+    """Validate condition-resolved adhesion rows without requiring unrelated targets."""
+    if uploaded_file is None:
+        return None, []
+    try:
+        if hasattr(uploaded_file, "seek"):
+            uploaded_file.seek(0)
+        frame = pd.read_csv(uploaded_file)
+    except Exception as exc:
+        return None, [f"CSV 无法读取：{exc}"]
+    frame.columns = [str(column).strip() for column in frame.columns]
+    aliases = {str(key).strip().lower(): value for key, value in EXPERIMENT_COLUMN_ALIASES.items()}
+    frame = frame.rename(columns={
+        column: EXPERIMENT_COLUMN_ALIASES.get(column, aliases.get(column.lower(), column))
+        for column in frame.columns
+    })
+    errors = []
+    missing = [EXPERIMENT_COLUMN_LABELS.get(name, EXPERIMENT_METADATA_LABELS.get(name, name))
+               for name in ADHESION_MATRIX_REQUIRED_COLUMNS if name not in frame]
+    if missing:
+        errors.append("缺少必需列：" + "、".join(missing))
+        return frame, errors
+    for column in ("candidate_id", "formulation_id", "candidate_library_version", "substrate_material",
+                   "substrate_grade", "surface_condition", "adhesion_test_method"):
+        values = frame[column].astype("string").str.strip()
+        if values.isna().any() or values.eq("").any():
+            errors.append(f"{EXPERIMENT_COLUMN_LABELS.get(column, column)} 不能有空值。")
+        frame[column] = values
+    for column, minimum, maximum in (
+        ("test_temperature_c", -180.0, 150.0),
+        ("wide_temp_adhesion_mpa", 0.0, None),
+        ("surface_roughness_ra_um", 0.0, None),
+        ("bondline_thickness_mm", 0.0, None),
+    ):
+        if column not in frame:
+            continue
+        values = pd.to_numeric(frame[column], errors="coerce")
+        if column in ADHESION_MATRIX_REQUIRED_COLUMNS and values.isna().any():
+            errors.append(f"{EXPERIMENT_COLUMN_LABELS.get(column, column)} 必须为数值。")
+        if values.notna().any() and (values.dropna() < minimum).any():
+            errors.append(f"{EXPERIMENT_COLUMN_LABELS.get(column, column)} 超出允许范围。")
+        if maximum is not None and values.notna().any() and (values.dropna() > maximum).any():
+            errors.append(f"{EXPERIMENT_COLUMN_LABELS.get(column, column)} 超出允许范围。")
+        frame[column] = values
+    frame["adhesion_condition_record"] = True
+    reference_default = (
+        frame["test_temperature_c"].eq(25.0)
+        & frame["substrate_material"].eq("铝合金")
+        & frame["substrate_grade"].eq("6061-T6")
+        & frame["surface_condition"].eq("溶剂脱脂")
+    )
+    if "screening_reference_condition" in frame:
+        requested = frame["screening_reference_condition"].astype("string").str.strip().str.lower().isin({"1", "true", "yes", "是"})
+        frame["screening_reference_condition"] = requested & reference_default
+    else:
+        frame["screening_reference_condition"] = reference_default
+    return frame, errors
 
 SCREENING_ARCHIVE_PATH = Path("work/models/latest-screening.json")
 
@@ -960,8 +1125,11 @@ st.html(
             "Distance": "相对时间",
             "Calendar": "日历日期",
             "Search": "搜索",
+            "Choose an option": "请选择一个选项",
             "Type to search": "输入关键词搜索",
             "Type to search...": "输入关键词搜索",
+            "No results": "无匹配结果",
+            "No results found": "未找到匹配结果",
             "Browse files": "上传",
             "Browse file": "上传",
             "Choose a file": "上传",
@@ -1281,8 +1449,20 @@ with st.expander("候选数据库预览", expanded=True):
     ]
     performance_columns = [
         "candidate_id", "glass_transition_c", "free_volume_fraction", "elastic_modulus_gpa", "cte_ppm_k",
-        "wide_temp_adhesion_mpa", "healing_efficiency_pct", "atomic_oxygen_retention_pct",
+        "adhesion_reference_summary", "healing_efficiency_pct", "atomic_oxygen_retention_pct",
         "uv_retention_pct", "am_feasibility", "data_source", "scientific_data_tier",
+    ]
+    candidate_performance_frame = candidate_frame.copy()
+    reference_strength = pd.to_numeric(
+        candidate_performance_frame.get("adhesion_reference_strength_mpa"), errors="coerce",
+    )
+    reference_scope = candidate_performance_frame.get(
+        "adhesion_prediction_scope", pd.Series("", index=candidate_performance_frame.index),
+    ).map(CANDIDATE_VALUE_LABELS["adhesion_prediction_scope"]).fillna("")
+    candidate_performance_frame["adhesion_reference_summary"] = [
+        f"{strength:.2f}｜{scope}" if pd.notna(strength) and scope else
+        (f"{strength:.2f}" if pd.notna(strength) else scope)
+        for strength, scope in zip(reference_strength, reference_scope)
     ]
     composition_tab, process_tab, target_tab = st.tabs(["组成与结构", "工艺条件", "性能与来源"])
     with composition_tab:
@@ -1290,7 +1470,7 @@ with st.expander("候选数据库预览", expanded=True):
     with process_tab:
         st.dataframe(_localized_candidate_table(candidate_frame, process_columns), width="stretch", hide_index=True)
     with target_tab:
-        st.dataframe(_localized_candidate_table(candidate_frame, performance_columns), width="stretch", hide_index=True)
+        st.dataframe(_localized_candidate_table(candidate_performance_frame, performance_columns), width="stretch", hide_index=True)
 
 st.divider()
 st.subheader("2. 多尺度计算方案")
@@ -1539,7 +1719,7 @@ def _render_multiscale_campaign_section() -> None:
                 disabled=not engine_selection_enabled,
             )
             job_engine = selected_job_engine if engine_selection_enabled else "VASP"
-        dft_engines = {"VASP", "Quantum ESPRESSO", "CP2K"}
+        dft_engines = {"VASP"}
         if job_engine in dft_engines:
             calculation_kind = "dft"
             job_temperature_c = 25.0
@@ -1877,9 +2057,9 @@ with st.expander("导入外部计算结果", expanded=False):
                 [configured_engine]
                 if configured_engine
                 else (
-                    ["VASP", "Quantum ESPRESSO", "CP2K"]
+                    ["VASP"]
                     if import_kind == "dft"
-                    else ["LAMMPS", "GROMACS"]
+                    else ["LAMMPS"]
                 )
             )
             import_engine = configured_engine or engine_options[0]
@@ -2005,7 +2185,7 @@ with st.expander("导入外部计算结果", expanded=False):
             uploaded_result = st.file_uploader(
                 "上传单个外部计算结果文件",
                 key=f"external_result_upload_{selected_import_run_id}_{selected_import_task_id}",
-                help="例如 VASP 的 OUTCAR、LAMMPS 的 log.lammps 或 GROMACS 的 .xvg 输出。",
+                help="例如 VASP 的 OUTCAR 或 LAMMPS 的 log.lammps 输出。",
             )
             if uploaded_result is not None and not identity_errors:
                 st.info("上传文件已就绪。确认后将写入上述目录，并按列出的解析指标执行自动回写。")
@@ -2406,21 +2586,49 @@ with interface_tab:
         st.info("已有旧版界面计算时可融合汇总值；新提交的界面任务会额外保存真实能量轨迹。")
 
 with performance_tab:
+    experiment_records = pd.DataFrame(mechanism_result["experiment_records"])
+    reference_record = pd.DataFrame()
+    if not experiment_records.empty and "screening_reference_condition" in experiment_records:
+        reference_record = experiment_records.loc[
+            experiment_records["screening_reference_condition"].fillna(False).astype(bool)
+        ]
+    if not reference_record.empty:
+        adhesion_summary = _adhesion_condition_summary(reference_record.iloc[-1])
+    else:
+        adhesion_summary = _adhesion_condition_summary(
+            mechanism_candidate.get("adhesion_reference_conditions", {})
+        )
     performance_table = pd.DataFrame([
         {
-            "输出指标": EXPERIMENT_COLUMN_LABELS.get(name, name),
+            "输出指标": (
+                "25 °C 基准黏附强度 (MPa)"
+                if name == "wide_temp_adhesion_mpa" else EXPERIMENT_COLUMN_LABELS.get(name, name)
+            ),
             "数值": mechanism_result["performance"].get(name),
+            "测试/适用条件": adhesion_summary if name == "wide_temp_adhesion_mpa" else "—",
             "来源": _source_label(mechanism_result["provenance"].get(f"performance.{name}")),
         }
         for name in OUTPUT_COLUMNS
     ])
     st.dataframe(performance_table, width="stretch", hide_index=True)
-    experiment_records = pd.DataFrame(mechanism_result["experiment_records"])
     if experiment_records.empty:
         st.info("该候选暂无实验记录。")
     else:
         st.markdown("#### 已融合实验记录")
-        experiment_display = experiment_records.rename(columns={**EXPERIMENT_COLUMN_LABELS, **EXPERIMENT_METADATA_LABELS})
+        experiment_display = experiment_records.drop(columns=["test_batch"], errors="ignore").copy()
+        if "wide_temp_adhesion_mpa" in experiment_display:
+            position = experiment_display.columns.get_loc("wide_temp_adhesion_mpa")
+            experiment_display.insert(
+                position,
+                "adhesion_test_conditions",
+                experiment_display.apply(_adhesion_condition_summary, axis=1),
+            )
+        experiment_display = experiment_display.rename(columns={
+            **EXPERIMENT_COLUMN_LABELS,
+            **EXPERIMENT_METADATA_LABELS,
+            "wide_temp_adhesion_mpa": "黏附强度 (MPa)",
+            "adhesion_test_conditions": "具体测试条件",
+        })
         st.dataframe(experiment_display, width="stretch", hide_index=True)
 
 st.divider()
@@ -2513,7 +2721,7 @@ if latest_screening and latest_screening.get("signature") == screening_input_sig
     )
     display_columns = [
         "candidate_id", "formulation_id", "candidate_library_version", "resin", "resin_variant", "dynamic_unit", "filler_pct", "crosslink_density", "simulation_source", "scientific_data_tier",
-        "predicted_wide_temp_adhesion_mpa", "predicted_healing_efficiency_pct",
+        "predicted_adhesion_reference_strength_mpa", "predicted_healing_efficiency_pct",
         "predicted_atomic_oxygen_retention_pct", "predicted_uv_retention_pct",
         "predicted_am_feasibility", "predicted_multi_objective_score", "predicted_screening_class",
     ]
@@ -2593,13 +2801,163 @@ if latest_screening and latest_screening.get("signature") == screening_input_sig
 
 st.divider()
 st.subheader("6. 实验回写与模型更新")
-st.caption("可填写单条记录或批量导入 CSV；保存后，全部历史实验会参与模型更新和下一轮筛选。")
+entry_mode = st.radio(
+    "记录类型",
+    ("黏附数据（推荐）", "完整性能数据"),
+    horizontal=True,
+    label_visibility="collapsed",
+    key="experiment_entry_mode",
+)
+if entry_mode == "黏附数据（推荐）":
+    st.caption("只填写温度、基材、表面状态、测试方法和黏附强度。非基准条件保存至条件数据；仅 25 °C、6061-T6 铝合金、溶剂脱脂记录会校准候选筛选模型。")
+    adhesion_matrix_upload = st.file_uploader(
+        "黏附数据 CSV（可选）",
+        type=["csv"],
+        help="必填：候选编号、配方指纹、候选库版本、温度、基材、牌号、表面状态、测试方法、黏附强度。",
+        key="simple_adhesion_matrix_csv",
+    )
+    st.download_button(
+        "下载黏附数据模板",
+        data=_adhesion_matrix_csv_template(),
+        file_name="adhesion-condition-matrix-template.csv",
+        mime="text/csv",
+        icon=":material/download:",
+        key="simple_adhesion_matrix_template",
+    )
+    simple_matrix, simple_matrix_errors = _read_adhesion_matrix_csv(adhesion_matrix_upload)
+    if simple_matrix is not None:
+        known = simple_matrix["candidate_id"].astype(str).map(candidate_formulations)
+        if known.isna().any():
+            simple_matrix_errors.append("CSV 含不在当前候选库的候选编号。")
+        elif known.astype(str).ne(simple_matrix["formulation_id"].astype(str)).any():
+            simple_matrix_errors.append("CSV 的配方指纹与当前候选库不匹配。")
+        if simple_matrix["candidate_id"].astype(str).map(candidate_library_versions).astype(str).ne(
+            simple_matrix["candidate_library_version"].astype(str)
+        ).any():
+            simple_matrix_errors.append("CSV 的候选库版本与当前候选库不匹配。")
+        for error in simple_matrix_errors:
+            st.error(error)
+        if not simple_matrix_errors:
+            st.dataframe(
+                simple_matrix.reindex(columns=[*ADHESION_MATRIX_REQUIRED_COLUMNS, *ADHESION_MATRIX_OPTIONAL_COLUMNS]).rename(
+                    columns={**EXPERIMENT_COLUMN_LABELS, **EXPERIMENT_METADATA_LABELS}
+                ),
+                width="stretch",
+                hide_index=True,
+            )
+    import_simple_matrix = st.button(
+        "导入黏附数据",
+        disabled=simple_matrix is None or bool(simple_matrix_errors),
+        width="stretch",
+        key="simple_adhesion_matrix_import",
+    )
+    with st.form("simple_adhesion_matrix_form", clear_on_submit=False):
+        simple_candidate_id = st.selectbox("候选编号", candidate_ids, index=None, placeholder="请选择候选编号", key="simple_adhesion_candidate")
+        simple_temperature, simple_material, simple_surface = st.columns(3)
+        with simple_temperature:
+            simple_test_temperature = st.selectbox("测试温度 (°C)", WIDE_TEMPERATURE_POINTS_C, index=WIDE_TEMPERATURE_POINTS_C.index(25.0), key="simple_adhesion_temperature")
+            simple_test_method = st.selectbox("测试方法", ("搭接剪切", "180° 剥离", "拉伸剪切", "其他"), key="simple_adhesion_method")
+        with simple_material:
+            simple_material_name = st.selectbox("基材类别", STANDARD_SUBSTRATES, key="simple_adhesion_material")
+            simple_grade = st.selectbox(
+                "基材牌号",
+                ("6061-T6", "2024-T3", "其他") if simple_material_name == "铝合金" else
+                (("304", "316L", "其他") if simple_material_name == "不锈钢" else
+                 (("Ti-6Al-4V", "其他") if simple_material_name == "钛合金" else ("环氧基 CFRP", "其他"))),
+                key="simple_adhesion_grade",
+            )
+            simple_grade_value = (
+                st.text_input("其他基材牌号", placeholder="例如：7075-T6", key="simple_adhesion_custom_grade")
+                if simple_grade == "其他" else simple_grade
+            )
+        with simple_surface:
+            simple_surface_condition = st.selectbox("表面状态", STANDARD_SURFACE_CONDITIONS, key="simple_adhesion_surface")
+            simple_strength = st.number_input("黏附强度 (MPa)", min_value=0.0, max_value=200.0, value=0.0, step=0.1, key="simple_adhesion_strength")
+        with st.expander("可选试样条件"):
+            simple_cleaning_choice = st.selectbox("清洗/预处理", STANDARD_SURFACE_CLEANING, key="simple_adhesion_cleaning")
+            simple_cleaning = (
+                st.text_input("其他清洗/预处理", placeholder="请输入处理方式", key="simple_adhesion_cleaning_custom")
+                if simple_cleaning_choice == "其他" else simple_cleaning_choice
+            )
+            simple_environment_choice = st.selectbox("测试环境", STANDARD_TEST_ENVIRONMENTS, key="simple_adhesion_environment")
+            simple_environment = (
+                st.text_input("其他测试环境", placeholder="请输入环境条件", key="simple_adhesion_environment_custom")
+                if simple_environment_choice == "其他" else simple_environment_choice
+            )
+            detail_one, detail_two = st.columns(2)
+            with detail_one:
+                simple_roughness = st.number_input("表面粗糙度 Ra (μm)", min_value=0.0, value=0.0, step=0.01, key="simple_adhesion_roughness")
+            with detail_two:
+                simple_bondline = st.number_input("胶层厚度 (mm)", min_value=0.0, value=0.0, step=0.01, key="simple_adhesion_bondline")
+        simple_reference_allowed = (
+            simple_test_temperature == 25.0 and simple_material_name == "铝合金"
+            and simple_grade_value == "6061-T6" and simple_surface_condition == "溶剂脱脂"
+            and simple_cleaning == "溶剂脱脂后测试"
+        )
+        simple_reference = simple_reference_allowed
+        st.caption("符合 25 °C、铝合金 6061-T6、溶剂脱脂条件的记录会自动作为候选库基准校准点。")
+        save_simple_matrix = st.form_submit_button("保存黏附记录", type="primary", width="stretch")
+    manual_simple_matrix = pd.DataFrame([{
+        "candidate_id": simple_candidate_id,
+        "formulation_id": candidate_formulations.get(simple_candidate_id, ""),
+        "candidate_library_version": candidate_library_versions.get(simple_candidate_id, ""),
+        "test_batch": default_test_batch(),
+        "test_temperature_c": simple_test_temperature,
+        "substrate_material": simple_material_name,
+        "substrate_grade": simple_grade_value,
+        "surface_condition": simple_surface_condition,
+        "surface_cleaning": simple_cleaning,
+        "adhesion_test_method": simple_test_method,
+        "test_environment": simple_environment,
+        "surface_roughness_ra_um": simple_roughness if simple_roughness > 0 else None,
+        "bondline_thickness_mm": simple_bondline if simple_bondline > 0 else None,
+        "adhesion_condition_record": True,
+        "screening_reference_condition": simple_reference,
+        "wide_temp_adhesion_mpa": simple_strength,
+    }])
+    if save_simple_matrix or import_simple_matrix:
+        simple_rows = manual_simple_matrix if save_simple_matrix else simple_matrix
+        if save_simple_matrix and simple_candidate_id not in candidate_ids:
+            st.error("请选择候选编号后再保存。")
+        elif save_simple_matrix and simple_grade == "其他" and not simple_grade_value.strip():
+            st.error("请输入其他基材牌号后再保存。")
+        elif save_simple_matrix and (
+            (simple_cleaning_choice == "其他" and not simple_cleaning.strip())
+            or (simple_environment_choice == "其他" and not simple_environment.strip())
+        ):
+            st.error("请输入其他清洗/预处理或测试环境后再保存。")
+        elif simple_rows is not None:
+            try:
+                saved_rows = save_experiments(
+                    simple_rows,
+                    default_source="adhesion-condition-matrix",
+                    candidate_formulations=candidate_formulations,
+                    candidate_library_versions=candidate_library_versions,
+                )
+                experiment_history = load_experiments(candidate_ids, formulation_ids=candidate_formulations)
+            except Exception as exc:
+                st.error(f"黏附记录持久化失败：{exc}")
+            else:
+                reference_count = int(simple_rows["screening_reference_condition"].fillna(False).astype(bool).sum())
+                if reference_count and calculation_training_ready:
+                    shortlist, closed_loop = screen_candidates(candidate_frame, experiments=experiment_history, top_n=12, minimum_class="C", version="external-v1")
+                    signature = _screening_input_signature(candidate_frame, external_payloads, experiment_history)
+                    _archive_screening_result(shortlist, closed_loop, input_signature=signature)
+                    st.session_state["latest_candidate_screening"] = {"signature": signature, "shortlist": shortlist, "model": closed_loop}
+                    suffix = "；基准点已用于模型校准"
+                else:
+                    suffix = "；已保存至黏附数据，未改写候选筛选模型"
+                st.session_state["feedback_notice"] = f"已保存 {saved_rows} 条黏附记录{suffix}。"
+                st.rerun()
+    st.stop()
+
+st.caption("完整性能数据适用于同时具备黏附、自修复、抗原子氧、紫外和增材制造等测试结果的实验批次。")
 experiment_upload_col, experiment_template_col = st.columns([4, 1])
 with experiment_upload_col:
     experiment_upload = st.file_uploader(
         "批量实验数据 CSV",
         type=["csv"],
-        help="必须包含候选编号、配方指纹和五项输出指标；支持中文或英文列名。",
+        help="必须包含候选编号、配方指纹和五项输出指标；建议同时填写温度、基材、表面状态和测试方法。支持中文或英文列名。",
         key="closed_loop_csv",
     )
 with experiment_template_col:
@@ -2637,7 +2995,9 @@ if uploaded_experiments is not None:
     for error in upload_errors:
         st.error(error)
     if not upload_errors:
-        upload_display = uploaded_experiments.head(20).rename(columns={**EXPERIMENT_COLUMN_LABELS, **EXPERIMENT_METADATA_LABELS})
+        upload_display = uploaded_experiments.head(20).drop(columns=["test_batch"], errors="ignore").rename(
+            columns={**EXPERIMENT_COLUMN_LABELS, **EXPERIMENT_METADATA_LABELS}
+        )
         st.dataframe(upload_display, width="stretch", hide_index=True)
 import_csv_feedback = st.button(
     "导入 CSV 并更新模型" if calculation_training_ready else "导入 CSV（计算完成后更新模型）",
@@ -2661,14 +3021,57 @@ with st.form("closed_loop_experiment_form", clear_on_submit=False):
         st.caption(f"配方指纹：{feedback_formulation_id}")
     else:
         st.caption("请选择候选编号后自动填入配方指纹。")
-    batch_col, test_temp_col = st.columns(2)
-    with batch_col:
-        feedback_batch = st.text_input("实验批次", value="manual-01", help="用于区分重复实验和不同批次。", key="feedback_batch")
-    with test_temp_col:
-        feedback_test_temperature = st.number_input("测试温度 (°C)", min_value=-180.0, max_value=150.0, value=25.0, step=1.0, key="feedback_temperature")
+    feedback_batch = default_test_batch()
+    st.markdown("##### 宽温域黏附测试条件")
+    condition_col, substrate_col, surface_col = st.columns(3)
+    with condition_col:
+        feedback_test_temperature = st.selectbox(
+            "测试温度 (°C)", WIDE_TEMPERATURE_POINTS_C, index=WIDE_TEMPERATURE_POINTS_C.index(25.0),
+            key="feedback_temperature",
+        )
+    with substrate_col:
+        feedback_substrate_material = st.selectbox("基材类别", STANDARD_SUBSTRATES, key="feedback_substrate_material")
+        feedback_substrate_grade = st.selectbox(
+            "基材牌号", ("6061-T6", "2024-T3", "其他") if feedback_substrate_material == "铝合金" else
+            (("304", "316L", "其他") if feedback_substrate_material == "不锈钢" else
+             (("Ti-6Al-4V", "其他") if feedback_substrate_material == "钛合金" else ("环氧基 CFRP", "其他"))),
+            key="feedback_substrate_grade",
+        )
+        feedback_substrate_grade_value = (
+            st.text_input("其他基材牌号", placeholder="例如：7075-T6", key="feedback_custom_grade")
+            if feedback_substrate_grade == "其他" else feedback_substrate_grade
+        )
+    with surface_col:
+        feedback_surface_condition = st.selectbox("表面状态", STANDARD_SURFACE_CONDITIONS, key="feedback_surface_condition")
+        feedback_test_method = st.selectbox("黏附测试方法", ("搭接剪切", "180° 剥离", "拉伸剪切", "其他"), key="feedback_test_method")
+    detail_col, environment_col = st.columns(2)
+    with detail_col:
+        feedback_surface_roughness = st.number_input("表面粗糙度 Ra (μm，可选)", min_value=0.0, value=0.0, step=0.01, key="feedback_surface_roughness")
+        feedback_bondline_thickness = st.number_input("胶层厚度 (mm，可选)", min_value=0.0, value=0.0, step=0.01, key="feedback_bondline_thickness")
+    with environment_col:
+        feedback_surface_cleaning_choice = st.selectbox("清洗/预处理", STANDARD_SURFACE_CLEANING, key="feedback_surface_cleaning")
+        feedback_surface_cleaning = (
+            st.text_input("其他清洗/预处理", placeholder="请输入处理方式", key="feedback_surface_cleaning_custom")
+            if feedback_surface_cleaning_choice == "其他" else feedback_surface_cleaning_choice
+        )
+        feedback_test_environment_choice = st.selectbox("测试环境", STANDARD_TEST_ENVIRONMENTS, key="feedback_test_environment")
+        feedback_test_environment = (
+            st.text_input("其他测试环境", placeholder="请输入环境条件", key="feedback_test_environment_custom")
+            if feedback_test_environment_choice == "其他" else feedback_test_environment_choice
+        )
+    reference_allowed = (
+        feedback_test_temperature == 25.0
+        and feedback_substrate_material == "铝合金"
+        and feedback_substrate_grade_value == "6061-T6"
+        and feedback_surface_condition == "溶剂脱脂"
+        and feedback_surface_cleaning == "溶剂脱脂后测试"
+    )
+    feedback_reference_condition = reference_allowed
+    if not reference_allowed:
+        st.caption("该记录将保留在条件化黏附数据中，不会覆盖候选库的 25 °C 基准校准。")
     adhesion_col, healing_col = st.columns(2)
     with adhesion_col:
-        feedback_adhesion = st.number_input("宽温域黏附强度 (MPa)", min_value=0.0, max_value=200.0, value=25.0, step=0.1, key="feedback_adhesion")
+        feedback_adhesion = st.number_input("该条件下黏附强度 (MPa)", min_value=0.0, max_value=200.0, value=25.0, step=0.1, key="feedback_adhesion")
     with healing_col:
         feedback_healing = st.number_input("自修复效率 (%)", min_value=0.0, max_value=100.0, value=70.0, step=0.5, key="feedback_healing")
     oxygen_col, uv_col, am_col = st.columns(3)
@@ -2711,10 +3114,27 @@ experiment_frame = pd.DataFrame([{
     "am_feasibility": feedback_am,
     "test_batch": feedback_batch,
     "test_temperature_c": feedback_test_temperature,
+    "substrate_material": feedback_substrate_material,
+    "substrate_grade": feedback_substrate_grade_value,
+    "surface_condition": feedback_surface_condition,
+    "surface_roughness_ra_um": feedback_surface_roughness if feedback_surface_roughness > 0 else None,
+    "surface_cleaning": feedback_surface_cleaning,
+    "adhesion_test_method": feedback_test_method,
+    "bondline_thickness_mm": feedback_bondline_thickness if feedback_bondline_thickness > 0 else None,
+    "test_environment": feedback_test_environment,
+    "adhesion_condition_record": True,
+    "screening_reference_condition": feedback_reference_condition,
     **optional_feedback,
 }])
 if submit_feedback and feedback_candidate_id not in candidate_ids:
     st.error("请选择候选编号后再回写实验数据。")
+elif submit_feedback and feedback_substrate_grade == "其他" and not feedback_substrate_grade_value.strip():
+    st.error("请输入其他基材牌号后再回写。")
+elif submit_feedback and (
+    (feedback_surface_cleaning_choice == "其他" and not feedback_surface_cleaning.strip())
+    or (feedback_test_environment_choice == "其他" and not feedback_test_environment.strip())
+):
+    st.error("请输入其他清洗/预处理或测试环境后再回写。")
 elif submit_feedback or import_csv_feedback:
     current_feedback = experiment_frame if submit_feedback else uploaded_experiments
     if submit_feedback:
@@ -2795,3 +3215,166 @@ elif submit_feedback or import_csv_feedback:
     if submit_feedback:
         st.session_state["feedback_notice"] = f"候选 {feedback_candidate_id} 的实验数据已回写，模型已更新。"
     st.rerun()
+
+# The recommended matrix mode above handles condition-resolved adhesion
+# records. Complete-performance mode ends here to avoid duplicate inputs.
+st.stop()
+
+st.markdown("#### 温度-基材-表面黏附数据")
+st.caption("此处只记录条件化黏附强度，不要求填写自修复、抗原子氧、紫外或增材制造指标。仅 25 °C、6061-T6 铝合金、溶剂脱脂记录可作为候选库基准校准点。")
+matrix_upload_col, matrix_template_col = st.columns([4, 1])
+with matrix_upload_col:
+    adhesion_matrix_upload = st.file_uploader(
+        "黏附数据 CSV",
+        type=["csv"],
+        help="必填：候选编号、配方指纹、候选库版本、温度、基材、牌号、表面状态、测试方法、黏附强度。",
+        key="adhesion_matrix_csv",
+    )
+with matrix_template_col:
+    st.write("")
+    st.download_button(
+        "下载矩阵模板",
+        data=_adhesion_matrix_csv_template(),
+        file_name="adhesion-condition-matrix-template.csv",
+        mime="text/csv",
+        icon=":material/download:",
+        width="stretch",
+        key="adhesion_matrix_csv_template",
+    )
+uploaded_adhesion_matrix, adhesion_matrix_errors = _read_adhesion_matrix_csv(adhesion_matrix_upload)
+if uploaded_adhesion_matrix is not None:
+    matrix_ids = uploaded_adhesion_matrix["candidate_id"].astype(str)
+    unknown = sorted(set(matrix_ids) - set(candidate_ids))
+    if unknown:
+        adhesion_matrix_errors.append("以下候选编号不在当前候选库：" + "、".join(unknown[:10]))
+    mismatched = uploaded_adhesion_matrix.loc[
+        matrix_ids.map(candidate_formulations).ne(uploaded_adhesion_matrix["formulation_id"].astype(str)),
+        "candidate_id",
+    ].astype(str).tolist()
+    if mismatched:
+        adhesion_matrix_errors.append("以下候选编号的配方指纹与当前候选库不匹配：" + "、".join(mismatched[:10]))
+    mismatched_versions = uploaded_adhesion_matrix.loc[
+        matrix_ids.map(candidate_library_versions).ne(uploaded_adhesion_matrix["candidate_library_version"].astype(str)),
+        "candidate_id",
+    ].astype(str).tolist()
+    if mismatched_versions:
+        adhesion_matrix_errors.append("以下候选编号的候选库版本与当前候选库不匹配：" + "、".join(mismatched_versions[:10]))
+    for error in adhesion_matrix_errors:
+        st.error(error)
+    if not adhesion_matrix_errors:
+        matrix_display = uploaded_adhesion_matrix.reindex(columns=[
+            *ADHESION_MATRIX_REQUIRED_COLUMNS, *ADHESION_MATRIX_OPTIONAL_COLUMNS,
+        ]).rename(columns={**EXPERIMENT_COLUMN_LABELS, **EXPERIMENT_METADATA_LABELS})
+        st.dataframe(matrix_display, width="stretch", hide_index=True)
+import_adhesion_matrix = st.button(
+    "导入黏附数据",
+    disabled=uploaded_adhesion_matrix is None or bool(adhesion_matrix_errors),
+    width="stretch",
+    key="adhesion_matrix_import",
+)
+
+with st.form("adhesion_matrix_form", clear_on_submit=False):
+    matrix_candidate_id = st.selectbox(
+        "候选编号",
+        candidate_ids,
+        index=None,
+        placeholder="请选择候选编号",
+        key="adhesion_matrix_candidate_id",
+    )
+    matrix_temperature, matrix_material, matrix_surface = st.columns(3)
+    with matrix_temperature:
+        matrix_test_temperature = st.selectbox(
+            "测试温度 (°C)", WIDE_TEMPERATURE_POINTS_C, index=WIDE_TEMPERATURE_POINTS_C.index(25.0),
+            key="adhesion_matrix_temperature",
+        )
+        matrix_test_method = st.selectbox(
+            "黏附测试方法", ("搭接剪切", "180° 剥离", "拉伸剪切", "其他"),
+            key="adhesion_matrix_method",
+        )
+    with matrix_material:
+        matrix_substrate_material = st.selectbox("基材类别", STANDARD_SUBSTRATES, key="adhesion_matrix_material")
+        matrix_substrate_grade = st.selectbox(
+            "基材牌号",
+            ("6061-T6", "2024-T3", "其他") if matrix_substrate_material == "铝合金" else
+            (("304", "316L", "其他") if matrix_substrate_material == "不锈钢" else
+             (("Ti-6Al-4V", "其他") if matrix_substrate_material == "钛合金" else ("环氧基 CFRP", "其他"))),
+            key="adhesion_matrix_grade",
+        )
+        matrix_substrate_grade_value = (
+            st.text_input("其他基材牌号", placeholder="例如：7075-T6", key="adhesion_matrix_custom_grade")
+            if matrix_substrate_grade == "其他" else matrix_substrate_grade
+        )
+    with matrix_surface:
+        matrix_surface_condition = st.selectbox("表面状态", STANDARD_SURFACE_CONDITIONS, key="adhesion_matrix_surface")
+        matrix_strength = st.number_input("该条件下黏附强度 (MPa)", min_value=0.0, max_value=200.0, value=0.0, step=0.1, key="adhesion_matrix_strength")
+    matrix_detail, matrix_environment = st.columns(2)
+    with matrix_detail:
+        matrix_roughness = st.number_input("表面粗糙度 Ra (μm，可选)", min_value=0.0, value=0.0, step=0.01, key="adhesion_matrix_roughness")
+        matrix_bondline = st.number_input("胶层厚度 (mm，可选)", min_value=0.0, value=0.0, step=0.01, key="adhesion_matrix_bondline")
+    with matrix_environment:
+        matrix_cleaning = st.text_input("清洗/预处理", value="溶剂脱脂后测试", key="adhesion_matrix_cleaning")
+        matrix_environment_text = st.text_input("测试环境", value="干燥空气", key="adhesion_matrix_environment")
+    matrix_reference_allowed = (
+        matrix_test_temperature == 25.0
+        and matrix_substrate_material == "铝合金"
+        and matrix_substrate_grade_value == "6061-T6"
+        and matrix_surface_condition == "溶剂脱脂"
+    )
+    matrix_reference = st.checkbox(
+        "作为候选库基准校准点",
+        value=matrix_reference_allowed,
+        disabled=not matrix_reference_allowed,
+        key="adhesion_matrix_reference",
+    )
+    save_adhesion_matrix_row = st.form_submit_button("保存黏附数据记录", type="primary", width="stretch")
+
+manual_adhesion_matrix = pd.DataFrame([{
+    "candidate_id": matrix_candidate_id,
+    "formulation_id": candidate_formulations.get(matrix_candidate_id, ""),
+    "candidate_library_version": candidate_library_versions.get(matrix_candidate_id, ""),
+    "test_batch": default_test_batch(),
+    "test_temperature_c": matrix_test_temperature,
+    "substrate_material": matrix_substrate_material,
+    "substrate_grade": matrix_substrate_grade_value,
+    "surface_condition": matrix_surface_condition,
+    "surface_roughness_ra_um": matrix_roughness if matrix_roughness > 0 else None,
+    "surface_cleaning": matrix_cleaning,
+    "adhesion_test_method": matrix_test_method,
+    "bondline_thickness_mm": matrix_bondline if matrix_bondline > 0 else None,
+    "test_environment": matrix_environment_text,
+    "adhesion_condition_record": True,
+    "screening_reference_condition": matrix_reference,
+    "wide_temp_adhesion_mpa": matrix_strength,
+}])
+if save_adhesion_matrix_row or import_adhesion_matrix:
+    matrix_rows = manual_adhesion_matrix if save_adhesion_matrix_row else uploaded_adhesion_matrix
+    if save_adhesion_matrix_row and matrix_candidate_id not in candidate_ids:
+        st.error("请选择候选编号后再保存。")
+    elif matrix_rows is not None:
+        try:
+            saved_rows = save_experiments(
+                matrix_rows,
+                default_source="adhesion-condition-matrix",
+                candidate_formulations=candidate_formulations,
+                candidate_library_versions=candidate_library_versions,
+            )
+            experiment_history = load_experiments(candidate_ids, formulation_ids=candidate_formulations)
+        except Exception as exc:
+            st.error(f"黏附数据持久化失败：{exc}")
+        else:
+            reference_count = int(matrix_rows["screening_reference_condition"].fillna(False).astype(bool).sum())
+            if reference_count and calculation_training_ready:
+                shortlist, closed_loop = screen_candidates(
+                    candidate_frame, experiments=experiment_history, top_n=12,
+                    minimum_class="C", version="external-v1",
+                )
+                updated_signature = _screening_input_signature(candidate_frame, external_payloads, experiment_history)
+                _archive_screening_result(shortlist, closed_loop, input_signature=updated_signature)
+                st.session_state["latest_candidate_screening"] = {
+                    "signature": updated_signature, "shortlist": shortlist, "model": closed_loop,
+                }
+                suffix = "；基准点已用于模型校准"
+            else:
+                suffix = "；非基准条件仅保存至黏附数据，未改写候选筛选模型"
+            st.session_state["feedback_notice"] = f"已保存 {saved_rows} 条黏附数据记录{suffix}。"
+            st.rerun()

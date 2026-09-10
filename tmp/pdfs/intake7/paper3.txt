@@ -1,0 +1,686 @@
+\n--- PAGE 1 ---\nDegradable and self-repairable polyurethanes with superior mechanical 
+properties and remarkable healing capability
+Libang Feng a,*
+, Danbin Zhu a, Han Zhang a, Qiong Bu a, Haoran Chen a, Chenyang Guo a,  
+Kaige Jiao a, Yanhua Liu a, Jianbin Zhang a, Jiaofeng Ye b,**
+a School of Materials Science and Engineering, Lanzhou Jiaotong University, Lanzhou, 730070, China
+b School of Bailie Mechanical Engineering, Lanzhou City University, Lanzhou, 730070, China
+A R T I C L E I N F O
+Keywords:
+Self–healing polyurethane
+Mechanical property
+Diels–Alder adduct
+Imine bond
+Degradation
+A B S T R A C T
+Self–healing polyurethanes relying on a single dynamic covalent bond often face trade-offs between mechanical 
+performance and healing efficiency. In this work, we developed an innovative self-healing elastomer by stra­
+tegically incorporating imine bonds into a Diels–Alder (DA) adduct-based polyurethane. The resulting material 
+exhibited exceptional mechanical properties, achieving a tensile strength of 26.9 MPa and an elongation at break 
+of 513.3%. Remarkably, PUDI retained 90.0% of its tensile strength and recovered 71.9% of dissipated energy 
+after 10 fatigue cycles at room temperature. This dual dynamic bonds system enabled outstanding self–healing 
+performance, complete healing at 120 ◦C—significantly surpassing conventional DA–based polyurethanes. 
+Moreover, the material maintained a high repair capability at reduced temperatures, demonstrating consistent 
+healing efficiencies of 94.3%, 90.9%, and 79.2% over three damage–repair cycles. Notably, the incorporation of 
+dynamic imine bonds significantly enhanced degradation performance, primarily due to improved chain mobility 
+and dynamic network rearrangement. This work overcomes fundamental limitations of traditional self-healing 
+polyurethanes, offering a promising platform for advanced applications in flexible electronics, protective coat­
+ings, and biomedical devices.
+1. Introduction
+Self-healing polymers have garnered significant research interest due 
+to their unique ability to autonomously repair damage, thereby 
+extending material lifespan and reducing maintenance costs [1–4]. 
+These materials primarily employ two healing mechanisms: (1) dynamic 
+covalent bonds [5,6], including Diels-Alder adducts (DA adducts) [7–9], 
+imine bonds [10–13], disulfide bonds [14–16], acylhydrazone bonds 
+[17–19], and diselenide bonds [20–22]. (2) non-covalent interactions 
+such as hydrogen bonding [23,24], metal-ligand coordination [25,26], 
+and host-guest complexation [27,28].
+Polyurethane, a highly versatile polymer, has been extensively 
+engineered with dynamic covalent bonds to achieve self-healing prop­
+erties [29–32]. However, relying on a single type of dynamic bond may 
+limit the repair efficiency and environmental adaptability of poly­
+urethanes. For example, DA adduct-based polyurethanes generally 
+require high healing temperatures (≥120 ◦C), exhibit lower self–healing 
+efficiency, and need prolonged healing durations [33], while imine 
+bond-based systems often suffer from reduced mechanical stability due 
+to excessive chain mobility. To address these challenges, many self­
+–healing polyurethanes have been developed using combined dynamic 
+bonds, including both dynamic covalent and dynamic noncovalent 
+bonds. Zhu et al. [34] engineered a dual-bond system combining DA 
+adducts and disulfide bonds, achieving a tensile strength of 9.87 MPa 
+with 90.1% healing efficiency. Mantala and Crespy [35] reported a se­
+ries of poly(urea–urethane) transparent elastomers containing revers­
+ible disulfide and hydrogen bonds, and revealed outstanding ability to 
+heal at room temperature with a healing efficiency as high as 95%. Ye 
+et al. [36] introduced disulfide bonds into an imine exchange reac­
+tion–based polyurethane, developing a polyurethane with enhanced 
+repair capabilities, including a tensile strength of 12.95 MPa, a first 
+repair efficiency of 92.5%, and a third repair efficiency of 73.4%.
+The aforementioned studies have enhanced the self-healing proper­
+ties of polyurethane by incorporating multiple dynamic bonds, enabling 
+* Corresponding author.
+** Corresponding author.
+E-mail addresses: fenglb@lzjtu.edu.cn (L. Feng), 469621619@qq.com (J. Ye). 
+Contents lists available at ScienceDirect
+Polymer
+journal homepage: www.elsevier.com/locate/polymer
+https://doi.org/10.1016/j.polymer.2026.129869
+Received 11 January 2026; Received in revised form 14 March 2026; Accepted 17 March 2026  
+Polymer 352 (2026) 129869 
+Available online 18 March 2026 
+0032-3861/© 2026 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies. 
+\n--- PAGE 2 ---\nlow-temperature repair while maintaining mechanical strength 
+[37–40]. Nonetheless, current systems still face key challenges: (1) 
+achieving an optimal balance between mechanical properties and 
+healing efficiency, as improved repair often compromises mechanical 
+performance; (2) insufficient mechanical strength for demanding ap­
+plications; and (3) in DA–based systems, the high healing temperature 
+(typically ≥120 
+◦C) significantly limits practical engineering 
+applications.
+This study developed an innovative self-healing polyurethane (PUDI) 
+by incorporating dual dynamic covalent bonds–Diels–Alder (DA) 
+Fig. 1. The synthetic route of VP.
+Fig. 2. The synthetic route of PUDI.
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+2 
+\n--- PAGE 3 ---\nadducts and imine bonds–to address the challenges mentioned above. 
+The DA adducts provided mechanical strength through robust, rigid 
+structures at ambient temperature, while the imine bonds enhanced 
+chain mobility and enabled dynamic exchange for efficient low­
+–temperature repair. This synergistic design offered the following ad­
+vantages: (1) the capability for self-healing at comparatively lower 
+temperatures than systems utilizing only DA adducts, and (2) excellent 
+recyclability through reversible bond dissociation and recombination. 
+The resulting material demonstrated an optimal balance between me­
+chanical robustness and healing efficiency, exhibiting both high strength 
+and effective low–temperature self–repair. These findings provide 
+valuable insights for developing advanced self–healing polymers appli­
+cable to flexible electronics, protective coatings, and biomedical 
+devices.
+2. Materials and methods
+2.1. Materials
+The chemicals used in this study were sourced as follows: vanillin, 
+p–phenylenediamine, 
+isophorone 
+diisocyanate 
+(IPDI, 
+AR), 
+2–furfurylamine (FAm, AR), and N,N'–(4,4′–methylenediphenyl) dima­
+leimide (MBI, AR) were purchased from Aladdin Reagent Co., Ltd. 
+(Shanghai, China). Polycaprolactone (PCL–2000, T.P.) was obtained 
+from Lido Chemical Co., Ltd. (Jining, China). N,N–dimethylformamide 
+(DMF), tetrahydrofuran, anhydrous ethanol, toluene, and n-hexane 
+were of analytical grade and supplied by Damao Chemical Reagent 
+Factory (Tianjin, China). Prior to use, PCL–2000 was vacuum-dried, 
+while all other chemicals were used without further purification.
+2.2. Synthesis of chain extender containing imine bonds (VP)
+The synthetic mechanism of the imine-containing chain extender 
+(VP) is illustrated in Fig. 1. In a typical procedure, p-phenylenediamine 
+was first dissolved in tetrahydrofuran in a three-necked flask equipped 
+with a stirrer and condenser, maintained at 45 ◦C in an oil bath. Vanillin, 
+in a 2:1 M ratio to p–phenylenediamine, dissolved in tetrahydrofuran, 
+was then added dropwise via a constant-pressure funnel. After 4 h of 
+reaction, the mixture was concentrated by rotary evaporation and 
+precipitated in ethanol (twice the volume). The resulting solid was 
+collected by filtration, purified through two recrystallizations from 
+toluene/hexane (10:1 v/v), and dried. The obtained VP is a light yellow 
+crystal with a yield of 93%.
+The successful synthesis of VP was confirmed through comprehen­
+sive characterization using 1H–NMR and FT–IR spectroscopy (see in 
+Supporting Information, Figs. S1 and S2).
+2.3. Synthesis of self–healing polyurethane with double dynamic covalent 
+bonds(PUDI)
+The synthesis of self–healing polyurethanes (PUDxIy, where x and y 
+denote the concentrations of DA adducts and imine bonds, respectively) 
+is illustrated in Fig. 2, with detailed reagent quantities provided in 
+Table S1. Using PUD1.5I0.5 as a representative example: IPDI (0.06 mol), 
+PCL–2000 (0.02 mol), and DMF (10 mL) were combined and added to a 
+nitrogen-purged four-necked flask. After adding six drops of dibutyltin 
+dilaurate catalyst, the mixture was stirred at 80 ◦C for 4 h to produce an 
+isocyanate–terminated prepolymer (PPU). Subsequently, FAm (0.06 mol 
+in 7.5 mL DMF) was slowly added via a constant–pressure funnel over 4 
+h to achieve furan end–capping.
+Fig. 3. FT-IR spectra and thermal performance of PU–DA and PUDI: (a) FT–IR spectra, (b) DSC thermograms, and (c, d) photographs of sol-gel transitions at 130 ◦C 
+and 60 ◦C, respectively.
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+3 
+\n--- PAGE 4 ---\nThe synthesis continued by adding BMI (0.04 mol) to DMF (15 mL), 
+followed by a 12-h reaction to prepare PU(-NCO)–DA (complete –NCO 
+consumption yielded PU–DA; see Table S2 for reagent quantities). VP 
+was then added stoichiometrically in DMF (15 mL) and introduced 
+dropwise into the PU(-NCO)–DA system at 70 ◦C for 8 h under constant 
+stirring. The final product (PUDI) was subjected to vacuum drying at 
+gradually increasing temperatures ranging from 60 to 90 ◦C. This pro­
+cess was accompanied by repeated dissolution in DMF to remove re­
+sidual unreacted monomers and further enhance the purity of the 
+polyurethanes.
+2.4. Characterization
+Chemical structure. The chemical structural characterization of the 
+synthesized compounds was conducted using spectroscopic techniques. 
+Fourier-transform infrared spectroscopy (FT–IR, VERTEX 70, Germany) 
+was employed to analyze the chemical structures of VP, PU–DA, and 
+PUDI over the spectral range of 500–4000 cm−1. Proton nuclear mag­
+netic resonance spectroscopy (1H NMR) was performed using a Bruker 
+AVANCE III HD 500 MHz NMR spectrometer (Germany).
+Thermal properties and thermal reversibility performance. The 
+thermal properties of PU-DA and PUDI were investigated using differ­
+ential scanning calorimetry (DSC, TA Q2000, USA). Samples were 
+analyzed from −80 ◦C to 200 ◦C at a heating rate of 10 ◦C/min under a 
+nitrogen atmosphere. Additionally, the thermal reversibility was eval­
+uated through sol–gel transition tests conducted at 130 ◦C and 60 ◦C, 
+respectively.
+Mechanical properties. The mechanical properties were evaluated 
+through tensile and cyclic tensile tests conducted on a Shimadzu AG–10 
+kN universal testing machine (Japan) at a constant speed of 50 mm/min.
+Self–healing performance. To evaluate the self-healing performance, 
+standardized scratch damage (0.5 mm deep) was introduced on the 
+specimen surfaces. The damaged samples were then subjected to ther­
+mal repair at varying temperatures and durations. The evolution of 
+scratch morphology during heat treatment was observed using polarized 
+optical microscopy (Axioskop 2 plus, Zeiss, Germany). For quantitative 
+evaluation, the specimen was completely cut into two pieces, and the 
+fractured ends were brought into contact before thermal treatment. The 
+recovery of tensile strength was measured after heat treatment. Healing 
+efficiencies (η) for single and multiple repair cycles were calculated 
+using Equation (1), enabling a quantitative comparison of the self- 
+healing capabilities of the two materials. 
+η = σhealed
+σoriginal
+× 100%
+(1) 
+where σhealed represents the tensile strength after repair, and σoriginal 
+denotes the initial tensile strength prior to damage.
+3. Results and discussion
+3.1. Chemical structure of polyurethane with double dynamic bonds 
+(PUDI)
+The PUDI elastomer was successfully synthesized by incorporating 
+both DA adducts and imine bonds, as confirmed by FT–IR analysis 
+(Fig. 3a). Key spectral features included: (1) the characteristic DA 
+adduct absorption at 1775 cm−1; (2) imine bond (C––N) stretching at 
+1654 cm−1; and (3) a shifted carbonyl (C––O) vibration at 1709 cm−1 
+compared to PU-DA (1654 cm−1). Additional peaks at 3310 cm−1 
+(H–bonded N–H), 2968/2865 cm−1 (–CH2/–CH3), and the absence of 
+–NCO signals (2200–2280 cm−1) further verified complete reaction and 
+structural integrity. These collective spectroscopic evidences unambig­
+uously demonstrated the successful formation of PUDI with both dy­
+namic covalent networks.
+3.2. Thermal property and thermal reversibility of PUDI
+The thermal behavior of PU–DA and PUDI was characterized by DSC 
+(Fig. 3b). Both materials exhibited distinct glass transitions tempera­
+tures (Tg) at −36.2 ◦C for PU–DA and −31.8 ◦C for PUDI. The 4.4 ◦C 
+increase in Tg for PUDI indicated enhanced chain rigidity due to the 
+incorporation of imine bonds. This structural modification improved 
+polymer chain regularity and network connectivity, thereby requiring 
+greater thermal energy for segmental motion. Additionally, an endo­
+thermic peak observed at 130 ◦C corresponded to the retro–Diels–Alder 
+(r–DA) reaction of the DA adducts, confirming their thermal reversibility 
+within the polyurethane matrix.
+The thermal reversibility of PU–DA and PUDI was evaluated using a 
+sol–gel transition test at 130 ◦C and 60 ◦C (Fig. 3c and d). When heated 
+at 130 ◦C for 10 min, both elastomers–initially cut into pieces with 
+minimal DMF)–transformed from solids into viscous liquids (Fig. 3c1, 
+d1), demonstrating DA bond cleavage. The average molecular weight 
+and polydispersity index (PDI, Mw/Mn) of the synthesized polyurethanes 
+were measured by gel permeation chromatography (GPC), as shown in 
+Table S3 in the supporting information. It was evident that the synthe­
+sized polyurethanes exhibited high molecular weights, however, the 
+number-average molecular weight (Mn) decreased significantly. Taking 
+PUD1.5I0.5 as an example: the original Mn was 32560 g/mol, which 
+decreased to approximately 14263 g/mol after treatment at 130 ◦C for 
+10 min. Subsequent heating at 60 ◦C for 120 min enabled DA recom­
+bination, restoring the solid state (Fig. 3c2,d2). This reversible transition 
+remained consistent through three complete cycles (Fig. 3c1–c6,d1–d6), 
+confirming the excellent thermal responsiveness of both materials.
+These results demonstrated that both PU–DA and PUDI exhibited 
+thermally reversible solid-fluid transitions through alternating heating 
+at 130 ◦C and 60 ◦C. The phase transformation mechanism involved 
+three key processes: (1) At 130 ◦C, r–DA reaction (indicated by the DSC 
+Fig. 4. Mechanical properties of self-healing polyurethanes: (a) stress–strain curves and (b) toughness.
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+4 
+\n--- PAGE 5 ---\nendothermic peak) cleaves DA adducts while simultaneously dissoci­
+ating hydrogen bonds, disrupting the network and increasing molecular 
+mobility; (2) For PUDI, additional imine bond cleavage generates more 
+short chains, resulting in a darker, more viscous fluid than PU-DA; (3) At 
+60 ◦C, all dynamic bonds (DA, imine, and hydrogen bonds) recombine, 
+restoring the solid network. This reversible transition cycle, enabled by 
+the materials' dynamic covalent chemistry, can be repeated multiple 
+times without performance degradation.
+Fig. 5. Cyclic tensile properties of PU–DA2.5 and PUD1.5I0.5 recovered for 1 h after 10 cyclic tensile tests: (a) cyclic tensile curve of PU–DA2.5, (b) cyclic tensile curve 
+of PUD1.5I0.5, (c) dissipated energy, and (d) recovery rate of tensile strength and dissipated energy.
+Fig. 6. Self-healing performance of PU–DA2.0 and PUD1.5I0.5 at 120 ◦C: (a) scratch repair behavior, (b, c) stress–strain curves of original and subsequent 
+repair elastomers.
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+5 
+\n--- PAGE 6 ---\n3.3. Mechanical properties
+3.3.1. Tensile properties
+This study systematically evaluated the mechanical properties of 
+PUDI using tensile testing (Fig. 4). The stress-strain curves (Fig. 4a) 
+demonstrated that increasing the imine bond content in PU-DA2.0 
+resulted in a clear trade–off: while elongation at break was enhanced (up 
+to 712.6% for PUD0.5I1.5), tensile strength reduced (from 27.6 MPa to 
+6.4 MPa). Optimal mechanical performance was achieved with a DA: 
+imine ratio of 1.5:0.5 (PUD1.5I0.5), exhibiting balanced properties (26.9 
+MPa strength, 513.3% elongation). Correspondingly, material toughness 
+decreased progressively with higher imine content, from 39.5 MJ/m3 
+(PUD1.5I0.5) to 17.3 MJ/m3 (PUD0.5I1.5), as illustrated in Fig. 4b.
+The mechanical property variations in PUDI result from competing 
+effects of its dual dynamic networks: (1) thermally stable DA adducts, 
+which maintain structural integrity at ambient temperature and 
+providing strength–toughness through permanent crosslinking; and (2) 
+room-temperature dynamic imine bonds, which reduce mechanical 
+stability through continuous exchange reactions but enhance chain 
+flexibility. As the imine bond content increases, this trade–off becomes 
+more pronounced—the resulting higher chain mobility improves elon­
+gation at break (up to 712%) but progressively diminishes tensile 
+strength and toughness due to network instability.
+3.3.2. Fatigue resistance
+To evaluate fatigue resistance under practical loading conditions, 
+PU–DA and PUDI were subjected to repeated cyclic tensile tests at a 
+constant strain of 120%. The hysteresis loop area in the stress-strain 
+curves (Fig. 5) was quantified as dissipated energy [32,33], providing 
+a direct measure of the materials' energy dissipation capacity and 
+structural integrity during prolonged mechanical stress.
+The cyclic tensile behavior of PU–DA2.0 and PUD1.5I0.5 was compared 
+in Fig. 5a and b, with a quantitative analysis presented in Fig. 5c. The 
+results revealed that the dissipated energy of PUD1.5I0.5 was lower than 
+that of PU–DA2.0. This reduction indicated that the incorporation of 
+imine bonds decreased energy storage capacity through two mecha­
+nisms: (1) a reduction in hydrogen bonding density and (2) enhanced 
+chain segment regularity. These structural modifications promoted 
+greater molecular mobility, enabling more efficient energy dissipation 
+during cyclic loading while maintaining the material's fatigue resistance 
+[36,41].
+A greater amount of energy was required to align the molecular 
+chains during the first tensile cycle, resulting in a larger hysteresis loop 
+area and enhanced energy dissipation. The stress relaxation behavior of 
+both PU–DA and PUDI elastomers was characterized by decreasing 
+hysteresis loop areas and dissipated energy with cycling (Fig. 5c), which 
+arose from intrinsic chain alignment and the disordered arrangement of 
+polymer chains. Moreover, timely tensile loading prevented complete 
+structural recovery between cycles. After a recovery period of 1 h at 
+room temperature, both the tensile strength and dissipated energy 
+returned to relatively elevated levels. A comparison of the recovery rates 
+of tensile strength and dissipated energy between PU–DA2.0 and 
+PUD1.5I0.5 (Fig. 5d) revealed that both elastomers exhibit a degree of 
+fatigue resistance, with PUD1.5I0.5 showing better energy dissipation 
+recovery (~71.9% vs ~69.3% for PU-DA2.0 after 1h rest) due to the 
+incorporation of imine bonds. These dynamic bonds enable (1) 
+enhanced chain mobility for segmental rearrangement, and (2) room­
+–temperature exchange reactions that partially restore the network 
+structure. The combined effects significantly improve fatigue resistance 
+compared to DA–only systems.
+3.4. Self-healing performance of PUDI
+The DSC analysis (Fig. 3b) showed that the r–DA reaction initiates at 
+120 ◦C, establishing this as the healing temperature. Scratch repair tests 
+(Fig. 6a) demonstrated that PUDI exhibited superior performance, 
+Fig. 7. Self–healing performance of polyurethanes at 90 ◦C: (a) scratch repair behavior of PU–DA2.0 and PUD1.5I0.5, (b) stress–strain curves of PUD1.5I0.5 after 
+multiple repairs, (c) comparison of tensile strength and repair efficiency of PUDI with self–healing materials reported in the literature recently [15,16,35,36,42–46].
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+6 
+\n--- PAGE 7 ---\nachieving complete scratch healing within 1 min–five times faster than 
+PU-DA, which required 5 min. This remarkable enhancement results 
+directly from the incorporation of imine bonds, which significantly 
+accelerate the self-healing kinetics through two mechanisms: (1) 
+increased chain mobility and (2) dynamic bond exchange at the healing 
+interface.
+To quantitatively assess self–healing performance, PU–DA and PUDI 
+samples underwent tensile testing following a two–stage thermal treat­
+ment (Fig. 6b and c): an initial repair at 120 ◦C to activate the dynamics 
+of DA adducts, followed by annealing at 60 ◦C to enable DA adduct 
+reformation. This dual–temperature protocol ensures complete network 
+reconstruction.
+The tensile strength data (Fig. 6b and c) revealed significant differ­
+ences in healing efficiency between PU–DA2.0 and PUD1.5I0.5. After 
+complete thermal treatment (120 ◦C for 10 min followed by 60 ◦C for 
+120 min), PU–DA2.0 recovered 94.0% of its original strength (28.6 MPa 
+→ 26.9 MPa), while PUD1.5I0.5 achieved 100% recovery (26.9 MPa → 
+27.2 MPa) due to imine bond exchange reactions during the 60 ◦C 
+annealing. Notably, even without the low–temperature treatment, 
+PUD1.5I0.5 maintained 84.2% efficiency compared to PU–DA2.0's 53.2%. 
+Therefore, PUD1.5I0.5 demonstrated superior healing efficiency due to 
+the combination of imine bonds and DA adducts, highlighting the dual 
+advantages of imine bonds: (1) enabling chain rearrangement at lower 
+temperatures through enhanced segmental mobility [33], which is 
+beneficial for forming more DA bonds than PU–DA without imine bonds; 
+and (2) facilitating PCL chain realignment and improving the regularity 
+of PCL segments. These effects further enhance the tensile strength. The 
+superior performance results from the dynamic exchange capability of 
+imine bonds, which compensates for the temperature-dependent refor­
+mation limitations of DA adducts.
+The incorporation of imine bonds can significantly enhance the 
+self–healing capabilities of PU–DA elastomers. Therefore, the low­
+–temperature (90 ◦C) self-healing performance of PUD1.5I0.5 and 
+PU–DA2.0 was comparatively evaluated (Fig. 7a and b). PUD1.5I0.5 ach­
+ieved complete scratch repair within 10 min, whereas PU–DA2.0 
+exhibited incomplete healing even after 120 min. Quantitative analysis 
+revealed outstanding healing efficiencies of 94.3%, 90.9%, and 79.2% 
+over three repair cycles for PUD1.5I0.5. This remarkable performance 
+resulted from the dual functionality of imine bonds: (1) increasing chain 
+flexibility to facilitate molecular diffusion to damaged areas, and (2) 
+promoting PCL chain realignment through dynamic exchange reactions. 
+These synergistic effects enable efficient low–temperature repair that is 
+unattainable by DA–adduct–only systems.
+As shown in Fig. 7c, the developed PUDI system outperformed 
+recently reported self–healing materials [15,16,35,36,42–46] by 
+simultaneously achieving both high tensile strength (26.9 MPa) and 
+exceptional healing efficiency (100%), a combination rarely attained in 
+existing systems. This breakthrough performance stems from the 
+synergistic integration of dynamic DA adducts and imine bonds, which 
+collectively provide structural stability while enabling efficient network 
+reformation.
+3.5. Exploration of self–healing mechanism of PUDI
+The PUDI elastomer was developed by strategically incorporating 
+imine bonds into a DA–based polyurethane network, creating a dual 
+dynamic covalent system comprising DA adducts and imine bonds. 
+Comprehensive characterization revealed that PUDI achieved an 
+optimal balance between mechanical strength (26.9 MPa tensile 
+strength) and healing efficiency (100%), attributable to synergistic in­
+teractions among (1) thermally reversible DA bonds, (2) dynamic imine 
+bonds, (3) hydrogen bonding networks, and (4) flexible PCL segments. 
+The repair mechanism is illustrated in Fig. 8.
+During service, PUDI elastomers are inevitably subjected to various 
+external stresses and environmental factors that can induce macroscopic 
+damage, such as crack initiation and propagation. This macroscopic 
+damage in polymeric materials fundamentally originating from micro­
+structural transformations. Heat treatment can induce alteration at the 
+molecular level, and promote self–repair. At elevated temperatures, 
+such as 120 ◦C, the elastomer network undergoes three simultaneous 
+dynamic processes: (1) retro–Diels–Alder (r-DA) reactions cleave DA 
+adducts, (2) imine bonds participate in exchange reactions, and (3) 
+hydrogen bonds undergo reversible dissociation. These transformations 
+generate mobile polymer fragments while simultaneously enhancing the 
+flexibility of PCL segments. The liberated chain segments then migrate 
+toward damaged regions via thermally activated diffusion, where they 
+initiate preliminary repair by physically filling microcracks. Concur­
+rently, the reduction in network constraints allows PCL chains to ach­
+ieve enhanced molecular alignment through thermal motion, 
+establishing the foundation for complete property restoration.
+Subsequent annealing at 60 ◦C promotes comprehensive network 
+reconstruction through multiple pathways: DA adducts recombine, 
+imine bonds reorganize via dynamic exchange, and hydrogen bonds 
+reestablish their connectivity. This triple–rebonding mechanism effec­
+tively restores the material's architecture while optimizing the packing 
+of PCL chains. Notably, the incorporated imine bonds extend the healing 
+capability to lower temperatures (from 120 ◦C to 90 ◦C) by enabling (1) 
+enhanced chain mobility, (2) continuous bond exchange, and (3) partial 
+activation of DA adducts. The synergistic interplay among these dy­
+namic covalent bonds, hydrogen bonding, and chain rearrangement 
+endows PUDI with superior healing efficiency over an extended tem­
+perature range compared to conventional systems relying on a single 
+dynamic bond type.
+Fig. 8. Schematic diagram of the repair mechanism of PUDI elastomer with dual dynamic covalent bonds.
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+7 
+\n--- PAGE 8 ---\n3.6. Degradation performance of PUDI
+As PCL is a semi–crystalline biodegradable polyester, and consid­
+ering the environmental pollution caused by waste polyurethane, 
+incorporating PCL into polyurethane chains inevitably imparts degrad­
+ability to the resulting material. Therefore, the degradation performance 
+of the synthesized self-healing polyurethane was investigated. The PUDI 
+sample was immersed in a 1 mol/L NaOH solution. The change in the 
+samples and their weight were periodically monitored and analyzed, as 
+shown in Fig. 9. For comparison, PU–DA was used as a control. It was 
+observed that the solution exhibited a visible color change after the 
+PUDI sample had been immersed for 30 days, accompanied by a 
+noticeable Tyndall effect in the container (Fig. 9b). These results suggest 
+that PUDI underwent gradual degradation in the alkaline solution, 
+releasing numerous degradation fragments into the surrounding me­
+dium. Over time, the solution color transitioned from light yellow to 
+brown, and the Tyndall effect became increasingly pronounced. The 
+degradation mechanism of PUDI can be explained as follows: the ester 
+bonds in the urethane groups and long–chain PCL segments are sus­
+ceptible to alkaline hydrolysis. Under strong alkaline conditions, these 
+bonds progressively break down [47], leading to fragmentation of mo­
+lecular chains and their release into the solution, which accounts for the 
+significant weight loss.
+In contrast, when PU–DA was immersed in the same alkaline solution 
+for 30 days, a Tyndall effect also appeared (Fig. 9a). However, after 90 
+days of immersion, the solution color only turned slightly yellow. This 
+indicates that PUDI degrades more rapidly than PU–DA. Concurrently, 
+sample weights were monitored, and the weight loss data are presented 
+in Fig. 9c. The weight loss rate for both samples increased progressively 
+throughout the degradation period, reaching 40% for PU–DA and 67% 
+for PUDI after 90 days. Consistently, the mass loss curves confirmed that 
+PUDI degraded significantly faster than PU–DA. This difference in 
+degradation behavior can be attributed to variations in chain flexibility. 
+Unlike PU-DA, PUDI incorporates dynamic imine bonds into its polymer 
+chains, which impart higher flexibility at room temperature. As a result, 
+hydroxide ions can more readily penetrate the polyurethane matrix in 
+PUDI and access the ester bonds, making it more susceptible to alkaline 
+hydrolysis and chain cleavage. Therefore, PUDI degrades more rapidly 
+than PU-DA.
+4. Conclusions
+This study successfully developed a novel self–healing polyurethane 
+(PUDI) by incorporating dual dynamic covalent structures comprising 
+Diels–Alder (DA) adducts and imine bonds. The PUDI elastomer 
+exhibited outstanding mechanical performance, with a tensile strength 
+of 26.9 MPa, elongation at break of 513.3%, and toughness of 39.5 MJ/ 
+m3. Remarkably, it maintains 90.0% tensile strength recovery and 
+71.9% energy dissipation recovery after 10 fatigue cycles followed by 1 
+h of rest at room temperature, demonstrating exceptional fatigue resis­
+tance. The material showed superior healing capabilities, achieving 
+complete repair at 120 ◦C and maintaining excellent multiple repair 
+performance even at reduced temperatures, representing a significant 
+improvement over conventional PU–DA systems. Additionally, the 
+incorporation of dynamic imine bonds imparted greater flexibility at 
+room temperature, resulting in enhanced degradation performance of 
+PUDI. These exceptional properties arose from the synergistic combi­
+nation of the dynamic exchange capabilities of imine bonds and DA 
+adducts, enabling simultaneous high mechanical strength and efficient 
+self-repair.
+CRediT authorship contribution statement
+Libang Feng: Writing – review & editing, Supervision, Funding 
+acquisition. Danbin Zhu: Writing – original draft, Investigation. Han 
+Zhang: Visualization, Data curation. Qiong Bu: Software, Formal 
+analysis. Haoran Chen: Validation, Data curation. Chenyang Guo: 
+Visualization, Methodology. Kaige Jiao: Software, Formal analysis. 
+Yanhua Liu: Resources, Project administration. Jianbin Zhang: Soft­
+ware, Methodology, Funding acquisition. Jiaofeng Ye: Methodology, 
+Conceptualization.
+Declaration of competing interest
+The authors claim there are no conflicts of interest.
+Acknowledgments
+This research is supported by National Natural Science Foundation of 
+China (No. 52563015, No. 52303056) and Science and Technology 
+Program of Gansu Province (No. 25JRRA147).
+Appendix A. Supplementary data
+Supplementary data to this article can be found online at https://doi. 
+org/10.1016/j.polymer.2026.129869.
+Data availability
+Data will be made available on request.
+Fig. 9. Degradation performance testing of PU–DA and PUDI: (a, b) evolution photographs of samples in alkaline solution and (c) mass loss curves of both samples 
+with immersion time.
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+8 
+\n--- PAGE 9 ---\nReferences
+[1] C.H. Li, J.L. Zuo, Self-healing polymers based on coordination bonds, Adv. Mater. 
+32 (2020) e1903762, https://doi.org/10.1002/adma.201903762.
+[2] B. Li, P. Cao, T. Saito, A.P. Sokolov, Intrinsically self-healing polymers: from 
+mechanistic insight to current challenges, Chem. Rev. 123 (2023) 701–735, 
+https://doi.org/10.1021/acs.chemrev.2c00575.
+[3] H. Jiang, T. Yan, M. Cheng, Z.H. Zhao, T.L. He, Z.K. Wang, C.L. Li, S.Q. Sun, X. 
+Z. Hu, S.Q. Hu, Hierarchical H-bonded hard domains reconcile high toughness and 
+self-healing in polyurethane elastomers for large-strain sensing, Polymer 342 
+(2026) 129309, https://doi.org/10.1016/j.polymer.2025.129309.
+[4] Y. Qian, F. Dong, S. Wang, et al., Ultrarobust, stretchable, and highly elastic 
+supramolecular elastomer with hydrogen-bond interactions via sp2 hybridized 
+boron-urethane bonds, Angew. Chem. Int. Ed. 64 (2025) e202421099, https://doi. 
+org/10.1002/anie.202421099.
+[5] S. Utrera-Barrios, R. Verdejo, M.A. L´opez-Manchado, M. Hern´andez Santana, 
+Evolution of self-healing elastomers, from extrinsic to combined intrinsic 
+mechanisms: a review, Mater. Horiz. 7 (2020) 2882–2902, https://doi.org/ 
+10.1039/d0mh00535e.
+[6] N. Zheng, Y. Xu, Q. Zhao, T. Xie, Dynamic covalent polymer networks: a molecular 
+platform for designing functions beyond chemical recycling and self-healing, 
+Chem. Rev. 121 (2021) 1716–1745, https://doi.org/10.1021/acs. 
+chemrev.0c00938.
+[7] Y. Zhang, J. Ye, D. Qu, H. Wang, C. Chai, L. Feng, Thermo-adjusted self-healing 
+epoxy resins based on diels–alder dynamic chemical reaction, Polym. Eng. Sci. 61 
+(2021) 2257–2266, https://doi.org/10.1002/pen.25753.
+[8] C.R. Ratwani, A.R. Kamali, A.M. Abdelkader, Self-healing by diels-alder 
+cycloaddition in advanced functional polymers: a review, Prog. Mater. Sci. 131 
+(2023) 101001, https://doi.org/10.1016/j.pmatsci.2022.101001.
+[9] S. Terryn, J. Brancart, E. Roels, R. Verhelle, A. Safaei, A. Cuvellier, 
+B. Vanderborght, G. Van Assche, Structure–property relationships of self-healing 
+polymer networks based on reversible diels–alder chemistry, Macromolecules 55 
+(2022) 5497–5513, https://doi.org/10.1021/acs.macromol.2c00434.
+[10] X. Liu, E. Zhang, J. Liu, J. Qin, M. Wu, C. Yang, L. Liang, Self-healing, 
+reprocessable, degradable, thermadapt shape memory multifunctional polymers 
+based on dynamic imine bonds and their application in nondestructively recyclable 
+carbon fiber composites, Chem. Eng. J. 454 (2023) 139992, https://doi.org/ 
+10.1016/j.cej.2022.139992.
+[11] S. Wang, S. Ma, Q. Li, X. Xu, B. Wang, W. Yuan, S. Zhou, S. You, J. Zhu, Facilein 
+situpreparation of high-performance epoxy vitrimer from renewable resources and 
+its application in nondestructive recyclable carbon fiber composite, Green Chem. 
+21 (2019) 1484–1497, https://doi.org/10.1039/c8gc03477j.
+[12] X. Dai, L.B. Huang, Y. Du, J. Han, Q. Zheng, J. Kong, J. Hao, Self-healing, flexible, 
+and tailorable triboelectric nanogenerators for self-powered sensors based on 
+thermal effect of infrared radiation, Adv. Funct. Mater. 30 (2020) 1910723, 
+https://doi.org/10.1002/adfm.201910723.
+[13] W. Xie, S. Huang, S. Liu, J. Zhao, Imine-functionalized biomass-derived dynamic 
+covalent thermosets enabled by heat-induced self-crosslinking and reversible 
+structures, Chem. Eng. J. 404 (2021) 126598, https://doi.org/10.1016/j. 
+cej.2020.126598.
+[14] J. Wu, X. Liu, L. Chen, J. Du, L. Ji, Y. Peng, L. Liu, Z. Xu, X. Lin, W. Lin, Y. Sun, 
+G. Yi, Rapid self-healing and high-mechanical-strength epoxy resin coatings 
+incorporating dynamic disulfide bonds, ACS Appl. Polym. Mater. 6 (2024) 
+4778–4788, https://doi.org/10.1021/acsapm.4c00346.
+[15] H. Shi, Y. Shi, L. Ren, W. Zhang, Y. Ji, J. Zhang, X. Zhong, Y. Liang, J. Dong, Y. Wu, 
+W. Li, D. Zhang, Z. Jiang, A self-reinforcing, self-healing, and shape memory 
+polybutadiene-based polyurethane via disulfide bonds for healable flexible sensors, 
+Chem. Eng. J. 511 (2025) 161524, https://doi.org/10.1016/j.cej.2025.161524.
+[16] N. Sun, Z. Wang, X. Ma, K. Zhang, Z. Wang, Z. Guo, Y. Chen, L. Sun, W. Lu, Y. Liu, 
+M. Di, Preparation and characterization of lignin-containing self-healing 
+polyurethane elastomers with hydrogen and disulfide bonds, Ind. Crop. Prod. 174 
+(2021) 114178, https://doi.org/10.1016/j.indcrop.2021.114178.
+[17] D. Ramimoghadam, D.J. Eyckens, R.A. Evans, G. Moad, S. Holmes, R. Simons, 
+Towards sustainable materials: a review of acylhydrazone chemistry for reversible 
+polymers, Chemistry 30 (2024) e202401728, https://doi.org/10.1002/ 
+chem.202401728.
+[18] H. Cheng, Z. Fan, Z. Wang, Z. Guo, J. Jiang, Y. Xie, Highly stretchable, fast self- 
+healing nanocellulose hydrogel combining borate ester bonds and acylhydrazone 
+bonds, Int. J. Biol. Macromol. 245 (2023) 125471, https://doi.org/10.1016/j. 
+ijbiomac.2023.125471.
+[19] Y. Sun, X. Li, T. Hu, S. Zhang, W. Niu, Dynamic acylhydrazone bonds cross-linked 
+chromotropic photonic-ionic skin with self-healing and high resilience for 
+interactive human-machine interface, Chem. Eng. J. 475 (2023) 146188, https:// 
+doi.org/10.1016/j.cej.2023.146188.
+[20] R. Liu, S. Li, N. Yao, J. Xia, M. Li, H. Ding, L. Xu, X. Yang, Castor oil-based 
+polyurethane networks containing diselenide bonds: self-healing, shape memory, 
+and high flexibility, Prog. Org. Coating 163 (2022) 106615, https://doi.org/ 
+10.1016/j.porgcoat.2021.106615.
+[21] L. Lyu, D. Li, Y. Chen, Y. Tian, J. Pei, Dynamic chemistry based self-healing of 
+asphalt modified by diselenide-crosslinked polyurethane elastomer, Constr. Build. 
+Mater. 293 (2021) 123480, https://doi.org/10.1016/j.conbuildmat.2021.123480.
+[22] H.J. Won, B. Ryplida, S.G. Kim, G. Lee, J.H. Ryu, S.Y. Park, Diselenide-bridged 
+carbon-dot-mediated self-healing, conductive, and adhesive wireless hydrogel 
+sensors for label-free breast cancer detection, ACS Nano 14 (2020) 8409–8420, 
+https://doi.org/10.1021/acsnano.0c02517.
+[23] Z. Xie, B. Hu, R. Li, Q. Zhang, Hydrogen bonding in self-healing elastomers, ACS 
+Omega 6 (2021) 9319–9333, https://doi.org/10.1021/acsomega.1c00462.
+[24] Z. Zhou, S. Chen, X. Xu, Y. Chen, L. Xu, Y. Zeng, F. Zhang, Room temperature self- 
+healing crosslinked elastomer constructed by dynamic urea bond and hydrogen 
+bond, Prog. Org. Coating 154 (2021) 106213, https://doi.org/10.1016/j. 
+porgcoat.2021.106213.
+[25] K. Auepattana-Aumrung, D. Crespy, Self-healing and anticorrosion coatings based 
+on responsive polymers with metal coordination bonds, Chem. Eng. J. 452 (2023) 
+139055, https://doi.org/10.1016/j.cej.2022.139055.
+[26] Y. Zhang, C. Cai, F. Li, S. Dong, Supramolecular soft material enabled by metal 
+coordination and hydrogen bonding: stretchability, self-healing, impact resistance, 
+3d printing, and motion monitoring, Small 19 (2023) e2300857, https://doi.org/ 
+10.1002/smll.202300857.
+[27] L. Xiao, J. Shi, K. Wu, M. Lu, Self-healing supramolecular waterborne polyurethane 
+based on host–guest interactions and multiple hydrogen bonds, React. Funct. 
+Polym. (2020) 148, https://doi.org/10.1016/j.reactfunctpolym.2020.104482.
+[28] E. Zhang, J. Shi, L. Xiao, Q. Zhang, M. Lu, B. Nan, K. Wu, M. Lu, A highly efficient 
+bionic self-healing flexible waterborne polyurethane elastic film based on a 
+cyclodextrin–ferrocene host–guest interaction, Polym. Chem. 12 (2021) 831–842, 
+https://doi.org/10.1039/d0py01480j.
+[29] R.H. Aguirresarobe, S. Nevejans, B. Reck, L. Irusta, H. Sardon, J.M. Asua, 
+N. Ballard, Healable and self-healing polyurethanes using dynamic chemistry, 
+Prog. Polym. Sci. 114 (2021) 101362, https://doi.org/10.1016/j. 
+progpolymsci.2021.101362.
+[30] X. Zhang, F. Dong, M. Yu, et al., Multifunctional waterborne polyurethane- 
+cellulose nanofiber composite: realizing ultrarobust, photoluminescence and swift 
+self-healing via multi-dynamic bonding, Chem. Eng. J. 507 (2025) 160302, 
+https://doi.org/10.1016/j.cej.2025.160302.
+[31] X. Fan, L. Zhang, F. Dong, et al., Room-temperature self-healing 
+polyurethane–cellulose nanocrystal composites with strong strength and toughness 
+based on dynamic bonds, Carbohydr. Polym. 308 (2023) 120654, https://doi.org/ 
+10.1016/j.carbpol.2023.120654.
+[32] F. Dong, X. Yang, L. Guo, et al., Self-healing polyurethane with high strength and 
+toughness based on a dynamic chemical strategy, J. Mater. Chem. A 10 (2022) 
+10139–10149, https://doi.org/10.1039/D2TA00802E.
+[33] L. Feng, Z. Yu, Y. Bian, J. Lu, X. Shi, C. Chai, Self-healing behavior of polyurethanes 
+based on dual actions of thermo-reversible diels-alder reaction and thermal 
+movement of molecular chains, Polymer 124 (2017) 48–59, https://doi.org/ 
+10.1016/j.polymer.2017.07.049.
+[34] D. Zhu, C. Guo, H. Liu, J. Ye, H. Chen, J. Zhang, Y. Liu, L. Feng, Thermo-reversible 
+DA adducts-based polyurethanes with both excellent comprehensive mechanical 
+property and remarkable room temperature self-healing capability, Colloids Surf. A 
+Physicochem. Eng. Asp. 711 (2025) 136398, https://doi.org/10.1016/j. 
+colsurfa.2025.136398.
+[35] K. Mantala, D. Crespy, Poly(urea-urethane) elastomers showing autonomous 
+healing at room temperature, Macromolecules 56 (2023) 7332–7343, https://doi. 
+org/10.1021/acs.macromol.3c00613.
+[36] J. Ye, J. Zhang, L. Feng, H. Liu, D. Zhu, Y. Liu, Polyurethane combining preeminent 
+toughness, puncture-resistance, and self-healing capabilities by multiple repair 
+options based on dual dynamic covalent bonds, Colloids Surf. A Physicochem. Eng. 
+Asp. 694 (2024) 134203, https://doi.org/10.1016/j.colsurfa.2024.134203.
+[37] Y. Li, M. Zhou, R. Wang, H. Han, Z. Huang, J. Wang, Self-healing polyurethane 
+elastomers: an essential review and prospects for future research, Eur. Polym. J. 
+214 (2024) 113159, https://doi.org/10.1016/j.eurpolymj.2024.113159.
+[38] Y. Song, J. Li, G. Song, L. Zhang, Z. Liu, X. Jing, F. Luo, Y. Zhang, Y. Zhang, X. Li, 
+Self-healing polyurethane elastomers with high mechanical properties based on 
+synergistically thermo-reversible and quadruple hydrogen bonds, ACS Appl. 
+Polym. Mater. 5 (2023) 1302–1311, https://doi.org/10.1021/acsapm.2c01849.
+[39] Sikun Fang, Wanting Zeng, Long Liu, Lyu Yuan, Fuwei Dong, Wan Lin, Y. Liu, 
+Shifiting the mechanical strength-healing efficiency trade-off of polyurethanes by 
+incorporating boronic ester bonds and hydrogen bonding, Eur. Polym. J. 206 
+(2024) 112776, https://doi.org/10.1016/j.eurpolymj.2024.112776.
+[40] K. Sugane, M. Shibata, Self-healing thermoset polyurethanes utilizing host‒guest 
+interaction of cyclodextrin and adamantane, Polymer 221 (2021), https://doi.org/ 
+10.1016/j.polymer.2021.123629.
+[41] J.C. Wong, K.H. Ngoi, C.H. Chia, T. Jeon, H. Kim, H.J. Kim, H.C. Kim, M. Ree, 
+Surface hardness and abrasion resistance natures of thermoplastic polymer covers 
+and windows and their enhancements with curable tetraacrylate coating, Polymer 
+239 (2022), https://doi.org/10.1016/j.polymer.2021.124419.
+[42] W. Xu, H. Liu, J. He, B. Bao, J. Jiang, H. Ren, Y. Xu, B. Zeng, C. Yuan, L. Dai, 
+Fabrication of multifunction polyurethane with robust, self-healing and anti- 
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+9 
+\n--- PAGE 10 ---\ncorrosion performance based multiple dynamic bonds strategy, Prog. Org. Coating 
+192 (2024) 108513, https://doi.org/10.1016/j.porgcoat.2024.108513.
+[43] Z. Ren, Y. Zhang, C. Dong, N. Li, Z. Cui, Z. Guan, Light- and heat-induced shape 
+deformation polyurethane actuators that combine self-healing capabilities, Mater. 
+Today Commun. 39 (2024) 109102, https://doi.org/10.1016/j. 
+mtcomm.2024.109102.
+[44] Z. Zhang, M. Wang, W. Cao, X. Duan, T. Xie, Z. Li, W. Gao, F. Luo, Synthesis of 
+diels–alder bond and hydrogen bond synergistic shape memory self-healing 
+polyurethane elastomers, J. Appl. Polym. Sci. 141 (2023), https://doi.org/ 
+10.1002/app.55070.
+[45] S. Yang, X. Du, S. Deng, J. Qiu, Z. Du, X. Cheng, H. Wang, Recyclable and self- 
+healing polyurethane composites based on diels-alder reaction for efficient solar- 
+to-thermal energy storage, Chem. Eng. J. 398 (2020) 125654, https://doi.org/ 
+10.1016/j.cej.2020.125654.
+[46] S.H. Lee, S.R. Shin, D.S. Lee, Self-healing of cross-linked pu via dual-dynamic 
+covalent bonds of a schiff base from cystine and vanillin, Mater. Des. 172 (2019), 
+https://doi.org/10.1016/j.matdes.2019.107774.
+[47] F. Li, Z. Xu, H. Hu, Z. Kong, C. Chen, Y. Tian, W. Zhang, W. Bin Ying, R. Zhang, 
+J. Zhu, A polyurethane integrating self-healing, anti-aging and controlled 
+degradation for durable and eco-friendly E-skin, Chem. Eng. J. 410 (2021) 128363, 
+https://doi.org/10.1016/j.cej.2020.128363.
+L. Feng et al.                                                                                                                                                                                                                                     
+Polymer 352 (2026) 129869 
+10 

@@ -1,0 +1,547 @@
+\n--- PAGE 1 ---\nDiels–Alder-Based Crosslinked Self-Healing Polyurethane/Urea from
+Polymeric Methylene Diphenyl Diisocyanate
+Pengfei Du,1 Meiyin Wu,1 Xuanxuan Liu,1 Zhen Zheng,1 Xinling Wang,1 Thomas Joncheray,2
+Yuefan Zhang3
+1State Key Laboratory of Metal Matrix Composites, School of Chemistry and Chemical Technology, Shanghai Jiao Tong University,
+Shanghai 200240, China
+2Huntsman (Europe) BVBA, Everberg B-3078, Belgium
+3Huntsman Chemistry R&D Center (Shanghai) Company, Limited, Shanghai 200245, China
+Correspondence to: X. Wang (E-mail: xlwang@sjtu.edu.cn)
+ABSTRACT: Crosslinked self-healing polyurethane/urea based on a Diels–Alder reaction (C-PMPU–DA) was synthesized from a
+multiple-furan monomer and a commercial bismaleimide. The multiple-furan monomer (PMPU–furan) was obtained from a func-
+tionalized prepolymer (polymeric MDI: PBA-2000 5 2:1) by furfuryl amine. The structures of both the PMPU–furan and C-PMPU–
+DA were characterized by attenuated total reflectance (ATR)–Fourier transform infrared (FTIR) spectroscopy, differential scanning
+calorimetry, thermogravimetric analysis, and 1H-NMR. The Diels–Alder bonds enabled C-PMPU–DA thermal reversibility, which was
+investigated by ATR–FTIR spectroscopy, 1H-NMR, gel–solution–gel experiments, and viscosity tests. Meanwhile, the self-healing prop-
+erties of C-PMPU–DA were also investigated by the recovery of the mechanical properties. The results showed that C-PMPU–DA
+exhibited good thermal reversibility and self-healing properties. C-PMPU–DA exhibited thermosetting properties at room tempera-
+ture, although it exhibited thermoplastic properties at higher temperatures and may find applications in self-healing materials, recy-
+clable materials, or removable materials. V
+C 2013 Wiley Periodicals, Inc. J. Appl. Polym. Sci. 2014, 131, 40234.
+KEYWORDS: crosslinking; polyurethanes; recycling; Diels–Alder reaction
+Received 23 August 2013; accepted 28 November 2013
+DOI: 10.1002/app.40234
+INTRODUCTION
+Polymer materials have a finite lifetime because their inherent
+properties degrade with continuous exposure to environmental
+stresses, such as chemical attack, radiation damage, mechanical
+abrasion, and impact and thermal decomposition alone or in
+combination.1 Inspired by the self-healing phenomenon of bio-
+logical organization,2 the concept of self-healing polymeric
+materials was proposed in the 1980s to heal invisible micro-
+cracks and prolong polymeric material service life.3–7 Self-
+healing materials are able to heal and repair themselves once or
+multiple times, either autonomically or in response to external
+stimuli such as changes in pH, heat, or light.8,9 The thermal
+reversibility of the Diels–Alder (DA) reaction and the mild condi-
+tions of its retro reaction make it particularly desirable for the
+preparation
+of
+heat-stimuli
+self-healing
+polymeric
+materials.
+Many studies have been focused on the reaction between furan
+(diene) and maleimide (dienophile), presumably because of the
+higher reactivity of maleimide in the DA reaction.6 All these stud-
+ies have focused on linear polymers10–22 and crosslinked polymers
+with pendant DA bonds.22–32 As for the later crosslinked polymer,
+although it has good mechanical properties, the pendant DA
+bond in the polymer chain restricts their application for self-
+healing materials because of the relatively poor chain mobility of
+the starting linear polymers with pendant furan or maleimide
+groups.6
+To obtain crosslinked polymers with good self-healing efficiency
+and mechanical properties, Wudl et al.33 prepared a polymer net-
+works based on the DA reaction between multifunctional furan
+and maleimide monomers. Their study was definitely the first
+example of thermally mendable polymers materials. After that,
+many research teams have concentrated on this crosslinked ther-
+mally mendable polymer. Wudl et al.34 prepared a remendable
+polymer network using two maleimides instead of maleimide
+monomers to proceed in bulk without any solvent, and the poly-
+mer exhibited good self-healing properties. Liu and Hsieh35 pre-
+pared one thermosetting polymer that consisted of epoxy-based
+trisfurans and trismaleimides; the final polymer network exhib-
+ited good self-healing properties. Watanabe and Yoshies16 also
+obtained crosslinked materials with mendability via DA reaction
+from furfuryl telechelic polyester with trifunctional maleimide.
+V
+C 2013 Wiley Periodicals, Inc.
+WWW.MATERIALSVIEWS.COM
+J. APPL. POLYM. SCI. 2014, DOI: 10.1002/APP.40234
+40234 (1 of 7)
+\n--- PAGE 2 ---\nGandini et al.36 also prepared a multiple-furan monomer via
+another click reaction. A novel furan–maleimide polymer was
+reported by Gostsmann.37 The novel polymer could switch
+between a rigid highly crosslinked state and a deformable frag-
+mented state. Their polymer network has been exploited in data
+storage and lithographic applications. Shape-memory polymer
+networks were also prepared via DA reaction.38–41 The kinetic
+and thermodynamic investigation of the DA reaction between a
+trisfuran and a bismaleimide (BMI) was carried out via Fourier
+transform infrared (FTIR) spectroscopy.42
+The key step of preparing this type of crosslinked polymer is to
+form the small multifunctional monomers containing furan and
+maleimide separately. In this study, polymeric MDI (S5005),
+which has been widely used for thermosetting polyurethane, was
+used to prepare a multiple-furan monomer (PMPU–furan) via
+the reaction between isocyanate and furfuryl amine. Then a com-
+mercial BMI was added to the solution to react with PMPU–furan
+to form the crosslinked self-healing polyurethane/urea based on a
+Diels–Alder
+reaction
+(C-PMPU–DA)
+in
+a
+simple
+one-pot
+method. The one-pot method made it much easier to obtain C-
+PMPU–DA with the synthesis procedure. The DA bond enabled
+C-PMPU–DA to obtain a new property: thermal reversibility in
+which it exhibited thermosetting properties at room temperature,
+although it exhibited thermoplastic properties at higher tempera-
+ture. The thermal reversibility provided C-PMPU–DA with the
+following advantages: (1) self-healing properties in response to
+heat stimuli, (2) a lower viscosity in solvents at higher tempera-
+tures (this makes it easier to proceed) and a higher viscosity at
+lower temperatures as a gel, and (3) the ability to be recycled and
+be good to the environment, unlike other crosslinked polyur-
+ethane. C-PMPU–DA can be potentially applied as a self-healing
+material or a removable material and so on.
+EXPERIMENTAL
+Materials
+Furfuryl amine (99%) and BMI [1,10-(methylenedi-1,4-phenyl-
+ene) bismaleimide (95%)] were purchased from Aldrich and
+were used as received.
+Polymeric MDI [S5005, a mixture of MDI, MDI dimmers, MDI
+trimmers, etc., with 2.7 NCO groups on average (99%)] was
+supplied by Huntsman and was used as received.
+PBA-2000 (poly-1,4-butylene adipate glycol, number-average
+molecular weight 5 2000) was supplied by Eternal Chemical
+and was used after 2 h of drying in vacuo at 90C.
+N,N-Dimethylformamide (DMF) was purchased from China
+National Medicines and was used after being dried with CaH2
+and purified by vacuum distillation.
+Synthesis of C-PMPU–DA
+Polymeric MDI [S5005, the product grade of polymeric MDI]
+(5.80 g, 16.0 mmol) was reacted with PBA-2000 (16.00 g, 8.0
+mmol) with 22 mL of DMF as a solvent in a 100-mL, three-
+necked, round-bottom flask, equipped with a mechanical stirrer.
+The prepolymerization was carried out at 60C under a nitrogen
+atmosphere. Three hours later, the flask was put in an ice–water
+bath to decrease the temperature. Then, furfuryl amine (2.70 g,
+27.2 mmol) dissolved in 3 mL of DMF was added dropwise
+into the isocyanate end-capped prepolymer solution in an ice–
+water bath. Three hours later, the whole solution (PU–furan
+prepolymer) was heated to 60C for about 30 min to make sure
+that all of the isocyanate was consumed by furfuryl amine.
+Then, BMI (5.13 g, 13.6 mmol) dissolved in 2 mL of DMF was
+added to the solution. Half an hour later, the whole solution
+was poured onto a Polytetrafluoroethene (PTFE) plate to pre-
+vent gelling in the flask. The PTFE plate was put in a 50C
+oven for about 2 days to remove the DMF solvent. Meanwhile,
+the crosslinking via the DA reaction proceeded during the
+removal of DMF. Finally, a polymer film (28.1 g) was obtained
+as the final product (C-PMPU–DA, yield 5 94.9%).
+Characterization
+Attenuated
+Total
+Reflectance
+(ATR)–FTIR
+Spectroscopy.
+ATR–FTIR was performed on a Paragon 1000 spectrometer
+(PerkinElmer). ATR–FTIR spectra were recorded in the range
+4000–400 cm21.
+1H-NMR. 1H-NMR spectroscopy was performed on an Avance-
+400 spectrometer (Bruker, Switzerland) with hexadeuterated
+dimethyl sulfoxide (DMSO-d6) as the solvent at 25C.
+Differential
+Scanning
+Calorimetry
+(DSC). DSC
+data
+was
+obtained from 2 60 to 160C at a heating rate of 10C/min
+under a nitrogen flow (TA Instruments Q2000).
+Thermogravimetric Analysis (TGA). TGA of PMPU–furan and
+C-PMPU–DA were performed on a TGA instrument (Q5000IR,
+TA Instruments) at a heating rate of 20C/min in an N2 atmos-
+phere from room temperature to 600C.
+Viscosity. The viscosity was measured on a Brookfield DV-II1
+Pro viscometer with an RV6 rotator. The viscosity was recorded
+every 10 s until the gels were obtained.
+Self-Healing Properties. The tensile properties of the original
+and the healed samples were measured on an Instron 4465 test-
+ing machine. The elongation rate was set at 50 mm/min.
+The specimens were dumbbell-like with sizes of 20 3 4 3 0.4–
+1 mm3.
+RESULTS AND DISCUSSION
+C-PMPU–DA Synthesis
+Polymeric MDI (S5005) was a mixture of MDI, MDI dimer,
+trimer, and so on (2.7 NCO on average). It was considered to
+have the structure shown in Scheme 1(a). S5005 reacted with
+PBA-2000 to form an NCO-terminated prepolymer, and this
+was then reacted with furfuryl amine to form the multiple-
+furan terminated prepolymer PMPU–furan [Scheme 1(b)]. No
+gels were generated in the prepolymerization because of the
+excess of NCO groups. Finally, the multiple-furan-terminated
+prepolymer
+was
+crosslinked
+with
+BMI
+at
+60C
+to
+form
+C-PMPU–DA, as shown in Scheme 1(b). Half an hour later, the
+whole solution was poured into a PTFE plate to prevent gelling
+in the flask. The polyurethane film was obtained after the
+removal of the DMF solvent. The whole procedure was carried
+out in a one-pot method; this made the synthesis procedure
+much easier to carry out.
+ARTICLE
+WILEYONLINELIBRARY.COM/APP
+WWW.MATERIALSVIEWS.COM
+J. APPL. POLYM. SCI. 2014, DOI: 10.1002/APP.40234
+40234 (2 of 7)
+\n--- PAGE 3 ---\nCharacterization
+The structure of the PMPU–furan was first investigated via
+1H-NMR, as shown in Figure 1. The peaks of the 8.4- and 6.5-
+ppm attributed to the H in urea confirmed the successful reac-
+tion
+between
+the
+isocyanate
+end-capped
+prepolymer
+and
+furfuryl amine. The multiple-furan monomer was obtained
+from the functionalized isocyanate end-capped prepolymer by
+furfuryl amine. The peaks at 6.2, 6.3, 7.5, and 4.2 ppm also
+confirmed the presence of the furan group in the intermediate
+PMPU–furan. The reaction of the PMPU–furan with BMI was
+investigated via the testing of the 1H-NMR spectra of the reac-
+tion solution after 30 min at 50C. Compared with the 1H-
+NMR of PMPU–furan, the characteristic peaks of the DA bond
+appeared after 30 min at 50C, as shown in Figure 1(a0–c0).
+This confirmed the successful DA reaction between PMPU–
+furan and BMI.
+The ATR–FTIR spectra of PMPU–furan and C-PMPU–DA
+(Figure 2) confirmed the 1H-NMR results. The absence of a
+peak at 2270 cm21 confirmed that there were no residual iso-
+cyanate groups in PMPU–furan. Meanwhile, additional peaks at
+Scheme 1. PMPU–furan and C-PMPU–DA synthesis.
+Figure 1. 1H-NMR spectra of PMPU–furan and C-PMPU–DA: (A)
+PMPU–furan and (B) reaction solution after the addition of BMI for
+0.5 h. [Color figure can be viewed in the online issue, which is available
+at wileyonlinelibrary.com.]
+Figure 2. ATR–FTIR spectra of PMPU–furan and PMPU–DA (magnifica-
+tion at 2500–600 cm21). [Color figure can be viewed in the online issue,
+which is available at wileyonlinelibrary.com.]
+ARTICLE
+WILEYONLINELIBRARY.COM/APP
+WWW.MATERIALSVIEWS.COM
+J. APPL. POLYM. SCI. 2014, DOI: 10.1002/APP.40234
+40234 (3 of 7)
+\n--- PAGE 4 ---\n1070, 720, and 810 cm21 confirmed the presence of furan rings
+in PMPU–furan. Compared with PMPU–furan, C-PMPU–DA
+exhibited a shoulder peak at 1730 cm21 specific to the DA
+adduct24
+and
+decreasing
+absorptions
+at
+1070,
+810,
+and
+720 cm21, which was ascribed to the furan ring and indicated
+the successful crosslinking of PMPU–furan with BMI via the
+DA reaction.
+The thermal properties of PMPU–furan and C-PMPU–DA were
+investigated via DSC and TGA. As shown in the DSC curves
+[Figure 3(a)], C-PMPU–DA exhibited a significant endothermic
+peak around 120C, whereas PMPU–furan did not. The signifi-
+cant endothermic peaks around 120C of C-PMPU-DA could
+be explained by the retro DA reaction; this confirmed the DA
+bonds in C-PU–DA. Meanwhile, PMPU–furan showed a sharp
+crystallization peak at 50C, whereas C-PMPU–DA did not.
+This could be explained by the fact that the crosslinking via DA
+reaction restricted the free movement of soft-segment PBA-
+2000; this inhibited the formation of the crystal. All of these
+results confirmed the successful reaction between PMPU–furan
+and BMI.
+From the TGA curves in Figure 3(b), C-PMPU–DA exhibited a
+significantly higher amount of char residue than PMPU–furan;
+this indicated the successful introduction of the crosslinker
+BMI.42 Meanwhile, C-PMPU–DA also showed a slow weight
+loss after 250C from the weight–temperature shown in Figure
+3(b); this suggested that C-PMPU–DA exhibited a higher ther-
+mal stability after crosslinking with BMI.
+Thermal Reversibility of C-PMPU–DA
+The thermal reversibility of C-PMPU–DA was first investigated
+by 1H-NMR. Because of the crosslinking via the DA reaction, C-
+PMPU–DA could not be dissolved in DMSO-d6. The original
+1H-NMR of C-PMPU–DA was not obtained. However, the
+undissolved C-PMPU–DA in DMSO-d6 could be easily dissolved
+after 10 min in a 120C oil bath because of the retro DA reac-
+tion. The retro DA reaction was confirmed by the disappearance
+of the four characteristic peaks at 3.1, 3.2, 5.2 and 6.6 ppm
+(C-PMPU–DA-re, the product of C-PMPU-DA after retro DA
+reaction in Figure 4). C-PMPU-DA reverted back to its starting
+material PMPU–furan and BMI completely after 10 min in a
+120C oil bath. After the sample was kept in 50C oven for 2
+days, the DA reaction was carried out again in an NMR tube at
+50C even at such a low concentration. This was confirmed by
+the reappearance of the characteristic peaks at 3.1, 3.2, 5.2 and
+6.6 ppm. The retro DA reaction and DA reaction cycle could be
+repeated at least two times, as shown in Figure 4. The 1H-NMR
+results indicated excellent thermal reversibility in C-PMPU–DA.
+The thermal reversibility of C-PMPU–DA was also investigated
+via ATR–FTIR spectroscopy. The characteristic shoulder peak at
+1730 cm21 disappeared after 20 min at 120C (C-PMPU–DA-0-
+re in Figure 5) because the retro DA reaction destroyed the DA
+bonds in C-PMPU–DA. The shoulder peak was observed again
+Figure 3. Thermal behavior of PMPU–furan and C-PMPU–DA as observed (a) DSC and (b) TGA. [Color figure can be viewed in the online issue, which
+is available at wileyonlinelibrary.com.]
+Figure 4. 1H-NMR spectra of C-PMPU–DA during the heating and cool-
+ing procedures. [Color figure can be viewed in the online issue, which is
+available at wileyonlinelibrary.com.]
+ARTICLE
+WILEYONLINELIBRARY.COM/APP
+WWW.MATERIALSVIEWS.COM
+J. APPL. POLYM. SCI. 2014, DOI: 10.1002/APP.40234
+40234 (4 of 7)
+\n--- PAGE 5 ---\nafter 1 day at 50C; this indicated the regeneration of the DA
+bonds. Meanwhile, the peak at 810 cm21, which was attributed
+to the furan ring, increased after 20 min at 120C and decreased
+after 1 day at 50C. All of this suggested that C-PMPU–DA
+reverted back to PMPU–furan and BMI at higher temperatures
+and regenerated at lower temperatures.
+The thermal reversibility of C-PMPU–DA was also investigated
+in DMF (25 wt %). Figure 6 shows the phase changes observed
+versus the temperature. C-PMPU–DA was swollen after only 4 h
+at 50C (picture 0 in Figure 6). Upon heating to 120C, the
+swollen C-PMPU–DA was converted into a clear and low-
+viscosity solution (picture 1a in Figure 6) in about 15 min
+because of the retro DA reaction. However, the viscosity of the
+solution increased gradually after the solution was placed at
+50C. The fluidity of the solution was finally lost, and gels
+formed in about 2 h (picture 1b in Figure 6). This gel–solu-
+tion–gel cycle could be repeated at least three times successfully
+(pictures 2a and 2b and 3a and 3b in Figure 6); this indicated
+good thermal reversibility in C-PMPU–DA.
+Consequently, the viscosity of the C-PMPU–DA solution in
+DMF (25 wt %) was also recorded from low-viscosity solution
+to gels at 60C on Brookfield DV-II1 Pro viscometers, as
+shown in Figure 7. After 20 min at 120C and quenching to
+room temperature, the solution was put in a test tube at 60C.
+The viscosity of the solution was very low, close to 0 Pa s; this
+confirmed the results of the gel–solution–gel experiment. This
+could be explained by the fact that C-PMPU–DA returned back
+to PMPU–furan and BMI after 20 min at 120C. The low vis-
+cosity of the solution at higher temperature made it much eas-
+ier to proceed. The viscosity of the solution exhibited a flat
+curve until it experienced a sudden significant increase at about
+6000 s. The viscosity could reach about 40,000 Pa s. After that,
+the viscosity returned to 0 Pa s when the rotator was stopped.
+The significant increase in the viscosity could be explained by
+the recrosslinking via the DA reaction. C-PMPU–DA was
+obtained again. The obtained gels returned back to low-
+viscosity solutions for the second time at 120C in about 20
+min, and the low-viscosity solution exhibited a flat curve of vis-
+cosity and a sudden significant increase in the test tube at 60C,
+as shown in Figure 7, and this phenomenon (gel–low-viscosity
+solution–gel) was repeated at least three times.
+All of the previous results confirmed the good thermal revers-
+ibility of C-PMPU–DA and highlighted the fact that C-PMPU–
+DA could potentially be used as self-healing, removable, or
+recyclable materials.
+Figure 5. ATR–FTIR spectra for C-PMPU–DA during the heating and
+cooling procedures. [Color figure can be viewed in the online issue, which
+is available at wileyonlinelibrary.com.]
+Figure 6. (0) C-PMPU–DA at 50C for 2 h, (1a,2a,3a) soluble solution after 10 min at 120C (cycles 1, 2, and 3, respectively), and (1b,2b,3b) gel forma-
+tion after 2 h at 50C (cycles 1, 2, and 3, respectively). [Color figure can be viewed in the online issue, which is available at wileyonlinelibrary.com.]
+Figure 7. Viscosity changes in C-PMPU–DA during the heating and cool-
+ing procedures. [Color figure can be viewed in the online issue, which is
+available at wileyonlinelibrary.com.]
+ARTICLE
+WILEYONLINELIBRARY.COM/APP
+WWW.MATERIALSVIEWS.COM
+J. APPL. POLYM. SCI. 2014, DOI: 10.1002/APP.40234
+40234 (5 of 7)
+\n--- PAGE 6 ---\nSelf-Healing Properties
+The self-healing properties behavior of C-PMPU–DA under
+thermal treatment was first investigated by observation of the
+evolution of a crack under polarizing optical microscopy
+equipped with a heating stage. The C-PMPU–DA film was cut
+through with a surgical blade and put on a heating stage under
+an N2 flow. The temperature was increased at a rate of 10C/
+min and held at 130C until the crack disappeared. Photographs
+were taken at different time intervals during the healing process,
+as shown in Figure 8.
+The crack did not change much below 120C but only when
+the temperature got close to 130C. When the sample was kept
+at 130C, the crack disappeared gradually in about 5 min; this
+indicated that C-PMPU–DA exhibited excellent self-healing
+properties.
+As for self-healing materials, healing efficiency is a good mea-
+sure for evaluating the healing process. In this article, the self-
+healing efficiency of C-PMPU–DA was obtained by the mea-
+surement of the breaking (tensile) strength before damage and
+after healing, as our previous wroks.43,44 A series of treatments
+were performed on C-PMPU–DA to evaluate the healing effi-
+ciency, as shown in Scheme 2.
+The original sample was cut through in its center with a surgi-
+cal blade, and it was healed at 130C for about 5 min followed
+by 1 day at 55C. The healed samples were named C-PMPU–
+DA-1, C-PMPU–DA-2, and C-PMPU–DA-3. The breaking (ten-
+sile) strength of C-PMPU–DA (as shown in Figure 9) reached
+46.5 MPa; this was much higher than our previous linear poly-
+urethane with DA bonds.44,45 This could be explained by the
+crosslinking with BMI. According to the breaking (tensile)
+strength of the damaged and healed samples, the healing effi-
+ciency [breaking (tensile) strength] of the first healed sample
+reached about 92.4%, whereas the third healed sample also
+exhibited a significant healing efficiency of about 64.5%. All of
+these results indicated that C-PU–DA exhibited good mechani-
+cal properties and self-healing properties.
+CONCLUSIONS
+Crosslinked polyurethane containing DA bonds (C-PMPU–DA)
+was synthesized from a multiple-furan monomer (PMPU–
+furan) and BMI. PMPU–furan was prepared from a functional-
+izing prepolymer (S5005–PBA-2000) with furfuryl amine. The
+structures
+of
+both
+PMPU–furan
+and
+C-PMPU–DA
+were
+Figure 8. Polarizing optical microscopy photographs of a crack in C-PU–
+DA during the healing process. [Color figure can be viewed in the online
+issue, which is available at wileyonlinelibrary.com.]
+Scheme 2. Thermal healing procedure for testing the self-healing efficiency of C-PMPU–DA. [Color figure can be viewed in the online issue, which is
+available at wileyonlinelibrary.com.]
+Figure 9. Mechanical properties of the C-PMPU–DA and healed samples.
+[Color figure can be viewed in the online issue, which is available at
+wileyonlinelibrary.com.]
+ARTICLE
+WILEYONLINELIBRARY.COM/APP
+WWW.MATERIALSVIEWS.COM
+J. APPL. POLYM. SCI. 2014, DOI: 10.1002/APP.40234
+40234 (6 of 7)
+\n--- PAGE 7 ---\nconfirmed by ATR–FTIR spectroscopy, DSC, TGA, and
+1H-
+NMR. According to the results of the ATR–FTIR spectroscopy,
+1H-NMR, gel–solution–gel experiments, and viscosity tests, C-
+PMPU–DA exhibited good thermal reversibility. C-PMPU–DA
+reverted back to PMPU–furan and BMI at 120C and recros-
+slinked at 50C to form C-PMPU–DA again. The breaking (ten-
+sile) strength of the original and the healed samples revealed
+excellent
+mechanical
+properties,
+with
+a
+breaking
+(tensile)
+strength of about 46.5 MPa for the original C-PMPU–DA, and
+significant recovery after healing (92.4% after damage and heal-
+ing for the first time and 64.5% for the third time).
+ACKNOWLEDGMENTS
+This work was supported by Huntsman Polyurethanes (China),
+Ltd. This project was also supported by the Shanghai Leading Aca-
+demic Discipline Project (contract grant number B202).
+REFERENCES
+1. Osswald, T.; Menges, G. Hanser: Materials Science of Poly-
+mers for engineers, Munich, 2003.
+2. Martin, P. Science 1997, 276, 75.
+3. Jud, K.; Kausch, H. H. J. Mater. Sci. 1981, 16, 204.
+4. Wu, D. Y.; Meure, S.; Solomon, D. Prog. Polym. Sci. 2008,
+33, 479.
+5. Bergman, S. D.; Wudl, F. J. Mater. Chem. 2008, 18, 41.
+6. Liu, Y. F.; Chuo, T. W. Polym. Chem. 2013, 4, 2194.
+7. Yan, Z. X.; Wang, F.; Zheng, B.; Huang, F. H. Chem. Soc.
+Rev. 2012, 41, 6042.
+8. Wietor, J. L.; Sijbesma, R. P. Angew. Chem. Int. Ed. 2008, 47,
+8161.
+9. Burattini, S.; Greenland, B. W.; Chappell, D.; Colquhoun,
+H. M.; Hayes, W. Chem. Soc. Rev. 2010, 39, 1973.
+10. Tesoro, G. C.; Sastri, V. R. Ind. Eng. Chem. Prod. Res. Dev.
+1986, 25, 444.
+11. Teramoto, N.; Arai, Y.; Shibata, M. Carbohydr. Polym. 2006,
+64, 78.
+12. Kuramoto, N.; Hayashi, K.; Nagai, K. J. Polym. Sci. Part A:
+Polym. Chem. 1994, 32, 2501.
+13. Vilela, C.; Cruciani, L.; Silvestre, A. J. D.; Gandini, A. A.
+Macromol. Rapid Commun. 2011, 32, 1319.
+14. Vilela, C.; Cruciani, L.; Silvestre, A. J. D.; Gandini, A. A.
+RSC Adv. 2012, 2, 2966.
+15. Loy, D. A.; Wheeler, D. R. U.S. Pat. 6,403,753 (2002).
+16. Watanabe, M.; Yoshie, N. Polymer 2006, 47, 4946.
+17. Gaina, C.; Ursache, O.; Gaina, V. Polym. Plast. Technol.
+2010, 50, 712.
+18. Mikroyannidis, J. A. J. Polym. Sci. Part A: Polym. Chem.
+1992, 30, 125.
+19. Mikroyannidis, J. A. J. Polym. Sci. Part A: Polym. Chem.
+1992, 30, 2017.
+20. Gousse, C.; Gandini, A. A. Polym. Bull. 1998, 40, 389.
+21. Gandini, A. A.; Coelho, D.; Silvestre, A. J. D. Polym. Chem.
+2011, 2, 1713.
+22. Gheneim, R.; Berumen, C. P.; Gandini, A. A. Macromolecules
+2002, 35, 7246.
+23. Canadell, J.; Fischer, H.; De With, G.; vanBenthem, R. A. T.
+M. J. Polym. Sci. Part A: Polym. Chem. 2010, 48, 3456.
+24. Adachi, K.; Achimuthu, A. K.; Chujo, Y. Macromolecules
+2004, 37, 9793.
+25. Kavitha, A. A.; Singha, N. K. J. Polym. Sci. Part A: Polym.
+Chem. 2007, 45, 4441.
+26. Kavitha, A. A.; Singha, N. K. J. Appl. Mater. Interfaces 2009,
+1, 1427.
+27. Stevens, M. P. J. Polym. Sci. Part A: Polym. Chem. 1979, 17,
+3675.
+28. Chujo, Y.; Sada, K.; Saegsa, T. Macromolecules 1990, 23,
+2636.
+29. Canary, S. A.; Stevens, M. P. J. Polym. Sci. Part A: Polym.
+Chem. 1992, 30, 1755.
+30. Gousse, C.; Gandini, A. A.; Hodge, P. Macromolecules 1998,
+31, 314.
+31. Zhang, Y. C.; Broekhuis, A. A.; Picchioni, F. Macromolecules
+2009, 42, 1906.
+32. Liu, Y. L.; Chen, Y. W. Macromol. Chem. Phys. 2007, 208,
+224.
+33. Chen, X.; Dam, M. A.; Ono, K.; Mal, A. K.; Shen, H.; Nutt,
+S. R.; Sheran, K.; Wudl, F. Science 2002, 295, 1698.
+34. Chen, X.; Wudl, F.; Mal, A. K.; Shen, H. B.; Nutt, S. R. Mac-
+romolecules 2003, 36, 1802.
+35. Liu, Y. L.; Hsieh, C. Y. J. Polym. Sci. Part A: Polym. Chem.
+2006, 44, 905.
+36. Vilela, C.; Silvestre, A. J. D.; Gandini, A. J. Polym. Sci., Part
+A: Polym. Chem. 2013, 51, 2260.
+37. Gotsmann, B.; Duerig, U.; Frommer, J.; Hawker, C.J. Adv.
+Funct. Mater. 2006, 16, 1499.
+38. Yamashiro, M.; Inoue, K.; Iji, M. Polymer Journal 2008, 40,
+657.
+39. Inoue, K.; Yamashiro, M.; Iji, M. J. Appl. Polym. Sci. 2009,
+112, 876.
+40. Defize, T.; Riva, R.; Raquez, J.M.; Dubois, P.; Jer^ome, C.;
+Alexandre, M. Macromol. Rapid Comm. 2011, 32, 1264.
+41. Raquez, J. M.; Vanderstappen, S.; Meyer, F.; Verge, P.;
+Alexandre, M.; Thomassin, J. M.; Jer^ome, C.; Dubois, P.
+Chem.-Eur. J. 2011, 17, 10135.
+42. Adzima, B. J.; Aguirre, H. A.; Kloxin, C. J.; Scott, T. F.;
+Bowman, C. N. Macromolecules 2008, 41, 9112.
+43. Du, P. F.; Wu, M. Y.; Liu, X. X.; Zheng, Z.; Wang, X. L.;
+Sun P. Y.; Joncherary, T.; Zhang, Y. F. New J. Chem.,
+DOI:10.1039/C3NJ01245J.
+44. Liu, X. X.; Du, P. F.; Zheng, Z.; Wang, X. L.; Joncherary, T.;
+Zhang, Y.F. Polymer Bulletin 2013, 70, 2319.
+45. Du, P. F.; Liu, X. X.; Zheng, Z.; Wang, X. L.; Joncherary, T.;
+Zhang, Y. F. RSC Advances 2013, 3, 15475.
+ARTICLE
+WILEYONLINELIBRARY.COM/APP
+WWW.MATERIALSVIEWS.COM
+J. APPL. POLYM. SCI. 2014, DOI: 10.1002/APP.40234
+40234 (7 of 7)

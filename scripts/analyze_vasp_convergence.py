@@ -7,6 +7,10 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src" / "adhesive_ai"))
+from vasp_checkpoint import electronic_converged
 
 
 ENERGY_PATTERN = re.compile(r"free\s+energy\s+TOTEN\s+=\s+([-+0-9.Ee]+)")
@@ -14,6 +18,9 @@ ENERGY_PATTERN = re.compile(r"free\s+energy\s+TOTEN\s+=\s+([-+0-9.Ee]+)")
 
 def _result(job: dict[str, object]) -> dict[str, object]:
     directory = Path(str(job["path"]))
+    if sys.platform != "win32" and re.match(r"^[A-Za-z]:[\\/]", str(job["path"])):
+        raw = str(job["path"]).replace("\\", "/")
+        directory = Path("/mnt") / raw[0].lower() / raw[3:]
     marker_path = directory / "run_status.json"
     marker = json.loads(marker_path.read_text(encoding="utf-8")) if marker_path.is_file() else {}
     outcar_path = directory / "OUTCAR"
@@ -30,8 +37,8 @@ def _result(job: dict[str, object]) -> dict[str, object]:
         "vacuum_a": float(manifest["vacuum_a"]),
         "atom_count": atom_count,
         "status": marker.get("status", "pending"),
-        "complete": marker.get("complete") is True and "General timing and accounting" in outcar,
-        "electronic_convergence": "aborting loop because EDIFF is reached" in outcar,
+        "complete": marker.get("complete") is True and electronic_converged(directory),
+        "electronic_convergence": electronic_converged(directory),
         "total_energy_ev": energies[-1] if energies else None,
         "energy_ev_per_atom": energies[-1] / atom_count if energies else None,
     }

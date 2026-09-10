@@ -15,6 +15,7 @@ def test_md_and_interface_ranges():
     quantum = calculate_quantum_surface(resin_polarity=.7)
     interface = calculate_interface_and_cg(quantum=quantum, md=md, filler_pct=5, crosslink_density=.65, resin_polarity=.7)
     assert md.temperatures_c[0] == -180
+    assert 120 in md.temperatures_c
     assert np.all(md.elastic_modulus_gpa > 0)
     assert 0 <= interface.dispersion_index <= 1
     assert interface.binding_energy_mj_m2 > 0

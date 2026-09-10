@@ -1,0 +1,1003 @@
+\n--- PAGE 1 ---\nEuropean Polymer Journal 213 (2024) 113123
+Available online 14 May 2024
+0014-3057/© 2024 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+A super strong polyurethane elastomer with efficient self-healing 
+performance enabled by partially mixing reversible hard domains 
+Ruhan Yang , Jin Hu , Weijie Li , Xinya Zhang * 
+School of Chemistry and Chemical Engineering, Guangdong Provincial Key Lab of Green Chemical Product Technology, South China University of Technology, Guangzhou 
+510640, PR China   
+A R T I C L E I N F O  
+Keywords: 
+Self-healing 
+Polyurethane 
+Diels-Alder 
+Mechanical strength 
+A B S T R A C T  
+The reversible chain extender Diels-Alder-diol (DA-diol) containing thermally dissociable Diels-Alder adducts 
+(DA adducts) was synthesized and combined with 1,4-butanediol (BDO) as complexed chain extenders used for 
+preparing a transparent polyurethane elastomer (DAPU) with high mechanical strength and efficient self-healing 
+ability by partially mixing reversible hard domains. The optimal DAPU occupies a desired high tensile strength of 
+65 MPa, and its elongation at break and toughness are of 1050 % and 216 MJ⋅m−3, respectively. Meanwhile, the 
+DAPU-0.2 elastomer heals at 110 ◦C for 2 h with a healing efficiency of 95 %. The desirable mechanical strength 
+and efficient self-healing ability are attributing to the BDO chain extended hard segments ensure the high 
+strength at room temperature, while DA-diol chain extended hard segments endow the as-prepared DAPUs with 
+self-healing ability at an elevated temperature. This work overall points to a strategy in designing self-healing 
+polyurethane elastomers with markedly improved mechanical strength and efficient self-healing ability by 
+partially mixing reversible hard domains.   
+1. Introduction 
+Inspired from nature, self-healing materials, capable of repairing 
+physical damages and restoring original performances under suitable 
+stimulus, have been developed and made significant advances over the 
+last two decades. Self-healing elastomers are one of the most studied 
+materials since they have broad and promising applications, including in 
+flexible sensors, [1,2] artificial skins, [3] energy conversion devices, 
+[4–6] lithium-ion batteries, [7–9] responsive robotics [10,11] and pro­
+tective coatings. [12,13] However, the mechanical strength and tough­
+ness required by load-bearing applications and self-healing ability 
+enabled by the bond reversibility and chain flexibility are mutually 
+exclusive in most structure design of healable elastomers. To prepare 
+high performance self-healing materials, several strategies are taken into 
+account, such as to generate a high density of units without crystalli­
+zation and covalent bonds, [14,15] to construct reversible covalent 
+crosslinking by dissociative dynamic bonds [16,17] and to achieve a 
+well-controlled balance between hierarchical physical crosslinking and 
+microphase separation [18,19] in the materials. 
+Thermoplastic polyurethane (TPU) elastomers with typically alter­
+nating hard and soft segments are prone to form microphase separation 
+morphology with glassy or crystalline hard domains dispersed in the soft 
+matrix. [20–22] The hard domains usually act as fillers and physical 
+crosslinking to enhance the mechanical strength. Suitable microphase 
+separation degree and ratio of hard domains and soft matrixes give ac­
+cess to an elastomeric TPU material with excellent mechanical proper­
+ties. It is foreseeable that the high-performance TPU materials generally 
+have high-melting crystalline hard domains, high molecular weight and 
+inter-chain entanglement. Thus, the diffusion rate of molecular chains is 
+slow that results in the incapable of self-healing ability. To endow TPU 
+with self-healing ability, non-covalent interactions including hydrogen 
+bonds, [23–26] coordination bonds, [27,28] and so on, and different 
+reversible bonds such as disulfide bonds, [29–32] imine bonds, [33,34] 
+phenol-carbamate bonds, [35] urea bonds, [36] and so on, are intro­
+duced into TPU backbones as chain extender or crosslinker that results 
+in the efficient self-healing ability of TPU. Multiple hydrogen bonds 
+introduced play a dual role in enhancing and promoting self-healing. 
+The breaking and recombination of dynamic hydrogen bonds confer 
+self-healing ability and mechanical enhancement properties of elasto­
+mers on the molecular scale. [23–25] By utilizing the rigidity and high 
+dynamism of the C = N double bond of imine, and controlling the degree 
+of microphase separation by adjusting the content of hard segments, 
+* Corresponding author. 
+E-mail address: cexyzh@scut.edu.cn (X. Zhang).  
+Contents lists available at ScienceDirect 
+European Polymer Journal 
+journal homepage: www.elsevier.com/locate/europolj 
+https://doi.org/10.1016/j.eurpolymj.2024.113123 
+Received 26 January 2024; Received in revised form 30 March 2024; Accepted 12 May 2024   
+\n--- PAGE 2 ---\nEuropean Polymer Journal 213 (2024) 113123
+2
+polyurethane elastomers with high mechanical strength and excellent 
+self-healing performance were prepared. [33,34] However, due to the 
+weak nature of reversible bonds and improved chain mobility, intrinsic 
+self-healing elastomers have compromised mechanical properties. 
+[37–39] It is critical to achieve a balance between strong mechanical 
+properties as traditional TPU and satisfying self-healing performances 
+by a simple and efficient way. 
+Diels-Alder (DA), first reported by Otto Diels and Kurt Alder, [40] is 
+one of the widest used reversible reactions and occupies in develop self- 
+healing materials with high modulus and high strength. [41–43] This 
+dynamic covalent bond has gained a lot of research interest in the last 
+few decades due to the highly sensitive temperature-dependent revers­
+ibility. Formed by the cyclo-addition reaction of diene and dienophile, 
+DA adducts are stable in a relatively low temperature while reverse re­
+action (rDA) trend to happen with increasing temperature. [44,45] As 
+the most commonly reactants, furan derivatives and maleimide de­
+rivatives have a high reaction rate under a mild condition with high 
+conversion rate and a relatively low reverse reaction rate at above 90 ◦C. 
+[46,47] Thus, DA bond is an excellent candidate for constructing self- 
+healing materials in a simple and efficient way under a mild condi­
+tion. And more, the reactants are widely supplied in raw material, cheap 
+and easy to synthesize which endow practicable industrial application of 
+DA bond. 
+Herein, to achieve a balance between mechanical properties and self- 
+healing ability, an appropriate dynamic chain extender ratio was 
+needed. In this work, the thermally dissociable DA-diol as reversible 
+chain extender was synthesized. Combining with BDO, the complexed 
+chain extenders give access to a high strength self-healing polyurethane 
+elastomer. On the one hand, due to the BDO chain extended hard do­
+mains, the polyurethane elastomer exhibits excellent strength at room 
+temperature. On the other hand, because of the temperature sensitivity 
+of DA reaction equilibrium, DA-diol chain extended hard segments 
+endow the polyurethane elastomer with self-healing ability at an 
+elevated temperature. Through tuning the dynamic chain extender ratio, 
+the varied self-healing ability and mechanical properties were exam­
+ined. By partially incorporating DA-diol chain extender in a ratio of 0.2 
+and 0.3 to BDO chain extender, the DAPUs ensure an efficient self- 
+healing ability with little sacrifice of its mechanical strength. The 
+optimal DAPU-0.2 occupies a desirable high tensile strength of 65 MPa, 
+and its elongation at break and toughness are of 1050 % and 216 
+MJ⋅m−3, respectively. Moreover, the DAPU elastomer achieves a healing 
+efficiency of 95.0 % in 2 h at 110 ◦C. This work presents a facile strategy 
+to achieve a balance of desirable mechanical properties and satisfying 
+self-healing performances for traditional PU elastomers by partially 
+mixing reversible hard domains. 
+2. Experimental section 
+2.1. Materials 
+Polytetramethylene ether glycol (PTMEG, Mn = 1000 g⋅mol−1) was 
+supplied from BASF (Ludwigshafen, Germany). Dicyclohexylmethane 
+4,4′-diisocyanate (HMDI, trans, trans-isomer) was supplied by Wanhua 
+Chemical Group Co. Lid (Yantai, China). Maleic anhydride, furan, 
+ethanolamine, 2-furfuryl alcohol, di-n-butyltin dilaurate (DBTDL) were 
+purchased from Maclin Reagent (Shanghai, China) and used as received. 
+Ethyl acetate, petroleum ether (b.p. 60–90 ◦C), methanol, ethanol, 
+dimethyl ether and 1,4-butanendiol (BDO) were purchased from 
+Guangzhou Chemical Reagent (Guangzhou, China). N, N-dimethyl 
+formamide (DMF, extra dry, with molecular sieves, water content ≤50 
+ppm) was purchased from Energy Chemical (Shanghai, China). 
+2.2. Synthesis of DA-diol chain extender 
+The DA-diol chain extender was synthesized with four steps as shown 
+in Scheme 1, modified according to the methods reported by literatures. 
+[48]. 
+2.2.1. Synthesis of 4,10-dioxatricyclo[5.2.1.02,6]dec-8-ene-3,5-dione 
+(FMA) 
+Maleic anhydride (294 g), furan (210 g) and ethyl acetate (400 mL) 
+were added into a round-bottom flask and stirred for 24 h at room 
+temperature. Then the white crystal precipitate was filtered and washed 
+with petroleum ether twice, followed by vacuum drying at 50 ◦C for 2 h. 
+The yield is of 84 % and the purity is of 99.9 %. 1H NMR (500 MHz, 
+DMSO‑d6) δ 6.58 (s, 2H), 5.35 (s, 2H), 3.35 (s, H2O), 3.31 (s, 2H), 2.51 
+(m, DMSO) ppm. 13C NMR (125 MHz, DMSO‑d6) δ 172.04, 137.32, 
+82.11, 49.55, 39.92 ppm. FTIR (KBr) ν = 3603, 3435, 1859, 1790, 1382, 
+1311, 1284, 1231, 1219, 1194, 1146, 1089, 1022, 1003 cm−1. The 
+chemical structure of FMA are showed in Figure S1. 
+2.2.2. Synthesis of 4-(2-hydroxy-ethyl)-10-oxa-4-aza-tricyclo[5.2.1.02,6] 
+dec-8-ene-3,5-dione (FMI) 
+FMA (175 g) and methanol (300 mL) were fed into a round-bottom 
+flask with ice-water bath. The mixture of ethanolamine (80 g) and 
+methanol (150 mL) were slowly dropped into the flask with stirring 
+under ice-water bath. After addition, the reaction mixture was stirred at 
+room temperature till the mixture became colorless transparent. After­
+wards, the reaction mixture was refluxed at 80 ◦C for 24 h, and then kept 
+in refrigerator overnight for recrystallization. The yellowish crystals 
+were filtered and washed by dimethyl ether twice, followed by vacuum 
+drying at 50 ◦C for 2 h. The yield is of 67 % and the purity is of 99.5 %. 
+1H NMR (500 MHz, DMSO‑d6) δ 6.55 (s, 2H), 5.12 (s, 2H), 4.80 (m, 1H), 
+3.41 (m, 4H), 3.35 (s, H2O), 2.93 (s, 2H), 2.50 (m, DMSO) ppm. 13C NMR 
+(125 MHz, DMSO‑d6) δ 176.97, 136.93, 80.75, 57.74, 47.60, 41.08, 
+39.95 ppm. FTIR (KBr) ν = 3478, 1770, 1688, 1471, 1437, 1406, 1387, 
+1336, 1317, 1289, 1270, 1221, 1170, 1157, 1099, 1055, 1032, 1015 
+cm−1. The chemical structure of FMI are showed in Figure S2. 
+2.2.3. Synthesis of N-(2-hydroxyethyl)-maleimide (MI) 
+FMI (80 g) and xylene (800 mL) were added into a round-bottom 
+flask and refluxed at 125 ◦C for 4 h. Then, the reaction mixture was 
+cooled down to room temperature and yellow oily insoluble by-products 
+were immediately precipitated. The upper solution was transferred to 
+another flask to remove the insoluble oily by-products and then left in 
+refrigerator overnight for crystallization. The yellowish crystals were 
+filtered and washed by petroleum ether three times, followed by vacuum 
+drying at 50 ◦C for 2 h. The yield is of 82 % and the purity is of 99.5 %. 
+1H NMR (500 MHz, DMSO‑d6) δ 7.01 (s, 2H), 4.79 (m, 2H), 3.46 (m, 
+4H), 3.35 (s, H2O), 2.51 (m, DMSO) ppm. 13C NMR (125 MHz, 
+DMSO‑d6) δ 171.58, 134.93, 58.39, 40.41, 39.92 ppm. FTIR (KBr) ν =
+3445, 3278, 3112, 2960, 2932, 2880, 1765, 1751, 1712, 1585, 1443, 
+1404, 1385, 1365, 1321, 1258, 1159, 1092, 1067, 1052 cm−1. The 
+chemical structure of MI are showed in Figure S3. 
+Scheme 1. Illustration of the synthetic route of DA-diol chain extender.  
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 3 ---\nEuropean Polymer Journal 213 (2024) 113123
+3
+2.2.4. Synthesis of DA-diol 
+MI (66 g), 2-furfuryl alcohol (50 g) and methanol (600 mL) were 
+added into a round-bottom flask and refluxed at 80 ◦C for 12 h. The 
+reaction mixture was cooled down in refrigerator and yellow block 
+precipitates were observed. After filtration, the precipitates were then 
+pulverized to powders. The yellowish powders were dispersed and 
+washed with ethyl acetate at 50 ◦C three times, followed by vacuum 
+drying at 50 ◦C for 12 h. The yield is of 70.0 % and the purity is of 99.7 
+%. 1H NMR (500 MHz, DMSO‑d6) δ 6.52 (m, 2H), 5.07 (s, 1H), 4.94 (t, 
+1H), 4.77 (m, 1H), 4.02 (q, 1H), 3.69 (q, 1H), 3.40 (m, 4H), 3.34 (s, 
+H2O), 3.04 (d, 1H), 2.89 (d, 1H), 2.50 (m, DMSO) ppm. 13C NMR (125 
+MHz, DMSO‑d6) δ 1176.86, 175.41, 138.58, 136.92, 92.11, 80.65, 
+59.41, 57.75, 50.43, 48.25, 41.03, 39.98 ppm. FTIR (KBr) ν = 3467, 
+3022, 2969, 2943, 2886, 1759, 1685, 1429, 1400, 1367, 1342, 1304, 
+1279, 1254, 1232, 1181, 1157, 1107, 1085, 1074, 1057, 1005 cm−1. The 
+chemical structure of DA-diol are showed in Figure S4. 
+2.3. Synthesis of DAPU elastomers 
+A series of DAPU elastomers with different DA-diol chain extending 
+ratio were prepared through a two-step polymerization method, as 
+illustrated in Scheme 2. The detailed formulations of all DAPUs were 
+displayed in Table 1. Taken DAPU-0.2 as example, the detailed synthesis 
+procedures were described as below. In a round-bottom flask, PTMEG 
+(40 g, 40 mmol) were dehydrated at 120 ◦C under vacuum for 2 h. After 
+cooling to 70 ◦C, HMDI (22.0 g, 84 mmol) and DBTDL (0.6 mg) were 
+added and stirred for about 30 min under the protection of N2. Then, 
+anhydrous DMF (100 g), BDO (2.88 g, 36 mmol) and DBTDL (0.08 g) 
+were added and stirred for 20 min at 70 ◦C. Afterwards, DA-diol (1.91 g, 
+4 mmol) and DBTDL (0.08 g) were added and continued to react at 70 ◦C 
+for 4 h. Finally, after dilution of the polymer solution with DMF to solid 
+concentration of 20 wt% to reduce the viscosity, it was poured into the 
+PTFE mold and dried in the oven at 70 ◦C for 12 h. After vacuum drying 
+at 70 ◦C for at least 48 h, a yellowish transparent elastomer film was 
+obtained. The 1H NMR of different DAPUs are showed in Figure S5. 
+2.4. Instrumentation and characterization 
+Nuclear magnetic resonance (NMR) spectra were measured at 
+298 K on an Ascend ™ 500 MHz NMR (Bruker, Germany) spectrometer. 
+Fourier transform infrared spectroscopy (FTIR) spectra of the compound 
+powders were measured on Nicolet Avatar 370 (Thermo Electron, USA) 
+spectrometer using the KBr pellet method. The FTIR spectra of the 
+prepared DAPU elastomer films were recorded on a Vertex 70 (Bruker, 
+Germany) using the attenuated total reflectance (ATR) accessory. All the 
+FTIR spectra were scanned 32 times from 4000 to 500 cm−1 with a 
+resolution of 4 cm−1. UV–vis transmittance spectra of DAPU films were 
+recorded by a U-3900 spectrophotometer (Hitachi, Japan), scanning 
+from 800 to 300 nm with a resolution of 2 nm. Gel permeation chro­
+matography (GPC) tests were performed on a Waters 1515 instrument 
+with two MIXED-C 7.5 × 300 mm PL columns. The DAPU films were 
+dissolved in THF and tested with THF as eluent at a flow rate of 1.0 
+mL⋅min−1, using narrowly dispersed polystyrene standards for calibra­
+tion of molecular weights. 
+Thermogravimetric analysis (TGA) was conducted on a TG 209 F1 
+Libra (Netzsch, Germany) instrument with 5–10 mg sample heating 
+from 50 to 600 ◦C at a speed of 10 ◦C⋅min−1 with N2 flow. Differential 
+Scheme 2. Schematic illustration of the design strategy and the synthesis route of DAPU elastomers (The “…/…“ connected the DA-diol hard segment in the red 
+wireframe, which meaning that if the temperature high than 110 ◦C, the DA-diol hard segment section would dissociate to endow DAPU with self-healing perfor­
+mance, and if the temperature low than 70 ◦C, the dissociate hard segment section is also possible to restructure the cross-linked network to restore its original 
+mechanical properties). 
+Table 1 
+The detailed formulas with different ratios of DA-diol to BDO.  
+Sample 
+PTMEG 
+(mmol) 
+HMDI 
+(mmol) 
+BDO 
+(mmol) 
+DA-diol 
+(mmol) 
+BDO: 
+DA-diol 
+HS 
+(%) 
+DAPU- 
+0.0 
+40 
+84 
+40 
+0 
+1:0  
+39.1 
+DAPU- 
+0.1 
+40 
+84 
+36 
+4 
+9:1  
+39.7 
+DAPU- 
+0.2 
+40 
+84 
+32 
+8 
+8:2  
+40.1 
+DAPU- 
+0.3 
+40 
+84 
+28 
+12 
+7:3  
+40.7 
+DAPU- 
+0.5 
+40 
+82 
+19 
+19 
+5:5  
+41.1 
+DAPU- 
+1.0 
+40 
+80 
+0 
+36.2 
+0:1  
+42.6  
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 4 ---\nEuropean Polymer Journal 213 (2024) 113123
+4
+scanning calorimetry (DSC) measurements were performed on a DSC 
+250 (TA Instruments, USA) instrument using about 10 mg sample with 
+N2 flow at temperature ranging from −90 ◦C to 160 ◦C with a speed of 
+10 ◦C⋅min−1. Dynamic mechanical thermal analysis (DMA) was per­
+formed on a Q850 (TA Instruments, USA) equipment using rectangular 
+films (20 × 5 × 0.5 mm) under tension mode at temperature ranging 
+from −80 to 150 ◦C with a speed of 3 ◦C⋅min−1. Wide-angle X-ray 
+diffraction (WAXD) patterns of DAPU films were recorded on a Smartlab 
+SE (Rigaku, Japan) diffractometer using Cu Kα radiation, scanning from 
+5 to 60◦with steps of 0.013◦at a speed of 12◦min−1. 
+Mechanical properties were measured by a universal testing machine 
+5565 (Instron, USA) with a 1 k load cell according to GB/T 528–2009 at 
+ambient temperature. Films were cut into type 4 dumbbell shaped 
+specimen with dimensions of 35 × 2 × 0.5 mm3. The gauge length is 
+12.5 mm and the stretching rate is 50 mm⋅min−1. The self-healing 
+processes of scratched surface were observed using an Axioskop 40 
+POL (CEISS, Germany) polarization microscope (POM). The films were 
+placed on a THMS600E (Linkam, UK) hot stage to control the healing 
+temperature. Self-healing efficiency tests were conducted by recording 
+and comparing the tensile properties of the original sample with the 
+fully cut sample after different healing time at various healing temper­
+atures. Rheological tests were performed on a M302 (Antonn Parr, 
+Austria) rheometer with 20-mm-diameter parallel plates. Disc-shaped 
+sample with thickness of 1.0 mm were scanned with frequency ramp­
+ing from 628 to 0.1 rad⋅s−1 at the strain of 1 % at various temperatures. 
+3. Results and discussion 
+3.1. Materials design and characterization 
+DAPU elastomers with different DA-diol chain extended hard seg­
+ments were prepared through a two-step polymerization method, as 
+illustrated in Scheme 2. First, HMDI and PTMEG were prepolymerized to 
+obtain NCO terminated prepolymer. Then, the prepolymer was chain 
+extended with BDO and DA-diol successively with different ratios, fol­
+lowed by the solvent evaporation in the Teflon mold to give transparent 
+elastomer films. In order to investigate the independence influence of 
+DA-diol chain extending ratio on the performance of DAPUs, the effects 
+of NCO: OH prepolymerization ratio and hard segment content should 
+be suppressed by controlling these two variables. Due to the molecular 
+mass differences of DA-diol and BDO chain extenders, it was impossible 
+to keep these two variables unchanged simultaneously, while varying 
+the DA-diol chain extending ratio. Thus, on the basis of total NCO: OH =
+1.05 instead of the stoichiometric NCO: OH = 1 (Considering the inev­
+itable reaction between water vapor and NCO– group during the reac­
+tion process, as well as the influence of the secondary reaction between 
+urethane and NCO– groups), these two variables were both varied 
+slightly to balance and reduce their effects. The first NCO: OH pre­
+polymerization ratios were set 2.1: 1 to 2.0:1 thus controlled the hard 
+segment contents were at about 40 wt% in the formulation. The detailed 
+reaction formulas with different ratio of BDO: DA-diol were listed in 
+Table 1. 
+All the DAPU films were of highly transparent elastic with light 
+yellow color. The color gradually became deeper with the increasing DA 
+adduct content. Fig. 1a showed the typical appearance and the UV–vis 
+transmittance spectra of DAPU films. The adsorptions of DAPU films on 
+visible light were mainly in the blue light region, originated from the 
+imide conjugated structure in the DA adduct. And the rising adsorptions 
+in the 300–500 nm blue light region were consistent with the increased 
+DA adduct contents. In the non-blue visible region above 500 nm, all 
+DAPUs, except the DAPU-1.0 with the highest content of DA adduct, 
+have a very high transparency with a transmittance greater than 88 %. 
+The ATR-FTIR spectra of different DAPUs were presented in Fig. 1b. It 
+was found that all the spectra were all similar, except the weak peak 
+band centered at 1775 cm−1. This peak is the characteristic adsorption 
+peak of DA adduct, and even though it is quite weak, the trend of 
+increased peak heights is consistent with the increasing DA-diol ratios of 
+DAPUs. 
+For further check the chemical structure of the prepared DAPUs, they 
+were dissolved in CDCl3, and characterized by 1H NMR. The results were 
+showed in Figure S5. The peaks at 6.54 and 6.48 ppm are the charac­
+teristic of two hydrogens a and a′ on the carbon–carbon double bond on 
+the six-membered ring of the DA adduct, while the peaks at 5.28 ppm 
+and 3.76 ppm belong to the hydrogen b on the DA adduct and the 
+hydrogen d on the HMDI, respectively. The ratio of the integral value of 
+the peaks mentioned above was matched to the DA-diol chain extending 
+ratio of DAPUs, which indicated that the DA-diol was successfully 
+introduced into the DAPUs according to the setting ratio. The molecular 
+weight of each DAPU was characterized by GPC shown as Fig. 2 and 
+Table 2. The molecular weight of DAPU-0.0 only extended by BDO was 
+the largest, while the DAPU-1.0 that only using DA-diol as the chain 
+extender exhibited the smallest molecular weight. Overall, the molar 
+mass of DAPUs decreased inconspicuously with the increasing DA-diol 
+chain extender ratio. This result indicated that the molecular weight 
+of DAPUs was not almost imparted by the DA reversible adduct at room 
+temperature because of its large equilibrium constant. And thus, the low 
+molecular weight would not affect the performances of DAPUs at room 
+temperature. 
+3.2. Thermal and morphological properties of DAPUs 
+Thermogravimetric analysis (TGA) was performed to investigate the 
+effect of DA-diol content on the thermal stability of DAPU as shown in 
+Fig. 3. With the increasing DA adduct content, a short decomposition 
+Fig. 1. (a) UV–Vis transmission spectra, (b) the ATR-FTIR spectra of DAPUs with different DA-diol to BDO ratios.  
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 5 ---\nEuropean Polymer Journal 213 (2024) 113123
+5
+stage appeared at 220–270 ◦C for all the DAPUs, and the decomposition 
+increased with the increasing DA adduct content in Fig. 3a. This trend is 
+consistent with the results of DTG in Fig. 3b. The decomposition in this 
+stage is mainly related to the presence of multiple DA adducts in a small 
+amount of long hard chain segments. When these DA adducts underwent 
+reverse reaction disconnection at high temperature, small molecules 
+such as furfuryl alcohol double-terminated HMDI were generated, which 
+evaporates and loses mass earlier at a relatively low temperature. All 
+DAPUs possess two degradation regions, which respectively belong to 
+the decomposition of hard segment in 200–350 ◦C and the decomposi­
+tion of soft segment in 350–450 ◦C. It is worth noting that, there is a 
+turning point when the mass loss is around 40 wt%, which coincides 
+with the setting hard segment content of the DAPUs of 40 wt%. Except 
+for the above stages, the decomposition of both hard and soft segments 
+was hardly imparted by the content of DA adducts. The above results 
+indicated that even if the DA reaction is highly reversible, the intro­
+duction of DA diol chain extenders would not significantly reduce the 
+thermal stability of DAPUs. 
+DSC was used to analyze DAPUs with different DA adduct contents, 
+and the DSC curves of the first heating scan of each DAPU are shown in 
+Figure S6 and the data are listed in Table S1. As the proportion of DA- 
+diol chain extending ratio increases, the soft segment Tg of DAPU 
+gradually increases, indicating better compatibility obtained between 
+the hard and soft segments of DA-diol chain extender. The introduction 
+of DA-diol chain extender would gradually reduce the degree of 
+microphase separation of DAPUs. For DAPU-0.0 chain extended 
+completely by BDO, there are two endothermic peaks at between 70 and 
+120◦C, belonging to ordered structures or microcrystals with different 
+degree of order formed by hard chain segments of different lengths, and 
+the endothermic peaks that consume heat when heated and destroyed. 
+When introducing a portion of DA diol chain extenders, that is, partially 
+mixing reversible domains, due to the dynamic reversibility of DA ad­
+ducts, different molecular chains could be dynamically reorganized, 
+resulting in a more uniform order of the ordered structure of hard 
+segment stacking in various parts of DAPUs. This leads to the two 
+endothermic peaks transferred into one as shown in Figure S6. This 
+endothermic peak shifts slightly towards high temperature with the 
+increasing DA diol chain extender ratio, mainly due to the increased 
+mobility of the molecular chains, and thus leading to a slight increase in 
+the ordering degree of hard segments with some extent. However, the 
+increasing DA-diol chain extender ratio would reduce the degree of 
+microphase separation of DAPUs as well as decrease the proportion of 
+hard segments that formed ordered structure, as shown in the thermal 
+effect of this endothermic peak Δ Hm gradually decreases in Table S1. 
+When the chain extending ratio of DA diol is more than 50 %, the ab­
+sorption peak has even decreased to complete disappear. The absorption 
+peak between 100 and 160 ◦C in Figure S6 is the reaction heat absorbed 
+by the DA reversible adducts rDA decomposition with a peak tempera­
+ture of around 140 ◦C. The enthalpy of this absorption peak Δ HrDA 
+enhances with the increasing DA-diol chain extending ratio, which is 
+consistent with expectations. 
+Dynamic mechanical analysis (DMA) was conducted to further 
+investigate the thermal properties of DAPUs as displayed in Fig. 4. 
+Fig. 4a shows the temperature dependent curve of the modulus of each 
+DAPU. From Fig. 4a, the increasing chain extender ratio of DA-diol 
+mainly affects the temperature at which DAPU enters the viscous flow 
+state. The temperature shifted towards lower temperature from DAPU- 
+0.0 to DAPU-1.0. By incorporating 10 % DA-diol chain extender, the 
+Fig. 2. GPC curves of DAPUs with different ratios of DA-diol to BDO.  
+Table 2 
+The GPC results of DAPUs with different ratios of DA-diol to BDO.  
+Sample 
+Mn (Da) 
+Mw (Da) 
+PDI 
+DAPU-0.0 
+9.00 × 104 
+1.85 × 105 
+1.38 × 105 
+DAPU-0.1 
+6.74 × 104 
+1.74 × 105 
+9.04 × 104 
+DAPU-0.2 
+5.45 × 104 
+1.36 × 105 
+7.33 × 104 
+DAPU-0.3 
+5.48 × 104 
+1.34 × 105 
+7.24 × 104 
+DAPU-0.5 
+5.87 × 104 
+1.41 × 105 
+8.66 × 104 
+DAPU-1.0 
+2.52 × 104 
+5.41 × 104 
+3.37 × 104  
+Fig. 3. (a) TG curves and, (b) DTG curves of DAPUs with different ratios of DA-diol to BDO.  
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 6 ---\nEuropean Polymer Journal 213 (2024) 113123
+6
+temperature lowered from above 140 ◦C of DAPU-0.0 to 110 ◦C of 
+DAPU-0.1. The more DA-diol used, the more the viscous flow transition 
+temperature reduced. When only DA-diol chain extender used, the 
+temperature is below 80 ◦C. Fig. 4b shows the variation curve of the loss 
+factor tanδ curves with temperature for DAPUs, indicating that the 
+overall Tg is affected by the introduced DA-diol chain extender ratio. The 
+Tg of DAPU-0.0 to DAPU-1.0 were of 8.3 ◦C, 9.7 ◦C, 15.6 ◦C, 16.9 ◦C, 
+19.9 ◦C, and 29.0 ◦C, respectively. The overall Tg increases with the 
+increasing DA-diol chain extending ratio, which is different from the 
+decrease of Tg in the soft segment measured by DSC as the DA-diol chain 
+extending ratio increases. The main reason is that the results from DMA 
+are the overall mechanical response of DAPU to temperature changes. 
+When the microphase separation degree is not so obviously, it reflects 
+the overall glass transition of the material. On the one hand, the content 
+of hard segments in the design formula increases slightly with the 
+increasing DA-diol chain extending ratio. On the other hand, it is related 
+to the slightly higher Tg of the hard segments themselves that are also 
+subjected to the DA-diol chain extender. Thus, the higher DA-diol chain 
+Fig. 4. (a) The storage modulus E′ and loss modulus E″ vs. temperature curves, (b) the loss factor tanδ vs. temperature curves of DAPUs with different ratios of DA- 
+diol to BDO. 
+Fig. 5. (a) The stress strain curves, (b) the cyclic load-unloading tensile tests of DAPU-0.2, (c) the elastic recovery ratio and hysteresis area of DAPU-0.2 during the 
+cyclic tensile processes. 
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 7 ---\nEuropean Polymer Journal 213 (2024) 113123
+7
+extending ratio would result in higher hard segment content as well as 
+higher Tg. 
+3.3. Mechanical and self-healing properties of DAPUs 
+In order to investigate the effect of the increasing chain extender 
+ratio of DA-diol on the mechanical properties of DAPUs, the mechanical 
+properties with different DA-diol chain extender ratio were examined by 
+tensile tests. The typical stress–strain curves obtained are shown in Fig. 5 
+and the mechanical performance data are listed in Table S2. The overall 
+DAPUs exhibit a trend of decreasing Young’s modulus, tensile strength, 
+and increasing elongation at break with the increasing DA-diol chain 
+extending ratio. The main reason is that due to the poor structural 
+regularity of DA-diol and the presence of two stereoisomers, the hard 
+segments of DA-diol chain extension are difficult to arrange into ordered 
+structure, resulting in the ordered micro regions of the original BDO 
+chain extension hard segments in DAPU being gradually destroyed by 
+the hard segments of DA-diol chain extension. This reduces the degree of 
+microphase separation of DAPU, and thus reduces its tensile strength, 
+but increases its elongation. When the chain extending ratio of DA-diol is 
+low, that is, the ordered micro regions of BDO hard segments in DAPU- 
+0.1 to DAPU-0.3 have not been completely destroyed, and still play a 
+role in filler reinforcement and physical crosslinking, consequently 
+maintain relatively high mechanical strength. When the chain extending 
+ratio of DA-diol is greater than 50 %, the ordered micro regions of hard 
+segments are basically destroyed, and thus the degree of microphase 
+separation significantly decreases as well as the strength sharply de­
+creases, that the poor tensile strength and higher elongation at break of 
+DAPU-0.5 and DAPU-1.0 shown in Fig. 5a. 
+In order to investigate the elastic recovery performance and fatigue 
+resistance of DAPUs, a typical DAPU-0.2 was subjected to cyclic tensile 
+tests. The stress–strain curve of the DAPU-0.2 during 10 cycles of cyclic 
+loading tensile tests in Fig. 5b. Fig. 5c shows the calculated elastic re­
+covery rate and hysteresis area for each cycle based on Fig. 5b. The 
+elasticity of the DAPU-0.2 is of an elastic recovery rate of 94 % in the 
+first cycle, and nearly 100 % in each subsequent cycle. Moreover, after 
+10 cyclic stretching at 500 % strain, the tensile strength was up to 60 
+MPa from Fig. 5b. From the energy loss of the hysteresis loop in each 
+cycle, except the maximum energy loss in the first hysteresis loop, the 
+energy loss of the hysteresis loop in the subsequent loading cycles 
+gradually approaches an equilibrium value. The main reason is that the 
+energy loss in the first loading cycle mainly includes the enthalpy energy 
+consumed by hydrogen bond disconnection, while the energy loss in the 
+subsequent loading cycles mainly consists of the entropy energy released 
+by the rebound of soft segment molecular chains. The above indicates 
+that when the DA-diol chain extending ratio is not high, the hard 
+segment micro region formed by the separation of hard and soft seg­
+ments plays a typical physical cross-linking role, leading to excellent 
+elastic and mechanical properties. And more, the stability of the hard 
+segment micro region is strong, leading to good fatigue resistance. 
+In order to investigate the effect of the composite chain extender 
+ratio of reversible chain extender DA-diol on the self-healing perfor­
+mance of DAPUs, a hot stage polarizing microscope was used to observe 
+the self-healing process of scratches on the DAPU film at a certain 
+temperature. Microscopic photos showed that all the self-healing pro­
+cess of DAPUs with different DA adduct contents carried out effectively 
+Fig. 6. Optical micrographs of the healing processes of DAPU films at certain temperatures.  
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 8 ---\nEuropean Polymer Journal 213 (2024) 113123
+8
+within 30 min in Fig. 6. Firstly, as shown in Fig. 6a, the DAPU-0.0, which 
+extended by BDO completely, possesses a slow diffusion rate due to 
+entanglement of the molecular chain and microphase separation of the 
+soft and hard segments resulting from the absence of reversible covalent 
+bonds in the hard domain. When the DAPU-0.0 heated at 120◦C for 30 
+min, there are almost no self-healing traces. But the DAPU-0.1with only 
+incorporated 10 % DA-diol chain extender, which can quickly self- 
+healing at 120 ◦C as shown in Fig. 6b, wherein the 20 to 30 μm wide 
+scratch quickly narrows and gradually sutures together until only a 
+small trace remains after 30 min. If continue heating, these traces would 
+disappear. As shown in Fig. 6c, the effective healing temperature of 
+DAPU-0.2 reduced to 110 ◦C, and in Fig. 6d, the healing temperature of 
+DAPU-0.3 further reduced to 100 ◦C. As shown in Fig. 6e, DAPU-0.5 
+with a higher content of DA-diol achieved a more complete healing ef­
+fect at 100 ◦C for 30 min, and the residual traces of scratch have 
+completely disappeared. As shown in Fig. 6f, the DAPU-1.0 completely 
+extended by DA-diol, occupies a poor degree of microphase separation. 
+The reversible disconnection of DA adducts occupies the greatest pro­
+moting effect on molecular chain diffusion, and thus quickly self-healed 
+at 80 ◦C. 
+The above results indicate that the large equilibrium shift in the 
+reverse reaction of DA adducts is very conducive to the self-healing 
+process. By introducing a small amount of DA reversible adducts into 
+the long chain of polymer molecules, the reversible equilibrium of DA 
+adducts can greatly weaken the hindrance effect of molecular chain 
+entanglement and microphase separation on molecular chain diffusion 
+without significantly reducing mechanical strength. Thus, it enables the 
+molecular chains to rapidly diffuse with the assistance of DA reversible 
+equilibrium reaction, and then fill and narrow the scratch gap until the 
+scratch damage is completely repaired. The higher the chain extension 
+ratio of DA-diol used, the higher the proportion of DA adducts in the 
+molecular chain presented as well as the weakened degree of micro­
+phase separation. The combined effect leads to a rapid improvement in 
+the self-healing performance of DAPUs with an increasing chain 
+extending ratio of DA-diol. 
+In order to further quantitively evaluate the self-healing efficiencies 
+of DAPUs, tensile tests of the DAPU films healed at different tempera­
+tures were conducted. Fig. 7 showed the stress–strain curves of DAPUs at 
+varied healing temperature and the exact data are listed in Table S3. It is 
+obvious that the incorporation of DA-diol significantly improved the 
+self-healing efficiencies of the DAPU films. Without the dynamic chain 
+extender, the healing efficiency of DAPU-0.0 that healed at 120 ◦C 
+within 4 h was of 36.9 %, while the healing efficiency of DAPU-0.1 was 
+of 86.9 % in 4 h at 110 ◦C and DAPU-0.2 was of 81.6 % in 1 h at 110 ◦C. 
+DAPU-0.3 occupies a higher healing efficiency of 87.0 % at 100 ◦C 
+within 1 h. As expected, DAPU-0.5 wholly healed at 80 ◦C and even the 
+temperature of 60 ◦C was an efficient temperature for DAPU-1.0. 
+Meanwhile, it is worth noting that compared with DAPU-0.0 chain 
+extended by BDO completely, all the DAPUs achieve a certain healing 
+degree at a lower temperature of 60–80 ◦C due to the DA reversible 
+reaction would proceed at 60–80 ◦C and the rearrangement of the mo­
+lecular chain happen in such condition. For example, DAPU-0.2 achieves 
+a healing efficiency of 48.9 % at 80 ◦C for 4 h, and DAPU-0.3 achieves a 
+healing efficiency of 65.9 % under the same conditions. The reason for 
+this phenomena is that even there is a large forward reaction equilib­
+rium constant at 60–80 ◦C, however, due to the high reaction rates of 
+both the forward and reverse reactions present at this time, the DA ad­
+ducts on different molecular chains are still continuously recombining. 
+As long as the reverse reaction rate is high, the DAPUs still show a 
+certain degree of self-healing ability, and resulted in a satisfying healing 
+efficiency of DAPU-0.1 to DAPU-1.0 contrast to DAPU-0.0. 
+In order to further highlight the advantages of the combination with 
+thermally reversible hard domains based on Diels-Alder adducts, we 
+listed this results compared with other literature in Table 3. Compared 
+with previous reports, [16,17,49–57] as the optimal DA-diol chain 
+extending ratio of from 0.2 to 0.3, the robust mechanical properties of 
+the DAPUs with a maximum tensile strength of over 65 MPa, and a self- 
+healing efficiency of 95 % at 110 ◦C for 2 h are achieved. 
+Fig. 7. Stress strain curves of DAPUs before and after healing at different temperatures: (a) DAPU-0.0; (b) DAPU-0.1; (c) DAPU-0.2; (d) DAPU-0.3; (e) DAPU-0.5; (f) 
+DAPU-1.0. 
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 9 ---\nEuropean Polymer Journal 213 (2024) 113123
+9
+3.4. Rheology and self-healing mechanism of DAPUs 
+To explain the self-healing mechanism of DAPU enabled by partially 
+mixing reversible hard domains of combination of DA-diol and BDO 
+chain extenders, rheological frequency sweep tests at 100 ◦C were 
+conducted as shown in Fig. 8. The relaxation time τ, known as the in­
+verse of the crossover frequency of storage modulus G′ and loss modulus 
+G″, is closely related with the chain mobility which is critical to the 
+process of self-healing. The relaxation time of DAPU-0.1 to DAPU-0.5 
+are 11.9 s, 1.04 s, 0.207 s, and 0.073 s which is steeply decreased 
+when the DA-diol chain extending ratio raising. The efficient self- 
+healing ability in DAPU films was attributed to the chain mobility 
+improved signally by incorporating the DA-diol chain extender. Zero 
+shear viscosity (η0) is a direct indicator for the self-healing process. As 
+shown in Fig. 8b, when the frequency extended to infinitely small, the 
+complex viscosities for DAPU-0.1 to DAPU-1.0 tended to a constant 
+called zero shear viscosity. On the contrary, the zero shear viscosity of 
+DAPU-0.0 approached infinity. It indicated that the zero shear viscosity 
+decreased distinctly in consequence of the increasing DA-diol chain 
+extender ratio and resulted in the higher self-healing efficiency. 
+4. Conclusions 
+In summary, a super strong DAPU elastomer with efficient self- 
+healing performance enabled by partially mixing reversible DA bonds 
+was successfully synthesized. Incorporating a small quantity of DA-diol 
+in hard domains exhibits desirable mechanical properties under ambient 
+temperature as well as efficient self-healing ability at an elevated 
+temperature. When the DA-diol chain extender ratio is of 0.2 and 0.3, 
+the maximum tensile strength of DAPUs is over 65 MPa and the elon­
+gation at break is up to 1053 % with the toughness of 216 MJ⋅m−3. 
+Meanwhile, the self-healing process were completely in 2 h at 110 ◦C 
+with the self-healing degree of 95 %. A small amount of DA reversible 
+adduct resulted in a slight increase in the microphase separation degree 
+in DAPUs which improved chain mobility and gave access to a steeply 
+increased of self-healing efficiency. This work provided a facile micro­
+phase separation strategy by designed reversible hard domain for self- 
+healing robust polyurethane materials. 
+CRediT authorship contribution statement 
+Ruhan Yang: Writing – original draft. Jin Hu: Data curation. Weijie 
+Li: Writing – review & editing. Xinya Zhang: Supervision. 
+Declaration of competing interest 
+The authors declare that they have no known competing financial 
+interests or personal relationships that could have appeared to influence 
+the work reported in this paper. 
+Data availability 
+No data was used for the research described in the article. 
+Table 3 
+Mechanical properties and self-healability of different PU elastomers.  
+Sample 
+Methods 
+Mechanical properties/MPa 
+Self-healability 
+Ref. 
+Temperature /◦C and time /h 
+Efficiency/% 
+DAPU 
+DA-diol and BDO combined 
+65.0 
+110, 2 
+95 
+This work 
+MPUF 
+multiple hydrogen bonds 
+37.1 
+120, 4 
+91.8 
+[49] 
+PUT 
+phenyl-carbamate bonds 
+~52.0 
+110, 0.5 
+−
+[50] 
+DOU-PU 
+dimethylglyoxime–urethane 
+~14.0 
+80, 24 
+76 
+[51] 
+PTU 
+thiocarbamate bonds 
+62.7 
+−
+90 
+[52] 
+PDM 
+Pyridine dimethanol 
+29.0 
+RT, 24 
+−
+[17] 
+PUU-TBAE 
+Urea Bonds 
+~40 
+100, 20 min 
+95 
+[53] 
+TPU 
+carbonyl hydrogen-bonds 
+43 
+35, 48 
+−
+[54] 
+PU 
+hydrogen bonds 
+25 
+65, 2 
+−
+[16] 
+PUDS 
+phase-locked design 
+25 
+70, 4 
+−
+[55] 
+Cu-BIMU 
+imidazole-urea 
+bond and multiple noncovalent bond coupling 
+65.3 
+100, 12 
+90.2 
+[56] 
+PU-GO 
+multiple dynamic H-bonds and flexible 
+disulfide bond 
+78.3 
+25, 24 
+88.6 
+[57]  
+Fig. 8. (a) Shear modulus G′/G″ versus frequency curves of DAPUs at 100 ◦C; (b) Complex viscosity |η*| versus frequency curves of DAPUs and its control sample.  
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 10 ---\nEuropean Polymer Journal 213 (2024) 113123
+10
+Appendix A. Supplementary data 
+Supplementary data to this article can be found online at https://doi. 
+org/10.1016/j.eurpolymj.2024.113123. 
+References 
+[1] X. Liu, G. Su, Q. Guo, C. Lu, T. Zhou, C. Zhou, X. Zhang, Hierarchically structured 
+self-healing sensors with tunable positive/negative piezoresistivity, Adv. Funct. 
+Mater. 28 (15) (2018) 1706658, https://doi.org/10.1002/adfm.201706658. 
+[2] Z. Huang, Z. Deng, X. Liu, T. Huang, Y. Hu, Y. Chen, Y. Liu, Z.-H. Guo, K. Yue, 
+Highly stretchable, strain-stiffening, self-healing ionic conductors for wearable 
+sensors, Chem. Eng. J. 449 (2022) 137633, https://doi.org/10.1016/j. 
+cej.2022.137633. 
+[3] J. Kang, D. Son, G.-J.-N. Wang, Y. Liu, J. Lopez, Y. Kim, J.Y. Oh, T. Katsumata, 
+J. Mun, Y. Lee, L. Jin, J.-B.-H. Tok, Z. Bao, Tough and water-insensitive self-healing 
+elastomer for robust electronic skin, Adv. Mater. 30 (13) (2018) 1706846, https:// 
+doi.org/10.1002/adma.201706846. 
+[4] K. Parida, G. Thangavel, G. Cai, X. Zhou, S. Park, J. Xiong, P.S. Lee, Extremely 
+stretchable and self-healing conductor based on thermoplastic elastomer for all- 
+three-dimensional printed triboelectric nanogenerator, Nat. Commun. 10 (1) 
+(2019) 2158, https://doi.org/10.1038/s41467-019-10061-y. 
+[5] Y. Lai, H. Wu, H. Lin, C. Chang, H. Chou, Y. Hsiao, Y. Wu, Entirely, intrinsically, 
+and autonomously self-Healable, highly transparent, and superstretchable 
+triboelectric nanogenerator for personal power sources and self-powered electronic 
+skins, Adv. Funct. Mater. 29 (40) (2019) 1904626, https://doi.org/10.1002/ 
+adfm.201904626. 
+[6] Q. Guan, G. Lin, Y. Gong, J. Wang, W. Tan, D. Bao, Y. Liu, Z. You, X. Sun, Z. Wen, 
+Y. Pan, Highly efficient self-healable and dual responsive hydrogel-based 
+deformable triboelectric nanogenerators for wearable electronics, J. Mater. Chem. 
+A 7 (23) (2019) 13948–13955, https://doi.org/10.1039/C9TA02711D. 
+[7] S. Li, C. Zuo, Y. Zhang, J. Wang, H. Gan, S. Li, L. Yu, B. Zhou, Z. Xue, Covalently 
+cross-linked polymer stabilized electrolytes with self-healing performance via 
+boronic ester bonds, Polym. Chem. 11 (36) (2020) 5893–5902, https://doi.org/ 
+10.1039/D0PY00728E. 
+[8] J. Xu, C. Ding, P. Chen, L. Tan, C. Chen, J. Fu, Intrinsic self-healing polymers for 
+advanced lithium-based batteries: advances and strategies, Appl. Phys. Rev. 7 (3) 
+(2020) 031304, https://doi.org/10.1063/5.0008206. 
+[9] Y.H. Jo, S. Li, C. Zuo, Y. Zhang, H. Gan, S. Li, L. Yu, D. He, X. Xie, Z. Xue, Self- 
+healing solid polymer electrolyte facilitated by a dynamic cross-linked polymer 
+matrix for lithium-ion batteries, Macromolecules 53 (3) (2020) 1024–1032, 
+https://doi.org/10.1021/acs.macromol.9b02305. 
+[10] Szczepanski, J.; Danner, P. M.; Opris, D. M. Self-healable, self-repairable, and 
+recyclable slectrically responsive artificial muscles. Adv. Sci. 2202153. https://doi. 
+org/10.1002/advs.202202153. 
+[11] J. Cao, C. Zhou, G. Su, X. Zhang, T. Zhou, Z. Zhou, Y. Yang, Arbitrarily 3D 
+configurable hygroscopic robots with a covalent–noncovalent interpenetrating 
+network and self-healing ability, Adv. Mater. 31 (18) (2019) 1900042, https://doi. 
+org/10.1002/adma.201900042. 
+[12] Y. Song, C. Chung, Repeatable self-healing of a microcapsule-type protective 
+coating, Polym. Chem. 4 (18) (2013) 4940–4947, https://doi.org/10.1039/ 
+C3PY00102D. 
+[13] Z. Zhou, S. Chen, X. Xu, Y. Chen, L. Xu, Y. Zeng, F. Zhang, Room temperature self- 
+healing crosslinked elastomer constructed by dynamic urea bond and hydrogen 
+bond, Prog. Org. Coat. 154 (2021) 106213, https://doi.org/10.1016/j. 
+porgcoat.2021.106213. 
+[14] S. Delpierre, B. Willocq, G. Manini, V. Lemaur, J. Goole, P. Gerbaux, J. Cornil, 
+P. Dubois, J. Raquez, Simple approach for a self-healable and stiff polymer network 
+from iminoboronate-based boroxine chemistry, Chem. Mater. 31 (10) (2019) 
+3736–3744, https://doi.org/10.1021/acs.chemmater.9b00750. 
+[15] Y. Zhang, H. Ying, K.R. Hart, Y. Wu, A.J. Hsu, A.M. Coppola, T.A. Kim, K. Yang, N. 
+R. Sottos, S.R. White, J. Cheng, Malleable and recyclable poly(urea-urethane) 
+thermosets bearing hindered urea bonds, Adv. Mater. 28 (35) (2016) 7646–7651, 
+https://doi.org/10.1002/adma.201601242. 
+[16] Z. Liang, D. Huang, L. Zhao, Y. Nie, Z. Zhou, T. Hao, S. Li, Self-healing 
+polyurethane elastomer based on molecular design: combination of reversible 
+hydrogen bonds and high segment mobility, J. Inorg. Organomet. Polym. Mater. 31 
+(2) (2021) 683–694, https://doi.org/10.1007/s10904-020-01697-1. 
+[17] Y. Li, W. Li, A. Sun, M. Jing, X. Liu, L. Wei, K. Wu, Q. Fu, A self-reinforcing and self- 
+healing elastomer with high strength, unprecedented toughness and room- 
+temperature reparability, Mater. Horiz. 8 (1) (2021) 267–275, https://doi.org/ 
+10.1039/D0MH01447H. 
+[18] F. Wang, Z. Yang, J. Li, C. Zhang, P. Sun, Bioinspired polyurethane using 
+multifunctional block modules with synergistic dynamic bonds, ACS Macro Lett. 10 
+(5) (2021) 510–517, https://doi.org/10.1021/acsmacrolett.1c00054. 
+[19] E. Filippidi, T.R. Cristiani, C.D. Eisenbach, J.H. Waite, J.N. Israelachvili, B.K. Ahn, 
+M.T. Valentine, Toughening elastomers using mussel-inspired iron-catechol 
+complexes, Science 358 (6362) (2017) 502–505, https://doi.org/10.1126/science. 
+aao0350. 
+[20] Y. He, D. Xie, X. Zhang, The Structure, microphase-separated morphology, and 
+property of polyurethanes and polyureas, J. Mater. Sci. 49 (21) (2014) 7339–7352, 
+https://doi.org/10.1007/s10853-014-8458-y. 
+[21] M.M. Mirhosseini, V. Haddadi-Asl, I.S. Jouibari, A simple and versatile method to 
+tailor physicochemical properties of thermoplastic polyurethane elastomers by 
+using novel mixed soft segments, Mater. Res. Express 6 (6) (2019) 065314, https:// 
+doi.org/10.1088/2053-1591/ab0cba. 
+[22] S. Liu, Y. Yuan, J. Li, S. Sun, Y. Chen, An Optomechanical study of 
+mechanoluminescent elastomeric polyurethanes with different hard segments, 
+Polym. Chem. 11 (11) (2020) 1877–1884, https://doi.org/10.1039/C9PY01850F. 
+[23] J. Chen, K. Zhang, X. Shi, Y. Huang, B. Jiang, Bioinspired polysiloxane/WS2 
+composites with stretchable and near-infrared light remote-controlled self-healing 
+abilities for deployable deformation actuators, Compos Sci Tech. 244 (2023) 
+110297, https://doi.org/10.1016/j.compscitech.2023.110297. 
+[24] J. Hu, R. Mo, X. Jiang, X. Sheng, X. Zhang, Towards mechanical robust yet self- 
+healing polyurethane elastomers via combination of dynamic main chain and 
+dangling quadruple hydrogen bonds, Polymer 183 (2019) 121912, https://doi.org/ 
+10.1016/j.polymer.2019.121912. 
+[25] Y. Wang, X. Huang, X. Zhang, Ultrarobust, tough and highly stretchable self- 
+healing materials based on cartilage-inspired noncovalent assembly nanostructure, 
+Nat. Commun. 12 (1) (2021) 1291, https://doi.org/10.1038/S41467-021-21577-7. 
+[26] L. Liu, M. Zhu, X. Xu, X. Li, Z. Ma, Z. Jiang, A. Pich, H. Wang, P. Song, Dynamic 
+nanoconfinement enabled highly stretchable and supratough polymeric materials 
+with desirable healability and biocompatibility, Adv. Mater. 33 (51) (2021) 
+e2105829, https://doi.org/10.1002/adma.202105829. 
+[27] M. Wu, T. Luo, J. Lu, Y. Wang, B. Lin, C. Xu, Fabricating robust natural rubber 
+composites with photothermal conversion and near-infrared light-actuated remote- 
+controlled accurate self-healing, Compos Sci Technol 235 (2023) 109966, https:// 
+doi.org/10.1016/j.compscitech.2023.109966. 
+[28] Y. Rao, A. Chortos, R. Pfattner, F. Lissel, Y. Chiu, V. Feig, J. Xu, T. Kurosawa, X. Gu, 
+C. Wang, M. He, J. Chung, Z. Bao, Stretchable self-healing polymeric dielectrics 
+cross-linked through metal-ligand coordination, J Am Chem Soc 138 (18) (2016) 
+6020–6027, https://doi.org/10.1021/jacs.6b02428. 
+[29] K. Zhang, X. Shi, J. Chen, T. Xiong, B. Jiang, Y. Huang, Self-healing and stretchable 
+PDMS-based bifunctional sensor enabled by synergistic dynamic interactions, 
+Chem Eng J 412 (2021) 128734, https://doi.org/10.1016/j.cej.2021.128734. 
+[30] X. Shi, K. Zhang, J. Chen, H. Qian, Y. Huang, B. Jiang, Octopi Tentacles-inspired 
+architecture enables self-healing conductive rapid-photo-responsive materials for 
+soft multifunctional actuators, Adv Funct Mater. 34 (2024) 2311567, https://doi. 
+org/10.1002/adfm.202311567. 
+[31] Y. Huang, J. Wang, Z. Shi, H. Wang, Z. Xue, Disulfide bond-embedded 
+polyurethane solid polymer electrolytes with self-healing and shape-memory 
+performance, Polym. Chem. 13 (42) (2022) 6002–6009, https://doi.org/10.1039/ 
+D2PY00944G. 
+[32] K. Chang, H. Jia, S. Gu, A transparent, highly stretchable, self-healing polyurethane 
+based on disulfide bonds, Eur. Polym. J. 112 (2019) 822–831, https://doi.org/ 
+10.1016/j.eurpolymj.2018.11.005. 
+[33] J. Hu, R. Mo, X. Sheng, X. Zhang, A self-healing polyurethane elastomer with 
+excellent mechanical properties based on phase-locked dynamic imine bonds, 
+Polym. Chem. 11 (14) (2020) 2585–2594, https://doi.org/10.1039/D0PY00151A. 
+[34] R. Mo, J. Hu, H. Huang, X. Sheng, X. Zhang, Tunable, self-healing and corrosion 
+inhibiting dynamic epoxy polyimine network built by post-crosslinking, J Mater 
+Chem A 7 (2019) 3031–3038, https://doi.org/10.1039/c8ta11546j. 
+[35] J. Hu, R. Yang, L. Zhang, Y. Chen, X. Sheng, X. Zhang, Robust, transparent, and 
+self-Healable polyurethane elastomer via dynamic crosslinking of phenol- 
+carbamate bonds, Polymer 222 (2021) 123674, https://doi.org/10.1016/j. 
+polymer.2021.123674. 
+[36] J. Wang, S. Hu, B. Yang, G. Jin, X. Zhou, X. Lin, R. Wang, Y. Lu, L. Zhang, Novel 
+three- dimensional-printing strategy based on dynamic urea bonds for isotropy and 
+mechanical robustness of large-scale printed products, ACS Appl. Mater. Interf. 14 
+(1) (2022) 1994–2005, https://doi.org/10.1021/acsami.1c20659. 
+[37] S. Kim, H. Jeon, S. Shin, S. Park, J. Jegal, S.Y. Hwang, D.X. Oh, J. Park, Superior 
+toughness and fast self-healing at room temperature engineered by transparent 
+elastomers, Adv. Mater. 30 (1) (2018) 1705145, https://doi.org/10.1002/ 
+adma.201705145. 
+[38] X. An, R.H. Aguirresarobe, L. Irusta, F. Ruip´erez, J.M. Matxain, X. Pan, 
+N. Aramburu, D. Mecerreyes, H. Sardon, J. Zhu, Aromatic diselenide crosslinkers to 
+enhance the reprocessability and self-healing of polyurethane thermosets, Polym. 
+Chem. 8 (23) (2017) 3641–3646, https://doi.org/10.1039/C7PY00448F. 
+[39] Y. Cai, L. Yan, Y. Wang, Y. Ge, M. Liang, Y. Chen, H. Zou, S. Zhou, A room 
+temperature self-healing and thermally reprocessable cross-linked elastomer with 
+unprecedented mechanical properties for ablation-resistant applications, Chem. 
+Eng. J. 436 (2022) 135156, https://doi.org/10.1016/j.cej.2022.135156. 
+[40] O. Diels, K. Alder, Synthesen in der hydroaromatischen reihe, Justus Liebigs Ann. 
+Chem. 460 (1) (1928) 98–122, https://doi.org/10.1002/jlac.19284600106. 
+[41] X. Chen, M.A. Dam, K. Ono, A. Mal, H. Shen, S.R. Nutt, K. Sheran, F. Wudl, 
+A thermally re-mendable cross-linked polymeric material, Science 295 (5560) 
+(2002) 1698–1702, https://doi.org/10.1126/science.1065879. 
+[42] P.A. Pratama, A.M. Peterson, G.R. Palmese, The role of maleimide structure in the 
+healing of furan-functionalized epoxy–amine thermosets, Polym. Chem. 4 (18) 
+(2013) 5000–5006, https://doi.org/10.1039/C3PY00084B. 
+[43] J. Brancart, R. Verhelle, J. Mangialetto, G. Van Assche, Coupling the microscopic 
+healing behaviour of coatings to the thermoreversible diels-alder network 
+formation, Coatings 9 (1) (2019) 13, https://doi.org/10.3390/coatings9010013. 
+[44] X. Liu, P. Du, L. Liu, Z. Zheng, X. Wang, T. Joncheray, Y. Zhang, Kinetic study of 
+diels-alder reaction involving in maleimide–furan compounds and linear 
+polyurethane, Polym. Bull. 70 (8) (2013) 2319–2335, https://doi.org/10.1007/ 
+s00289-013-0954-8. 
+[45] A. Gandini, D. Coelho, A.J.D. Silvestre, Reversible click chemistry at the service of 
+macromolecular materials. part 1: kinetics of the diels–alder reaction applied to 
+R. Yang et al.                                                                                                                                                                                                                                    
+\n--- PAGE 11 ---\nEuropean Polymer Journal 213 (2024) 113123
+11
+furan–maleimide model compounds and linear polymerizations, Eur. Polym. J. 44 
+(12) (2008) 4029–4036, https://doi.org/10.1016/j.eurpolymj.2008.09.026. 
+[46] P. Mondal, G. Jana, P.K. Behera, P.K. Chattaraj, N.K. Singha, Fast “ES-click” 
+reaction involving furfuryl and triazolinedione functionalities toward designing a 
+healable polymethacrylate, Macromolecules 53 (19) (2020) 8313–8323, https:// 
+doi.org/10.1021/acs.macromol.0c00742. 
+[47] P. Mondal, G. Jana, P.K. Behera, P.K. Chattaraj, N.K. Singha, A new healable 
+polymer material based on ultrafast diels–alder ‘click’ chemistry using 
+triazolinedione and fluorescent anthracyl derivatives: A mechanistic approach, 
+Polym. Chem. 10 (37) (2019) 5070–5079, https://doi.org/10.1039/C9PY00499H. 
+[48] W.H. Heath, F. Palmieri, J.R. Adams, B.K. Long, J. Chute, T.W. Holcombe, 
+S. Zieren, M.J. Truitt, J.L. White, C.G. Willson, Degradable cross-linkers and 
+strippable imaging materials for step-and-flash imprint lithography, 
+Macromolecules 41 (3) (2008) 719–726, https://doi.org/10.1021/ma702291k. 
+[49] S. Yang, S. Wang, X. Du, Z. Du, X. Cheng, H. Wang, Mechanically robust self- 
+healing and recyclable flame-retarded polyurethane elastomer based on 
+thermoreversible crosslinking network and multiple hydrogen bonds, Chem. Eng. 
+J. 391 (2020) 123544, https://doi.org/10.1016/j.cej.2019.123544. 
+[50] L. Bai, J. Zheng, A transparent, high refractive, shape-memory, healable, and 
+recyclable phenolic polyurethane thermoset: unexpected roles of bromine 
+substituents and tertiary amine catalysts, Macromol. Chem. Phys. 221 (5) (2020) 
+1900493, https://doi.org/10.1002/macp.201900493. 
+[51] Z. Liu, L. Zhang, Q. Guan, Biomimetic materials with multiple protective 
+functionalities, Adv. Func. Mater. 29 (28) (2019) 1901058, https://doi.org/ 
+10.1002/adfm.201901058. 
+[52] C. Cui, X. Chen, L. Ma, Q. Zhong, Z. Li, A. Mariappan, Q. Zhang, Y. Cheng, G. He, 
+X. Chen, Z. Dong, L. An, Y. Zhang, Polythiourethane covalent adaptable networks 
+for strong and reworkable adhesives and fully recyclable carbon fiber-reinforced 
+composites, ACS Appl. Mater. Interf. 12 (42) (2020) 47975–47983, https://doi. 
+org/10.1021/acsami.0c14189. 
+[53] Y. Zhang, H. Ying, K.R. Hart, Y. Wu, A.J. Hsu, A.M. Coppola, T.A. Kim, K. Yang, N. 
+R. Sottos, S.R. White, J. Cheng, Malleable and recyclable poly(urea-urethane) 
+thermosets bearing hindered urea bonds, Adv. Mater. 28 (35) (2016) 7646–7651, 
+https://doi.org/10.1002/adma.201601242. 
+[54] Y. Eom, S.M. Kim, M. Lee, H. Jeon, J. Park, E.S. Lee, S.Y. Hwang, J. Park, D.X. Oh, 
+Mechano-responsive hydrogen-bonding array of thermoplastic polyurethane 
+elastomer captures both strength and self-healing, Nat. Commun. 12 (1) (2021) 
+621, https://doi.org/10.1038/s41467-021-20931-z. 
+[55] Y. Lai, X. Kuang, P. Zhu, M. Huang, X. Dong, D. Wang, Colorless, Transparent, 
+robust, and fast scratch-self-healing elastomers via a phase-locked dynamic bonds 
+design, Adv. Mater. 30 (38) (2018) 1802556, https://doi.org/10.1002/ 
+adma.201802556. 
+[56] L. Yang, Z. Liu, R.E. Neisiany, J. Lou, Y. Guo, L. Zhang, H. Liu, S. Chen, S. Gu, 
+Z. You, A topological polymer network with Cu(II)-coordinated reversible 
+imidazole-urea locked unit constructs an ultra-strong self-healing elastomer, Sci. 
+China Chem. 66 (3) (2023) 853–862, https://doi.org/10.1007/s11426-022-1437- 
+5. 
+[57] X. Zhu, W. Zhang, G. Lu, H. Zhao, L. Wang, Ultrahigh mechanical strength and 
+robust room-temperature self-Healing properties of a polyurethane−graphene 
+oxide network resulting from multiple dynamic bonds, ACS Nano 16 (10) (2022) 
+16724–16735, https://doi.org/10.1021/acsnano.2c06264. 
+R. Yang et al.                                                                                                                                                                                                                                    

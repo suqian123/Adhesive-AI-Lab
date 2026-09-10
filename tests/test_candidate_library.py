@@ -13,7 +13,11 @@ def test_candidate_library_assigns_stable_formula_fingerprints():
     first = build_candidate_library(max_records=18, seed=3)
     second = build_candidate_library(max_records=18, seed=3)
 
-    assert first["candidate_library_version"].eq("candidate-library-v3").all()
+    assert first["candidate_library_version"].eq("candidate-library-v4").all()
+    assert first["adhesion_reference_strength_mpa"].notna().all()
+    assert first["adhesion_prediction_scope"].eq(
+        "25C 6061-T6 solvent-degreased lap-shear physics-informed proxy"
+    ).all()
     assert first["formulation_id"].str.startswith("FMT-").all()
     assert first["formulation_id"].is_unique
     assert first["formulation_id"].tolist() == second["formulation_id"].tolist()

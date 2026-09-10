@@ -30,6 +30,7 @@ import pandas as pd
 from .campaign import CalculationTask, MultiscaleCampaign, write_multiscale_campaign
 from .jobs import cancel_job, get_job_status, parse_job_result, split_job_command, submit_job, update_job_metadata
 from .result_integration import apply_external_results, to_jsonable
+from .vasp_checkpoint import electronic_converged
 
 
 TERMINAL_TASK_STATUSES = {"completed", "failed", "blocked", "cancelled"}
@@ -51,12 +52,13 @@ VASP_RUNNER_CONTROL_FILENAME = "runner_control.json"
 VASP_RUNNER_PID_FILENAME = "runner.pid"
 VASP_RUNNER_PGID_FILENAME = "runner.pgid"
 VASP_LOG_STALE_SECONDS = 15 * 60
+VASP_SCF_RECOVERY_FILENAME = "scf_recovery.json"
 VASP_PRECONVERGENCE_STAGES = (
     ("step1-fixed-charge", "固定电荷初始化"),
     ("step2-pbe", "PBE 桥接预收敛"),
     ("step3-dftu", "DFT+U 预收敛"),
 )
-VASP_ELECTRONIC_STEP_PATTERN = re.compile(r"^(?:DAV|RMM|CGA):\s+(\d+)", re.MULTILINE)
+VASP_ELECTRONIC_STEP_PATTERN = re.compile(r"^(?:DAV|RMM|CGA|DMP):\s+(\d+)", re.MULTILINE)
 ENV_PREFIXES = {
     "dft": "ADHESIVE_DFT",
     "bulk_md": "ADHESIVE_BULK_MD",
@@ -66,16 +68,12 @@ ENV_PREFIXES = {
 AUTO_ENGINE_COMMANDS = {
     "dft": (
         ("VASP", ("vasp_std", "vasp_gam"), "", "OUTCAR"),
-        ("Quantum ESPRESSO", ("pw.x",), "-in scf.in", "scf.out"),
-        ("CP2K", ("cp2k.psmp", "cp2k"), "-i cp2k.inp -o cp2k.out", "cp2k.out"),
     ),
     "bulk_md": (
         ("LAMMPS", ("lmp", "lmp_serial"), "-in in.production", "log.lammps"),
-        ("GROMACS", ("gmx",), "mdrun -deffnm production", "potential.xvg"),
     ),
     "interface_md": (
         ("LAMMPS", ("lmp", "lmp_serial"), "-in in.production", "log.lammps"),
-        ("GROMACS", ("gmx",), "mdrun -deffnm production", "potential.xvg"),
     ),
     "coarse_grained": (
         ("LAMMPS", ("lmp", "lmp_serial"), "-in in.cg", "log.lammps"),
@@ -208,6 +206,14 @@ def load_engine_profiles(
         for name in ("surface_energy_ev", "oxygen_energy_ev"):
             if category == "dft" and profile.get(name) not in (None, ""):
                 profiles[category][name] = profile[name]
+    # The current DFT convergence evidence, generated inputs, and production
+    # gate are VASP-specific. Do not revive an older QE/CP2K command as a
+    # selectable project profile; historical task records retain their engine.
+    if str(profiles["dft"].get("engine") or "").strip().lower() != "vasp":
+        profiles["dft"].update(engine="VASP", command="", result_file="OUTCAR")
+    for category in ("bulk_md", "interface_md", "coarse_grained"):
+        if str(profiles[category].get("engine") or "").strip().lower() != "lammps":
+            profiles[category].update(engine="LAMMPS", command="", result_file="log.lammps")
     return profiles
 
 
@@ -625,6 +631,124 @@ def _write_json_file(path: Path, payload: Mapping[str, Any]) -> None:
     os.replace(temporary, path)
 
 
+def _update_incar_settings(path: Path, settings: Mapping[str, str]) -> None:
+    """Replace selected INCAR tags while retaining all unrelated settings."""
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError as exc:
+        raise FileNotFoundError(f"Missing VASP INCAR: {path}") from exc
+    normalized = {str(key).upper(): str(value) for key, value in settings.items()}
+    seen: set[str] = set()
+    updated: list[str] = []
+    for line in lines:
+        match = re.match(r"^(\s*)([A-Za-z_]+)\s*=.*$", line)
+        key = match.group(2).upper() if match else ""
+        if key in normalized:
+            updated.append(f"{match.group(1)}{key} = {normalized[key]}")
+            seen.add(key)
+        else:
+            updated.append(line)
+    if seen != set(normalized):
+        updated.append("")
+        updated.extend(f"{key} = {value}" for key, value in normalized.items() if key not in seen)
+    path.write_text("\n".join(updated) + "\n", encoding="utf-8")
+
+
+def prepare_stalled_vasp_scf_recovery(
+    root: str | Path = VASP_VALIDATION_ROOT,
+    *,
+    approval: str | Path | None = None,
+) -> dict[str, Any]:
+    """Prepare one conservative restart from a stale VASP SCF checkpoint.
+
+    The checkpoint and the diagnostic logs remain in place; copies of the
+    mutable inputs and logs are stored beside the job before changing INCAR.
+    A recovery marker prevents automatic repeated parameter changes.
+    """
+    validation_root = Path(root).expanduser().resolve()
+    approval_path = Path(approval).expanduser() if approval is not None else validation_root / "approved.json"
+    progress = vasp_convergence_progress(validation_root, approval=approval_path)
+    if not progress.get("stalled"):
+        raise RuntimeError("当前 VASP 验证并未处于日志停滞状态，不能执行受控 SCF 恢复。")
+    job_name = str(progress.get("job") or "").strip()
+    if not job_name:
+        raise RuntimeError("无法确定停滞的 VASP 验证任务目录。")
+    job_directory = (validation_root / job_name).resolve()
+    try:
+        job_directory.relative_to(validation_root)
+    except ValueError as exc:
+        raise RuntimeError("停滞任务目录不属于当前 VASP 验证目录。") from exc
+    incar = job_directory / "INCAR"
+    checkpoint = job_directory / "CHGCAR"
+    marker_path = job_directory / VASP_SCF_RECOVERY_FILENAME
+    prior_recovery = _read_json_file(marker_path)
+    if prior_recovery.get("attempt", 0) >= 1:
+        raise RuntimeError("该任务已经执行过一次受控 SCF 恢复，需先人工检查新的 VASP 输出。")
+    if not checkpoint.is_file() or checkpoint.stat().st_size == 0:
+        raise RuntimeError("停滞任务没有可用的 CHGCAR 检查点，不能安全恢复。")
+    if not incar.is_file():
+        raise RuntimeError("停滞任务缺少 INCAR，不能安全恢复。")
+    if not electronic_converged(job_directory):
+        raise RuntimeError("该目录没有已验证收敛的电荷密度，不能把初始 CHGCAR 当作中断步检查点；请建立干净基准。")
+    _ensure_no_vasp_process_is_running()
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    backup_directory = job_directory / ".scf-recovery-backups" / timestamp
+    backup_directory.mkdir(parents=True, exist_ok=False)
+    for filename in ("INCAR", "run_status.json", "vasp.stdout.log", "vasp.stderr.log", "OUTCAR", "OSZICAR"):
+        source = job_directory / filename
+        if source.is_file():
+            shutil.copy2(source, backup_directory / filename)
+
+    settings = {
+        "ALGO": "Damped",
+        "TIME": "0.4",
+        "NELM": "240",
+        "NELMDL": "-1",
+        "AMIX": "0.05",
+        "BMIX": "0.0001",
+        "AMIX_MAG": "0.2",
+        "BMIX_MAG": "0.0001",
+        "AMIN": "0.01",
+        "MAXMIX": "80",
+        "ICHARG": "1",
+        "ISTART": "0",
+        "LREAL": ".FALSE.",
+    }
+    _update_incar_settings(incar, settings)
+    _write_json_file(
+        marker_path,
+        {
+            "state": "prepared",
+            "attempt": 1,
+            "prepared_at": _now(),
+            "job": job_name,
+            "checkpoint": str(checkpoint),
+            "checkpoint_bytes": checkpoint.stat().st_size,
+            "backup_directory": str(backup_directory),
+            "previous_electronic_step": progress.get("electronic_step"),
+            "settings": settings,
+        },
+    )
+    _write_json_file(
+        job_directory / "run_status.json",
+        {"job": job_name, "status": "recovery-prepared", "complete": False, "prepared_at": _now()},
+    )
+    for filename in (VASP_RUNNER_PID_FILENAME, VASP_RUNNER_PGID_FILENAME):
+        (validation_root / filename).unlink(missing_ok=True)
+    _write_json_file(
+        validation_root / VASP_RUNNER_CONTROL_FILENAME,
+        {"state": "recovery-prepared", "job": job_name, "updated_at": _now()},
+    )
+    return {
+        "prepared": True,
+        "job": job_name,
+        "backup_directory": backup_directory,
+        "checkpoint_bytes": checkpoint.stat().st_size,
+        "settings": settings,
+    }
+
+
 def _runner_identifiers(validation_root: Path) -> tuple[int | None, int | None]:
     def read_identifier(filename: str) -> int | None:
         try:
@@ -664,7 +788,7 @@ def _send_vasp_runner_signal(pid: int, pgid: int, signal_name: str) -> None:
 
 
 def _wsl_failure_detail(completed: subprocess.CompletedProcess[str]) -> str:
-    detail = (completed.stderr or completed.stdout or "").strip()
+    detail = (completed.stderr or completed.stdout or "").replace("\x00", "").strip()
     if "E_ACCESSDENIED" in detail or "ACCESSDENIED" in detail:
         return "当前页面服务没有访问 WSL 的权限。请重启页面服务后重试。"
     return detail or "未找到运行器进程。"
@@ -675,10 +799,13 @@ def _ensure_no_vasp_process_is_running() -> None:
     distribution = os.environ.get("ADHESIVE_VASP_WSL_DISTRIBUTION", "Ubuntu-24.04")
     user = os.environ.get("ADHESIVE_VASP_WSL_USER", "vasp")
     completed = subprocess.run(
-        ["wsl.exe", "-d", distribution, "-u", user, "--", "bash", "-lc", "pgrep -x vasp_std"],
+        ["wsl.exe", "-d", distribution, "-u", user, "--", "pgrep", "-x", "vasp_std"],
         check=False,
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=30,
     )
     if completed.returncode == 0:
         process_ids = ", ".join(completed.stdout.split()) or "unknown"
@@ -773,12 +900,17 @@ def restart_vasp_convergence(
     runner = Path(__file__).resolve().parents[2] / "scripts" / "run_vasp_convergence.sh"
     if not runner.is_file():
         raise FileNotFoundError(f"未找到 VASP 收敛运行脚本：{runner}")
+    # Bash reads a script incrementally. A live run must not see later edits
+    # to the repository file halfway through the validation matrix.
+    runner_snapshot = validation_root / ".runner-script.sh"
+    shutil.copyfile(runner, runner_snapshot)
     distribution = os.environ.get("ADHESIVE_VASP_WSL_DISTRIBUTION", "Ubuntu-24.04")
     user = os.environ.get("ADHESIVE_VASP_WSL_USER", "vasp")
     command = [
         "wsl.exe", "-d", distribution, "-u", user, "--", "/usr/bin/env",
         f"ADHESIVE_VASP_VALIDATION_ROOT={_windows_path_to_wsl(validation_root)}",
-        "setsid", "bash", _windows_path_to_wsl(runner),
+        f"ADHESIVE_VASP_SCRIPT_DIR={_windows_path_to_wsl(runner.parent)}",
+        "setsid", "bash", _windows_path_to_wsl(runner_snapshot),
     ]
     options: dict[str, Any] = {
         "stdin": subprocess.DEVNULL,
@@ -789,7 +921,9 @@ def restart_vasp_convergence(
         options["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_NO_WINDOW
     else:
         options["start_new_session"] = True
-    subprocess.Popen(command, **options)
+    with (validation_root / "runner.stdout.log").open("ab") as stdout, (validation_root / "runner.stderr.log").open("ab") as stderr:
+        options.update(stdout=stdout, stderr=stderr)
+        subprocess.Popen(command, **options)
     return {"started": True, **vasp_convergence_progress(validation_root, approval=approval)}
 
 
@@ -812,6 +946,8 @@ def ensure_vasp_convergence_running(
     if progress.get("paused"):
         resumed = resume_vasp_convergence(validation_root)
         return {"started": False, "resumed": True, "reason": "resumed", **resumed}
+    if progress.get("stalled") or progress.get("failed") or progress.get("uncontrolled"):
+        return {"started": False, "reason": "needs-review", **progress}
     return restart_vasp_convergence(validation_root, facet=normalized_facet, resources=resources)
 
 
@@ -850,6 +986,7 @@ def ensure_next_vasp_facet_convergence(
         pending_progress.get("cancelled")
         or pending_progress.get("stalled")
         or pending_progress.get("uncontrolled")
+        or pending_progress.get("failed")
     ):
         return {"facet": pending, "reason": "interrupted", "progress": progress_by_facet, "started": False}
     root = vasp_validation_root_for_facet(pending, base_root=base_root)
@@ -899,6 +1036,7 @@ def vasp_convergence_progress(
     completed = 0
     failed = 0
     active_detail: dict[str, Any] | None = None
+    failed_detail: dict[str, Any] | None = None
 
     for job in jobs:
         job_path = Path(str(job.get("path") or "")).expanduser()
@@ -914,10 +1052,17 @@ def vasp_convergence_progress(
         except (OSError, TypeError, ValueError, json.JSONDecodeError):
             job_status = {}
         if job_status.get("complete") is True or job_status.get("status") == "complete":
-            completed += 1
+            if electronic_converged(job_path):
+                completed += 1
+            else:
+                failed += 1
             continue
         if job_status.get("status") == "failed":
             failed += 1
+            failed_detail = {
+                "job": job_name, "phase": "电子收敛失败",
+                "log_path": job_path / "vasp.stdout.log",
+            }
 
         for stage_name, phase in VASP_PRECONVERGENCE_STAGES:
             stage_path = job_path / ".model-preconverge" / stage_name
@@ -942,8 +1087,8 @@ def vasp_convergence_progress(
                 "attempt": job_status.get("attempt"),
                 "log_path": job_path / "vasp.stdout.log",
             }
-        if active_detail is not None:
-            break
+    has_running_detail = active_detail is not None
+    active_detail = active_detail or failed_detail
 
     electronic_step = None
     updated_at = None
@@ -965,8 +1110,16 @@ def vasp_convergence_progress(
     runner_controlled = runner_pid is not None and runner_pgid is not None
     paused = runner_control.get("state") == "paused" and runner_controlled
     cancelled = runner_control.get("state") in {"cancelling", "cancelled"}
-    uncontrolled = active_detail is not None and not runner_controlled and not cancelled
-    active = active_detail is not None and not stale and not paused and not cancelled and runner_controlled
+    uncontrolled = has_running_detail and not runner_controlled and not cancelled
+    active = (has_running_detail and not stale and not paused and not cancelled
+              and runner_controlled and runner_control.get("state") not in {"failed", "finished"})
+    recovery_attempt = 0
+    if active_detail is not None:
+        recovery = _read_json_file(validation_root / str(active_detail["job"]) / VASP_SCF_RECOVERY_FILENAME)
+        try:
+            recovery_attempt = max(0, int(recovery.get("attempt") or 0))
+        except (TypeError, ValueError):
+            recovery_attempt = 0
 
     return {
         "available": True,
@@ -981,10 +1134,11 @@ def vasp_convergence_progress(
         "uncontrolled": uncontrolled,
         "runner_pid": runner_pid,
         "runner_pgid": runner_pgid,
-        "stalled": active_detail is not None and (stale or cancelled),
+        "stalled": has_running_detail and (stale or cancelled),
         "runner_state": runner_control.get("state"),
         "stale_after_seconds": VASP_LOG_STALE_SECONDS,
         "electronic_step": electronic_step,
+        "recovery_attempt": recovery_attempt,
         "updated_at": updated_at,
         **(active_detail or {}),
     }
