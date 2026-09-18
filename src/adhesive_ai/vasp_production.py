@@ -436,7 +436,7 @@ def write_convergence_suite(
         facet, objective="surface-convergence", settings=baseline,
         repeat_override=convergence_repeat,
     )
-    for cutoff in (450, 520, 600):
+    for cutoff in (450, 520, 600, 650):
         directory = root / "encut" / str(cutoff)
         manifest = write_vasp_model(
             atoms, directory, metadata={**metadata, "validation_axis": "encut"},
@@ -450,7 +450,7 @@ def write_convergence_suite(
             resources=resources, settings=baseline, kpoints=mesh, static=True,
         )
         jobs.append({"path": str(directory), **manifest})
-    for layers in (2, 3, 4):
+    for layers in (2, 3, 4, 5):
         settings = VaspBaseline(slab_layers=layers, ncore=2, kpar=1, ce_initial_moment=0.0)
         candidate, candidate_metadata = build_ceo2_model(
             facet, objective="surface-convergence", settings=settings,

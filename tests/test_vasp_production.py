@@ -90,12 +90,12 @@ def test_convergence_suite_records_the_requested_surface_facet(tmp_path):
     plan = write_convergence_suite(tmp_path / "ceo2-110", facet="(110)", resources=resources)
 
     assert plan["facet"] == "(110)"
-    assert plan["job_count"] == 12
+    assert plan["job_count"] == 14
     first_manifest = json.loads((tmp_path / "ceo2-110" / "encut" / "450" / "input_manifest.json").read_text(encoding="utf-8"))
     assert first_manifest["facet"] == "(110)"
 
 
-@pytest.mark.parametrize("layers", [2, 3, 4])
+@pytest.mark.parametrize("layers", [2, 3, 4, 5])
 def test_111_clean_slab_has_neutral_oxygen_terminated_trilayers(layers):
     atoms, metadata = build_ceo2_model(
         "(111)", objective="surface-convergence", repeat_override=(1, 1, 1),

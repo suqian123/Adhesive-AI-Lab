@@ -9,6 +9,7 @@ WAVECAR can seed the calculation.
 from __future__ import annotations
 
 import json
+import argparse
 from datetime import datetime, timezone
 from pathlib import Path
 import shutil
@@ -32,7 +33,6 @@ from adhesive_ai.vasp_checkpoint import electronic_converged
 
 
 VALIDATION_ROOT = ROOT / "work" / "vasp_validation" / "ceo2-111-baseline-v1"
-JOB_NAME = "encut/600"
 MUTABLE_OUTPUTS = (
     "CHG", "CHGCAR", "CONTCAR", "DOSCAR", "EIGENVAL", "IBZKPT", "OSZICAR",
     "OUTCAR", "PCDAT", "PROCAR", "REPORT", "WAVECAR", "XDATCAR", "vasprun.xml",
@@ -41,8 +41,12 @@ MUTABLE_OUTPUTS = (
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--job", default="encut/600", help="failed validation job relative to the shared validation root")
+    arguments = parser.parse_args()
     root = VALIDATION_ROOT.resolve()
-    job = (root / JOB_NAME).resolve()
+    job_name = str(arguments.job).replace("\\", "/").strip("/")
+    job = (root / job_name).resolve()
     if not job.is_relative_to(root):
         raise RuntimeError("Recovery target is outside the validation root.")
     if electronic_converged(job):
@@ -51,8 +55,11 @@ def main() -> int:
     if status.get("status") != "failed":
         raise RuntimeError("The target is not a recorded failed VASP calculation.")
     prior = _read_json_file(job / VASP_SCF_RECOVERY_FILENAME)
-    if prior.get("state") != "prepared-fresh-atomic" or int(prior.get("attempt") or 0) != 1:
-        raise RuntimeError("A single fresh-atomic recovery must have failed before preparing this second recovery.")
+    prior_attempt = int(prior.get("attempt") or 0)
+    if prior.get("state") == "prepared-model-preconvergence":
+        raise RuntimeError("A model-preconvergence recovery is already prepared; repeated parameter changes are blocked.")
+    if prior and (prior.get("state") != "prepared-fresh-atomic" or prior_attempt != 1):
+        raise RuntimeError("The existing recovery marker is not eligible for a clean model-preconvergence recovery.")
     _ensure_no_vasp_process_is_running()
 
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -87,25 +94,25 @@ def main() -> int:
     _update_incar_settings(incar, settings)
     _write_json_file(job / VASP_SCF_RECOVERY_FILENAME, {
         "state": "prepared-model-preconvergence",
-        "attempt": 2,
+        "attempt": prior_attempt + 1,
         "prepared_at": datetime.now(timezone.utc).isoformat(),
-        "job": JOB_NAME,
+        "job": job_name,
         "backup_directory": str(backup),
-        "basis": "Fresh-atomic recovery exhausted NELM=180; regenerate a clean DFT+U seed before a damped final SCF.",
+        "basis": "Fresh-atomic SCF exhausted NELM; regenerate a clean DFT+U seed before a damped final SCF.",
         "settings": settings,
         "checkpoint_policy": "All failed-run CHGCAR/WAVECAR and preconvergence stages archived; none retained or reused.",
     })
     _write_json_file(job / "run_status.json", {
-        "job": JOB_NAME, "status": "recovery-prepared", "complete": False,
+        "job": job_name, "status": "recovery-prepared", "complete": False,
         "prepared_at": datetime.now(timezone.utc).isoformat(),
     })
     for filename in (VASP_RUNNER_PID_FILENAME, VASP_RUNNER_PGID_FILENAME):
         (root / filename).unlink(missing_ok=True)
     _write_json_file(root / VASP_RUNNER_CONTROL_FILENAME, {
-        "state": "recovery-prepared", "job": JOB_NAME,
+        "state": "recovery-prepared", "job": job_name,
         "updated_at": datetime.now(timezone.utc).isoformat(),
     })
-    print(json.dumps({"prepared": True, "job": JOB_NAME, "backup_directory": str(backup), "settings": settings}))
+    print(json.dumps({"prepared": True, "job": job_name, "backup_directory": str(backup), "settings": settings}))
     return 0
 
 

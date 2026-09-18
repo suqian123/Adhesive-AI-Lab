@@ -12,9 +12,9 @@ runner_pid_file="$root/runner.pid"
 runner_pgid_file="$root/runner.pgid"
 runner_control_file="$root/runner_control.json"
 jobs=(
-  "encut/450" "encut/520" "encut/600"
+  "encut/450" "encut/520" "encut/600" "encut/650"
   "kpoints/1x1x1" "kpoints/2x2x1" "kpoints/3x3x1"
-  "slab-layers/2" "slab-layers/3" "slab-layers/4"
+  "slab-layers/2" "slab-layers/3" "slab-layers/4" "slab-layers/5"
   "vacuum/15A" "vacuum/18A" "vacuum/22A"
 )
 
@@ -195,7 +195,18 @@ preconverge_model() {
 
   if ! stage_complete "$pbe"; then
     reset_stage_outputs "$pbe"
-    cp "$directory/POSCAR" "$directory/KPOINTS" "$directory/POTCAR" "$directory/CHGCAR" "$pbe/"
+    # A clean three-stage recovery deliberately removes the top-level
+    # CHGCAR/WAVECAR.  In that case PBE must start from the verified
+    # fixed-charge stage, rather than silently creating an empty CHGCAR.
+    local pbe_charge="$directory/CHGCAR"
+    if [[ ! -s "$pbe_charge" ]]; then
+      pbe_charge="$fixed/CHGCAR"
+    fi
+    if [[ ! -s "$pbe_charge" ]]; then
+      echo "Missing converged charge density for PBE bridge: $directory" >&2
+      return 1
+    fi
+    cp "$directory/POSCAR" "$directory/KPOINTS" "$directory/POTCAR" "$pbe_charge" "$pbe/"
     awk '
     /^LDAU/ { next }
     /^LMAXMIX[[:space:]]*=/ { next }

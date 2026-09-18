@@ -13,7 +13,7 @@ import pandas as pd
 from .features import Formulation, CURING_SYSTEMS, DYNAMIC_UNITS, RESIN_SYSTEMS, formulation_features
 
 
-CANDIDATE_LIBRARY_VERSION = "candidate-library-v4"
+CANDIDATE_LIBRARY_VERSION = "candidate-library-v5"
 
 
 def _formulation_id(contract: dict[str, object]) -> str:
@@ -82,6 +82,37 @@ CURING_WINDOWS = {
     "Silicone": (110.0, 180.0),
     "PU": (70.0, 130.0),
 }
+
+
+def _coverage_anchor_combinations(seed: int) -> list[tuple[ResinVariant, str, str, str, str, float, float, float]]:
+    """Return one deterministic process/filler point for every composition axis.
+
+    A candidate library used for interactive selection must not accidentally
+    omit a chemically valid combination merely because a random down-sample
+    did not draw it.  The coverage axes intentionally stop before curing
+    process, catalyst, and filler loading; one reproducible member of those
+    axes is selected for each composition family.
+    """
+    rng = np.random.default_rng(seed)
+    process_options = list(product(CURING_SYSTEMS, CATALYSTS, FILLER_LEVELS))
+    anchors = []
+    for variant in (item for family in RESIN_VARIANTS.values() for item in family):
+        for dynamic_unit in DYNAMIC_UNITS:
+            for toughener_type, toughener_pct in zip(TOUGHENER_TYPES, (0.0, 5.0, 10.0, 15.0)):
+                for blend_fraction in BLEND_FRACTIONS:
+                    cure_system, catalyst, filler_pct = process_options[int(rng.integers(len(process_options)))]
+                    anchors.append(
+                        (variant, dynamic_unit, cure_system, catalyst, toughener_type, toughener_pct, filler_pct, blend_fraction)
+                    )
+    return anchors
+
+
+COVERAGE_ANCHOR_COUNT = (
+    sum(len(variants) for variants in RESIN_VARIANTS.values())
+    * len(DYNAMIC_UNITS)
+    * len(TOUGHENER_TYPES)
+    * len(BLEND_FRACTIONS)
+)
 
 
 def _blend_partner(family: str) -> str | None:
@@ -363,8 +394,14 @@ def _compose_candidate(
     return row
 
 
-def build_candidate_library(max_records: int = 720, seed: int = 7) -> pd.DataFrame:
-    """Generate a structured candidate database for simulation and ML."""
+def build_candidate_library(max_records: int = COVERAGE_ANCHOR_COUNT, seed: int = 7) -> pd.DataFrame:
+    """Generate a candidate library with composition coverage before sampling.
+
+    Requests of at least ``COVERAGE_ANCHOR_COUNT`` retain one candidate for
+    every resin-variant × dynamic-unit × toughener-type × blend-state family.
+    Smaller programmatic requests remain a deterministic random subset for
+    lightweight tests and exploratory scripts.
+    """
     rng = np.random.default_rng(seed)
     combos = [
         (variant, dynamic_unit, cure_system, catalyst, toughener_type, toughener_pct, filler_pct, blend_fraction)
@@ -378,11 +415,19 @@ def build_candidate_library(max_records: int = 720, seed: int = 7) -> pd.DataFra
     ]
     if not combos:
         return pd.DataFrame()
-    rng.shuffle(combos)
-    selected = combos[: max(1, min(int(max_records), len(combos)))]
+    requested = max(1, min(int(max_records), len(combos)))
+    if requested >= COVERAGE_ANCHOR_COUNT:
+        selected = _coverage_anchor_combinations(seed)
+        selected_set = set(selected)
+        remaining = [combo for combo in combos if combo not in selected_set]
+        rng.shuffle(remaining)
+        selected.extend(remaining[: requested - len(selected)])
+    else:
+        rng.shuffle(combos)
+        selected = combos[:requested]
     records = [
         _compose_candidate(
-            candidate_id=f"CL-{idx:05d}",
+            candidate_id=f"CL5-{idx:05d}",
             variant=variant,
             dynamic_unit=dynamic_unit,
             cure_system=cure_system,
@@ -411,7 +456,7 @@ def build_candidate_library(max_records: int = 720, seed: int = 7) -> pd.DataFra
     return frame.loc[:, ordered].sort_values("multi_objective_score", ascending=False).reset_index(drop=True)
 
 
-def save_candidate_library(max_records: int = 720, seed: int = 7) -> pd.DataFrame:
+def save_candidate_library(max_records: int = COVERAGE_ANCHOR_COUNT, seed: int = 7) -> pd.DataFrame:
     """Generate the candidate library and persist each row via the MySQL helper."""
     from .database import save_candidate
 

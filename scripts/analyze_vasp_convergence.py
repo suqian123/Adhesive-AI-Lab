@@ -113,6 +113,12 @@ def main() -> int:
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     if args.approval and report["passed"]:
+        results = list(report["results"])
+
+        def second_finest(axis: str, key: str, default: object) -> object:
+            values = sorted((item for item in results if item["axis"] == axis), key=lambda item: item[key])
+            return values[-2][key] if len(values) >= 2 else default
+
         approval = {
             "approved": True,
             "approved_at": datetime.now(timezone.utc).isoformat(),
@@ -124,10 +130,10 @@ def main() -> int:
                 "functional": "PBE-D3(BJ)",
                 "ivdw": 12,
                 "ce_u_eff_ev": 4.5,
-                "encut_ev": 520,
-                "reference_kpoints": [2, 2, 1],
-                "slab_layers": 3,
-                "vacuum_a": 18.0,
+                "encut_ev": second_finest("encut", "encut_ev", 520),
+                "reference_kpoints": second_finest("kpoints", "kpoints", [2, 2, 1]),
+                "slab_layers": second_finest("slab_layers", "slab_layers", 3),
+                "vacuum_a": second_finest("vacuum", "vacuum_a", 18.0),
             },
             "limitations": [
                 "Ce Ueff=4.5 eV and lattice a=5.411 A are user-confirmed baseline assumptions, not fitted experimental parameters",

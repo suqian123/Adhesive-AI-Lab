@@ -13,7 +13,7 @@ def test_candidate_library_assigns_stable_formula_fingerprints():
     first = build_candidate_library(max_records=18, seed=3)
     second = build_candidate_library(max_records=18, seed=3)
 
-    assert first["candidate_library_version"].eq("candidate-library-v4").all()
+    assert first["candidate_library_version"].eq("candidate-library-v5").all()
     assert first["adhesion_reference_strength_mpa"].notna().all()
     assert first["adhesion_prediction_scope"].eq(
         "25C 6061-T6 solvent-degreased lap-shear physics-informed proxy"
@@ -22,3 +22,16 @@ def test_candidate_library_assigns_stable_formula_fingerprints():
     assert first["formulation_id"].is_unique
     assert first["formulation_id"].tolist() == second["formulation_id"].tolist()
     assert first["formulation_contract"].map(type).eq(dict).all()
+
+
+def test_full_library_covers_each_composition_axis_family():
+    frame = build_candidate_library(max_records=900, seed=11)
+    covered = frame.loc[
+        (frame["resin"].eq("PI"))
+        & (frame["resin_variant"].eq("rigid_imide"))
+        & (frame["blend_fraction"].eq(0.0))
+        & (frame["dynamic_unit"].eq("DielsAlder"))
+        & (frame["toughener_type"].eq("rubber"))
+    ]
+    assert len(covered) == 1
+    assert covered.iloc[0]["toughener_pct"] == 5.0

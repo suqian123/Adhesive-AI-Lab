@@ -12,6 +12,10 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 from adhesive_ai.candidate_library import build_candidate_library
+from adhesive_ai.candidate_preview import (
+    ADHESION_SORT_DESCENDING,
+    order_candidate_preview,
+)
 from adhesive_ai.campaign import build_multiscale_campaign, campaign_task_frame, requirement_coverage, validate_candidate_contract
 from adhesive_ai.campaign_runner import (
     available_engine_profiles, campaign_environment_frame, campaign_run_frame, get_campaign_run,
@@ -1317,13 +1321,13 @@ with st.expander("需求实现与科学就绪状态", expanded=False):
 
 st.divider()
 st.subheader("1. 候选数据库")
-candidate_count = 360
+candidate_count = 900
 base_candidate_frame = build_candidate_library(max_records=candidate_count, seed=11)
 candidate_frame = base_candidate_frame
 candidate_ids = candidate_frame["candidate_id"].astype(str).tolist()
 
 candidate_signature = (
-    "candidate-db-v3",
+    "candidate-db-v5",
     candidate_count,
     tuple(base_candidate_frame["formulation_id"].astype(str)),
 )
@@ -1470,7 +1474,11 @@ with st.expander("候选数据库预览", expanded=True):
     with process_tab:
         st.dataframe(_localized_candidate_table(candidate_frame, process_columns), width="stretch", hide_index=True)
     with target_tab:
-        st.dataframe(_localized_candidate_table(candidate_performance_frame, performance_columns), width="stretch", hide_index=True)
+        sorted_performance_frame = order_candidate_preview(
+            candidate_performance_frame,
+            ADHESION_SORT_DESCENDING,
+        )
+        st.dataframe(_localized_candidate_table(sorted_performance_frame, performance_columns), width="stretch", hide_index=True)
 
 st.divider()
 st.subheader("2. 多尺度计算方案")

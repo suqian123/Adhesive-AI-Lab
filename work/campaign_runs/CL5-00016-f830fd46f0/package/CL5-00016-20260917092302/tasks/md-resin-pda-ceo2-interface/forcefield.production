@@ -1,0 +1,9 @@
+# Static-readability precursor only; scientific production approval is intentionally blocked.
+pair_style lj/cut/coul/long 12.0
+pair_modify mix arithmetic
+bond_style harmonic
+angle_style harmonic
+dihedral_style fourier
+improper_style cvff
+special_bonds amber
+kspace_style pppm 1.0e-4
