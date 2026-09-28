@@ -603,7 +603,7 @@ def _vasp_production_approved(path: str | Path, *, expected_facet: object | None
             return False
         if expected_facet is not None and approval.get("facet") != _normalized_vasp_facet(expected_facet):
             return False
-        report_path = Path(str(evidence[0])).expanduser()
+        report_path = _portable_vasp_evidence_path(evidence[0], approval_path)
         if not report_path.is_absolute():
             report_path = (approval_path.parent / report_path).resolve()
         report = json.loads(report_path.read_text(encoding="utf-8"))
@@ -614,6 +614,16 @@ def _vasp_production_approved(path: str | Path, *, expected_facet: object | None
         and report.get("scientific_status") == "convergence-approved"
         and (expected_facet is None or report.get("facet") == _normalized_vasp_facet(expected_facet))
     )
+
+
+def _portable_vasp_evidence_path(value: object, approval_path: Path) -> Path:
+    """Resolve evidence saved by either Windows or WSL VASP orchestration."""
+    raw = str(value or "").strip()
+    wsl_path = re.fullmatch(r"/mnt/([A-Za-z])/(.+)", raw)
+    if os.name == "nt" and wsl_path:
+        return Path(f"{wsl_path.group(1).upper()}:/{wsl_path.group(2)}")
+    path = Path(raw).expanduser()
+    return path if path.is_absolute() else (approval_path.parent / path).resolve()
 
 
 def _read_json_file(path: Path) -> dict[str, Any]:
@@ -1568,11 +1578,14 @@ def resume_approved_vasp_tasks(
     vasp_resources: str | Path = VASP_RESOURCE_CONFIG_PATH,
     vasp_approval: str | Path | None = None,
     launch_supervisor: bool = True,
+    max_parallel: int | None = None,
 ) -> dict[str, Any]:
     """Resume statically valid DFT tasks once convergence evidence is approved."""
     record = get_campaign_run(run_id, root=root)
     if record.get("status") in {"completed", "partial", "cancelled", "termination_failed"}:
         return record
+    if max_parallel is not None:
+        record["max_parallel"] = max(1, int(max_parallel))
 
     from .vasp_production import validate_vasp_input_set
 
@@ -1583,7 +1596,7 @@ def resume_approved_vasp_tasks(
             task.get("category") != "dft"
             or task.get("status") != "blocked"
             or not str(task.get("input_validation") or "").startswith("static-valid")
-            or "收敛" not in str(task.get("blocker") or "")
+            or "pending-convergence-approval" not in str(task.get("input_validation") or "")
         ):
             continue
         facet, approval_path = _vasp_approval_for_task(task, vasp_approval)

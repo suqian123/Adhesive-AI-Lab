@@ -32,7 +32,7 @@ from adhesive_ai.campaign_runner import (
 from adhesive_ai.vasp_checkpoint import electronic_converged
 
 
-VALIDATION_ROOT = ROOT / "work" / "vasp_validation" / "ceo2-111-baseline-v1"
+DEFAULT_VALIDATION_ROOT = ROOT / "work" / "vasp_validation" / "ceo2-111-baseline-v1"
 MUTABLE_OUTPUTS = (
     "CHG", "CHGCAR", "CONTCAR", "DOSCAR", "EIGENVAL", "IBZKPT", "OSZICAR",
     "OUTCAR", "PCDAT", "PROCAR", "REPORT", "WAVECAR", "XDATCAR", "vasprun.xml",
@@ -42,9 +42,14 @@ MUTABLE_OUTPUTS = (
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--validation-root",
+        default=str(DEFAULT_VALIDATION_ROOT),
+        help="VASP validation root containing the failed job",
+    )
     parser.add_argument("--job", default="encut/600", help="failed validation job relative to the shared validation root")
     arguments = parser.parse_args()
-    root = VALIDATION_ROOT.resolve()
+    root = Path(arguments.validation_root).expanduser().resolve()
     job_name = str(arguments.job).replace("\\", "/").strip("/")
     job = (root / job_name).resolve()
     if not job.is_relative_to(root):

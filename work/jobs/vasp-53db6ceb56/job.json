@@ -1,0 +1,87 @@
+{
+  "job_id": "vasp-53db6ceb56",
+  "engine": "VASP",
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "-u",
+    "vasp",
+    "--",
+    "env",
+    "OMP_NUM_THREADS=1",
+    "OMP_STACKSIZE=512m",
+    "mpirun",
+    "-np",
+    "4",
+    "/usr/local/bin/vasp_std"
+  ],
+  "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-pda-binding-111",
+  "status": "failed",
+  "submitted_at": "2026-09-23T06:43:41.667939+00:00",
+  "started_at": "2026-09-23T06:43:41.959445+00:00",
+  "finished_at": "2026-09-23T06:43:42.153703+00:00",
+  "return_code": 4294967295,
+  "stdout_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\vasp-53db6ceb56\\stdout.log",
+  "stderr_path": "E:\\Adhesive-AI-Lab\\work\\jobs\\vasp-53db6ceb56\\stderr.log",
+  "metadata": {
+    "candidate_id": "CL5-00016",
+    "formulation_id": "FMT-553A4410C5387F8A",
+    "candidate_library_version": "candidate-library-v5",
+    "campaign_run_id": "CL5-00016-f830fd46f0",
+    "campaign_task_id": "dft-pda-binding-111",
+    "calculation_kind": "dft",
+    "result_file": "OUTCAR",
+    "area_nm2": 100.0,
+    "filler_ratio": 0.05,
+    "polar_fraction": 0.53,
+    "compatibility_index": 0.49409880000000006,
+    "temperature_c": 25.0,
+    "temperature_unit": "K",
+    "energy_unit": "kJ/mol",
+    "facet": "(111)",
+    "functional_group_type": "cyanate/phenolic",
+    "input_artifacts": {
+      "required": [
+        "POSCAR",
+        "INCAR",
+        "KPOINTS",
+        "POTCAR"
+      ],
+      "present": [
+        "INCAR",
+        "KPOINTS",
+        "POSCAR",
+        "POTCAR"
+      ],
+      "complete": true,
+      "production_approved": null,
+      "artifacts": {
+        "POSCAR": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-pda-binding-111\\POSCAR",
+          "sha256": "6082df87b12342e5eacc44746175028080ab5bc7977259a6aadccc806a6ed1d0",
+          "bytes": 30360
+        },
+        "INCAR": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-pda-binding-111\\INCAR",
+          "sha256": "11d95935f488dc330621be136f382b68bdf4bb0d6831cf26b5c518402fc8badd",
+          "bytes": 1374
+        },
+        "KPOINTS": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-pda-binding-111\\KPOINTS",
+          "sha256": "2ae619c92a251af8d011e3ef586f8ca852320fedc4127f21568f83216a75a02e",
+          "bytes": 36
+        },
+        "POTCAR": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-pda-binding-111\\POTCAR",
+          "sha256": "9dfdb3096e78cc171abf3c5ec75c4f73126c0af21229bf34e0bb266403a945e6",
+          "bytes": 1053727
+        }
+      }
+    },
+    "submission_source": "campaign",
+    "input_validation": "static-valid; convergence-approved",
+    "production_approved": true
+  },
+  "error": "Command exited with code 4294967295"
+}

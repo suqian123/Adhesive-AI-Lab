@@ -175,6 +175,18 @@ CAMPAIGN_CATEGORY_LABELS = {
     "dft": "量子化学 DFT", "bulk_md": "树脂体相 MD",
     "interface_md": "界面 MD", "coarse_grained": "粗粒化动力学",
 }
+READINESS_NEXT_STEPS = {
+    "候选配方数据库": "将代理筛选结果作为候选优先级；以合格的计算或实验记录校准。",
+    "量子化学代理预测": "仅用于趋势判断；不得替代已批准的 VASP 生产结果。",
+    "真实 DFT 计算": "完成各 CeO₂ 晶面的收敛验证并生成批准文件后，再提交对应生产任务。",
+    "树脂 MD 与宽温域评价": "完成交联拓扑、力场、独立副本及 Tg/模量/CTE 验证审批。",
+    "界面与粗粒化动力学": "用 DFT、PMF 与实验标定界面参数后，才可作定量结论。",
+    "多尺度任务自动编排": "仅在前置科学批准满足后启动；失败任务须保留日志并受控重试。",
+    "外部结果回写与身份校验": "导入候选编号、配方指纹和候选库版本一致的真实输出。",
+    "候选结果汇总与综合分析": "逐指标核对数据来源；代理或混合来源不能作为实验结论。",
+    "回归/分类筛选": "积累合格外部计算与实验数据后重训，并评估验证集误差。",
+    "实验闭环": "录入带完整测试条件和候选身份的可追溯实验数据。",
+}
 JOB_COMMAND_EXAMPLES = {
     "VASP": "vasp_std",
     "Quantum ESPRESSO": "pw.x -in scf.in",
@@ -615,7 +627,15 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
             except (OSError, RuntimeError, ValueError) as exc:
                 st.error(str(exc))
     elif status == "failed":
-        st.error("本次自动计算失败。请查看任务表中的错误原因和对应外部任务日志。")
+        failed_tasks = [task for task in tasks if task.get("status") == "failed"]
+        if live_vasp_text and vasp_progress.get("active"):
+            st.warning(
+                f"本次候选运行保留了 {len(failed_tasks)} 个历史外部任务失败记录；"
+                f"{live_vasp_text}。当前进行的是共享 VASP 基准验证恢复，"
+                "它不会自动重写或掩盖旧失败记录。验证通过后，需对失败任务进行一次受控重试。"
+            )
+        else:
+            st.error("本次自动计算失败。请查看任务表中的错误原因和对应外部任务日志。")
     elif status == "cancelled":
         st.warning("当前多尺度运行已终止。可以重新设置最大并行任务数并创建新的运行。")
     elif status == "termination_failed":
@@ -1301,22 +1321,25 @@ st.markdown(
 
 saved_campaign_profiles = load_engine_profiles()
 with st.expander("需求实现与科学就绪状态", expanded=False):
+    readiness_frame = pd.DataFrame(requirement_coverage(
+        saved_campaign_profiles,
+        vasp_validation_roots={
+            "(111)": Path("work/vasp_validation/ceo2-111-baseline-v1"),
+            "(110)": Path("work/vasp_validation/ceo2-110-baseline-v1"),
+            "(100)": Path("work/vasp_validation/ceo2-100-baseline-v1"),
+        },
+        md_baseline_root=Path("work/md_baselines/odpa-oda-catechol-pdba-v1"),
+    ))
+    readiness_frame["下一步"] = readiness_frame["模块"].map(READINESS_NEXT_STEPS).fillna("按说明完成对应验证。")
     st.dataframe(
-        pd.DataFrame(requirement_coverage(
-            saved_campaign_profiles,
-            vasp_validation_roots={
-                "(111)": Path("work/vasp_validation/ceo2-111-baseline-v1"),
-                "(110)": Path("work/vasp_validation/ceo2-110-baseline-v1"),
-                "(100)": Path("work/vasp_validation/ceo2-100-baseline-v1"),
-            },
-            md_baseline_root=Path("work/md_baselines/odpa-oda-catechol-pdba-v1"),
-        )),
+        readiness_frame,
         width="stretch",
         hide_index=True,
     )
     st.caption(
-        "“已实现”只表示软件功能已具备；“已配置”表示已保存外部求解器命令，不代表生产输入、力场或科学结果已验证。"
-        "DFT 按 CeO₂ 晶面独立汇总收敛验证；MD 前驱输入即使通过静态读取，也必须经过带文件哈希的科学批准后才会提交。"
+        "本表在页面刷新时读取当前工作区状态。“已实现”只表示软件功能已具备；“已配置”表示已保存外部求解器命令，"
+        "不代表生产输入、力场或科学结果已验证。DFT 按 CeO₂ 晶面独立汇总收敛验证；MD 前驱输入即使通过静态读取，"
+        "也必须经过带文件哈希的科学批准后才会提交。"
     )
 
 st.divider()

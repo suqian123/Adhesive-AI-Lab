@@ -3,12 +3,12 @@
   "campaign_id": "CL5-00016-20260917092302",
   "candidate_id": "CL5-00016",
   "created_at": "2026-09-17T09:23:43.176899+00:00",
-  "status": "blocked",
+  "status": "failed",
   "integrated_at": null,
   "integration_error": null,
   "package_directory": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302",
   "job_root": "E:\\Adhesive-AI-Lab\\work\\jobs",
-  "max_parallel": 16,
+  "max_parallel": 1,
   "candidate_snapshot": {
     "candidate_id": "CL5-00016",
     "formulation_id": "FMT-553A4410C5387F8A",
@@ -306,10 +306,12 @@
         }
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-o-111-v00-h00",
-      "input_validation": "static-valid; pending-convergence-approval",
-      "status": "blocked",
-      "blocker": "输入已生成并通过静态验证；等待 VASP 收敛验证完成并批准生产计算",
-      "job_id": null
+      "input_validation": "static-valid; convergence-approved",
+      "status": "failed",
+      "blocker": null,
+      "job_id": "vasp-ae82d55367",
+      "return_code": 1,
+      "error": "Command exited with code 1"
     },
     {
       "task_id": "dft-o-111-v00-h35",
@@ -445,10 +447,12 @@
         }
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-o-111-v00-h35",
-      "input_validation": "static-valid; pending-convergence-approval",
-      "status": "blocked",
-      "blocker": "输入已生成并通过静态验证；等待 VASP 收敛验证完成并批准生产计算",
-      "job_id": null
+      "input_validation": "static-valid; convergence-approved",
+      "status": "failed",
+      "blocker": null,
+      "job_id": "vasp-9b2e7e9b83",
+      "return_code": 1,
+      "error": "Command exited with code 1"
     },
     {
       "task_id": "dft-o-111-v08-h00",
@@ -584,10 +588,12 @@
         }
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-o-111-v08-h00",
-      "input_validation": "static-valid; pending-convergence-approval",
-      "status": "blocked",
-      "blocker": "输入已生成并通过静态验证；等待 VASP 收敛验证完成并批准生产计算",
-      "job_id": null
+      "input_validation": "static-valid; convergence-approved",
+      "status": "failed",
+      "blocker": null,
+      "job_id": "vasp-0f01828056",
+      "return_code": 4294967295,
+      "error": "Command exited with code 4294967295"
     },
     {
       "task_id": "dft-o-111-v08-h35",
@@ -723,10 +729,12 @@
         }
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-o-111-v08-h35",
-      "input_validation": "static-valid; pending-convergence-approval",
-      "status": "blocked",
-      "blocker": "输入已生成并通过静态验证；等待 VASP 收敛验证完成并批准生产计算",
-      "job_id": null
+      "input_validation": "static-valid; convergence-approved",
+      "status": "failed",
+      "blocker": null,
+      "job_id": "vasp-768f985ec4",
+      "return_code": 4294967295,
+      "error": "Command exited with code 4294967295"
     },
     {
       "task_id": "dft-o-111-v15-h00",
@@ -862,10 +870,12 @@
         }
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-o-111-v15-h00",
-      "input_validation": "static-valid; pending-convergence-approval",
-      "status": "blocked",
-      "blocker": "输入已生成并通过静态验证；等待 VASP 收敛验证完成并批准生产计算",
-      "job_id": null
+      "input_validation": "static-valid; convergence-approved",
+      "status": "failed",
+      "blocker": null,
+      "job_id": "vasp-5252f39052",
+      "return_code": 4294967295,
+      "error": "Command exited with code 4294967295"
     },
     {
       "task_id": "dft-o-111-v15-h35",
@@ -1001,10 +1011,12 @@
         }
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-o-111-v15-h35",
-      "input_validation": "static-valid; pending-convergence-approval",
-      "status": "blocked",
-      "blocker": "输入已生成并通过静态验证；等待 VASP 收敛验证完成并批准生产计算",
-      "job_id": null
+      "input_validation": "static-valid; convergence-approved",
+      "status": "failed",
+      "blocker": null,
+      "job_id": "vasp-1c439251da",
+      "return_code": 4294967295,
+      "error": "Command exited with code 4294967295"
     },
     {
       "task_id": "dft-pda-binding-111",
@@ -1136,10 +1148,12 @@
         }
       },
       "workdir": "E:\\Adhesive-AI-Lab\\work\\campaign_runs\\CL5-00016-f830fd46f0\\package\\CL5-00016-20260917092302\\tasks\\dft-pda-binding-111",
-      "input_validation": "static-valid; pending-convergence-approval",
-      "status": "blocked",
-      "blocker": "输入已生成并通过静态验证；等待 VASP 收敛验证完成并批准生产计算",
-      "job_id": null
+      "input_validation": "static-valid; convergence-approved",
+      "status": "failed",
+      "blocker": null,
+      "job_id": "vasp-53db6ceb56",
+      "return_code": 4294967295,
+      "error": "Command exited with code 4294967295"
     },
     {
       "task_id": "dft-o-110-v00-h00",
@@ -3736,5 +3750,5 @@
     "md": {},
     "interface": {}
   },
-  "updated_at": "2026-09-17T09:23:50.946669+00:00"
+  "updated_at": "2026-09-23T06:43:43.796119+00:00"
 }

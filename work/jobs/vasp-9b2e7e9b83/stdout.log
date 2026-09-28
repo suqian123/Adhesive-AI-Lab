@@ -1,0 +1,10 @@
+ running    4 mpi-ranks, with    1 threads/rank, on    1 nodes
+ distrk:  each k-point on    4 cores,    1 groups
+ distr:  one band on    2 cores,    2 groups
+ vasp.6.4.2 20Jul23 (build Aug 29 2026 11:11:35) complex                         
+ POSCAR found type information on POSCAR CeO H 
+ POSCAR found :  3 types and     151 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Pade appr. of Perdew
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
