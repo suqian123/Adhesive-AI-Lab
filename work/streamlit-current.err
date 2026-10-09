@@ -1,0 +1,2 @@
+2026-09-28 17:36:38.479 Uvicorn server started on 127.0.0.1:8501
+2026-09-28 17:36:43.308 Not recommending the 'install skills' nudge: E:\Adhesive-AI-Lab\.agents\skills\developing-with-streamlit already exist(s) and would block a one-click install. Remove to enable it.
