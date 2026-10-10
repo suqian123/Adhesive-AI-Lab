@@ -781,14 +781,21 @@ def _windows_path_to_wsl(path: Path) -> str:
     return f"/mnt/{drive}/{suffix}"
 
 
+def _vasp_platform_command(arguments: list[str]) -> list[str]:
+    """Use the dedicated WSL account on Windows, or the service account on Linux."""
+    if os.name != "nt":
+        return arguments
+    distribution = os.environ.get("ADHESIVE_VASP_WSL_DISTRIBUTION", "Ubuntu-24.04")
+    user = os.environ.get("ADHESIVE_VASP_WSL_USER", "vasp")
+    return ["wsl.exe", "-d", distribution, "-u", user, "--", *arguments]
+
+
 def _send_vasp_runner_signal(pid: int, pgid: int, signal_name: str) -> None:
     if signal_name not in {"STOP", "CONT"}:
         raise ValueError(f"Unsupported VASP runner signal: {signal_name}")
-    distribution = os.environ.get("ADHESIVE_VASP_WSL_DISTRIBUTION", "Ubuntu-24.04")
-    user = os.environ.get("ADHESIVE_VASP_WSL_USER", "vasp")
     command = f"kill -0 {pid} && kill -{signal_name} -- -{pgid}"
     completed = subprocess.run(
-        ["wsl.exe", "-d", distribution, "-u", user, "--", "bash", "-lc", command],
+        _vasp_platform_command(["bash", "-lc", command]),
         check=False,
         capture_output=True,
         text=True,
@@ -806,10 +813,8 @@ def _wsl_failure_detail(completed: subprocess.CompletedProcess[str]) -> str:
 
 def _ensure_no_vasp_process_is_running() -> None:
     """Prevent a restart from overlapping an untracked VASP calculation."""
-    distribution = os.environ.get("ADHESIVE_VASP_WSL_DISTRIBUTION", "Ubuntu-24.04")
-    user = os.environ.get("ADHESIVE_VASP_WSL_USER", "vasp")
     completed = subprocess.run(
-        ["wsl.exe", "-d", distribution, "-u", user, "--", "pgrep", "-x", "vasp_std"],
+        _vasp_platform_command(["pgrep", "-x", "vasp_std"]),
         check=False,
         capture_output=True,
         text=True,
@@ -871,11 +876,9 @@ def cancel_vasp_convergence(root: str | Path = VASP_VALIDATION_ROOT) -> dict[str
     if pid is None or pgid is None:
         raise RuntimeError("未找到 VASP 运行器 PID，无法安全取消。")
     _set_vasp_runner_state(validation_root, "cancelling", pid, pgid)
-    distribution = os.environ.get("ADHESIVE_VASP_WSL_DISTRIBUTION", "Ubuntu-24.04")
-    user = os.environ.get("ADHESIVE_VASP_WSL_USER", "vasp")
     command = f"kill -0 {pid} && kill -CONT -- -{pgid} && kill -TERM -- -{pgid}"
     completed = subprocess.run(
-        ["wsl.exe", "-d", distribution, "-u", user, "--", "bash", "-lc", command],
+        _vasp_platform_command(["bash", "-lc", command]),
         check=False,
         capture_output=True,
         text=True,
@@ -914,14 +917,12 @@ def restart_vasp_convergence(
     # to the repository file halfway through the validation matrix.
     runner_snapshot = validation_root / ".runner-script.sh"
     shutil.copyfile(runner, runner_snapshot)
-    distribution = os.environ.get("ADHESIVE_VASP_WSL_DISTRIBUTION", "Ubuntu-24.04")
-    user = os.environ.get("ADHESIVE_VASP_WSL_USER", "vasp")
-    command = [
-        "wsl.exe", "-d", distribution, "-u", user, "--", "/usr/bin/env",
+    command = _vasp_platform_command([
+        "/usr/bin/env",
         f"ADHESIVE_VASP_VALIDATION_ROOT={_windows_path_to_wsl(validation_root)}",
         f"ADHESIVE_VASP_SCRIPT_DIR={_windows_path_to_wsl(runner.parent)}",
         "setsid", "bash", _windows_path_to_wsl(runner_snapshot),
-    ]
+    ])
     options: dict[str, Any] = {
         "stdin": subprocess.DEVNULL,
         "stdout": subprocess.DEVNULL,

@@ -1,9 +1,10 @@
-"""Prepare and run one approved campaign DFT task through WSL VASP."""
+"""Prepare and run one approved campaign DFT task using native or WSL VASP."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -66,15 +67,17 @@ def main() -> int:
             f"Production run is locked until {facet} convergence evidence is approved in {approval}"
         )
 
-    translated = subprocess.run(
-        ["wsl.exe", "-d", args.distro, "-u", args.user, "--", "wslpath", "-a", str(task_file.parent)],
-        check=True, text=True, capture_output=True,
-    ).stdout.strip()
     command = [
-        "wsl.exe", "-d", args.distro, "-u", args.user, "--cd", translated, "--",
-        "env", "OMP_NUM_THREADS=1", "OMP_STACKSIZE=512m", "mpirun", "-np", str(args.np), args.executable,
+        "env", "OMP_NUM_THREADS=1", "OPENBLAS_NUM_THREADS=1", "OMP_STACKSIZE=512m",
+        "mpirun", "-np", str(args.np), args.executable,
     ]
-    return subprocess.run(command, check=False).returncode
+    if os.name == "nt":
+        translated = subprocess.run(
+            ["wsl.exe", "-d", args.distro, "-u", args.user, "--", "wslpath", "-a", str(task_file.parent)],
+            check=True, text=True, capture_output=True,
+        ).stdout.strip()
+        command = ["wsl.exe", "-d", args.distro, "-u", args.user, "--cd", translated, "--", *command]
+    return subprocess.run(command, cwd=task_file.parent, check=False).returncode
 
 
 if __name__ == "__main__":

@@ -1,0 +1,18 @@
+# Engine installation smoke test; not a material production calculation.
+units lj
+atom_style atomic
+boundary p p p
+lattice fcc 0.8442
+region cell block 0 3 0 3 0 3
+create_box 1 cell
+create_atoms 1 box
+mass 1 1.0
+pair_style lj/cut 2.5
+pair_coeff 1 1 1.0 1.0 2.5
+velocity all create 1.0 87287 mom yes rot no dist gaussian
+neighbor 0.3 bin
+fix integrate all nve
+timestep 0.002
+thermo 10
+thermo_style custom step temp pe ke etotal press vol
+run 100

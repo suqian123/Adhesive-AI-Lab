@@ -50,7 +50,10 @@ exit 0
             if first_converged:
                 second = json.loads((root / "encut/520/run_status.json").read_text())
                 self.assertFalse(second["complete"])
-                self.assertIn("ICHARG = 1", (root / "encut/520/INCAR").read_text())
+                # A new cutoff has a different FFT grid and must start from
+                # atomic charge, even when the previous cutoff converged.
+                self.assertIn("ICHARG = 2", (root / "encut/520/INCAR").read_text())
+                self.assertIn("fresh-atomic-charge", (root / "status.tsv").read_text())
             else:
                 self.assertFalse((root / "encut/520/run_status.json").exists())
             self.assertFalse((root / "runner.pid").exists())
@@ -80,7 +83,7 @@ exit 0
     def test_nelm_exhaustion_stops_matrix_despite_zero_exit(self):
         self.run_scenario(False)
 
-    def test_only_converged_seed_is_reused_and_failure_blocks_retry(self):
+    def test_cutoff_change_uses_fresh_charge_and_failure_blocks_retry(self):
         self.run_scenario(True)
 
 

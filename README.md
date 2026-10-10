@@ -50,6 +50,14 @@ streamlit run app.py
 
 浏览器打开 `http://localhost:8501`。
 
+## 服务器部署
+
+Linux 常驻服务、反向代理、数据迁移与计算环境配置见 [服务器部署说明](docs/server-deployment.md)。
+
+已部署实例及 SSH 隧道访问方式见 [2026-10-10 部署记录](docs/server-instance-20261010.md)；本机运行 `.\run_server_tunnel.ps1` 后访问 `http://127.0.0.1:18501`。
+
+服务器已配置 VASP/LAMMPS，版本、并行设置和验证结果见 [计算引擎配置记录](docs/server-engines-20261010.md)。
+
 ## 网络受限时的离线启动
 
 如果无法安装 Streamlit、Plotly 或 Pytest，可以直接运行：

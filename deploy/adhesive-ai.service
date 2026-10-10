@@ -1,0 +1,22 @@
+[Unit]
+Description=Adhesive AI Lab Streamlit application
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=adhesive-ai
+Group=adhesive-ai
+WorkingDirectory=/opt/adhesive-ai-lab
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONUTF8=1
+Environment=STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+ExecStart=/opt/adhesive-ai-lab/.venv/bin/python -m streamlit run app.py --server.address=127.0.0.1 --server.port=8501 --server.headless=true
+Restart=on-failure
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=60
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
