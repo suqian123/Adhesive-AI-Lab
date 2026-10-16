@@ -1,0 +1,5 @@
+ALGO = Normal
+NELM = 160
+ICHARG = 1
+LREAL = Auto
+GGA = PE

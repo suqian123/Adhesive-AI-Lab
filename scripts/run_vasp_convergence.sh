@@ -5,6 +5,19 @@ set -o pipefail
 script_dir="${ADHESIVE_VASP_SCRIPT_DIR:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)}"
 export PYTHONPATH="$script_dir/../src${PYTHONPATH:+:$PYTHONPATH}"
 
+# Keep the WSL default; the server can opt into its shared MPI rank budget.
+mpi_ranks="${ADHESIVE_VALIDATION_MPI_RANKS:-4}"
+if [[ ! "$mpi_ranks" =~ ^[1-9][0-9]*$ ]]; then
+  echo "ADHESIVE_VALIDATION_MPI_RANKS must be a positive integer" >&2
+  exit 2
+fi
+if [[ "${ADHESIVE_VALIDATION_USE_LAUNCHER:-0}" == "1" ]]; then
+  launch_vasp=("$script_dir/../.venv/bin/python" "$script_dir/../deploy/compute/mpi_launch.py"
+    --engine vasp --ranks "$mpi_ranks" --executable /usr/local/bin/vasp_std)
+else
+  launch_vasp=(mpirun --bind-to none -np "$mpi_ranks" /usr/local/bin/vasp_std)
+fi
+
 root="${ADHESIVE_VASP_VALIDATION_ROOT:-/mnt/e/Adhesive-AI-Lab/work/vasp_validation/ceo2-111-baseline-v1}"
 status_file="$root/status.tsv"
 lock_dir="$root/.runner.lock"
@@ -125,7 +138,7 @@ preconverge_charge() {
     { print }
   ' "$directory/INCAR" > "$pre/INCAR"
   cd "$pre" || return 3
-  OMP_NUM_THREADS=1 OMP_STACKSIZE=512m mpirun --bind-to none -np 4 /usr/local/bin/vasp_std \
+  OMP_NUM_THREADS=1 OMP_STACKSIZE=512m "${launch_vasp[@]}" \
     > preconverge.stdout.log 2> preconverge.stderr.log
   local exit_code=$?
   if [[ $exit_code -ne 0 ]] || [[ ! -s CHGCAR ]] || ! job_converged "$pre"; then
@@ -182,7 +195,7 @@ preconverge_model() {
     ' "$directory/INCAR" > "$fixed/INCAR"
     printf '{"status":"running","complete":false}\n' > "$fixed/run_status.json"
     cd "$fixed" || return 3
-    OMP_NUM_THREADS=1 OMP_STACKSIZE=512m mpirun --bind-to none -np 4 /usr/local/bin/vasp_std \
+    OMP_NUM_THREADS=1 OMP_STACKSIZE=512m "${launch_vasp[@]}" \
       > stage.stdout.log 2> stage.stderr.log
     local exit_code=$?
     if [[ $exit_code -ne 0 ]] || ! stage_converged "$fixed"; then
@@ -237,7 +250,7 @@ preconverge_model() {
     exit_code=1
     for attempt in 1 2 3; do
       printf '{"status":"running","attempt":%d,"complete":false}\n' "$attempt" > run_status.json
-      OMP_NUM_THREADS=1 OMP_STACKSIZE=512m mpirun --bind-to none -np 4 /usr/local/bin/vasp_std \
+      OMP_NUM_THREADS=1 OMP_STACKSIZE=512m "${launch_vasp[@]}" \
         > stage.stdout.log 2> stage.stderr.log
       exit_code=$?
       if stage_converged "$pbe"; then
@@ -279,7 +292,7 @@ preconverge_model() {
     exit_code=1
     for attempt in 1 2 3; do
       printf '{"status":"running","attempt":%d,"complete":false}\n' "$attempt" > run_status.json
-      OMP_NUM_THREADS=1 OMP_STACKSIZE=512m mpirun --bind-to none -np 4 /usr/local/bin/vasp_std \
+      OMP_NUM_THREADS=1 OMP_STACKSIZE=512m "${launch_vasp[@]}" \
         > stage.stdout.log 2> stage.stderr.log
       exit_code=$?
       if stage_converged "$dftu"; then
@@ -406,7 +419,7 @@ for relative in "${jobs[@]}"; do
   cd "$directory" || exit 3
   exit_code=0
   OMP_NUM_THREADS=1 OMP_STACKSIZE=512m /usr/bin/time -v \
-    mpirun --bind-to none -np 4 /usr/local/bin/vasp_std \
+    "${launch_vasp[@]}" \
     > vasp.stdout.log 2> vasp.stderr.log || exit_code=$?
   complete=false
   status="failed"

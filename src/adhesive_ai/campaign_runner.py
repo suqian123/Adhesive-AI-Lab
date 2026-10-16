@@ -811,6 +811,16 @@ def _wsl_failure_detail(completed: subprocess.CompletedProcess[str]) -> str:
     return detail or "未找到运行器进程。"
 
 
+class VaspHostBusyError(RuntimeError):
+    """Another VASP calculation is occupying the shared compute host."""
+
+    def __init__(self, process_ids: tuple[int, ...]) -> None:
+        self.process_ids = process_ids
+        super().__init__(
+            f"检测到仍在运行的 VASP 进程（PID: {', '.join(map(str, process_ids))}），不能重复启动。"
+        )
+
+
 def _ensure_no_vasp_process_is_running() -> None:
     """Prevent a restart from overlapping an untracked VASP calculation."""
     completed = subprocess.run(
@@ -823,8 +833,8 @@ def _ensure_no_vasp_process_is_running() -> None:
         timeout=30,
     )
     if completed.returncode == 0:
-        process_ids = ", ".join(completed.stdout.split()) or "unknown"
-        raise RuntimeError(f"检测到仍在运行的 VASP 进程（PID: {process_ids}），不能重复启动。")
+        process_ids = tuple(int(value) for value in completed.stdout.split())
+        raise VaspHostBusyError(process_ids)
     if completed.returncode != 1:
         raise RuntimeError(f"无法确认 VASP 进程状态：{_wsl_failure_detail(completed)}")
 
@@ -1001,12 +1011,18 @@ def ensure_next_vasp_facet_convergence(
     ):
         return {"facet": pending, "reason": "interrupted", "progress": progress_by_facet, "started": False}
     root = vasp_validation_root_for_facet(pending, base_root=base_root)
-    result = ensure_vasp_convergence_running(
-        root,
-        approval=vasp_approval_path_for_facet(pending, base_root=base_root),
-        facet=pending,
-        resources=resources,
-    )
+    try:
+        result = ensure_vasp_convergence_running(
+            root,
+            approval=vasp_approval_path_for_facet(pending, base_root=base_root),
+            facet=pending,
+            resources=resources,
+        )
+    except VaspHostBusyError as exc:
+        return {
+            "facet": pending, "progress": progress_by_facet,
+            "started": False, "reason": "host-busy", "vasp_process_count": len(exc.process_ids),
+        }
     return {"facet": pending, "progress": progress_by_facet, **result}
 
 
@@ -1098,6 +1114,24 @@ def vasp_convergence_progress(
                 "attempt": job_status.get("attempt"),
                 "log_path": job_path / "vasp.stdout.log",
             }
+    runner_pid, runner_pgid = _runner_identifiers(validation_root)
+    if active_detail is None and runner_pid is not None:
+        # The first job may spend time in the legacy charge preconvergence
+        # stage before its top-level run_status.json is written.
+        try:
+            runner_cwd = Path(os.readlink(f"/proc/{runner_pid}/cwd")).resolve()
+            relative_cwd = runner_cwd.relative_to(validation_root)
+        except (OSError, ValueError):
+            relative_cwd = Path()
+        if relative_cwd.name == ".preconverge":
+            preconverge_log = runner_cwd / "preconverge.stdout.log"
+            if preconverge_log.is_file():
+                active_detail = {
+                    "job": relative_cwd.parent.as_posix(),
+                    "phase": "初始电荷预收敛",
+                    "attempt": None,
+                    "log_path": preconverge_log,
+                }
     has_running_detail = active_detail is not None
     active_detail = active_detail or failed_detail
 
@@ -1117,7 +1151,6 @@ def vasp_convergence_progress(
         except OSError:
             stale = True
 
-    runner_pid, runner_pgid = _runner_identifiers(validation_root)
     runner_controlled = runner_pid is not None and runner_pgid is not None
     paused = runner_control.get("state") == "paused" and runner_controlled
     cancelled = runner_control.get("state") in {"cancelling", "cancelled"}

@@ -1,0 +1,239 @@
+{
+  "run_id": "CL-00001-421fa855b8",
+  "campaign_id": "CL-00001-test-dft-campaign",
+  "candidate_id": "CL-00001",
+  "created_at": "2026-10-14T06:35:36.072158+00:00",
+  "status": "running",
+  "integrated_at": null,
+  "integration_error": null,
+  "package_directory": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign",
+  "job_root": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\jobs",
+  "max_parallel": 16,
+  "candidate_snapshot": {
+    "candidate_id": "CL-00001",
+    "filler_pct": 0.0,
+    "resin_polarity": 0.5,
+    "low_temp_toughness_index": 0.6
+  },
+  "tasks": [
+    {
+      "task_id": "dft-o-111-v00-h00",
+      "scale": "quantum",
+      "calculation_kind": "dft",
+      "category": "dft",
+      "objective": "atomic-oxygen-surface-chemistry",
+      "conditions": {
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0
+      },
+      "vasp_validation_facet": "(111)",
+      "vasp_approval_path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\approved.json",
+      "expected_outputs": [
+        "adsorption_energy_ev"
+      ],
+      "dependencies": [],
+      "engine": "VASP",
+      "command": [
+        "E:\\Adhesive-AI-Lab\\.venv\\Scripts\\python.exe"
+      ],
+      "result_file": "OUTCAR",
+      "metadata": {
+        "candidate_id": "CL-00001",
+        "formulation_id": null,
+        "candidate_library_version": null,
+        "campaign_run_id": "CL-00001-421fa855b8",
+        "campaign_task_id": "dft-o-111-v00-h00",
+        "calculation_kind": "dft",
+        "result_file": "OUTCAR",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.0,
+        "polar_fraction": 0.5,
+        "compatibility_index": 0.6,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "facet": "(111)",
+        "oxygen_vacancy_fraction": 0.0,
+        "hydroxyl_fraction": 0.0,
+        "input_artifacts": {
+          "required": [
+            "POSCAR",
+            "INCAR",
+            "KPOINTS",
+            "POTCAR"
+          ],
+          "present": [
+            "INCAR",
+            "KPOINTS",
+            "POSCAR",
+            "POTCAR"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "POSCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\POSCAR",
+              "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+              "bytes": 7
+            },
+            "INCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\INCAR",
+              "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+              "bytes": 7
+            },
+            "KPOINTS": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\KPOINTS",
+              "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+              "bytes": 7
+            },
+            "POTCAR": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\POTCAR",
+              "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+              "bytes": 7
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "POSCAR",
+          "INCAR",
+          "KPOINTS",
+          "POTCAR"
+        ],
+        "present": [
+          "INCAR",
+          "KPOINTS",
+          "POSCAR",
+          "POTCAR"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "POSCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\POSCAR",
+            "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+            "bytes": 7
+          },
+          "INCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\INCAR",
+            "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+            "bytes": 7
+          },
+          "KPOINTS": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\KPOINTS",
+            "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+            "bytes": 7
+          },
+          "POTCAR": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\POTCAR",
+            "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+            "bytes": 7
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00",
+      "input_validation": "static-valid; convergence-approved",
+      "status": "queued",
+      "blocker": null,
+      "job_id": "vasp-2c5f03b488"
+    },
+    {
+      "task_id": "cg-pda-ceo2-dispersion",
+      "scale": "coarse-grained",
+      "calculation_kind": "interface_md",
+      "category": "coarse_grained",
+      "objective": "pda-ceo2-dispersion-and-reinforcement",
+      "conditions": {
+        "filler_pct": 0.0,
+        "temperature_c": 25.0
+      },
+      "vasp_validation_facet": null,
+      "vasp_approval_path": null,
+      "expected_outputs": [
+        "dispersion_index"
+      ],
+      "dependencies": [],
+      "engine": null,
+      "command": [],
+      "result_file": null,
+      "metadata": {
+        "candidate_id": "CL-00001",
+        "formulation_id": null,
+        "candidate_library_version": null,
+        "campaign_run_id": "CL-00001-421fa855b8",
+        "campaign_task_id": "cg-pda-ceo2-dispersion",
+        "calculation_kind": "interface_md",
+        "result_file": null,
+        "area_nm2": 100.0,
+        "filler_ratio": 0.0,
+        "polar_fraction": 0.5,
+        "compatibility_index": 0.6,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kJ/mol",
+        "filler_pct": 0.0,
+        "input_artifacts": {
+          "required": [
+            "interface.data",
+            "in.cg"
+          ],
+          "present": [
+            "in.cg",
+            "interface.data"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "interface.data": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+              "sha256": "500edf8d79b6fd17a4562f02d501a1b618a3fba8857fa3079d0af4058728f8c6",
+              "bytes": 18069
+            },
+            "in.cg": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+              "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+              "bytes": 1207
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "interface.data",
+          "in.cg"
+        ],
+        "present": [
+          "in.cg",
+          "interface.data"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "interface.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+            "sha256": "500edf8d79b6fd17a4562f02d501a1b618a3fba8857fa3079d0af4058728f8c6",
+            "bytes": 18069
+          },
+          "in.cg": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+            "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+            "bytes": 1207
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\cg-pda-ceo2-dispersion",
+      "input_validation": "static-valid; pending-convergence-approval",
+      "status": "blocked",
+      "blocker": "未配置 ADHESIVE_CG_COMMAND",
+      "job_id": null
+    }
+  ],
+  "result_payload": {
+    "dft": {},
+    "md": {},
+    "interface": {}
+  },
+  "updated_at": "2026-10-14T06:35:36.194161+00:00"
+}

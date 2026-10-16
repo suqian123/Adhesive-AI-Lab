@@ -1,15 +1,17 @@
-"""Archive the failed clean CeO2(111) ENCUT=600 run and prepare a fresh retry.
+"""Archive a failed clean CeO2(111) ENCUT=600/650 run and prepare a fresh retry.
 
 The retry is deliberately limited to the failed cutoff point. It starts from
-atomic charge and never reuses the 520 eV charge density or wavefunctions,
-whose FFT grids do not match the 600 eV calculation.
+atomic charge and never reuses charge density or wavefunctions from another
+cutoff, whose FFT grids do not match this calculation.
 """
 
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import argparse
 import json
 from pathlib import Path
+import re
 import shutil
 import sys
 
@@ -19,6 +21,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from adhesive_ai.campaign_runner import _ensure_no_vasp_process_is_running, _update_incar_settings
 from adhesive_ai.vasp_checkpoint import electronic_converged
+from adhesive_ai.vasp_production import configured_ncore
 
 
 MUTABLE_OUTPUTS = (
@@ -28,8 +31,10 @@ MUTABLE_OUTPUTS = (
 )
 
 RECOVERY_SETTINGS = {
-    "ALGO": "Normal",
-    "NELM": "180",
+    # Use the conservative direct optimizer successful at 450 and 600 eV.
+    "ALGO": "All",
+    "TIME": "0.1",
+    "NELM": "240",
     "NELMDL": "-5",
     "ISTART": "0",
     "ICHARG": "2",
@@ -44,22 +49,38 @@ RECOVERY_SETTINGS = {
 }
 
 
-def prepare(root: Path) -> dict[str, object]:
+def prepare(root: Path, *, cutoff: int = 600) -> dict[str, object]:
+    if cutoff not in {600, 650}:
+        raise ValueError("This recovery is restricted to the audited 600/650 eV cutoff points")
     root = root.resolve()
-    job = root / "encut" / "600"
+    job_name = f"encut/{cutoff}"
+    job = root / job_name
     status_path = job / "run_status.json"
-    if not (root / "clean_baseline.json").is_file():
+    clean_path = root / "clean_baseline.json"
+    if not clean_path.is_file():
         raise RuntimeError("Refusing recovery: this is not the corrected clean (111) baseline")
+    clean = json.loads(clean_path.read_text(encoding="utf-8"))
+    plan = json.loads((root / "validation_plan.json").read_text(encoding="utf-8"))
+    if clean.get("surface_termination") != "O-Ce-O-trilayers-v2" or plan.get("facet") != "(111)":
+        raise RuntimeError("Refusing recovery: expected the corrected O-Ce-O (111) baseline")
     status = json.loads(status_path.read_text(encoding="utf-8"))
     if status.get("status") != "failed" or status.get("complete") is not False:
-        raise RuntimeError(f"Refusing recovery: expected failed ENCUT=600, got {status!r}")
+        raise RuntimeError(f"Refusing recovery: expected failed ENCUT={cutoff}, got {status!r}")
     if electronic_converged(job):
-        raise RuntimeError("Refusing recovery: ENCUT=600 is already electronically converged")
+        raise RuntimeError(f"Refusing recovery: ENCUT={cutoff} is already electronically converged")
     outcar = (job / "OUTCAR").read_text(encoding="utf-8", errors="replace")
     if "electronic self-consistency was not achieved" not in outcar:
         raise RuntimeError("Refusing recovery: failed output is not a NELM exhaustion")
     if (job / "scf_recovery.json").exists():
-        raise RuntimeError("Refusing recovery: an ENCUT=600 recovery is already prepared")
+        raise RuntimeError(f"Refusing recovery: an ENCUT={cutoff} recovery is already prepared")
+    incar = (job / "INCAR").read_text(encoding="utf-8")
+    encut = re.search(r"(?m)^\s*ENCUT\s*=\s*([0-9.]+)", incar)
+    if encut is None or float(encut.group(1)) != cutoff:
+        raise RuntimeError("Refusing recovery: INCAR cutoff does not match the selected validation point")
+    recovery_settings = dict(RECOVERY_SETTINGS)
+    # Validate the grouping before any output is archived.
+    ncore = re.search(r"(?m)^\s*NCORE\s*=\s*([0-9]+)", incar)
+    recovery_settings["NCORE"] = str(configured_ncore(int(ncore.group(1)) if ncore else 1))
 
     _ensure_no_vasp_process_is_running()
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -71,17 +92,17 @@ def prepare(root: Path) -> dict[str, object]:
             shutil.move(str(source), str(backup / name))
     shutil.copy2(job / "INCAR", backup / "INCAR")
     shutil.copy2(status_path, backup / "run_status.json")
-    _update_incar_settings(job / "INCAR", RECOVERY_SETTINGS)
+    _update_incar_settings(job / "INCAR", recovery_settings)
 
     prepared_at = datetime.now(timezone.utc).isoformat()
     payload = {
         "state": "prepared-fresh-atomic",
         "attempt": 1,
         "prepared_at": prepared_at,
-        "job": "encut/600",
+        "job": job_name,
         "backup_directory": str(backup),
-        "basis": "NELM=120 exhausted after incompatible ENCUT=520 CHGCAR/WAVECAR reuse",
-        "settings": RECOVERY_SETTINGS,
+        "basis": "Normal SCF exhausted NELM; retry with direct optimization from atomic charge.",
+        "settings": recovery_settings,
         "checkpoint_policy": "No CHGCAR or WAVECAR is retained or reused",
     }
     (job / "scf_recovery.json").write_text(
@@ -89,7 +110,7 @@ def prepare(root: Path) -> dict[str, object]:
     )
     status_path.write_text(
         json.dumps(
-            {"job": "encut/600", "status": "recovery-prepared", "complete": False, "prepared_at": prepared_at},
+            {"job": job_name, "status": "recovery-prepared", "complete": False, "prepared_at": prepared_at},
             ensure_ascii=False,
         )
         + "\n",
@@ -97,7 +118,7 @@ def prepare(root: Path) -> dict[str, object]:
     )
     (root / "runner_control.json").write_text(
         json.dumps(
-            {"state": "recovery-prepared", "job": "encut/600", "updated_at": prepared_at},
+            {"state": "recovery-prepared", "job": job_name, "updated_at": prepared_at},
             ensure_ascii=False,
         )
         + "\n",
@@ -107,4 +128,7 @@ def prepare(root: Path) -> dict[str, object]:
 
 
 if __name__ == "__main__":
-    print(json.dumps(prepare(PROJECT_ROOT / "work" / "vasp_validation" / "ceo2-111-baseline-v1"), ensure_ascii=False))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--cutoff", type=int, choices=(600, 650), default=600)
+    args = parser.parse_args()
+    print(json.dumps(prepare(PROJECT_ROOT / "work" / "vasp_validation" / "ceo2-111-baseline-v1", cutoff=args.cutoff), ensure_ascii=False))

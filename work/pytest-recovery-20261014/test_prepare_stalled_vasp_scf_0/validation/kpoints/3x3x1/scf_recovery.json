@@ -1,0 +1,25 @@
+{
+  "state": "prepared",
+  "attempt": 1,
+  "prepared_at": "2026-10-14T06:35:36.535264+00:00",
+  "job": "kpoints/3x3x1",
+  "checkpoint": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_prepare_stalled_vasp_scf_0\\validation\\kpoints\\3x3x1\\CHGCAR",
+  "checkpoint_bytes": 10,
+  "backup_directory": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_prepare_stalled_vasp_scf_0\\validation\\kpoints\\3x3x1\\.scf-recovery-backups\\20261014T063536Z",
+  "previous_electronic_step": 158,
+  "settings": {
+    "ALGO": "Damped",
+    "TIME": "0.4",
+    "NELM": "240",
+    "NELMDL": "-1",
+    "AMIX": "0.05",
+    "BMIX": "0.0001",
+    "AMIX_MAG": "0.2",
+    "BMIX_MAG": "0.0001",
+    "AMIN": "0.01",
+    "MAXMIX": "80",
+    "ICHARG": "1",
+    "ISTART": "0",
+    "LREAL": ".FALSE."
+  }
+}

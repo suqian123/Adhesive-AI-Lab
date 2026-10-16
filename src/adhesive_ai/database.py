@@ -128,6 +128,8 @@ def _ensure_mysql_identity_columns(conn: Any) -> None:
 
 @contextmanager
 def sqlite_connection() -> Iterator[sqlite3.Connection]:
+    if os.getenv("ADHESIVE_SQLITE_FALLBACK", "1").strip().lower() in {"0", "false", "no", "off"}:
+        raise DatabaseError("共享 MySQL 主库不可用。请连接数据库 SSH 隧道后重试；当前配置禁止写入独立 SQLite 后备库。")
     path = _sqlite_path()
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(path)
@@ -226,8 +228,8 @@ def save_candidate(row: dict[str, Any]) -> None:
     save_candidates([row])
 
 
-def save_candidates(rows: Any) -> int:
-    """Upsert a candidate batch in one transaction and return its row count."""
+def save_candidates(rows: Any, *, update_existing: bool = True) -> int:
+    """Persist candidates; initial seeding can preserve every existing row."""
     if isinstance(rows, pd.DataFrame):
         records = rows.to_dict("records")
     else:
@@ -255,10 +257,15 @@ def save_candidates(rows: Any) -> int:
     sql = (
         "INSERT INTO candidates (candidate_id,formulation_id,candidate_library_version,resin,blend_resin,blend_fraction,dynamic_unit,cure_system,catalyst,toughener_pct,filler_pct,crosslink_density,properties) "
         "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) "
-        "ON DUPLICATE KEY UPDATE formulation_id=VALUES(formulation_id), candidate_library_version=VALUES(candidate_library_version), resin=VALUES(resin), blend_resin=VALUES(blend_resin), blend_fraction=VALUES(blend_fraction), "
-        "dynamic_unit=VALUES(dynamic_unit), cure_system=VALUES(cure_system), catalyst=VALUES(catalyst), toughener_pct=VALUES(toughener_pct), "
-        "filler_pct=VALUES(filler_pct), crosslink_density=VALUES(crosslink_density), properties=VALUES(properties)"
     )
+    if update_existing:
+        sql += (
+            "ON DUPLICATE KEY UPDATE formulation_id=VALUES(formulation_id), candidate_library_version=VALUES(candidate_library_version), resin=VALUES(resin), blend_resin=VALUES(blend_resin), blend_fraction=VALUES(blend_fraction), "
+            "dynamic_unit=VALUES(dynamic_unit), cure_system=VALUES(cure_system), catalyst=VALUES(catalyst), toughener_pct=VALUES(toughener_pct), "
+            "filler_pct=VALUES(filler_pct), crosslink_density=VALUES(crosslink_density), properties=VALUES(properties)"
+        )
+    else:
+        sql += "ON DUPLICATE KEY UPDATE candidate_id=candidate_id"
     with connection() as conn:
         _ensure_mysql_identity_columns(conn)
         cursor = conn.cursor()

@@ -1,0 +1,76 @@
+{
+  "job_id": "vasp-2c5f03b488",
+  "engine": "VASP",
+  "command": [
+    "E:\\Adhesive-AI-Lab\\.venv\\Scripts\\python.exe"
+  ],
+  "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00",
+  "status": "completed",
+  "submitted_at": "2026-10-14T06:35:36.138102+00:00",
+  "started_at": "2026-10-14T06:35:36.632814+00:00",
+  "finished_at": "2026-10-14T06:35:37.104465+00:00",
+  "return_code": 0,
+  "stdout_path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\jobs\\vasp-2c5f03b488\\stdout.log",
+  "stderr_path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\jobs\\vasp-2c5f03b488\\stderr.log",
+  "metadata": {
+    "candidate_id": "CL-00001",
+    "formulation_id": null,
+    "candidate_library_version": null,
+    "campaign_run_id": "CL-00001-421fa855b8",
+    "campaign_task_id": "dft-o-111-v00-h00",
+    "calculation_kind": "dft",
+    "result_file": "OUTCAR",
+    "area_nm2": 100.0,
+    "filler_ratio": 0.0,
+    "polar_fraction": 0.5,
+    "compatibility_index": 0.6,
+    "temperature_c": 25.0,
+    "temperature_unit": "K",
+    "energy_unit": "kJ/mol",
+    "facet": "(111)",
+    "oxygen_vacancy_fraction": 0.0,
+    "hydroxyl_fraction": 0.0,
+    "input_artifacts": {
+      "required": [
+        "POSCAR",
+        "INCAR",
+        "KPOINTS",
+        "POTCAR"
+      ],
+      "present": [
+        "INCAR",
+        "KPOINTS",
+        "POSCAR",
+        "POTCAR"
+      ],
+      "complete": true,
+      "production_approved": null,
+      "artifacts": {
+        "POSCAR": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\POSCAR",
+          "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+          "bytes": 7
+        },
+        "INCAR": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\INCAR",
+          "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+          "bytes": 7
+        },
+        "KPOINTS": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\KPOINTS",
+          "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+          "bytes": 7
+        },
+        "POTCAR": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_approved_vasp_tasks_are_r0\\runs\\CL-00001-421fa855b8\\package\\CL-00001-test-dft-campaign\\tasks\\dft-o-111-v00-h00\\POTCAR",
+          "sha256": "d400e534602cddb1bc3f8d858c4473462400feabef4955164a92412539eef416",
+          "bytes": 7
+        }
+      }
+    },
+    "submission_source": "campaign",
+    "input_validation": "static-valid; convergence-approved",
+    "production_approved": true
+  },
+  "error": null
+}

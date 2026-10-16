@@ -1,0 +1,20 @@
+{
+  "run_id": "CL-00001-7563051467",
+  "execution_mode": "external",
+  "candidate_id": "CL-00001",
+  "formulation_id": null,
+  "candidate_library_version": null,
+  "tasks": [
+    {
+      "task_id": "cg-pda-ceo2-dispersion",
+      "engine": "LAMMPS",
+      "command": [],
+      "result_file": "log.lammps",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_external_result_zip_match0\\runs\\CL-00001-7563051467\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion",
+      "input_validation": "external-inputs-ready",
+      "expected_outputs": [
+        "dispersion_index"
+      ]
+    }
+  ]
+}

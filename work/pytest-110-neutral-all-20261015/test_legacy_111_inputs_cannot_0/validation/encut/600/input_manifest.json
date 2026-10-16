@@ -1,0 +1,52 @@
+{
+  "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+  "scientific_status": "pending-convergence-validation",
+  "facet": "(111)",
+  "surface_termination": "O-Ce-O-trilayers-v2",
+  "miller_indices": [
+    1,
+    1,
+    1
+  ],
+  "repeat": [
+    1,
+    1,
+    1
+  ],
+  "slab_layers": 3,
+  "vacuum_a": 18.0,
+  "surface_oxygen_sites": 4,
+  "requested_vacancy_fraction": 0.0,
+  "actual_vacancy_fraction": 0.0,
+  "requested_hydroxyl_fraction": 0.0,
+  "actual_hydroxyl_fraction": 0.0,
+  "vacancy_count": 0,
+  "hydroxyl_count": 0,
+  "adsorbate_index": null,
+  "atom_count": 36,
+  "validation_axis": "encut",
+  "species": [
+    "Ce",
+    "O"
+  ],
+  "species_counts": [
+    12,
+    24
+  ],
+  "functional": "PBE-D3(BJ)",
+  "ce_u_eff_ev": 4.5,
+  "vdw_kernel_installed": true,
+  "vdw_kernel_used": false,
+  "encut_ev": 600,
+  "kpoints": [
+    1,
+    1,
+    1
+  ],
+  "ncore": 2,
+  "kpar": 1,
+  "resource_hashes": {
+    "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+    "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+  }
+}

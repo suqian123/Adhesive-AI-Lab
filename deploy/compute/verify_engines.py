@@ -16,6 +16,7 @@ from adhesive_ai.campaign_runner import available_engine_profiles, load_engine_p
 from adhesive_ai.engines import parse_dft_output, parse_lammps_thermo
 from adhesive_ai.vasp_checkpoint import electronic_converged
 from adhesive_ai.vasp_resources import install_vasp_resources, load_vasp_resource_config
+from mpi_launch import launch_plan
 
 
 def run_engine(command, directory, logfile, timeout=180):
@@ -71,7 +72,12 @@ def main():
     energy = result.total_energy_ev
     if not electronic_converged(vasp) or energy is None or not math.isfinite(energy):
         raise RuntimeError("VASP H2 check did not reach electronic convergence and normal termination")
-    report = {"status": "installation-check-passed", "mpi_ranks": int(os.getenv("ADHESIVE_MPI_RANKS", "4")),
+    report = {"status": "installation-check-passed",
+              "mpi_ranks_by_engine": {
+                  "vasp": launch_plan("vasp", [], os.environ, directory=vasp)["mpi_ranks"],
+                  "lammps": launch_plan("lammps", ["-in", "in.smoke"], os.environ)["mpi_ranks"],
+              },
+              "server_mpi_budget": int(os.getenv("ADHESIVE_MPI_BUDGET", "0")),
               "lammps_steps": 100, "lammps_required_features": required,
               "vasp_h2_energy_ev": energy, "vasp_h2_electronic_converged": True,
               "scientific_scope": "Software installation checks; no material-production approval",

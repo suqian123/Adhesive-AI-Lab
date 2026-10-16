@@ -1,0 +1,69 @@
+{
+  "job_id": "lammps-cac1e48d35",
+  "engine": "LAMMPS",
+  "command": [
+    "E:\\Adhesive-AI-Lab\\.venv\\Scripts\\python.exe"
+  ],
+  "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_blocked_md_task_is_rechec0\\task",
+  "status": "completed",
+  "submitted_at": "2026-10-15T09:24:49.421508+00:00",
+  "started_at": "2026-10-15T09:24:49.731740+00:00",
+  "finished_at": "2026-10-15T09:24:50.108236+00:00",
+  "return_code": 0,
+  "stdout_path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_blocked_md_task_is_rechec0\\jobs\\lammps-cac1e48d35\\stdout.log",
+  "stderr_path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_blocked_md_task_is_rechec0\\jobs\\lammps-cac1e48d35\\stderr.log",
+  "metadata": {
+    "candidate_id": "CL-1",
+    "formulation_id": null,
+    "candidate_library_version": null,
+    "campaign_run_id": "md-resume",
+    "campaign_task_id": "md-1",
+    "calculation_kind": "bulk_md",
+    "result_file": "log.lammps",
+    "area_nm2": 100.0,
+    "filler_ratio": 0.0,
+    "polar_fraction": 0.5,
+    "compatibility_index": 0.5,
+    "temperature_c": 25.0,
+    "temperature_unit": "K",
+    "energy_unit": "kcal/mol",
+    "submission_source": "campaign",
+    "input_validation": "static-valid; md-production-approved",
+    "production_approved": true,
+    "temperatures_c": [
+      25.0
+    ],
+    "input_artifacts": {
+      "required": [
+        "system.data",
+        "forcefield.production",
+        "in.production"
+      ],
+      "present": [
+        "forcefield.production",
+        "in.production",
+        "system.data"
+      ],
+      "complete": true,
+      "production_approved": true,
+      "artifacts": {
+        "system.data": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_blocked_md_task_is_rechec0\\task\\system.data",
+          "sha256": "d88b925f8bbd68b8f98e53005656d71029f8baad904d78d6caa6931cf2911297",
+          "bytes": 20
+        },
+        "forcefield.production": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_blocked_md_task_is_rechec0\\task\\forcefield.production",
+          "sha256": "59772d2eb0c230a19e3f2bc7d9526bac967cedb6dbdda998f9c9d7a2b0a0a6d0",
+          "bytes": 24
+        },
+        "in.production": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_blocked_md_task_is_rechec0\\task\\in.production",
+          "sha256": "51c838dd36a72d7e583cb0d13214e169f30ee78c505f5880409e83a444fca087",
+          "bytes": 752
+        }
+      }
+    }
+  },
+  "error": null
+}

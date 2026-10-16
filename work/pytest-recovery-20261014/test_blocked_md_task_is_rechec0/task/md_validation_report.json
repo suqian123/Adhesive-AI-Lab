@@ -1,0 +1,1 @@
+{"passed": true, "scientific_status": "md-production-approved", "resolution": "all-atom", "charge_model": "RESP", "baseline_id": "test-baseline-v1", "validated_files": {"system.data": "d88b925f8bbd68b8f98e53005656d71029f8baad904d78d6caa6931cf2911297", "forcefield.production": "59772d2eb0c230a19e3f2bc7d9526bac967cedb6dbdda998f9c9d7a2b0a0a6d0"}}

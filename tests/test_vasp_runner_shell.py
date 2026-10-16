@@ -16,6 +16,7 @@ class RunnerChecks(unittest.TestCase):
             binary.mkdir()
             fake = binary / "mpirun"
             fake.write_text("""#!/bin/sh
+printf '%s\\n' "$@" > mpi-arguments.txt
 echo 'DAV: 1 -123.0'
 if [ "$FAKE_FIRST_CONVERGED" = 1 ] && [ "${PWD##*/}" = 450 ]; then
   echo 'Iteration 1(12)' > OUTCAR
@@ -39,6 +40,8 @@ exit 0
             (root / "clean_baseline.json").write_text("{}")
             env = {**os.environ, "PATH": f"{binary}:{os.environ['PATH']}",
                    "ADHESIVE_VASP_VALIDATION_ROOT": str(root),
+                   "ADHESIVE_VALIDATION_MPI_RANKS": "8",
+                   "ADHESIVE_VALIDATION_USE_LAUNCHER": "0",
                    "FAKE_FIRST_CONVERGED": "1" if first_converged else "0"}
             script = Path(__file__).resolve().parents[1] / "scripts/run_vasp_convergence.sh"
             result = subprocess.run(["bash", str(script)], env=env, capture_output=True, text=True, timeout=20)
@@ -46,6 +49,8 @@ exit 0
             first = json.loads((root / "encut/450/run_status.json").read_text())
             self.assertEqual(first["complete"], first_converged)
             self.assertEqual(first["exit_code"], 0)  # Zero solver exit is not sufficient.
+            arguments = (root / "encut/450/mpi-arguments.txt").read_text().splitlines()
+            self.assertEqual(arguments[arguments.index("-np") + 1], "8")
             self.assertFalse((root / "encut/600/run_status.json").exists())
             if first_converged:
                 second = json.loads((root / "encut/520/run_status.json").read_text())

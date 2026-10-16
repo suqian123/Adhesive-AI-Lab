@@ -560,6 +560,8 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
     st.dataframe(_localized_campaign_run_table(display_record), width="stretch", hide_index=True)
     if status in {"queued", "running"}:
         st.info("后台监督进程正在自动推进任务；本区域每 5 秒刷新一次。")
+        if vasp_coordination.get("reason") == "host-busy":
+            st.info("服务器上已有 VASP 计算；当前页面每 5 秒检查一次，资源空闲后将尝试启动对应晶面的验证。")
         if live_vasp_text:
             st.info(f"{live_vasp_text}。该晶面通过后，系统会继续调度下一个待验证晶面。")
         if st.button("终止当前多尺度运行", key=f"terminate-campaign-{run_id}", width="stretch"):
@@ -569,7 +571,9 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
             except (OSError, RuntimeError, ValueError) as exc:
                 st.error(str(exc))
     elif status == "blocked":
-        if live_vasp_text and vasp_progress.get("active"):
+        if vasp_coordination.get("reason") == "host-busy":
+            st.info("服务器上已有 VASP 计算；当前页面每 5 秒检查一次，资源空闲后将尝试启动对应晶面的验证。")
+        elif live_vasp_text and vasp_progress.get("active"):
             st.info(
                 f"{live_vasp_text}。这是所有候选共用的 DFT 基准验证；当前候选输入静态校验已通过。"
                 "该晶面的 12 项验证矩阵全部完成并满足数值阈值后，"
@@ -1356,18 +1360,22 @@ candidate_signature = (
 )
 try:
     if st.session_state.get("persisted_candidate_signature") != candidate_signature:
-        save_candidates(base_candidate_frame)
+        save_candidates(base_candidate_frame, update_existing=False)
         st.session_state["persisted_candidate_signature"] = candidate_signature
     database_candidate_frame = load_candidates()
     database_ids = database_candidate_frame.get("candidate_id", pd.Series(dtype=str)).astype(str).tolist()
-    if set(database_ids) == set(candidate_ids) and len(database_ids) == len(candidate_ids):
+    if len(database_ids) and len(set(database_ids)) == len(database_ids):
         database_candidate_frame["candidate_id"] = database_candidate_frame["candidate_id"].astype(str)
-        database_candidate_frame = database_candidate_frame.set_index("candidate_id").reindex(candidate_ids).reset_index()
         missing_database_columns = [column for column in base_candidate_frame.columns if column not in database_candidate_frame]
         if not missing_database_columns:
             base_candidate_frame = database_candidate_frame.reindex(columns=base_candidate_frame.columns)
             candidate_frame = base_candidate_frame
     candidate_frame, experiment_history, external_payloads = load_connected_state(base_candidate_frame)
+    candidate_ids = candidate_frame["candidate_id"].astype(str).tolist()
+    candidate_signature = (
+        "candidate-db-v5", len(candidate_frame),
+        tuple(candidate_frame["formulation_id"].astype(str)),
+    )
 except DatabaseError as exc:
     experiment_history = pd.DataFrame()
     external_payloads = {}
@@ -1626,6 +1634,10 @@ def _render_multiscale_campaign_section() -> None:
     except ValueError:
         configured_parallel = 16
     configured_parallel = min(16, max(1, configured_parallel))
+    try:
+        server_mpi_budget = max(0, int(os.getenv("ADHESIVE_MPI_BUDGET") or "0"))
+    except ValueError:
+        server_mpi_budget = 0
     with parallel_col:
         campaign_max_parallel = st.selectbox(
             "最大并行任务数",
@@ -1635,7 +1647,9 @@ def _render_multiscale_campaign_section() -> None:
             disabled=launch_locked,
         )
     with launch_col:
-        st.caption("本地运行")
+        st.caption("服务器运行" if server_mpi_budget and os.name != "nt" else "本地运行")
+        if server_mpi_budget:
+            st.caption(f"服务器共用 {server_mpi_budget} 个 MPI 进程配额；超出配额的任务等待空闲资源。")
         launch_campaign = st.button(
             "一键生成并启动多尺度计算",
             type="primary",
@@ -1718,6 +1732,8 @@ def _render_multiscale_campaign_section() -> None:
                     st.info(f"计算包已生成，已自动启动 CeO₂{auto_vasp_result.get('facet')} 晶面的共享 VASP 收敛验证。")
                 elif auto_vasp_result and auto_vasp_result.get("resumed"):
                     st.info(f"计算包已生成，已自动继续 CeO₂{auto_vasp_result.get('facet')} 晶面的共享 VASP 收敛验证。")
+                elif auto_vasp_result and auto_vasp_result.get("reason") == "host-busy":
+                    st.info("计算包已生成；服务器正在运行其他 VASP 计算。打开任务状态页面后会定期检查，并在资源空闲时尝试启动晶面验证。")
                 else:
                     st.warning("计算包已生成，但外部程序或输入条件尚未满足；请查看下方任务状态。")
             else:

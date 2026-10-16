@@ -1,0 +1,658 @@
+{
+  "run_id": "CL-00001-021090b0e4",
+  "campaign_id": "CL-00001-test-campaign",
+  "candidate_id": "CL-00001",
+  "created_at": "2026-10-15T09:24:45.581613+00:00",
+  "status": "completed",
+  "integrated_at": null,
+  "integration_error": null,
+  "package_directory": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign",
+  "job_root": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\jobs",
+  "max_parallel": 1,
+  "candidate_snapshot": {
+    "candidate_id": "CL-00001",
+    "filler_pct": 3.0,
+    "resin_polarity": 0.5,
+    "low_temp_toughness_index": 0.6
+  },
+  "tasks": [
+    {
+      "task_id": "cg-pda-ceo2-dispersion",
+      "scale": "coarse-grained",
+      "calculation_kind": "interface_md",
+      "category": "coarse_grained",
+      "objective": "pda-ceo2-dispersion-and-reinforcement",
+      "conditions": {
+        "filler_pct": 3.0,
+        "temperature_c": 25.0
+      },
+      "vasp_validation_facet": null,
+      "vasp_approval_path": null,
+      "expected_outputs": [
+        "dispersion_index"
+      ],
+      "dependencies": [],
+      "engine": "LAMMPS",
+      "command": [
+        "E:\\Adhesive-AI-Lab\\.venv\\Scripts\\python.exe",
+        "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\fake_lammps.py",
+        "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\task.json"
+      ],
+      "result_file": "log.lammps",
+      "metadata": {
+        "candidate_id": "CL-00001",
+        "formulation_id": null,
+        "candidate_library_version": null,
+        "campaign_run_id": "CL-00001-021090b0e4",
+        "campaign_task_id": "cg-pda-ceo2-dispersion",
+        "calculation_kind": "interface_md",
+        "result_file": "log.lammps",
+        "area_nm2": 100.0,
+        "filler_ratio": 0.03,
+        "polar_fraction": 0.5,
+        "compatibility_index": 0.6,
+        "temperature_c": 25.0,
+        "temperature_unit": "K",
+        "energy_unit": "kcal/mol",
+        "filler_pct": 3.0,
+        "input_artifacts": {
+          "required": [
+            "interface.data",
+            "in.cg"
+          ],
+          "present": [
+            "in.cg",
+            "interface.data"
+          ],
+          "complete": true,
+          "production_approved": null,
+          "artifacts": {
+            "interface.data": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+              "sha256": "594082394b98f2fe63016ea02affebe0f0c760854b311279571faf716f20ecb6",
+              "bytes": 20519
+            },
+            "in.cg": {
+              "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+              "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+              "bytes": 1207
+            }
+          }
+        }
+      },
+      "input_artifacts": {
+        "required": [
+          "interface.data",
+          "in.cg"
+        ],
+        "present": [
+          "in.cg",
+          "interface.data"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "interface.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+            "sha256": "594082394b98f2fe63016ea02affebe0f0c760854b311279571faf716f20ecb6",
+            "bytes": 20519
+          },
+          "in.cg": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+            "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+            "bytes": 1207
+          }
+        }
+      },
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion",
+      "input_validation": null,
+      "status": "completed",
+      "blocker": null,
+      "job_id": "lammps-7c27bf5e46",
+      "return_code": 0,
+      "error": null
+    }
+  ],
+  "result_payload": {
+    "dft": {},
+    "md": {},
+    "interface": {
+      "binding_energy_mj_m2": 7.642579999999999,
+      "adhesion_work_mj_m2": 5.502657599999999,
+      "stability_score": 0.9090909090909091,
+      "engine": "lammps",
+      "area_nm2": 100.0,
+      "job_id": "lammps-7c27bf5e46",
+      "temperature_c": 25.0,
+      "steps": [
+        0.0,
+        100.0
+      ],
+      "energy": [
+        -10.0,
+        -12.0
+      ],
+      "coverage": [
+        0.0,
+        0.0
+      ],
+      "final_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "input_artifacts": {
+        "required": [
+          "interface.data",
+          "in.cg"
+        ],
+        "present": [
+          "in.cg",
+          "interface.data"
+        ],
+        "complete": true,
+        "production_approved": null,
+        "artifacts": {
+          "interface.data": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+            "sha256": "594082394b98f2fe63016ea02affebe0f0c760854b311279571faf716f20ecb6",
+            "bytes": 20519
+          },
+          "in.cg": {
+            "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+            "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+            "bytes": 1207
+          }
+        }
+      },
+      "task_id": "cg-pda-ceo2-dispersion",
+      "task_results": [
+        {
+          "binding_energy_mj_m2": 7.642579999999999,
+          "adhesion_work_mj_m2": 5.502657599999999,
+          "stability_score": 0.9090909090909091,
+          "engine": "lammps",
+          "area_nm2": 100.0,
+          "job_id": "lammps-7c27bf5e46",
+          "temperature_c": 25.0,
+          "steps": [
+            0.0,
+            100.0
+          ],
+          "energy": [
+            -10.0,
+            -12.0
+          ],
+          "coverage": [
+            0.0,
+            0.0
+          ],
+          "final_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "input_artifacts": {
+            "required": [
+              "interface.data",
+              "in.cg"
+            ],
+            "present": [
+              "in.cg",
+              "interface.data"
+            ],
+            "complete": true,
+            "production_approved": null,
+            "artifacts": {
+              "interface.data": {
+                "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+                "sha256": "594082394b98f2fe63016ea02affebe0f0c760854b311279571faf716f20ecb6",
+                "bytes": 20519
+              },
+              "in.cg": {
+                "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+                "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+                "bytes": 1207
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "updated_at": "2026-10-15T09:24:48.991612+00:00"
+}

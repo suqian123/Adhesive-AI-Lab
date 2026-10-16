@@ -21,9 +21,9 @@ LAMMPS 使用[官方稳定版 30 Sep 2026](https://github.com/lammps/lammps/rele
 - 树脂体相和界面 MD：`deploy/compute/run-lammps.sh -in in.production`，结果为 `log.lammps`。
 - 粗粒化：`deploy/compute/run-lammps.sh -in in.cg`，结果为 `log.lammps`。
 
-经服务器容量评估并按用户要求调整，当前默认 `ADHESIVE_MPI_RANKS=8`，每个启动器任务使用 8 个 MPI 进程；OpenMP/OpenBLAS 固定为 1 线程。`ADHESIVE_CAMPAIGN_MAX_PARALLEL=6`，默认每个计算批次最多同时运行 6 个任务。页面手动选择的并行数可以覆盖该默认值，多个批次会叠加；这不是服务器全局任务上限。单批次达到上限时合计 48 个 MPI 进程，保留约 16 个物理核心的容量余量。详见 [容量评估](server-capacity-20261010.md)。
+2026-10-12 实测后，普通 DFT 改为 16 MPI/NCORE=4/NUMA，MD 和 CG 保留 8 MPI，5 图像 NEB 使用 40 MPI。OpenMP/OpenBLAS 固定为 1 线程。新增跨批次共用的 `ADHESIVE_MPI_BUDGET=48`，标准启动器和共享验证超过配额时等待。`ADHESIVE_CAMPAIGN_MAX_PARALLEL=6` 控制每批次提交数，同类 DFT 最多 3 个同时计算，验证也占配额。计时、适用范围、备份及部署核对见 [2026-10-12 性能优化](server-performance-audit-20261012.md)。
 
-独立 VASP 收敛/恢复脚本仍固定使用 4 个 MPI 进程，`scripts/run_vasp_task.py` 的 `--np` 默认也为 4，不受服务器启动器环境变量影响。并行配置修改前的 `.env` 备份保存在服务器 `work/engine_setup/parallel-20261010T090504388889Z/env.before`。
+共享收敛/恢复运行器已启用标准资源池并改为 16 MPI；本机 WSL 默认仍为 4。手工工具 `scripts/run_vasp_task.py` 的 `--np` 默认仍为 4，直接运行 MPI，不参与资源池。本次配置和代码备份在服务器 `work/performance_checks/config-backup-20261012/`，更早备份在 `work/engine_setup/parallel-20261010T090504388889Z/env.before`。
 
 服务配置 `/etc/systemd/system/adhesive-ai.service.d/compute.conf` 设置单线程环境和 `LimitMEMLOCK=infinity`。应用仍使用独立服务账号 `adhesive-ai`。
 
@@ -49,7 +49,7 @@ LAMMPS 使用[官方稳定版 30 Sep 2026](https://github.com/lammps/lammps/rele
 
 调整为 8 个 MPI 进程后再次以服务账号运行安装检查：LAMMPS 完成 100 步，VASP H₂ 达到电子收敛并正常结束，总能量仍为 `-6.72345963 eV`；四类引擎启动器可用。新增报告为 `work/engine_checks/20261010T090507334491Z/report.json`。网页入口和外部计算页面的 AppTest 均通过，应用及 Nginx 健康检查正常，服务处于 active/running。新进程读取到的默认 MPI 进程数为 8、每批次并行任务数为 6。该检查验证运行可用性，不代表实际生产模型的加速比。
 
-这些是软件安装和运行检查。CeO₂ 各晶面的收敛批准、MD 拓扑/力场及物性验证仍按项目原有规则执行；H₂ 和 Lennard-Jones 检查不会回写候选数据库，也不会生成材料生产批准。历史数据和本机 MD 模型资源没有在本次引擎配置中迁移。
+这些是软件安装和运行检查。CeO₂ 各晶面的收敛批准、MD 拓扑/力场及物性验证仍按项目原有规则执行；H₂ 和 Lennard-Jones 检查不会回写候选数据库，也不会生成材料生产批准。历史数据和本机 MD 模型资源没有在本次引擎配置中迁移。2026-10-12 已另外完成历史数据库及现有代理模型文件迁移，详见 [数据迁移记录](server-database-sync-20261012.md)；该迁移不包含 MD 拓扑与计算目录。
 
 ## 重新验证
 

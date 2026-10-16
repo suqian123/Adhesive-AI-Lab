@@ -1,0 +1,39 @@
+{
+  "run_id": "md-submit-gate",
+  "campaign_id": "campaign",
+  "candidate_id": "CL-1",
+  "created_at": "2026-01-01T00:00:00+00:00",
+  "status": "blocked",
+  "package_directory": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_advance_campaign_rechecks0",
+  "job_root": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_advance_campaign_rechecks0\\jobs",
+  "max_parallel": 1,
+  "candidate_snapshot": {},
+  "tasks": [
+    {
+      "task_id": "md-1",
+      "scale": "atomistic-md",
+      "calculation_kind": "bulk_md",
+      "category": "bulk_md",
+      "conditions": {},
+      "dependencies": [],
+      "engine": "LAMMPS",
+      "command": [
+        "E:\\Adhesive-AI-Lab\\.venv\\Scripts\\python.exe",
+        "-c",
+        "raise SystemExit('must not run')"
+      ],
+      "result_file": "log.lammps",
+      "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-recovery-20261014\\test_advance_campaign_rechecks0\\task",
+      "status": "blocked",
+      "blocker": "输入已生成并通过静态验证；等待 MD 力场、交联拓扑与物性验证完成并批准生产计算",
+      "job_id": null,
+      "input_validation": "static-valid; pending-md-production-approval"
+    }
+  ],
+  "result_payload": {
+    "dft": {},
+    "md": {},
+    "interface": {}
+  },
+  "updated_at": "2026-10-14T06:35:35.874183+00:00"
+}

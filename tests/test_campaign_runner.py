@@ -17,6 +17,7 @@ from adhesive_ai.campaign_runner import (
     _vasp_production_approved,
     available_engine_profiles,
     campaign_environment_frame,
+    ensure_next_vasp_facet_convergence,
     ensure_vasp_convergence_running,
     engine_profiles_from_env,
     get_campaign_run,
@@ -32,6 +33,7 @@ from adhesive_ai.campaign_runner import (
     start_campaign_run,
     terminate_campaign_run,
     VASP_LOG_STALE_SECONDS,
+    VaspHostBusyError,
     vasp_convergence_progress,
 )
 
@@ -612,6 +614,31 @@ def test_vasp_convergence_progress_reads_damped_iteration(tmp_path):
     assert progress["recovery_attempt"] == 1
 
 
+def test_vasp_convergence_progress_reports_legacy_charge_preconvergence(tmp_path, monkeypatch):
+    validation_root = tmp_path / "validation"
+    job_path = validation_root / "encut" / "450"
+    stage_path = job_path / ".preconverge"
+    stage_path.mkdir(parents=True)
+    (validation_root / "validation_plan.json").write_text(
+        json.dumps({"facet": "(110)", "job_count": 1, "jobs": [{"path": str(job_path)}]}),
+        encoding="utf-8",
+    )
+    (stage_path / "preconverge.stdout.log").write_text("RMM:  26  -2.0\n", encoding="utf-8")
+    (validation_root / "runner.pid").write_text("123\n", encoding="utf-8")
+    (validation_root / "runner.pgid").write_text("123\n", encoding="utf-8")
+    (validation_root / "runner_control.json").write_text(
+        json.dumps({"state": "running", "pid": 123, "pgid": 123}), encoding="utf-8",
+    )
+    monkeypatch.setattr("adhesive_ai.campaign_runner.os.readlink", lambda path: str(stage_path))
+
+    progress = vasp_convergence_progress(validation_root, approval=tmp_path / "missing-approved.json")
+
+    assert progress["active"] is True
+    assert progress["job"] == "encut/450"
+    assert progress["phase"] == "初始电荷预收敛"
+    assert progress["electronic_step"] == 26
+
+
 def test_vasp_convergence_progress_marks_stale_or_paused_stage_inactive(tmp_path):
     validation_root = tmp_path / "validation"
     job_path = validation_root / "encut" / "450"
@@ -769,6 +796,26 @@ def test_ensure_vasp_convergence_starts_only_when_inactive(monkeypatch, tmp_path
     assert resumed["resumed"] is True
     assert resumed["reason"] == "resumed"
     assert calls == [tmp_path]
+
+
+def test_next_vasp_facet_waits_when_host_is_running_another_job(monkeypatch, tmp_path):
+    monkeypatch.setattr(
+        "adhesive_ai.campaign_runner.vasp_convergence_progress",
+        lambda root, *, approval: {"available": False, "approved": False, "active": False},
+    )
+    attempted = []
+
+    def busy(root, **kwargs):
+        attempted.append(kwargs["facet"])
+        raise VaspHostBusyError((316688, 316689))
+
+    monkeypatch.setattr("adhesive_ai.campaign_runner.ensure_vasp_convergence_running", busy)
+    result = ensure_next_vasp_facet_convergence({"(110)"}, base_root=tmp_path)
+
+    assert attempted == ["(110)"]
+    assert result["started"] is False
+    assert result["reason"] == "host-busy"
+    assert result["vasp_process_count"] == 2
 
 
 def test_page_selected_profiles_are_persisted_over_environment_defaults(tmp_path):

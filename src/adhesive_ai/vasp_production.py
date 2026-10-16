@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -34,6 +35,7 @@ CLEAN_111_SCF_SETTINGS = {
     "AMIX_MAG": "0.2", "BMIX_MAG": "0.0001", "AMIN": "0.01",
     "LREAL": ".FALSE.", "LWAVE": ".TRUE.", "DIPOL": "0.5 0.5 0.5",
 }
+ROBUST_111_SCF_SETTINGS = {"ALGO": "All", "TIME": "0.1", "NELM": "240"}
 
 
 @dataclass(frozen=True)
@@ -48,6 +50,16 @@ class VaspBaseline:
     ncore: int = 2
     kpar: int = 1
     ce_initial_moment: float = 1.0
+
+
+def configured_ncore(default: int) -> int:
+    """The server's measured FFT grouping; blank keeps the model default."""
+    from dotenv import dotenv_values
+    config = {**dotenv_values(Path(__file__).resolve().parents[2] / ".env"), **os.environ}
+    value = int(config.get("ADHESIVE_VASP_NCORE") or default)
+    if value < 1:
+        raise ValueError("ADHESIVE_VASP_NCORE must be a positive integer")
+    return value
 
 
 def _surface_oxygen_indices(atoms: Atoms, tolerance_a: float = 0.35) -> list[int]:
@@ -156,6 +168,12 @@ def build_ceo2_model(
         # an atomic plane exactly on the wrapping boundary.
         crystal.positions += settings.lattice_constant_a / 10.0
         crystal.wrap()
+    elif facet == "(110)":
+        # The unshifted (110) cleavage splits a neutral CeO2 layer, leaving
+        # oppositely charged Ce/O and O-only outer planes. Place the cleavage
+        # between complete CeO2 layers so both faces are stoichiometric.
+        crystal.positions[:, 0] += settings.lattice_constant_a / 4.0
+        crystal.wrap()
     slab = surface(crystal, FACET_INDICES[facet], settings.slab_layers, vacuum=settings.vacuum_a, periodic=True)
     slab = slab.repeat(repeat)
     slab.set_tags(np.ones(len(slab), dtype=int))
@@ -215,7 +233,10 @@ def build_ceo2_model(
         "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
         "scientific_status": "pending-convergence-validation",
         "facet": facet,
-        "surface_termination": "O-Ce-O-trilayers-v2" if facet == "(111)" else "legacy-v1",
+        "surface_termination": (
+            "O-Ce-O-trilayers-v2" if facet == "(111)"
+            else "neutral-CeO2-layers-v2" if facet == "(110)" else "legacy-v1"
+        ),
         "miller_indices": FACET_INDICES[facet],
         "repeat": repeat,
         "slab_layers": settings.slab_layers,
@@ -266,6 +287,7 @@ def _incar(
     neb: bool = False,
     static: bool = False,
     clean_111: bool = False,
+    scf_overrides: Mapping[str, str] | None = None,
 ) -> str:
     ldau_l = [3 if symbol == "Ce" else -1 for symbol in species]
     ldau_u = [settings.ce_u_eff_ev if symbol == "Ce" else 0.0 for symbol in species]
@@ -281,7 +303,7 @@ def _incar(
         ("ISPIN", 2), ("MAGMOM", " ".join(f"{value:g}" for value in magnetic)),
         ("ISMEAR", 0), ("SIGMA", 0.05), ("ALGO", "Normal"), ("NELM", 160), ("NELMDL", -5),
         ("AMIX", 0.2), ("BMIX", 0.0001), ("AMIX_MAG", 0.8), ("BMIX_MAG", 0.0001),
-        ("NCORE", settings.ncore), ("KPAR", settings.kpar),
+        ("NCORE", configured_ncore(settings.ncore)), ("KPAR", settings.kpar),
         ("ISIF", 2), ("IBRION", -1 if static else 3 if neb else 2), ("NSW", 0 if static else 200),
         ("ISYM", 0), ("LREAL", "Auto"), ("LASPH", ".TRUE."), ("ADDGRID", ".TRUE."),
         ("LWAVE", ".FALSE."), ("LCHARG", ".TRUE."), ("LORBIT", 11),
@@ -295,8 +317,9 @@ def _incar(
     if neb:
         values.extend((("IMAGES", settings.neb_images), ("SPRING", -5), ("LCLIMB", ".TRUE."), ("IOPT", 3)))
     if clean_111:
-        values = [(key, value) for key, value in values if key not in CLEAN_111_SCF_SETTINGS]
-        values.extend(CLEAN_111_SCF_SETTINGS.items())
+        clean_settings = {**CLEAN_111_SCF_SETTINGS, **(scf_overrides or {})}
+        values = [(key, value) for key, value in values if key not in clean_settings]
+        values.extend(clean_settings.items())
     return "\n".join(f"{key} = {value}" for key, value in values) + "\n"
 
 
@@ -310,6 +333,7 @@ def write_vasp_model(
     cutoff_ev: int | None = None,
     kpoints: tuple[int, int, int] | None = None,
     static: bool = False,
+    scf_overrides: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     directory = Path(output_dir).expanduser().resolve()
     directory.mkdir(parents=True, exist_ok=True)
@@ -319,7 +343,8 @@ def write_vasp_model(
     write(directory / "POSCAR", ordered, format="vasp", direct=True, vasp5=True, ignore_constraints=False)
     (directory / "INCAR").write_text(
         _incar(ordered, species, settings=selected_settings, static=static,
-               clean_111=static and metadata.get("facet") == "(111)" and bool(metadata.get("validation_axis"))),
+               clean_111=static and metadata.get("facet") == "(111)" and bool(metadata.get("validation_axis")),
+               scf_overrides=scf_overrides),
         encoding="utf-8",
     )
     mesh = kpoints or _kpoint_mesh(ordered)
@@ -332,6 +357,7 @@ def write_vasp_model(
         "functional": "PBE-D3(BJ)", "ce_u_eff_ev": selected_settings.ce_u_eff_ev,
         "vdw_kernel_installed": True, "vdw_kernel_used": False,
         "encut_ev": selected_settings.cutoff_ev, "kpoints": mesh,
+        "ncore": configured_ncore(selected_settings.ncore), "kpar": selected_settings.kpar,
         "resource_hashes": {
             "potcar_sha256": installed["potcar_sha256"],
             "vdw_kernel_sha256": installed["vdw_kernel_sha256"],
@@ -377,6 +403,7 @@ def write_neb_model(
     installed = install_vasp_resources(directory, resources)
     manifest = {
         **dict(metadata), "workflow": "CI-NEB", "images": settings.neb_images,
+        "ncore": configured_ncore(settings.ncore), "kpar": settings.kpar,
         "functional": "PBE-D3(BJ)", "ce_u_eff_ev": settings.ce_u_eff_ev,
         "vdw_kernel_installed": True, "vdw_kernel_used": False,
         "initial_adsorbate_height_delta_a": 3.0, "kpoints": mesh,
@@ -460,6 +487,7 @@ def write_convergence_suite(
         manifest = write_vasp_model(
             candidate, directory, metadata={**candidate_metadata, "validation_axis": "slab_layers"},
             resources=resources, settings=settings, kpoints=(1, 1, 1), static=True,
+            scf_overrides=ROBUST_111_SCF_SETTINGS if facet == "(111)" and layers >= 4 else None,
         )
         jobs.append({"path": str(directory), **manifest})
     for vacuum in (15.0, 18.0, 22.0):
@@ -472,6 +500,7 @@ def write_convergence_suite(
         manifest = write_vasp_model(
             candidate, directory, metadata={**candidate_metadata, "validation_axis": "vacuum"},
             resources=resources, settings=settings, kpoints=(1, 1, 1), static=True,
+            scf_overrides=ROBUST_111_SCF_SETTINGS if facet == "(111)" else None,
         )
         jobs.append({"path": str(directory), **manifest})
 
@@ -532,6 +561,8 @@ def validate_vasp_input_set(
     manifest = json.loads((root / "input_manifest.json").read_text(encoding="utf-8"))
     if manifest.get("facet") == "(111)":
         checks["corrected_111_termination"] = manifest.get("surface_termination") == "O-Ce-O-trilayers-v2"
+    elif manifest.get("facet") == "(110)":
+        checks["corrected_110_termination"] = manifest.get("surface_termination") == "neutral-CeO2-layers-v2"
     neb = root / "neb"
     if neb.is_dir():
         image_dirs = sorted(path for path in neb.iterdir() if path.is_dir() and path.name.isdigit())

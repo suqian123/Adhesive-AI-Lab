@@ -1,0 +1,757 @@
+{
+  "scientific_status": "pending-convergence-calculations",
+  "facet": "(111)",
+  "job_count": 14,
+  "acceptance": {
+    "total_energy_change_ev_per_atom_max": 0.001,
+    "force_ev_a_max": 0.02,
+    "convergence_comparison": "final-two-points",
+    "bulk_lattice_and_u_eff_status": "user-confirmed-assumptions-not-fitted",
+    "require_neb_endpoint_relaxation": true,
+    "slab_second_difference_ev_max": 0.05
+  },
+  "jobs": [
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\encut\\450",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "encut",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 450,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\encut\\520",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "encut",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\encut\\600",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "encut",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 600,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\encut\\650",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "encut",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 650,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\kpoints\\1x1x1",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "kpoints",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\kpoints\\2x2x1",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "kpoints",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        2,
+        2,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\kpoints\\3x3x1",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "kpoints",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        3,
+        3,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\slab-layers\\2",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 2,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 24,
+      "validation_axis": "slab_layers",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        8,
+        16
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\slab-layers\\3",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "slab_layers",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\slab-layers\\4",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 4,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 48,
+      "validation_axis": "slab_layers",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        16,
+        32
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\slab-layers\\5",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 5,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 60,
+      "validation_axis": "slab_layers",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        20,
+        40
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\vacuum\\15A",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 15.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "vacuum",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\vacuum\\18A",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 18.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "vacuum",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    },
+    {
+      "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_legacy_111_inputs_cannot_0\\validation\\vacuum\\22A",
+      "model": "CeO2-fluorite/PDA-dopamine-tetramer-baseline-v1",
+      "scientific_status": "pending-convergence-validation",
+      "facet": "(111)",
+      "surface_termination": "O-Ce-O-trilayers-v2",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "repeat": [
+        1,
+        1,
+        1
+      ],
+      "slab_layers": 3,
+      "vacuum_a": 22.0,
+      "surface_oxygen_sites": 4,
+      "requested_vacancy_fraction": 0.0,
+      "actual_vacancy_fraction": 0.0,
+      "requested_hydroxyl_fraction": 0.0,
+      "actual_hydroxyl_fraction": 0.0,
+      "vacancy_count": 0,
+      "hydroxyl_count": 0,
+      "adsorbate_index": null,
+      "atom_count": 36,
+      "validation_axis": "vacuum",
+      "species": [
+        "Ce",
+        "O"
+      ],
+      "species_counts": [
+        12,
+        24
+      ],
+      "functional": "PBE-D3(BJ)",
+      "ce_u_eff_ev": 4.5,
+      "vdw_kernel_installed": true,
+      "vdw_kernel_used": false,
+      "encut_ev": 520,
+      "kpoints": [
+        1,
+        1,
+        1
+      ],
+      "ncore": 2,
+      "kpar": 1,
+      "resource_hashes": {
+        "potcar_sha256": "534b159a345b2b6c707971d25d01b2838c8720b258579c749e0211bf29b9dfb3",
+        "vdw_kernel_sha256": "fdd43c844e6ce3e0b7c55c051ceec786d6af31ae29ca0821c552fa4cf2bfe798"
+      }
+    }
+  ]
+}

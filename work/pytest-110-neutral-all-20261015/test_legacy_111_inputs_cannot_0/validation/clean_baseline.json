@@ -1,0 +1,19 @@
+{
+  "surface_termination": "O-Ce-O-trilayers-v2",
+  "settings": {
+    "ALGO": "Normal",
+    "NELM": "120",
+    "ISTART": "0",
+    "ICHARG": "2",
+    "NELMDL": "-5",
+    "AMIX": "0.05",
+    "BMIX": "0.0001",
+    "AMIX_MAG": "0.2",
+    "BMIX_MAG": "0.0001",
+    "AMIN": "0.01",
+    "LREAL": ".FALSE.",
+    "LWAVE": ".TRUE.",
+    "DIPOL": "0.5 0.5 0.5"
+  },
+  "reuse_policy": "Electronically converged and matching geometry/pseudopotentials only"
+}

@@ -8,8 +8,55 @@ import adhesive_ai.database as database
 from adhesive_ai.engines import MDObservables
 
 
+@pytest.fixture(autouse=True)
+def default_fallback_configuration(monkeypatch):
+    monkeypatch.setenv("ADHESIVE_SQLITE_FALLBACK", "1")
+
+
 def test_database_module_imports_without_mysql_driver():
     assert hasattr(database, "config_from_env")
+
+
+def test_shared_database_failure_does_not_create_a_local_fallback(monkeypatch, tmp_path):
+    monkeypatch.setattr(database, "mysql_connector", None)
+    monkeypatch.setenv("ADHESIVE_SQLITE_FALLBACK", "0")
+    fallback = tmp_path / "isolated.sqlite3"
+    monkeypatch.setenv("ADHESIVE_SQLITE_PATH", str(fallback))
+    with pytest.raises(database.DatabaseError, match="共享 MySQL 主库"):
+        database.save_experiment(
+            "CL-00001", {"wide_temp_adhesion_mpa": 28.5},
+            formulation_id="FMT-001", candidate_library_version="candidate-library-v3",
+        )
+    with pytest.raises(database.DatabaseError, match="共享 MySQL 主库"):
+        database.load_experiments()
+    assert not fallback.exists()
+
+
+def test_candidate_seeding_does_not_overwrite_existing_properties(monkeypatch):
+    captured = []
+
+    class Cursor:
+        def executemany(self, query, params):
+            captured.append(query)
+        def close(self):
+            pass
+
+    class Connection:
+        def cursor(self):
+            return Cursor()
+
+    @contextmanager
+    def connect():
+        yield Connection()
+
+    monkeypatch.setattr(database, "connection", connect)
+    monkeypatch.setattr(database, "_ensure_mysql_identity_columns", lambda conn: None)
+    database.save_candidates([{"candidate_id": "CL-00001"}], update_existing=False)
+    conflict_clause = captured[0].split("ON DUPLICATE KEY UPDATE", 1)[1]
+    assert "properties=" not in conflict_clause
+    assert "formulation_id=" not in conflict_clause
+    database.save_candidates([{"candidate_id": "CL-00001"}])
+    assert "properties=VALUES(properties)" in captured[1]
 
 
 def test_connection_errors_when_mysql_driver_missing(monkeypatch):

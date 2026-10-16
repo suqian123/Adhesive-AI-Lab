@@ -1,0 +1,19 @@
+{
+  "task_id": "cg-pda-ceo2-dispersion",
+  "candidate_id": "CL-00001",
+  "scale": "coarse-grained",
+  "calculation_kind": "interface_md",
+  "objective": "pda-ceo2-dispersion-and-reinforcement",
+  "engine_options": [
+    "LAMMPS"
+  ],
+  "conditions": {
+    "filler_pct": 3.0,
+    "temperature_c": 25.0
+  },
+  "expected_outputs": [
+    "dispersion_index"
+  ],
+  "readiness": "generator-available-requires-calibration",
+  "blocking_requirements": []
+}

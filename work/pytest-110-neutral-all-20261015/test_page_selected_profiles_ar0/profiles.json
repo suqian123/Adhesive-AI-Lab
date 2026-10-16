@@ -1,0 +1,22 @@
+{
+  "dft": {
+    "engine": "CP2K",
+    "command": "cp2k.psmp -i cp2k.inp",
+    "result_file": "cp2k.out"
+  },
+  "bulk_md": {
+    "engine": "LAMMPS",
+    "command": "lmp -in in.production",
+    "result_file": "log.lammps"
+  },
+  "interface_md": {
+    "engine": "GROMACS",
+    "command": "gmx mdrun -deffnm production",
+    "result_file": "potential.xvg"
+  },
+  "coarse_grained": {
+    "engine": "LAMMPS",
+    "command": "lmp -in in.cg",
+    "result_file": "log.lammps"
+  }
+}

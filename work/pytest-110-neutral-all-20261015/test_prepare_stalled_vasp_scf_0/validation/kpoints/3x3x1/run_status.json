@@ -1,0 +1,6 @@
+{
+  "job": "kpoints/3x3x1",
+  "status": "recovery-prepared",
+  "complete": false,
+  "prepared_at": "2026-10-15T09:24:50.345584+00:00"
+}

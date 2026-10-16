@@ -1,0 +1,62 @@
+{
+  "job_id": "lammps-7c27bf5e46",
+  "engine": "LAMMPS",
+  "command": [
+    "E:\\Adhesive-AI-Lab\\.venv\\Scripts\\python.exe",
+    "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\fake_lammps.py",
+    "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\task.json"
+  ],
+  "workdir": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion",
+  "status": "completed",
+  "submitted_at": "2026-10-15T09:24:45.605246+00:00",
+  "started_at": "2026-10-15T09:24:46.137376+00:00",
+  "finished_at": "2026-10-15T09:24:46.516486+00:00",
+  "return_code": 0,
+  "stdout_path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\jobs\\lammps-7c27bf5e46\\stdout.log",
+  "stderr_path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\jobs\\lammps-7c27bf5e46\\stderr.log",
+  "metadata": {
+    "candidate_id": "CL-00001",
+    "formulation_id": null,
+    "candidate_library_version": null,
+    "campaign_run_id": "CL-00001-021090b0e4",
+    "campaign_task_id": "cg-pda-ceo2-dispersion",
+    "calculation_kind": "interface_md",
+    "result_file": "log.lammps",
+    "area_nm2": 100.0,
+    "filler_ratio": 0.03,
+    "polar_fraction": 0.5,
+    "compatibility_index": 0.6,
+    "temperature_c": 25.0,
+    "temperature_unit": "K",
+    "energy_unit": "kcal/mol",
+    "filler_pct": 3.0,
+    "input_artifacts": {
+      "required": [
+        "interface.data",
+        "in.cg"
+      ],
+      "present": [
+        "in.cg",
+        "interface.data"
+      ],
+      "complete": true,
+      "production_approved": null,
+      "artifacts": {
+        "interface.data": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\interface.data",
+          "sha256": "594082394b98f2fe63016ea02affebe0f0c760854b311279571faf716f20ecb6",
+          "bytes": 20519
+        },
+        "in.cg": {
+          "path": "E:\\Adhesive-AI-Lab\\work\\pytest-110-neutral-all-20261015\\test_one_click_campaign_runs_c0\\runs\\CL-00001-021090b0e4\\package\\CL-00001-test-campaign\\tasks\\cg-pda-ceo2-dispersion\\in.cg",
+          "sha256": "3845087def8aac28360c170ba2cb4de0022f6cc17199169249215912790e6169",
+          "bytes": 1207
+        }
+      }
+    },
+    "submission_source": "campaign",
+    "input_validation": null,
+    "production_approved": false
+  },
+  "error": null
+}

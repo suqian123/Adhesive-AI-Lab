@@ -1,0 +1,20 @@
+{
+  "task_id": "dft-o-111-v00-h00",
+  "candidate_id": "CL-00001",
+  "scale": "quantum",
+  "calculation_kind": "dft",
+  "objective": "atomic-oxygen-surface-chemistry",
+  "engine_options": [
+    "VASP"
+  ],
+  "conditions": {
+    "facet": "(111)",
+    "oxygen_vacancy_fraction": 0.0,
+    "hydroxyl_fraction": 0.0
+  },
+  "expected_outputs": [
+    "adsorption_energy_ev"
+  ],
+  "readiness": "pending-convergence-validation",
+  "blocking_requirements": []
+}
