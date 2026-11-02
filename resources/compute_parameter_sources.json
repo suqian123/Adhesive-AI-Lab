@@ -1,0 +1,15 @@
+{
+  "CE": {"title":"Triazine reaction of cyanate ester resin systems catalyzed by organic tin compound: kinetics and mechanism", "url":"https://doi.org/10.1002/pi.1446", "scope":"BADCy 等氰酸酯的环三聚路线参考；催化条件与候选未匹配，不移植动力学或工艺数值。", "route":"氰酸酯基环三聚形成三嗪结构"},
+  "PN": {"title":"The curing reaction of phthalonitrile promoted by sulfhydryl groups with high curing activity", "url":"https://doi.org/10.1016/j.polymer.2022.124948", "scope":"巯基促进的 PN 固化研究；仅提示需核对多种固化产物，未证明适用于每个候选。", "route":"需区分异吲哚啉、三嗪和酞菁等产物，比例待确认"},
+  "PI": {"title":"Organosolubility and optical transparency of novel polyimides derived from 2′,7′-bis(4-aminophenoxy)-spiro(fluorene-9,9′-xanthene)", "url":"https://doi.org/10.1039/B9PY00339H", "scope":"具体二酐/二胺体系的两步法原始研究；单体及工艺参数不能按 PI 类别直接继承。", "route":"二酐与二胺形成聚酰胺酸后酰亚胺化的路线参考"},
+  "PU": {"title":"HMF–glycerol acetals as additives for the debonding of polyurethane adhesives", "url":"https://doi.org/10.1039/D0GC04093B", "scope":"具体聚醚多元醇/IPDI 胶黏剂研究；仅供官能团和反应路线核查。", "route":"异氰酸酯与羟基反应形成氨基甲酸酯键的路线参考"},
+  "Silicone": {"title":"Silicone elastomers with covalently incorporated aromatic voltage stabilisers", "url":"https://doi.org/10.1039/C6RA25878F", "scope":"含氢/乙烯基硅氧烷的硅氢加成原始研究；不适用于未经确认的缩合固化体系。", "route":"含氢与乙烯基硅氧烷硅氢加成的路线参考；候选也可能采用缩合固化"},
+  "Disulfide": {"title":"Catalyst-free room-temperature self-healing elastomers based on aromatic disulfide metathesis", "url":"https://doi.org/10.1039/C3MH00061C", "scope":"芳香族二硫键聚脲/聚氨酯体系；不能把室温愈合或交换速率外推到其他树脂。", "route":"需区分芳香族/脂肪族二硫键及交换机制"},
+  "Boronic": {"title":"Maximizing the symbiosis of static and dynamic bonds in self-healing boronic ester networks", "url":"https://doi.org/10.1039/C8PY00123E", "scope":"需确认硼酸/二醇结构、游离二醇和湿度后才能匹配交换机制。", "route":"硼酸酯水解/再酯化及与游离二醇的交换路线参考"},
+  "DielsAlder": {"title":"One-component Diels–Alder based polyurethanes: a unique way to self-heal", "url":"https://doi.org/10.1039/C7RA09898G", "scope":"呋喃/马来酰亚胺 PU 原始研究；候选的实际二烯/亲二烯体仍待指定。", "route":"呋喃/马来酰亚胺 DA/逆 DA 是可核查的示例，不自动选作候选单体"},
+  "Ionic": {"title":"Connecting supramolecular bond lifetime and network mobility for scratch healing in poly(butyl acrylate) ionomers containing sodium, zinc and cobalt", "url":"https://doi.org/10.1039/C4CP04015E", "scope":"具体羧酸盐离聚物的原始研究；离子种类、配位数、电荷及浓度均需候选专属证据。", "route":"离子缔合需指定离子对和中和度，不能仅用 Ionic 标签分配电荷"},
+  "CTBN1300X13": {"title":"Huntsman HYPRO 1300X13 CTBN product characteristics", "url":"https://products.huntsman.com/products/hypro-1300x13-ctbn", "scope":"供应商典型分子量 3150 g/mol、官能度 1.8；非批次保证值，仅用于用户指定的 CL5-00016 模型提案。"},
+  "CTBNTDS": {"title":"Huntsman HYPRO 1300X13 CTBN technical datasheet, August 2020", "url":"https://www.huntsman.com/docs/Documents/Hypro1300X13_US_e.pdf", "scope":"搜索索引可读，原链接当前返回 404；26% AN 作为用户提供的近似规格记录，不将该失效链接作为独立数值验证。"},
+  "LAMMPS_UNITS": {"title":"LAMMPS units command", "url":"https://docs.lammps.org/units.html", "scope":"real 制式使用 Å、fs、kcal/mol、K、atm；文档默认步长不等于候选体系的稳定步长。"},
+  "LAMMPS_REACTION": {"title":"LAMMPS fix bond/react command", "url":"https://docs.lammps.org/fix_bond_react.html", "scope":"需要预反应/后反应模板和原子映射；不会自行推导反应或产生经验证的力场参数。"}
+}

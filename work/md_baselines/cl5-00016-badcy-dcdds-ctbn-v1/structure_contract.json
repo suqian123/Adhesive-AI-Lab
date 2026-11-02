@@ -1,0 +1,108 @@
+{
+  "baseline_id": "cl5-00016-badcy-dcdds-ctbn-v1",
+  "candidate_id": "CL5-00016",
+  "formulation_id": "FMT-553A4410C5387F8A",
+  "resin": "CE",
+  "dynamic_unit": "Disulfide",
+  "scientific_status": "molecular-precursors-defined; network-forcefield-validation-pending",
+  "production_approved": false,
+  "feed": {
+    "basis": "100 mass parts of the two cyanate ester monomers",
+    "BADCy_mass_parts": 79.0,
+    "DCDDS_mass_parts": 21.0,
+    "CTBN_phr": 5.0,
+    "BADCy_mole_fraction_among_cyanate_monomers": 0.802371
+  },
+  "monomers": {
+    "BADCy": {
+      "name": "bisphenol A dicyanate",
+      "canonical_smiles": "CC(C)(c1ccc(OC#N)cc1)c1ccc(OC#N)cc1",
+      "formula": "C17H14N2O2",
+      "molecular_weight_g_mol": 278.311,
+      "cyanate_groups": 2,
+      "disulfide_bonds": 0,
+      "carboxyl_groups": 0
+    },
+    "DCDDS": {
+      "name": "4,4'-dicyanatodiphenyl disulfide",
+      "canonical_smiles": "N#COc1ccc(SSc2ccc(OC#N)cc2)cc1",
+      "formula": "C14H8N2O2S2",
+      "molecular_weight_g_mol": 300.364,
+      "cyanate_groups": 2,
+      "disulfide_bonds": 1,
+      "carboxyl_groups": 0
+    }
+  },
+  "CTBN": {
+    "grade": "Hypro 1300X13 CTBN",
+    "supplier_typical": {
+      "Mn_g_mol": 3150,
+      "bound_acrylonitrile_wt_pct": 26.0,
+      "average_carboxyl_functionality": 1.8,
+      "source": "https://products.huntsman.com/products/hypro-1300x13-ctbn",
+      "batch_TDS_or_CoA_required": true
+    },
+    "representative_chain": {
+      "canonical_smiles": "N#CC(CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC=CCCC(C#N)CC=CCCC=CCCC(C#N)C(=O)O)CCC=CCCC=CCCC=CCCC(=O)O",
+      "formula": "C216H301N15O4",
+      "molecular_weight_g_mol": 3171.885,
+      "cyanate_groups": 0,
+      "disulfide_bonds": 0,
+      "carboxyl_groups": 2,
+      "butadiene_repeat_units": 42,
+      "acrylonitrile_repeat_units": 15,
+      "acrylonitrile_repeat_mass_fraction": 0.259454,
+      "assumptions": [
+        "all butadiene units represented as 1,4 links without assigned cis/trans stereochemistry",
+        "acrylonitrile units evenly spaced; actual product has a distribution",
+        "one molecule has two carboxyl ends; supplier functionality 1.8 is an ensemble average",
+        "no CTBN-cyanate covalent coupling assigned"
+      ]
+    }
+  },
+  "finite_cell_proposal": {
+    "BADCy_molecules": 181,
+    "DCDDS_molecules": 44,
+    "representative_CTBN_chains": 1,
+    "BADCy_wt_pct_in_resin": 79.2169,
+    "DCDDS_wt_pct_in_resin": 20.7831,
+    "CTBN_phr": 4.988,
+    "available_cyanate_sites": 450,
+    "crosslink_conversion_interpretation": "user-approved modeling assumption: fraction of cyanate sites trimerized",
+    "conversion_targets": [
+      {
+        "task_id": "md-resin-x1",
+        "target_conversion": 0.798,
+        "triazine_rings": 120,
+        "reacted_cyanate_sites": 360,
+        "unreacted_cyanate_sites": 90,
+        "realizable_conversion": 0.8
+      },
+      {
+        "task_id": "md-resin-x2",
+        "target_conversion": 0.948,
+        "triazine_rings": 142,
+        "reacted_cyanate_sites": 426,
+        "unreacted_cyanate_sites": 24,
+        "realizable_conversion": 0.946667
+      },
+      {
+        "task_id": "md-resin-x3",
+        "target_conversion": 1.0,
+        "triazine_rings": 150,
+        "reacted_cyanate_sites": 450,
+        "unreacted_cyanate_sites": 0,
+        "realizable_conversion": 1.0
+      }
+    ]
+  },
+  "production_gaps": [
+    "experimental verification of assumed cyanate conversion targets",
+    "cyanate trimerization network topology and validated bonded parameters",
+    "RESP or equivalently validated charges for all reacted/unreacted species",
+    "CTBN sequence, stereochemistry, batch acid value, and coupling/phase morphology",
+    "disulfide exchange reaction model and validation",
+    "equilibration, density, mechanical, thermal, and replica validation",
+    "PDA@CeO2 interface force field and approved DFT reference surfaces"
+  ]
+}

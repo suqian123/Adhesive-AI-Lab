@@ -1,0 +1,38 @@
+{
+  "baseline_id": "cl5-00016-badcy-dcdds-ctbn-v1",
+  "candidate_id": "CL5-00016",
+  "formulation_id": "FMT-553A4410C5387F8A",
+  "created_at": "2026-10-29T09:22:01.082291+00:00",
+  "scientific_status": "molecular-precursors-defined; network-forcefield-validation-pending",
+  "production_approved": false,
+  "geometry_methods": {
+    "BADCy": "ETKDGv3 + MMFF94",
+    "DCDDS": "ETKDGv3 + MMFF94"
+  },
+  "artifacts": {
+    "BADCy_pdb": {
+      "relative_path": "components/BADCy.pdb",
+      "sha256": "4d26f0e035309ee07ce7fea001f6516bf79a4bbd2fd19d584b1218621934dc76"
+    },
+    "BADCy_sdf": {
+      "relative_path": "components/BADCy.sdf",
+      "sha256": "7fe306065674239589cb9b773916b18159307d5da67a97f6165883a7c8eff87d"
+    },
+    "CTBN_representative_smiles": {
+      "relative_path": "components/CTBN_1300X13_representative.smiles",
+      "sha256": "572a605092f014d4cd4e51159d5c31d8d1e246498a5beaf6cedef005b7b01d98"
+    },
+    "DCDDS_pdb": {
+      "relative_path": "components/DCDDS.pdb",
+      "sha256": "39f7520d537ce42958d4429abb33da8e25f9861df809293062e9315951b2d127"
+    },
+    "DCDDS_sdf": {
+      "relative_path": "components/DCDDS.sdf",
+      "sha256": "069fff59d4e5385170837dd9467291ace5e531d4c3db93d280b6daf491f7b838"
+    },
+    "structure_contract": {
+      "relative_path": "structure_contract.json",
+      "sha256": "140d3d3810f04591479a080cb91d1caddcbe79ad977f2f6e176178369ce2f591"
+    }
+  }
+}

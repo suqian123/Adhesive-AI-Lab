@@ -1,0 +1,21 @@
+{
+  "batch_id": "compute-parameter-research-20261029-v1",
+  "candidates": 1260,
+  "versions": {
+    "candidate-library-v4": 360,
+    "candidate-library-v5": 900
+  },
+  "parameters_with_values": {
+    "resin_monomers": 1,
+    "dynamic_component": 1,
+    "toughener_grade": 1,
+    "toughener_Mn_g_mol": 1,
+    "toughener_acrylonitrile_wt_pct": 1,
+    "toughener_average_functionality": 1,
+    "reaction_conversion": 1
+  },
+  "candidates_with_specific_model": 1,
+  "candidates_with_reference_routes": 1260,
+  "production_ready_candidates": 0,
+  "policy": "unknown parameters are null; references are not assignments; proxy predictions are not validation"
+}

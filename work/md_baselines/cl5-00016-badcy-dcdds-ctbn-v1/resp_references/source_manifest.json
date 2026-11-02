@@ -1,0 +1,12 @@
+{
+  "captured_at": "2026-10-30T09:10:11.622607+00:00",
+  "production_approved": false,
+  "sha256": {
+    "src/adhesive_ai/ce_resp.py": "ce4cca484a726dd57323f4c95d83320367c477cafd7f41d62d91b99913627f63",
+    "scripts/prepare_ce_resp_structure.py": "40fc1d187b90883bf81e4881a78651594b082fcf7aefc684770306ec156ebfa4",
+    "scripts/run_ce_resp.py": "b271b55929496eae610249a2804600d8a48104717da51df28901eec311944288",
+    "scripts/run_ce_resp_queue.py": "260f1c8e101fa1d763b41118da217396b7c782fd7514f5b7289337a73505fd66",
+    "scripts/audit_ce_gaff2.py": "0dd8e12eeb80c06343a97cd4300b371cc230b2ae7a7c050f82bf3ddb880e925b",
+    "engines/md-bootstrap-20261029/environment-explicit.txt": "950299f5e2e40dc4c750140a4d34b04e3bd6c065ecc1dc816de8e2e377e7f3c4"
+  }
+}

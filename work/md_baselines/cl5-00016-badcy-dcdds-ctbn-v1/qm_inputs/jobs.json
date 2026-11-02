@@ -1,0 +1,30 @@
+{
+  "scope": "isolated HF/6-31G* geometry references; RESP, bonded fitting and force-field validation pending",
+  "production_approved": false,
+  "jobs": [
+    {
+      "name": "BADCy",
+      "xyz": "BADCy.xyz",
+      "sha256": "4f1a30a03572391fef067ac933df4a6a4c07c713cf4671f982a17363a2e3caa2",
+      "charge": 0,
+      "spin": 0,
+      "formula": "C17H14N2O2"
+    },
+    {
+      "name": "DCDDS",
+      "xyz": "DCDDS.xyz",
+      "sha256": "09e704378809c3dd521a1c58fca038bebadf54708313f95b781ee7266e02fa7f",
+      "charge": 0,
+      "spin": 0,
+      "formula": "C14H8N2O2S2"
+    },
+    {
+      "name": "triazine_reference",
+      "xyz": "triazine_reference.xyz",
+      "sha256": "e3f47d5558286b58a894400ba5f8d358a003aa74779714efe3ae4010269a17f6",
+      "charge": 0,
+      "spin": 0,
+      "formula": "C21H15N3O3"
+    }
+  ]
+}

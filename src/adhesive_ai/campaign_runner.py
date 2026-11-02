@@ -418,6 +418,32 @@ write_data final.data
 """
 
 
+def _bundled_md_baseline_compatible(task_dir: Path) -> tuple[bool, str | None]:
+    """Only stage the bundled PI/boronic precursor for a matching campaign."""
+    campaign_path = task_dir.parent.parent / "campaign.json"
+    try:
+        campaign = json.loads(campaign_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError):
+        return False, None
+    composition = campaign.get("composition") or {}
+    snapshot = campaign.get("candidate_snapshot") or {}
+    from .md_production import MD_BASELINE_VERSION
+
+    baseline_id = snapshot.get("md_baseline_id") or composition.get("md_baseline_id")
+    if (
+        composition.get("resin") == "PI"
+        and composition.get("dynamic_unit") == "Boronic"
+        and baseline_id == MD_BASELINE_VERSION
+    ):
+        return True, None
+    resin = str(composition.get("resin") or "未指定")
+    dynamic_unit = str(composition.get("dynamic_unit") or "未指定")
+    return False, (
+        f"当前候选为 {resin}/{dynamic_unit}；内置 MD 前体是 PI/Boronic，化学体系不匹配。"
+        "需明确绑定候选专属的结构基线，并提供经验证的拓扑和力场。"
+    )
+
+
 def _prepare_direct_lammps_inputs(
     task: CalculationTask | Mapping[str, Any],
     profile: Mapping[str, Any],
@@ -432,11 +458,12 @@ def _prepare_direct_lammps_inputs(
 
     data_file = "system.data" if category == "bulk_md" else "interface.data"
     task_dir.mkdir(parents=True, exist_ok=True)
-    if category == "bulk_md":
+    baseline_compatible, model_blocker = _bundled_md_baseline_compatible(task_dir)
+    if category == "bulk_md" and baseline_compatible:
         from .md_production import provision_bulk_md_inputs
 
         provision_bulk_md_inputs(task, task_dir)
-    elif category == "interface_md":
+    elif category == "interface_md" and baseline_compatible:
         from .md_production import provision_interface_md_inputs
 
         provision_interface_md_inputs(task, task_dir)
@@ -460,7 +487,7 @@ def _prepare_direct_lammps_inputs(
 
     missing = [name for name in (data_file, "forcefield.production") if not (task_dir / name).is_file()]
     if missing:
-        return "template-valid; pending-topology-forcefield", None
+        return "template-valid; pending-topology-forcefield", model_blocker
     if not _md_production_approved(task_dir, data_file=data_file):
         return (
             "static-valid; pending-md-production-approval",
@@ -551,6 +578,14 @@ def _md_production_approved(task_dir: str | Path, *, data_file: str | None = Non
         if not report_path.is_absolute():
             report_path = (approval_path.parent / report_path).resolve()
         report = json.loads(report_path.read_text(encoding="utf-8"))
+        campaign_path = directory.parent.parent / "campaign.json"
+        if campaign_path.is_file():
+            campaign = json.loads(campaign_path.read_text(encoding="utf-8"))
+            expected_formulation = str(
+                (campaign.get("candidate_snapshot") or {}).get("formulation_id") or ""
+            ).strip()
+            if expected_formulation and str(report.get("formulation_id") or "").strip() != expected_formulation:
+                return False
         validated_files = dict(report.get("validated_files") or {})
         if not all((directory / name).is_file() for name in required_files):
             return False
@@ -1769,9 +1804,20 @@ def advance_campaign_run(run_id: str, *, root: str | Path = "work/campaign_runs"
             continue
         try:
             job = get_job_status(task["job_id"], root=job_root)
-            task["status"] = job.status
-            task["return_code"] = job.return_code
-            task["error"] = job.error
+            if (
+                job.status == "completed"
+                and task.get("category") == "dft"
+                and str(task.get("engine") or "").lower() == "vasp"
+                and not electronic_converged(task["workdir"])
+            ):
+                task.update(
+                    status="failed", return_code=job.return_code,
+                    error="VASP exited without a normally terminated, electronically converged OUTCAR",
+                )
+            else:
+                task["status"] = job.status
+                task["return_code"] = job.return_code
+                task["error"] = job.error
         except Exception as exc:
             task.update(status="failed", error=str(exc))
 

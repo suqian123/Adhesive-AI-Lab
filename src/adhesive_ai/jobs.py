@@ -348,6 +348,7 @@ def update_job_metadata(job_id: str, updates: dict[str, object], *, root: str | 
 def parse_job_result(job_id: str, *, root: str | Path = "work/jobs") -> object:
     """Parse captured output using the selected engine adapter."""
     from .engines import parse_dft_output, parse_gromacs_xvg, parse_lammps_thermo
+    from .vasp_checkpoint import electronic_converged
 
     record = get_job_status(job_id, root=root)
     if record.status != "completed":
@@ -355,6 +356,8 @@ def parse_job_result(job_id: str, *, root: str | Path = "work/jobs") -> object:
     output = read_job_result_text(job_id, root=root)
     engine = record.engine.lower().replace(" ", "")
     if engine in {"vasp", "quantumespresso", "qe", "cp2k"}:
+        if engine == "vasp" and not electronic_converged(record.workdir):
+            raise ValueError(f"VASP job {job_id} lacks a normally terminated, electronically converged OUTCAR")
         metadata = record.metadata or {}
         surface_energy = metadata.get("surface_energy_ev")
         oxygen_energy = metadata.get("oxygen_energy_ev")

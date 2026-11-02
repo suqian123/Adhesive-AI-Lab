@@ -1,0 +1,21 @@
+{
+  "state": "qm-geometry-converged",
+  "started_at": "2026-10-30T07:29:13.811763+00:00",
+  "input": {
+    "name": "BADCy",
+    "xyz": "BADCy.xyz",
+    "sha256": "4f1a30a03572391fef067ac933df4a6a4c07c713cf4671f982a17363a2e3caa2",
+    "charge": 0,
+    "spin": 0,
+    "formula": "C17H14N2O2"
+  },
+  "method": "RHF",
+  "basis": "6-31g*",
+  "threads": 4,
+  "production_approved": false,
+  "finished_at": "2026-10-30T08:13:50.468098+00:00",
+  "energy_hartree": -910.463150441884,
+  "gradient_max_abs_hartree_bohr": 3.3718586473163725e-05,
+  "wavefunction_stability": "not-yet-tested",
+  "next_step": "ESP/RESP charge fitting and independent force-field validation"
+}

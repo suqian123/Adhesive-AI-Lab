@@ -1,0 +1,16 @@
+{
+  "state": "running",
+  "started_at": "2026-10-30T09:01:37.834841+00:00",
+  "input": {
+    "name": "triazine_reference",
+    "xyz": "triazine_reference.xyz",
+    "sha256": "e3f47d5558286b58a894400ba5f8d358a003aa74779714efe3ae4010269a17f6",
+    "charge": 0,
+    "spin": 0,
+    "formula": "C21H15N3O3"
+  },
+  "method": "RHF",
+  "basis": "6-31g*",
+  "threads": 4,
+  "production_approved": false
+}

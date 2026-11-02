@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "SDF/AC atom-order and respgen preflight only; zero input charges are placeholders",
+  "max_coordinate_difference_A": 0.0005394600000001581,
+  "atoms": 35,
+  "production_approved": false
+}

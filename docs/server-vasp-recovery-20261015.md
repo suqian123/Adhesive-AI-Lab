@@ -134,3 +134,32 @@ At 08:35 UTC, the first `encut/450` point passed `electronic_converged`,
 and the matrix advanced automatically to `encut/520` with 1/14 complete,
 0 failed, and no approval. All 48 VASP processes were consuming CPU; the two
 requeued CeO2(111) job records were running, and the web endpoint returned 200.
+
+## 2026-10-17 cutoff extension after the 14-point matrix
+
+The neutral (110) matrix finished all 14 electronic calculations at 11:50 UTC
+on 2026-10-16, with zero failed electronic jobs. Its final scientific report
+did not approve the facet: the 600-to-650 eV cutoff energy difference was
+0.0010350197 eV/atom, just above the unchanged 0.001 eV/atom threshold.
+All other checks passed. The failed runner state therefore reflects a
+scientific acceptance failure, not a crashed electronic calculation. The
+next facet (100) was correctly not started.
+
+`scripts/extend_ceo2_110_cutoff_20261017.py` preserved the previous report
+and plan under `.cutoff-extensions/20261017T015531Z`, added one 700 eV input
+set with the same neutral slab, pseudopotentials, mesh, and robust SCF settings
+as the verified 650 eV point, and left the acceptance thresholds unchanged.
+The extension uses `scripts/run_vasp_convergence_110_cutoff700.sh`, a snapshot
+of the standard runner differing only in its job list. It starts only the
+new point, then analyzes all 15 points. At 01:55 UTC, validation showed
+14/15 complete, 0 failed, with a live 16-rank `encut/700` calculation alongside
+the two existing 16-rank production jobs. Approval remains pending until the
+new electronic calculation and energy-difference check pass.
+
+At 02:18 UTC on 2026-10-17, the 700 eV point completed and the expanded
+15-point matrix passed all six checks. The final 650-to-700 eV difference was
+0.0008206983 eV/atom, below the unchanged 0.001 eV/atom threshold. The server
+created `approved.json` for (110), selecting 650 eV as the second-finest
+production cutoff. At 02:34 UTC the server reported 15/15 complete, 0 failed,
+runner state `finished`, and `approved=true`. The (100) facet had no matrix
+yet; whether it is required depends on the waiting campaign facets.

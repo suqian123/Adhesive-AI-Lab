@@ -1,0 +1,15 @@
+{
+  "state": "running",
+  "started_at": "2026-10-30T08:58:01.975002+00:00",
+  "model_id": "MDM-00203D56BC3B1B90",
+  "name": "BADCy",
+  "input_hashes": {
+    "qm_references/BADCy/optimized.xyz": "d99d2c3725988b3e2a5a72c0e0280483137e2450e2b758a1c76d99adebf558ef",
+    "qm_references/BADCy/optimized.chk": "39f937c03e6b01415b2ce0273712b1946d76df90e0db956117ea64956be02f29",
+    "qm_references/BADCy/state.json": "6788644c9f617efd640c8b28b3803e556de343e78ba0c14d18913d3bded085b4"
+  },
+  "method": "RHF/6-31G*; AmberTools two-stage RESP",
+  "threads": 4,
+  "production_approved": false,
+  "forcefield_validated": false
+}

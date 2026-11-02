@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import sys
 import time
+from types import SimpleNamespace
 import zipfile
 
 from adhesive_ai.campaign import CalculationTask, MultiscaleCampaign
@@ -12,6 +13,7 @@ from adhesive_ai.campaign_runner import (
     advance_campaign_run,
     _prepare_direct_vasp_inputs,
     _prepare_direct_lammps_inputs,
+    _md_production_approved,
     _input_artifact_manifest,
     _preflight,
     _vasp_production_approved,
@@ -103,6 +105,30 @@ def _dft_campaign() -> MultiscaleCampaign:
         },
         tasks=(dft_task, cg_task),
     )
+
+
+def test_vasp_zero_exit_without_electronic_convergence_fails_campaign_task(tmp_path, monkeypatch):
+    import adhesive_ai.campaign_runner as campaign_runner
+
+    workdir = tmp_path / "vasp"
+    workdir.mkdir()
+    (workdir / "OUTCAR").write_text("free  energy   TOTEN  = -10.0 eV\n")
+    record = {
+        "run_id": "run-1", "status": "running", "max_parallel": 1,
+        "job_root": str(tmp_path / "jobs"),
+        "tasks": [{
+            "task_id": "dft-1", "category": "dft", "engine": "VASP",
+            "status": "running", "job_id": "vasp-1", "workdir": str(workdir),
+        }],
+    }
+    monkeypatch.setattr(campaign_runner, "get_campaign_run", lambda *_args, **_kwargs: record)
+    monkeypatch.setattr(campaign_runner, "get_job_status", lambda *_args, **_kwargs: SimpleNamespace(status="completed", return_code=0, error=None))
+    monkeypatch.setattr(campaign_runner, "collect_campaign_payload", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(campaign_runner, "_write_run", lambda value, _root: value)
+
+    result = campaign_runner.advance_campaign_run("run-1", root=tmp_path)
+    assert result["tasks"][0]["status"] == "failed"
+    assert "electronically converged OUTCAR" in result["tasks"][0]["error"]
 
 
 def test_one_click_campaign_runs_configured_task_and_collects_result(tmp_path):
@@ -270,6 +296,58 @@ def test_direct_lammps_md_generates_protocol_but_requires_validated_inputs(monke
     assert (tmp_path / "MD_INPUT_REQUIREMENTS.md").is_file()
 
 
+def test_bundled_pi_md_baseline_is_not_staged_for_ce_disulfide_campaign(monkeypatch, tmp_path):
+    campaign_dir = tmp_path / "campaign"
+    task_dir = campaign_dir / "tasks" / "md-resin-x1"
+    task_dir.mkdir(parents=True)
+    (campaign_dir / "campaign.json").write_text(json.dumps({
+        "composition": {"resin": "CE", "dynamic_unit": "Disulfide"},
+    }), encoding="utf-8")
+
+    def unexpected_provision(*args, **kwargs):
+        raise AssertionError("mismatched PI/boronic precursor must not be copied")
+
+    monkeypatch.setattr(
+        "adhesive_ai.md_production.provision_bulk_md_inputs", unexpected_provision,
+    )
+    validation, blocker = _prepare_direct_lammps_inputs(
+        {"scale": "atomistic-md", "calculation_kind": "bulk_md", "conditions": {}},
+        {"engine": "LAMMPS", "command": "lmp -in in.production"},
+        task_dir,
+    )
+
+    assert validation == "template-valid; pending-topology-forcefield"
+    assert "CE/Disulfide" in blocker
+    assert not (task_dir / "system.data").exists()
+
+
+def test_bundled_md_baseline_requires_explicit_candidate_binding(monkeypatch, tmp_path):
+    campaign_dir = tmp_path / "campaign"
+    task_dir = campaign_dir / "tasks" / "md-resin-x1"
+    task_dir.mkdir(parents=True)
+    campaign_path = campaign_dir / "campaign.json"
+    campaign_path.write_text(json.dumps({
+        "composition": {"resin": "PI", "dynamic_unit": "Boronic"},
+    }), encoding="utf-8")
+    calls = []
+    monkeypatch.setattr(
+        "adhesive_ai.md_production.provision_bulk_md_inputs",
+        lambda *args: calls.append(args),
+    )
+    task = {"scale": "atomistic-md", "calculation_kind": "bulk_md", "conditions": {}}
+    profile = {"engine": "LAMMPS", "command": "lmp -in in.production"}
+
+    _prepare_direct_lammps_inputs(task, profile, task_dir)
+    assert not calls
+
+    campaign_path.write_text(json.dumps({
+        "composition": {"resin": "PI", "dynamic_unit": "Boronic"},
+        "candidate_snapshot": {"md_baseline_id": "odpa-oda-catechol-pdba-v1"},
+    }), encoding="utf-8")
+    _prepare_direct_lammps_inputs(task, profile, task_dir)
+    assert len(calls) == 1
+
+
 def test_prepare_standalone_vasp_task_uses_campaign_input_generator(monkeypatch, tmp_path):
     captured = {}
 
@@ -389,6 +467,39 @@ def test_md_files_without_scientific_approval_remain_blocked(tmp_path):
 
     assert validation == "static-valid; pending-md-production-approval"
     assert "等待 MD 力场、交联拓扑与物性验证" in blocker
+
+
+def test_md_approval_must_match_campaign_formulation(tmp_path):
+    campaign_dir = tmp_path / "campaign"
+    task_dir = campaign_dir / "tasks" / "md-resin-x1"
+    task_dir.mkdir(parents=True)
+    (campaign_dir / "campaign.json").write_text(json.dumps({
+        "candidate_snapshot": {"formulation_id": "FMT-EXPECTED"},
+    }), encoding="utf-8")
+    for name in ("system.data", "forcefield.production"):
+        (task_dir / name).write_text(name, encoding="utf-8")
+    report = {
+        "passed": True,
+        "scientific_status": "md-production-approved",
+        "resolution": "all-atom",
+        "charge_model": "RESP",
+        "baseline_id": "ce-disulfide-v1",
+        "formulation_id": "FMT-OTHER",
+        "validated_files": {
+            name: hashlib.sha256((task_dir / name).read_bytes()).hexdigest()
+            for name in ("system.data", "forcefield.production")
+        },
+    }
+    report_path = task_dir / "validation.json"
+    report_path.write_text(json.dumps(report), encoding="utf-8")
+    (task_dir / "md_approval.json").write_text(json.dumps({
+        "approved": True, "evidence": [report_path.name],
+    }), encoding="utf-8")
+
+    assert _md_production_approved(task_dir) is False
+    report["formulation_id"] = "FMT-EXPECTED"
+    report_path.write_text(json.dumps(report), encoding="utf-8")
+    assert _md_production_approved(task_dir) is True
 
 
 def test_advance_campaign_rechecks_md_approval_before_submission(tmp_path):

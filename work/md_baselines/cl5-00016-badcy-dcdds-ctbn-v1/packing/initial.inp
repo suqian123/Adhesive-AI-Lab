@@ -1,0 +1,20 @@
+tolerance 2.0
+filetype pdb
+output initial_mixture.pdb
+seed 20261030
+nloop 1000
+
+structure ../components/BADCy.pdb
+  number 181
+  inside box 1. 1. 1. 84. 84. 84.
+end structure
+
+structure ../components/DCDDS.pdb
+  number 44
+  inside box 1. 1. 1. 84. 84. 84.
+end structure
+
+structure CTBN_representative.pdb
+  number 1
+  inside box 1. 1. 1. 84. 84. 84.
+end structure

@@ -1,0 +1,7 @@
+{
+  "molecule": "H2",
+  "method": "RHF/6-31G*",
+  "energy_hartree": -1.1267553171969311,
+  "scf_converged": true,
+  "production_approved": false
+}

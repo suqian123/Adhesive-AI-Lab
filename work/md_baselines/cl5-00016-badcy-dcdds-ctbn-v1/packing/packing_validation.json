@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "production_approved": false,
+  "scope": "initial unreacted mixture packing only",
+  "atoms": 8103,
+  "molecules": 226,
+  "intermolecular_contacts_below_1_98_A": 0
+}

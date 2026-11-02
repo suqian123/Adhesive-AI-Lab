@@ -1,0 +1,265 @@
+{
+  "checked_at": "2026-10-29T09:57:50.958207+00:00",
+  "total": 1260,
+  "versions": {
+    "candidate-library-v4": 360,
+    "candidate-library-v5": 900
+  },
+  "comparison": "Exact values after JSON key ordering/numeric-format normalization; no numeric tolerance. Full-content comparison excludes identifiers, versions, maintenance timestamps and added computation metadata.",
+  "groups": {
+    "full_content": [
+      {
+        "candidate_ids": [
+          "CL-00042",
+          "CL5-00070"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-11235E307CE2C5DE"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00130",
+          "CL5-00135"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-48FDD2A8F4D3E435"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00228",
+          "CL5-00473"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-CB2F9018621178A3"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00261",
+          "CL5-00281"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-8EC3C96B9445FE7F"
+        ],
+        "differing_property_fields": []
+      }
+    ],
+    "formulation_contract": [
+      {
+        "candidate_ids": [
+          "CL-00042",
+          "CL5-00070"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-11235E307CE2C5DE"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00130",
+          "CL5-00135"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-48FDD2A8F4D3E435"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00228",
+          "CL5-00473"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-CB2F9018621178A3"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00261",
+          "CL5-00281"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-8EC3C96B9445FE7F"
+        ],
+        "differing_property_fields": []
+      }
+    ],
+    "formulation_and_process": [
+      {
+        "candidate_ids": [
+          "CL-00042",
+          "CL5-00070"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-11235E307CE2C5DE"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00130",
+          "CL5-00135"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-48FDD2A8F4D3E435"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00228",
+          "CL5-00473"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-CB2F9018621178A3"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00261",
+          "CL5-00281"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-8EC3C96B9445FE7F"
+        ],
+        "differing_property_fields": []
+      }
+    ],
+    "formulation_id": [
+      {
+        "candidate_ids": [
+          "CL-00042",
+          "CL5-00070"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-11235E307CE2C5DE"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00130",
+          "CL5-00135"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-48FDD2A8F4D3E435"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00228",
+          "CL5-00473"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-CB2F9018621178A3"
+        ],
+        "differing_property_fields": []
+      },
+      {
+        "candidate_ids": [
+          "CL-00261",
+          "CL5-00281"
+        ],
+        "versions": [
+          "candidate-library-v4",
+          "candidate-library-v5"
+        ],
+        "formulation_ids": [
+          "FMT-8EC3C96B9445FE7F"
+        ],
+        "differing_property_fields": []
+      }
+    ]
+  },
+  "summary": {
+    "full_content": {
+      "duplicate_groups": 4,
+      "records_in_groups": 8,
+      "redundant_records": 4
+    },
+    "formulation_contract": {
+      "duplicate_groups": 4,
+      "records_in_groups": 8,
+      "redundant_records": 4
+    },
+    "formulation_and_process": {
+      "duplicate_groups": 4,
+      "records_in_groups": 8,
+      "redundant_records": 4
+    },
+    "formulation_id": {
+      "duplicate_groups": 4,
+      "records_in_groups": 8,
+      "redundant_records": 4
+    }
+  }
+}

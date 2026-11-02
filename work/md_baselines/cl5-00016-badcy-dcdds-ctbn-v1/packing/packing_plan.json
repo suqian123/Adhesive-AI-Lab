@@ -1,0 +1,18 @@
+{
+  "expected_atoms": 8103,
+  "CTBN_atoms": 536,
+  "CTBN_MMFF_optimizer_code": 1,
+  "box_A": [
+    85,
+    85,
+    85
+  ],
+  "intermolecular_tolerance_A": 2.0,
+  "scope": "dilute unreacted starting packing; box is a construction choice, not validated density",
+  "production_approved": false,
+  "remaining": "distance-based curing, complete force field, compression and equilibration",
+  "packing_bounds_A": [
+    1,
+    84
+  ]
+}

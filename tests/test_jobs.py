@@ -3,7 +3,7 @@ import time
 
 import pytest
 
-from adhesive_ai.jobs import get_job_status, list_jobs, read_job_output, read_job_result_text, register_imported_job, split_job_command, submit_job, update_job_metadata
+from adhesive_ai.jobs import get_job_status, list_jobs, parse_job_result, read_job_output, read_job_result_text, register_imported_job, split_job_command, submit_job, update_job_metadata
 
 
 def _wait_for_job(job_id, root, timeout=10):
@@ -105,3 +105,18 @@ def test_register_imported_job_preserves_result_contract(tmp_path):
 def test_invalid_job_id_cannot_escape_job_root(tmp_path):
     with pytest.raises(ValueError, match="Invalid job ID"):
         get_job_status("../outside", root=tmp_path)
+
+
+def test_completed_vasp_job_rejects_unconverged_outcar(tmp_path):
+    workdir = tmp_path / "calculation"
+    submitted = submit_job(
+        "VASP",
+        [sys.executable, "-c", "from pathlib import Path; Path('OUTCAR').write_text('free  energy   TOTEN  = -10.0 eV\\n')"],
+        workdir=workdir,
+        root=tmp_path / "jobs",
+        metadata={"result_file": "OUTCAR"},
+    )
+    completed = _wait_for_job(submitted.job_id, tmp_path / "jobs")
+    assert completed.status == "completed"
+    with pytest.raises(ValueError, match="electronically converged OUTCAR"):
+        parse_job_result(submitted.job_id, root=tmp_path / "jobs")

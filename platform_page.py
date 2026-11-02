@@ -436,6 +436,10 @@ def _sync_campaign_context_from_run() -> None:
 def _vasp_progress_text(progress: dict[str, object]) -> str:
     facet = str(progress.get("facet") or "未知晶面")
     parts = [f"共享 CeO₂{facet} VASP 收敛验证 {progress.get('completed', 0)}/{progress.get('total', 0)} 完成"]
+    if progress.get("approved"):
+        parts.append("数值验收已通过")
+    elif progress.get("runner_state") == "failed" and progress.get("completed") == progress.get("total"):
+        parts.append("数值验收未通过")
     if progress.get("job"):
         parts.append(f"当前 {progress['job']}")
     if progress.get("phase"):
@@ -563,7 +567,10 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
         if vasp_coordination.get("reason") == "host-busy":
             st.info("服务器上已有 VASP 计算；当前页面每 5 秒检查一次，资源空闲后将尝试启动对应晶面的验证。")
         if live_vasp_text:
-            st.info(f"{live_vasp_text}。该晶面通过后，系统会继续调度下一个待验证晶面。")
+            st.info(
+                f"{live_vasp_text}。共享验证通过后会解锁对应晶面的生产任务；"
+                "候选数据需待生产任务完成并汇总后才会回写。"
+            )
         if st.button("终止当前多尺度运行", key=f"terminate-campaign-{run_id}", width="stretch"):
             try:
                 terminate_campaign_run(run_id)
@@ -576,7 +583,7 @@ def _render_campaign_run_status(run_id: str, candidate_id: str) -> None:
         elif live_vasp_text and vasp_progress.get("active"):
             st.info(
                 f"{live_vasp_text}。这是所有候选共用的 DFT 基准验证；当前候选输入静态校验已通过。"
-                "该晶面的 12 项验证矩阵全部完成并满足数值阈值后，"
+                "该晶面的验证矩阵全部完成并满足数值阈值后，"
                 "系统会自动生成批准文件并提交生产计算。"
             )
         elif live_vasp_text and vasp_progress.get("paused"):

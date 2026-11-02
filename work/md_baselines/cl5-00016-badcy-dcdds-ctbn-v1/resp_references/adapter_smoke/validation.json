@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "known_charges": [
+    -0.82,
+    0.41,
+    0.41
+  ],
+  "recovered_charges": [
+    -0.82,
+    0.41,
+    0.41
+  ],
+  "pyscf_integral_max_error_au": 1.1102230246251565e-16,
+  "production_approved": false
+}

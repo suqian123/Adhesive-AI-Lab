@@ -1,0 +1,9 @@
+{
+  "state": "waiting-for-resp",
+  "molecules": [
+    "BADCy",
+    "DCDDS",
+    "triazine_reference"
+  ],
+  "production_approved": false
+}
